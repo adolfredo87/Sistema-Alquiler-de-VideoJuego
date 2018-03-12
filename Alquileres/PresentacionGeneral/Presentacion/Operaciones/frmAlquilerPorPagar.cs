@@ -86,7 +86,7 @@ namespace Presentacion.Operaciones
             {
                 ObtenerProductos();
                 DataGridViewComboBoxColumn column = ((DataGridViewComboBoxColumn)dgAlquiler.Columns["colProducto"]);
-                column.DisplayMember = "Nombre";
+                column.DisplayMember = "Descripcion";
                 column.ValueMember = "ID";
                 column.DataSource = (from cp in _lstProductos select cp).ToList();
             }

@@ -112,13 +112,13 @@ namespace Presentacion.Principal
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void CategoriaProducto_ToolStripButton_Click(object sender, EventArgs e)
+        private void Categoria_ToolStripButton_Click(object sender, EventArgs e)
         {
             try
             {
-                if (!FormularioEstaCargado("Presentacion.Maestros.frmCategoriaProducto"))
+                if (!FormularioEstaCargado("Presentacion.Maestros.frmCategoria"))
                 {
-                    Presentacion.Maestros.frmCategoriaProducto frmMdiParent = new Presentacion.Maestros.frmCategoriaProducto();
+                    Presentacion.Maestros.frmCategoria frmMdiParent = new Presentacion.Maestros.frmCategoria();
                     frmMdiParent.MdiParent = this;
                     frmMdiParent.Show();
                 }
@@ -128,13 +128,13 @@ namespace Presentacion.Principal
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void CategoriaProducto_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Categoria_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                if (!FormularioEstaCargado("Presentacion.Maestros.frmCategoriaProducto"))
+                if (!FormularioEstaCargado("Presentacion.Maestros.frmCategoria"))
                 {
-                    Presentacion.Maestros.frmCategoriaProducto frmMdiParent = new Presentacion.Maestros.frmCategoriaProducto();
+                    Presentacion.Maestros.frmCategoria frmMdiParent = new Presentacion.Maestros.frmCategoria();
                     frmMdiParent.MdiParent = this;
                     frmMdiParent.Show();
                 }
@@ -144,7 +144,6 @@ namespace Presentacion.Principal
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void Descuento_ToolStripButton_Click(object sender, EventArgs e)
         {
             try
@@ -265,5 +264,9 @@ namespace Presentacion.Principal
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        
+
+        
     }
 }

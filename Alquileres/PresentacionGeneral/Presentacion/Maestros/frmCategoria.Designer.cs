@@ -1,6 +1,6 @@
 ﻿namespace Presentacion.Maestros
 {
-    partial class frmCategoriaProducto
+    partial class frmCategoria
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCategoriaProducto));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCategoria));
             this.mstpGuardarCancelar = new System.Windows.Forms.MenuStrip();
             this.mstpItemGuardar = new System.Windows.Forms.ToolStripMenuItem();
             this.mstpItemCancelar = new System.Windows.Forms.ToolStripMenuItem();
@@ -36,22 +36,22 @@
             this.mstpInsSupr = new System.Windows.Forms.MenuStrip();
             this.mstpItemInsert = new System.Windows.Forms.ToolStripMenuItem();
             this.mstpItemSupr = new System.Windows.Forms.ToolStripMenuItem();
-            this.dgCategoriaProducto = new System.Windows.Forms.DataGridView();
+            this.dgCategoria = new System.Windows.Forms.DataGridView();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCoddigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GrupBox.SuspendLayout();
             this.mstpGuardarCancelar.SuspendLayout();
             this.mstpInsSupr.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgCategoriaProducto)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgCategoria)).BeginInit();
             this.SuspendLayout();
             // 
             // GrupBox
             // 
-            this.GrupBox.Controls.Add(this.dgCategoriaProducto);
+            this.GrupBox.Controls.Add(this.dgCategoria);
             this.GrupBox.Location = new System.Drawing.Point(12, 27);
             this.GrupBox.Size = new System.Drawing.Size(577, 433);
-            this.GrupBox.Text = "Categoria Producto";
+            this.GrupBox.Text = "Categoria";
             // 
             // mstpGuardarCancelar
             // 
@@ -124,25 +124,25 @@
             this.mstpItemSupr.Text = "(Supr)";
             this.mstpItemSupr.Click += new System.EventHandler(this.mstpItemSupr_Click);
             // 
-            // dgCategoriaProducto
+            // dgCategoria
             // 
-            this.dgCategoriaProducto.AllowUserToAddRows = false;
-            this.dgCategoriaProducto.AllowUserToResizeRows = false;
-            this.dgCategoriaProducto.BackgroundColor = System.Drawing.Color.LightGray;
-            this.dgCategoriaProducto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgCategoriaProducto.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgCategoria.AllowUserToAddRows = false;
+            this.dgCategoria.AllowUserToResizeRows = false;
+            this.dgCategoria.BackgroundColor = System.Drawing.Color.LightGray;
+            this.dgCategoria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgCategoria.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colID,
             this.colCoddigo,
-            this.colCategoria});
-            this.dgCategoriaProducto.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgCategoriaProducto.Location = new System.Drawing.Point(3, 16);
-            this.dgCategoriaProducto.Name = "dgCategoriaProducto";
-            this.dgCategoriaProducto.RowHeadersVisible = false;
-            this.dgCategoriaProducto.Size = new System.Drawing.Size(571, 414);
-            this.dgCategoriaProducto.TabIndex = 2;
-            this.dgCategoriaProducto.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCategoriaProducto_CellEndEdit);
-            this.dgCategoriaProducto.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgCategoriaProducto_DataError);
-            this.dgCategoriaProducto.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgCategoriaProducto_EditingControlShowing);
+            this.colDescripcion});
+            this.dgCategoria.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgCategoria.Location = new System.Drawing.Point(3, 16);
+            this.dgCategoria.Name = "dgCategoria";
+            this.dgCategoria.RowHeadersVisible = false;
+            this.dgCategoria.Size = new System.Drawing.Size(571, 414);
+            this.dgCategoria.TabIndex = 2;
+            this.dgCategoria.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCategoria_CellEndEdit);
+            this.dgCategoria.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgCategoria_DataError);
+            this.dgCategoria.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgCategoria_EditingControlShowing);
             // 
             // colID
             // 
@@ -159,25 +159,25 @@
             this.colCoddigo.Name = "colCoddigo";
             this.colCoddigo.Width = 90;
             // 
-            // colCategoria
+            // colDescripcion
             // 
-            this.colCategoria.DataPropertyName = "Categoria";
-            this.colCategoria.HeaderText = "Categoria";
-            this.colCategoria.Name = "colCategoria";
-            this.colCategoria.Width = 350;
+            this.colDescripcion.DataPropertyName = "Descripcion";
+            this.colDescripcion.HeaderText = "Descripcion";
+            this.colDescripcion.Name = "colDescripcion";
+            this.colDescripcion.Width = 350;
             // 
-            // frmCategoriaProducto
+            // frmCategoria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(601, 487);
             this.Controls.Add(this.mstpInsSupr);
             this.Controls.Add(this.mstpGuardarCancelar);
-            this.Name = "frmCategoriaProducto";
-            this.Text = "Categoria Producto";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCategoriaProducto_FormClosing);
-            this.Load += new System.EventHandler(this.frmCategoriaProducto_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmCategoriaProducto_KeyDown);
+            this.Name = "frmCategoria";
+            this.Text = "Categoria";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCategoria_FormClosing);
+            this.Load += new System.EventHandler(this.frmCategoria_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmCategoria_KeyDown);
             this.Controls.SetChildIndex(this.GrupBox, 0);
             this.Controls.SetChildIndex(this.mstpGuardarCancelar, 0);
             this.Controls.SetChildIndex(this.mstpInsSupr, 0);
@@ -186,7 +186,7 @@
             this.mstpGuardarCancelar.PerformLayout();
             this.mstpInsSupr.ResumeLayout(false);
             this.mstpInsSupr.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgCategoriaProducto)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgCategoria)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -201,9 +201,9 @@
         internal System.Windows.Forms.MenuStrip mstpInsSupr;
         public System.Windows.Forms.ToolStripMenuItem mstpItemInsert;
         public System.Windows.Forms.ToolStripMenuItem mstpItemSupr;
-        internal System.Windows.Forms.DataGridView dgCategoriaProducto;
+        internal System.Windows.Forms.DataGridView dgCategoria;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCoddigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCategoria;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDescripcion;
     }
 }

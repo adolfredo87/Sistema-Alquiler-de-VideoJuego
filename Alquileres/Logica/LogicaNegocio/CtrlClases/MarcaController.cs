@@ -11,29 +11,29 @@ using System.Collections.Generic;
 
 namespace LogicaNegocio
 {
-    public class CategoriaProductoController
+    public class MarcaController
     {
         private Dato.Modelo.DemoAlquilerGameBD db = new Dato.Modelo.DemoAlquilerGameBD();
 
-        public List<EntidadNegocio.Entidades.CategoriaProducto> ObtenerItems()
+        public List<EntidadNegocio.Entidades.Marca> ObtenerItems()
         {
             try
             {
-                List<Dato.Modelo.CategoriaProducto> _ListCP = null;
-                List<EntidadNegocio.Entidades.CategoriaProducto> _ListCPE = new List<EntidadNegocio.Entidades.CategoriaProducto>();
-                EntidadNegocio.Entidades.CategoriaProducto _cpE = null;
-                _ListCP = (List<Dato.Modelo.CategoriaProducto>)db.CategoriaProductoSet.ToList();
-                foreach (Dato.Modelo.CategoriaProducto element in _ListCP)
+                List<Dato.Modelo.Marca> _ListM = null;
+                List<EntidadNegocio.Entidades.Marca> _ListME = new List<EntidadNegocio.Entidades.Marca>();
+                EntidadNegocio.Entidades.Marca _mE = null;
+                _ListM = (List<Dato.Modelo.Marca>)db.MarcaSet.ToList();
+                foreach (Dato.Modelo.Marca element in _ListM)
                 {
-                    _cpE = new EntidadNegocio.Entidades.CategoriaProducto();
-                    _cpE.ID = element.ID;
-                    _cpE.Codigo = element.Codigo;
-                    _cpE.Categoria = element.Categoria;
-                    _cpE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
-                    _cpE.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
-                    _ListCPE.Add(_cpE);
+                    _mE = new EntidadNegocio.Entidades.Marca();
+                    _mE.ID = element.ID;
+                    _mE.Codigo = element.Codigo;
+                    _mE.Descripcion = element.Descripcion;
+                    _mE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    _mE.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+                    _ListME.Add(_mE);
                 }
-                return _ListCPE;
+                return _ListME;
             }
             catch (Exception ex)
             {
@@ -43,40 +43,40 @@ namespace LogicaNegocio
 
         public Int32 UltimoID()
         {
-            Dato.Modelo.CategoriaProducto _entidadToIDAdd = db.CategoriaProductoSet.ToList().LastOrDefault();
+            Dato.Modelo.Marca _entidadToIDAdd = db.MarcaSet.ToList().LastOrDefault();
             Int32 _id = _entidadToIDAdd.ID;
             return _id;
         }
 
-        public EntidadNegocio.Entidades.CategoriaProducto Details(int id)
+        public EntidadNegocio.Entidades.Marca Details(int id)
         {
-            Dato.Modelo.CategoriaProducto _categoriaProducto = new Dato.Modelo.CategoriaProducto();
+            Dato.Modelo.Marca _Marca = new Dato.Modelo.Marca();
             if (id == 0)
             {
-                _categoriaProducto = new Dato.Modelo.CategoriaProducto();
+                _Marca = new Dato.Modelo.Marca();
             }
             else
             {
-                _categoriaProducto = db.CategoriaProductoSet.First(c => c.ID == id);
+                _Marca = db.MarcaSet.First(c => c.ID == id);
             }
-            EntidadNegocio.Entidades.CategoriaProducto categoriaProductoDetail = new EntidadNegocio.Entidades.CategoriaProducto();
-            categoriaProductoDetail.ID = _categoriaProducto.ID;
-            categoriaProductoDetail.Codigo = _categoriaProducto.Codigo;
-            categoriaProductoDetail.Categoria = _categoriaProducto.Categoria;
-            return categoriaProductoDetail;
+            EntidadNegocio.Entidades.Marca MarcaDetail = new EntidadNegocio.Entidades.Marca();
+            MarcaDetail.ID = _Marca.ID;
+            MarcaDetail.Codigo = _Marca.Codigo;
+            MarcaDetail.Descripcion = _Marca.Descripcion;
+            return MarcaDetail;
         }
 
-        public Boolean Create(EntidadNegocio.Entidades.CategoriaProducto _categoriaProducto)
+        public Boolean Create(EntidadNegocio.Entidades.Marca _marca)
         {
-            Dato.Modelo.CategoriaProducto categoriaProductoToAdd = new Dato.Modelo.CategoriaProducto();
+            Dato.Modelo.Marca MarcaToAdd = new Dato.Modelo.Marca();
             Boolean resul = false;
 
-            categoriaProductoToAdd.ID = _categoriaProducto.ID;
-            categoriaProductoToAdd.Codigo = _categoriaProducto.Codigo;
-            categoriaProductoToAdd.Categoria = _categoriaProducto.Categoria;
+            MarcaToAdd.ID = _marca.ID;
+            MarcaToAdd.Codigo = _marca.Codigo;
+            MarcaToAdd.Descripcion = _marca.Descripcion;
 
             //valido claves primaria
-            if (db.CategoriaProductoSet.FirstOrDefault(b => b.ID == categoriaProductoToAdd.ID) != null)
+            if (db.MarcaSet.FirstOrDefault(b => b.ID == MarcaToAdd.ID) != null)
             {
                 MessageBox.Show(EntidadNegocio.Entidades.Mensajes.Info_ErrorAlGuardarViolacionPK, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -92,11 +92,11 @@ namespace LogicaNegocio
                 try
                 {
                     // Guardar y confirmar.
-                    db.AddToCategoriaProductoSet(categoriaProductoToAdd);
+                    db.AddToMarcaSet(MarcaToAdd);
                     db.SaveChanges();
                     dbTransaction.Commit();
                     /// Si la transaccion es exitosa enviamos true
-                    Dato.Modelo.CategoriaProducto _entidadToIDAdd = db.CategoriaProductoSet.ToList().LastOrDefault();
+                    Dato.Modelo.Marca _entidadToIDAdd = db.MarcaSet.ToList().LastOrDefault();
                     Int32 _id = _entidadToIDAdd.ID;
                     _entidadToIDAdd.ID = _id;
                     resul = true;
@@ -114,14 +114,14 @@ namespace LogicaNegocio
             return resul;
         }
 
-        public Boolean Edit(EntidadNegocio.Entidades.CategoriaProducto _categoriaProducto)
+        public Boolean Edit(EntidadNegocio.Entidades.Marca _marca)
         {
-            Int32 id = _categoriaProducto.ID; Boolean resul = false;
-            Dato.Modelo.CategoriaProducto categoriaProductoToUpdate = db.CategoriaProductoSet.First(cb => cb.ID == id);
+            Int32 id = _marca.ID; Boolean resul = false;
+            Dato.Modelo.Marca MarcaToUpdate = db.MarcaSet.First(cb => cb.ID == id);
 
-            categoriaProductoToUpdate.ID = _categoriaProducto.ID;
-            categoriaProductoToUpdate.Codigo = _categoriaProducto.Codigo;
-            categoriaProductoToUpdate.Categoria = _categoriaProducto.Categoria;
+            MarcaToUpdate.ID = _marca.ID;
+            MarcaToUpdate.Codigo = _marca.Codigo;
+            MarcaToUpdate.Descripcion = _marca.Descripcion;
 
             if (db.Connection.State != System.Data.ConnectionState.Open)
             {
@@ -150,19 +150,19 @@ namespace LogicaNegocio
             return resul;
         }
 
-        public Boolean Delete(EntidadNegocio.Entidades.CategoriaProducto _categoriaProducto)
+        public Boolean Delete(EntidadNegocio.Entidades.Marca _marca)
         {
-            Int32 id = _categoriaProducto.ID; Boolean resul = false;
-            Dato.Modelo.CategoriaProducto categoriaProductoToDelete = db.CategoriaProductoSet.First(cb => cb.ID == id);
+            Int32 id = _marca.ID; Boolean resul = false;
+            Dato.Modelo.Marca MarcaToDelete = db.MarcaSet.First(cb => cb.ID == id);
 
-            categoriaProductoToDelete.ID = _categoriaProducto.ID;
-            categoriaProductoToDelete.Codigo = _categoriaProducto.Codigo;
-            categoriaProductoToDelete.Categoria = _categoriaProducto.Categoria;
+            MarcaToDelete.ID = _marca.ID;
+            MarcaToDelete.Codigo = _marca.Codigo;
+            MarcaToDelete.Descripcion = _marca.Descripcion;
 
-            //valido la categoria tiene un producto
-            if (db.ProductoSet.FirstOrDefault(b => b.IDcategoriaProducto == id) != null)
+            //valido la Marca tiene un producto
+            if (db.ProductoSet.FirstOrDefault(b => b.IDMarca == id) != null)
             {
-                MessageBox.Show(String.Format("Esta intentando Borrar una categoria que tiene una Producto"), EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(String.Format("Esta intentando Borrar una Marca que tiene una Producto"), EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -176,7 +176,7 @@ namespace LogicaNegocio
                     DbTransaction dbTransaction = db.Connection.BeginTransaction();
 
                     // Delete 
-                    db.DeleteObject(categoriaProductoToDelete);
+                    db.DeleteObject(MarcaToDelete);
                     db.SaveChanges();
                     dbTransaction.Commit();
                     /// Si la transaccion es exitosa enviamos true
@@ -194,10 +194,10 @@ namespace LogicaNegocio
             return resul;
         }
 
-        public Boolean DatosValidos(List<EntidadNegocio.Entidades.CategoriaProducto> _categoriaProductos)
+        public Boolean DatosValidos(List<EntidadNegocio.Entidades.Marca> _marcas)
         {
             bool valido = true;
-            var count = (from cp in _categoriaProductos where string.IsNullOrEmpty(cp.ID.ToString()) || string.IsNullOrEmpty(cp.Codigo) || string.IsNullOrEmpty(cp.Categoria.ToString()) select cp.ID).Count();
+            var count = (from m in _marcas where string.IsNullOrEmpty(m.ID.ToString()) || string.IsNullOrEmpty(m.Codigo) || string.IsNullOrEmpty(m.Descripcion.ToString()) select m.ID).Count();
             if (count > 0)
             {
                 valido = false; throw new Exception(EntidadNegocio.Entidades.Mensajes.Info_Incompleta);
@@ -209,9 +209,9 @@ namespace LogicaNegocio
             return valido;
         }
 
-        public Boolean DatoDuplicado(List<EntidadNegocio.Entidades.CategoriaProducto> _categoriaProductos, Int32 id)
+        public Boolean DatoDuplicado(List<EntidadNegocio.Entidades.Marca> _marcas, Int32 id)
         {
-            if (_categoriaProductos.FindAll(cp => cp.ID.ToString().ToUpper() == id.ToString().ToUpper()).Count > 1)
+            if (_marcas.FindAll(m => m.ID.ToString().ToUpper() == id.ToString().ToUpper()).Count > 1)
             {
                 return true;
             }
@@ -221,37 +221,37 @@ namespace LogicaNegocio
             }
         }
 
-        public Boolean Guardar(List<EntidadNegocio.Entidades.CategoriaProducto> _categoriaProductos)
+        public Boolean Guardar(List<EntidadNegocio.Entidades.Marca> _marcas)
         {
             try
             {
                 bool resul = false;
-                var l = (from c in _categoriaProductos where c.Edicion != EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal select c);
-                List<EntidadNegocio.Entidades.CategoriaProducto> _listCP = null;
-                _listCP = l.ToList();
-                if (DatosValidos(_listCP))
+                var l = (from c in _marcas where c.Edicion != EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal select c);
+                List<EntidadNegocio.Entidades.Marca> _listM = null;
+                _listM = l.ToList();
+                if (DatosValidos(_listM))
                 {
-                    if (_listCP.Count == 0)
+                    if (_listM.Count == 0)
                     {
                         resul = false;
                     }
-                    else if (_listCP.Count > 0)
+                    else if (_listM.Count > 0)
                     {
                         if (MessageBox.Show(EntidadNegocio.Entidades.Mensajes.Info_Guardar, EntidadNegocio.Entidades.Mensajes.Titulo_Guardar, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
                         {
-                            foreach (EntidadNegocio.Entidades.CategoriaProducto _categoriaProd in _listCP)
+                            foreach (EntidadNegocio.Entidades.Marca _marca in _listM)
                             {
-                                if (_categoriaProd.Edicion == EntidadNegocio.Enumerados.EnumEstatus.Edicion.Nuevo)
+                                if (_marca.Edicion == EntidadNegocio.Enumerados.EnumEstatus.Edicion.Nuevo)
                                 {
-                                    resul = this.Create(_categoriaProd);
+                                    resul = this.Create(_marca);
                                 }
-                                else if (_categoriaProd.Edicion == EntidadNegocio.Enumerados.EnumEstatus.Edicion.Editado)
+                                else if (_marca.Edicion == EntidadNegocio.Enumerados.EnumEstatus.Edicion.Editado)
                                 {
-                                    resul = this.Edit(_categoriaProd);
+                                    resul = this.Edit(_marca);
                                 }
-                                else if (_categoriaProd.Edicion == EntidadNegocio.Enumerados.EnumEstatus.Edicion.Eliminar)
+                                else if (_marca.Edicion == EntidadNegocio.Enumerados.EnumEstatus.Edicion.Eliminar)
                                 {
-                                    resul = this.Delete(_categoriaProd);
+                                    resul = this.Delete(_marca);
                                 }
                                 else
                                 {
@@ -289,6 +289,6 @@ namespace LogicaNegocio
                 return this.ToString() + "." + new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name;
             }
         }
-        
+
     }
 }

@@ -8,9 +8,9 @@ using Utilidad;
 
 namespace Dato.Modelo
 {
-    [MetadataType(typeof(CategoriaProducto.MetaData))]
+    [MetadataType(typeof(Categoria.MetaData))]
     [DisplayName("Categoria Producto")]
-    public partial class CategoriaProducto
+    public partial class Categoria
     {
         private sealed class MetaData
         {
@@ -20,8 +20,8 @@ namespace Dato.Modelo
             [Required, DisplayName("Codigo"), StringLength(50)]
             public String Codigo { get; set; }
 
-            [Required, DisplayName("Categoria Producto"), StringLength(100)]
-            public String Categoria { get; set; }
+            [Required, DisplayName("Categoria del Producto"), StringLength(100)]
+            public String Descripcion { get; set; }
 
         }
 

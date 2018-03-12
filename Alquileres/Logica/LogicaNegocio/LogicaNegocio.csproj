@@ -43,9 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CtrlClases\AlquilerController.cs" />
-    <Compile Include="CtrlClases\CategoriaProductoController.cs" />
+    <Compile Include="CtrlClases\CategoriaController.cs" />
     <Compile Include="CtrlClases\ClienteController.cs" />
     <Compile Include="CtrlClases\DescuentoController.cs" />
+    <Compile Include="CtrlClases\MarcaController.cs" />
+    <Compile Include="CtrlClases\ModeloController.cs" />
     <Compile Include="CtrlClases\PagoCabeceraController.cs" />
     <Compile Include="CtrlClases\PrecioController.cs" />
     <Compile Include="CtrlClases\ProductoController.cs" />

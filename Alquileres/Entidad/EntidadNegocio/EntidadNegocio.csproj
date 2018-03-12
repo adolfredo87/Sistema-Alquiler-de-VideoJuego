@@ -46,11 +46,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entidades\Alquiler.cs" />
-    <Compile Include="Entidades\CategoriaProducto.cs" />
+    <Compile Include="Entidades\Categoria.cs" />
     <Compile Include="Entidades\Cliente.cs" />
     <Compile Include="Entidades\Descuento.cs" />
     <Compile Include="Entidades\EstatusRegistro.cs" />
+    <Compile Include="Entidades\Marca.cs" />
     <Compile Include="Entidades\Mensajes.cs" />
+    <Compile Include="Entidades\Modelo.cs" />
     <Compile Include="Entidades\PagoCabecera.cs" />
     <Compile Include="Entidades\Precio.cs" />
     <Compile Include="Entidades\Producto.cs" />

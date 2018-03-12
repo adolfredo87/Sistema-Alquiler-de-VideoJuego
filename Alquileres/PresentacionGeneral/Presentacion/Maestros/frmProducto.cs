@@ -14,8 +14,12 @@ namespace Presentacion.Maestros
         #region "Atributos"
         private LogicaNegocio.ProductoController _ctrlProducto = new LogicaNegocio.ProductoController();
         private List<EntidadNegocio.Entidades.Producto> _lstProductos = new List<EntidadNegocio.Entidades.Producto>();
-        private List<EntidadNegocio.Entidades.CategoriaProducto> _lstCategoriaProducto = new List<EntidadNegocio.Entidades.CategoriaProducto>();
-        private LogicaNegocio.CategoriaProductoController _ctrlCategoriaProducto = new LogicaNegocio.CategoriaProductoController();
+        private List<EntidadNegocio.Entidades.Marca> _lstMarca = new List<EntidadNegocio.Entidades.Marca>();
+        private LogicaNegocio.MarcaController _ctrlMarca = new LogicaNegocio.MarcaController();
+        private List<EntidadNegocio.Entidades.Modelo> _lstModelo = new List<EntidadNegocio.Entidades.Modelo>();
+        private LogicaNegocio.ModeloController _ctrlModelo = new LogicaNegocio.ModeloController();
+        private List<EntidadNegocio.Entidades.Categoria> _lstCategoria = new List<EntidadNegocio.Entidades.Categoria>();
+        private LogicaNegocio.CategoriaController _ctrlCategoria = new LogicaNegocio.CategoriaController();
         #endregion
 
         #region "Eventos"
@@ -59,27 +63,81 @@ namespace Presentacion.Maestros
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void ObtenerCategoriaProducto()
+        private void ObtenerMarca()
         {
             try
             {
-                _lstCategoriaProducto = _ctrlCategoriaProducto.ObtenerItems();
+                _lstMarca = _ctrlMarca.ObtenerItems();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void CargarComboCategoriaProducto() 
+        private void CargarComboMarca()
         {
             try
             {
-                ObtenerCategoriaProducto();
+                ObtenerMarca();
+                CargarProductos();
+                DataGridViewComboBoxColumn column = ((DataGridViewComboBoxColumn)dgProductos.Columns["colMarca"]);
+                column.DisplayMember = "Descripcion";
+                column.ValueMember = "ID";
+                column.DataSource = (from cp in _lstMarca select cp).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void ObtenerModelo()
+        {
+            try
+            {
+                _lstModelo = _ctrlModelo.ObtenerItems();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void CargarComboModelo()
+        {
+            try
+            {
+                ObtenerModelo();
+                CargarProductos();
+                DataGridViewComboBoxColumn column = ((DataGridViewComboBoxColumn)dgProductos.Columns["colModelo"]);
+                column.DisplayMember = "Descripcion";
+                column.ValueMember = "ID";
+                column.DataSource = (from cp in _lstModelo select cp).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void ObtenerCategoria()
+        {
+            try
+            {
+                _lstCategoria = _ctrlCategoria.ObtenerItems();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void CargarComboCategoria() 
+        {
+            try
+            {
+                ObtenerCategoria();
                 CargarProductos();
                 DataGridViewComboBoxColumn column = ((DataGridViewComboBoxColumn)dgProductos.Columns["colCategoria"]);
-                column.DisplayMember = "Categoria";
+                column.DisplayMember = "Descripcion";
                 column.ValueMember = "ID";
-                column.DataSource = (from cp in _lstCategoriaProducto select cp).ToList();
+                column.DataSource = (from cp in _lstCategoria select cp).ToList();
             }
             catch(Exception ex)
             {
@@ -189,7 +247,9 @@ namespace Presentacion.Maestros
             {
                 this.GrupBox.Text = "Producto";
                 this.Text = "Producto";
-                CargarComboCategoriaProducto();
+                CargarComboMarca();
+                CargarComboModelo();
+                CargarComboCategoria();
                 CargarProductos();
                 MostrarProductos();
             }
@@ -211,7 +271,7 @@ namespace Presentacion.Maestros
                     if (_ctrlProducto.DatoDuplicado(_lstProductos, ((EntidadNegocio.Entidades.Producto)dgProductos.CurrentRow.DataBoundItem).ID))
                     {
                         MessageBox.Show(EntidadNegocio.Entidades.Mensajes.Info_DatosRepetidos, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        ((EntidadNegocio.Entidades.Producto)dgProductos.CurrentRow.DataBoundItem).ID = Int32.Parse(_ctrlCategoriaProducto.UltimoID().ToString());
+                        ((EntidadNegocio.Entidades.Producto)dgProductos.CurrentRow.DataBoundItem).ID = Int32.Parse(_ctrlCategoria.UltimoID().ToString());
                     }
                 }
                 if (((EntidadNegocio.Entidades.Producto)dgProductos.CurrentRow.DataBoundItem).Edicion != EntidadNegocio.Enumerados.EnumEstatus.Edicion.Nuevo)

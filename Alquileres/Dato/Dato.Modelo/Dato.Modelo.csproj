@@ -44,14 +44,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entidades\Alquiler.cs" />
-    <Compile Include="Entidades\CategoriaProducto.cs" />
-    <Compile Include="Entidades\Cliente.cs" />
-    <Compile Include="Entidades\Descuento.cs" />
-    <Compile Include="Entidades\PagoCabecera.cs" />
-    <Compile Include="Entidades\PagoDetalle.cs" />
-    <Compile Include="Entidades\Precio.cs" />
-    <Compile Include="Entidades\Producto.cs" />
+    <Compile Include="Modelo\Entidades\Alquiler.cs" />
+    <Compile Include="Modelo\Entidades\Categoria.cs" />
+    <Compile Include="Modelo\Entidades\Cliente.cs" />
+    <Compile Include="Modelo\Entidades\Descuento.cs" />
+    <Compile Include="Modelo\Entidades\Marca.cs" />
+    <Compile Include="Modelo\Entidades\Modelo.cs" />
+    <Compile Include="Modelo\Entidades\PagoCabecera.cs" />
+    <Compile Include="Modelo\Entidades\PagoDetalle.cs" />
+    <Compile Include="Modelo\Entidades\Precio.cs" />
+    <Compile Include="Modelo\Entidades\Producto.cs" />
     <Compile Include="Modelo\ModeloBD.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -10,18 +10,12 @@ using EntidadNegocio.Enumerados;
 
 namespace EntidadNegocio.Entidades
 {
-    public class Producto
+    public class Modelo
     {
         #region "Atributos"
         private System.Int32 _id;
         private System.String _codigo;
         private System.String _descripcion;
-        private System.Int32 _idmarca;
-        private Marca _marca;
-        private System.Int32 _idmodelo;
-        private Modelo _modelo;
-        private System.Int32 _idcategoria;
-        private Categoria _categoria;
         private EnumEstatus.Registro _estatus = EnumEstatus.Registro.Activo;
         private EnumEstatus.Edicion _edicion = EnumEstatus.Edicion.Normal;
         #endregion
@@ -37,40 +31,10 @@ namespace EntidadNegocio.Entidades
             get { return _codigo; }
             set { _codigo = value; }
         }
-        public System.String Descripcion
+        public String Descripcion
         {
             get { return _descripcion; }
             set { _descripcion = value; }
-        }
-        public Int32 IDMarca
-        {
-            get { return _idmarca; }
-            set { _idmarca = value; }
-        }
-        public Marca Marca
-        {
-            get { return _marca; }
-            set { _marca = value; }
-        }
-        public Int32 IDModelo
-        {
-            get { return _idmodelo; }
-            set { _idmodelo = value; }
-        }
-        public Modelo Modelo
-        {
-            get { return _modelo; }
-            set { _modelo = value; }
-        }
-        public Int32 IDCategoria
-        {
-            get { return _idcategoria; }
-            set { _idcategoria = value; }
-        }
-        public Categoria Categoria
-        {
-            get { return _categoria; }
-            set { _categoria = value; }
         }
         public EnumEstatus.Registro Status
         {

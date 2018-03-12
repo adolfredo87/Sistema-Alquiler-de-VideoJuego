@@ -27,18 +27,34 @@ namespace LogicaNegocio
                 {
                     _pE = new EntidadNegocio.Entidades.Producto();
                     _pE.ID = element.ID;
-                    _pE.Nombre = element.Nombre;
-                    _pE.Marca = element.Marca;
-                    _pE.IDcategoriaProducto = element.IDcategoriaProducto;
+                    _pE.Codigo = element.Codigo;
+                    _pE.Descripcion = element.Descripcion;
+                    _pE.IDMarca = element.IDMarca;
+                    _pE.IDModelo = element.IDModelo;
+                    _pE.IDCategoria = element.IDCategoria;
                     _pE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
                     _pE.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
-                    element.CategoriaProductoLoad();
-                    _pE.CategoriaProducto = new EntidadNegocio.Entidades.CategoriaProducto();
-                    _pE.CategoriaProducto.ID = element.IDcategoriaProducto;
-                    _pE.CategoriaProducto.Codigo = element.CategoriaProducto.Codigo;
-                    _pE.CategoriaProducto.Categoria = element.CategoriaProducto.Categoria;
-                    _pE.CategoriaProducto.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
-                    _pE.CategoriaProducto.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+                    element.MarcaLoad();
+                    _pE.Marca = new EntidadNegocio.Entidades.Marca();
+                    _pE.Marca.ID = element.IDMarca;
+                    _pE.Marca.Codigo = element.Marca.Codigo;
+                    _pE.Marca.Descripcion = element.Marca.Descripcion;
+                    _pE.Marca.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    _pE.Marca.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+                    element.ModeloLoad();
+                    _pE.Modelo = new EntidadNegocio.Entidades.Modelo();
+                    _pE.Modelo.ID = element.IDModelo;
+                    _pE.Modelo.Codigo = element.Modelo.Codigo;
+                    _pE.Modelo.Descripcion = element.Modelo.Descripcion;
+                    _pE.Modelo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    _pE.Modelo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+                    element.CategoriaLoad();
+                    _pE.Categoria = new EntidadNegocio.Entidades.Categoria();
+                    _pE.Categoria.ID = element.IDCategoria;
+                    _pE.Categoria.Codigo = element.Categoria.Codigo;
+                    _pE.Categoria.Descripcion = element.Categoria.Descripcion;
+                    _pE.Categoria.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    _pE.Categoria.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                     _ListPE.Add(_pE);
                 }
                 return _ListPE;
@@ -66,18 +82,41 @@ namespace LogicaNegocio
             else
             {
                 _productoDetail = db.ProductoSet.First(p => p.ID == id);
-                _productoDetail.CategoriaProductoLoad();
+                _productoDetail.MarcaLoad();
+                _productoDetail.ModeloLoad();
+                _productoDetail.CategoriaLoad();
             }
             EntidadNegocio.Entidades.Producto productoDetail = new EntidadNegocio.Entidades.Producto();
 
             productoDetail.ID = _productoDetail.ID;
-            productoDetail.Nombre = _productoDetail.Nombre;
-            productoDetail.Marca = _productoDetail.Marca;
-            productoDetail.IDcategoriaProducto = _productoDetail.IDcategoriaProducto;
-            productoDetail.CategoriaProducto = new EntidadNegocio.Entidades.CategoriaProducto();
-            productoDetail.CategoriaProducto.ID = _productoDetail.IDcategoriaProducto;
-            productoDetail.CategoriaProducto.Codigo = _productoDetail.CategoriaProducto.Codigo;
-            productoDetail.CategoriaProducto.Categoria = _productoDetail.CategoriaProducto.Categoria;
+            productoDetail.Codigo = _productoDetail.Codigo;
+            productoDetail.Descripcion = _productoDetail.Descripcion;
+            productoDetail.IDMarca = _productoDetail.IDMarca;
+            productoDetail.IDModelo = _productoDetail.IDModelo;
+            productoDetail.IDCategoria = _productoDetail.IDCategoria;
+            productoDetail.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+            productoDetail.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+
+            productoDetail.Marca = new EntidadNegocio.Entidades.Marca();
+            productoDetail.Marca.ID = _productoDetail.IDMarca;
+            productoDetail.Marca.Codigo = _productoDetail.Marca.Codigo;
+            productoDetail.Marca.Descripcion = _productoDetail.Marca.Descripcion;
+            productoDetail.Marca.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+            productoDetail.Marca.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+
+            productoDetail.Modelo = new EntidadNegocio.Entidades.Modelo();
+            productoDetail.Modelo.ID = _productoDetail.IDModelo;
+            productoDetail.Modelo.Codigo = _productoDetail.Modelo.Codigo;
+            productoDetail.Modelo.Descripcion = _productoDetail.Modelo.Descripcion;
+            productoDetail.Modelo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+            productoDetail.Modelo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+
+            productoDetail.Categoria = new EntidadNegocio.Entidades.Categoria();
+            productoDetail.Categoria.ID = _productoDetail.IDCategoria;
+            productoDetail.Categoria.Codigo = _productoDetail.Categoria.Codigo;
+            productoDetail.Categoria.Descripcion = _productoDetail.Categoria.Descripcion;
+            productoDetail.Categoria.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+            productoDetail.Categoria.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
 
             return productoDetail;
         }
@@ -85,23 +124,52 @@ namespace LogicaNegocio
         public Boolean Create(EntidadNegocio.Entidades.Producto _producto)
         {
             Dato.Modelo.Producto productoToAdd = new Dato.Modelo.Producto();
-            Boolean resul = false; String IDCategoriaProducto = "";
+            Boolean resul = false; String IDMarca = ""; String IDModelo = ""; String IDCategoria = "";
 
             productoToAdd.ID = _producto.ID;
-            productoToAdd.Nombre = _producto.Nombre;
-            productoToAdd.Marca = _producto.Marca;
-            Int32 iIDCategoriaProducto = _producto.IDcategoriaProducto;
-            productoToAdd.IDcategoriaProducto = iIDCategoriaProducto;
-            IDCategoriaProducto = iIDCategoriaProducto.ToString();
+            productoToAdd.Codigo = _producto.Codigo;
+            productoToAdd.Descripcion = _producto.Descripcion;
 
-            if (!String.IsNullOrEmpty(IDCategoriaProducto))
+            Int32 iIDMarca = _producto.IDMarca;
+            productoToAdd.IDMarca = iIDMarca;
+            IDMarca = iIDMarca.ToString();
+
+            Int32 iIDModelo = _producto.IDModelo;
+            productoToAdd.IDModelo = iIDModelo;
+            IDModelo = iIDModelo.ToString();
+
+            Int32 iIDCategoria = _producto.IDCategoria;
+            productoToAdd.IDCategoria = iIDCategoria;
+            IDCategoria = iIDCategoria.ToString();
+
+            if (!String.IsNullOrEmpty(IDMarca))
             {
-                productoToAdd.CategoriaProducto = db.CategoriaProductoSet.FirstOrDefault(c => c.ID == iIDCategoriaProducto);
+                productoToAdd.Marca = db.MarcaSet.FirstOrDefault(c => c.ID == iIDMarca);
             }
 
-            if (productoToAdd.CategoriaProducto == null)
+            if (productoToAdd.Marca == null)
             {
-                MessageBox.Show(String.Format("El número de IDCategoriaProducto {0} no está registrado en la base de datos."), EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(String.Format("El número de IDMarca {0} no está registrado en la base de datos."), EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            if (!String.IsNullOrEmpty(IDModelo))
+            {
+                productoToAdd.Modelo = db.ModeloSet.FirstOrDefault(c => c.ID == iIDModelo);
+            }
+
+            if (productoToAdd.Modelo == null)
+            {
+                MessageBox.Show(String.Format("El número de IDModelo {0} no está registrado en la base de datos."), EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            if (!String.IsNullOrEmpty(IDCategoria))
+            {
+                productoToAdd.Categoria = db.CategoriaSet.FirstOrDefault(c => c.ID == iIDCategoria);
+            }
+
+            if (productoToAdd.Categoria == null)
+            {
+                MessageBox.Show(String.Format("El número de IDCategoria {0} no está registrado en la base de datos."), EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
                 
             //valido claves primaria
@@ -147,49 +215,77 @@ namespace LogicaNegocio
         {
             Int32 id = _producto.ID; Boolean resul = false;
             Producto productoToUpdate = db.ProductoSet.First(b => b.ID == id);
-            String IDCategoriaProducto = "";
+            String IDMarca = ""; String IDModelo = ""; String IDCategoria = "";
 
-            productoToUpdate.ID = id;
-            productoToUpdate.Nombre = _producto.Nombre;
-            productoToUpdate.Marca = _producto.Marca;
-            Int32 iIDCategoriaProducto = _producto.IDcategoriaProducto;
-            productoToUpdate.IDcategoriaProducto = iIDCategoriaProducto;
-            IDCategoriaProducto = iIDCategoriaProducto.ToString();
-            
-            if (!String.IsNullOrEmpty(IDCategoriaProducto))
+            productoToUpdate.ID = _producto.ID;
+            productoToUpdate.Codigo = _producto.Codigo;
+            productoToUpdate.Descripcion = _producto.Descripcion;
+
+            Int32 iIDMarca = _producto.IDMarca;
+            productoToUpdate.IDMarca = iIDMarca;
+            IDMarca = iIDMarca.ToString();
+
+            Int32 iIDModelo = _producto.IDModelo;
+            productoToUpdate.IDModelo = iIDModelo;
+            IDModelo = iIDModelo.ToString();
+
+            Int32 iIDCategoria = _producto.IDCategoria;
+            productoToUpdate.IDCategoria = iIDCategoria;
+            IDCategoria = iIDCategoria.ToString();
+
+            if (!String.IsNullOrEmpty(IDMarca))
             {
-                productoToUpdate.CategoriaProducto = db.CategoriaProductoSet.FirstOrDefault(c => c.ID == iIDCategoriaProducto);
+                productoToUpdate.Marca = db.MarcaSet.FirstOrDefault(c => c.ID == iIDMarca);
             }
 
-            if (productoToUpdate.CategoriaProducto == null)
+            if (productoToUpdate.Marca == null)
             {
-                MessageBox.Show(String.Format("El número de IDCategoriaProducto {0} no está registrado en la base de datos."), EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(String.Format("El número de IDMarca {0} no está registrado en la base de datos."), EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else
+
+            if (!String.IsNullOrEmpty(IDModelo))
             {
-                if (db.Connection.State != System.Data.ConnectionState.Open)
-                {
-                    db.Connection.Open();
-                }
+                productoToUpdate.Modelo = db.ModeloSet.FirstOrDefault(c => c.ID == iIDModelo);
+            }
 
-                DbTransaction dbTransaction = db.Connection.BeginTransaction();
+            if (productoToUpdate.Modelo == null)
+            {
+                MessageBox.Show(String.Format("El número de IDModelo {0} no está registrado en la base de datos."), EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-                try
-                {
-                    // Guardar y confirmar.
-                    db.SaveChanges();
-                    dbTransaction.Commit();
-                    // Si la transaccion es exitosa enviamos true
-                    resul = true;
-                }
-                catch (Exception ex)
-                {
-                    dbTransaction.Rollback();
-                    HandleException excepcion = new HandleException();
-                    String msjLog = "Error en " + ObtenerMetodoEnEjecucion(false).ToString() + ".\n" + excepcion.RegistrarExcepcion(ex, ObtenerMetodoEnEjecucion(false).ToString());
-                    excepcion.EscribirLogExcepcion(msjLog); String clientMessage = excepcion.HandleExceptionEx(ex); excepcion = null;
-                    resul = false;
-                }
+            if (!String.IsNullOrEmpty(IDCategoria))
+            {
+                productoToUpdate.Categoria = db.CategoriaSet.FirstOrDefault(c => c.ID == iIDCategoria);
+            }
+
+            if (productoToUpdate.Categoria == null)
+            {
+                MessageBox.Show(String.Format("El número de IDCategoria {0} no está registrado en la base de datos."), EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+            if (db.Connection.State == System.Data.ConnectionState.Closed)
+            {
+                db.Connection.Open();
+            }
+
+            DbTransaction dbTransaction = db.Connection.BeginTransaction();
+
+            try
+            {
+                // Guardar y confirmar.
+                db.SaveChanges();
+                dbTransaction.Commit();
+                // Si la transaccion es exitosa enviamos true
+                resul = true;
+            }
+            catch (Exception ex)
+            {
+                dbTransaction.Rollback();
+                HandleException excepcion = new HandleException();
+                String msjLog = "Error en " + ObtenerMetodoEnEjecucion(false).ToString() + ".\n" + excepcion.RegistrarExcepcion(ex, ObtenerMetodoEnEjecucion(false).ToString());
+                excepcion.EscribirLogExcepcion(msjLog); String clientMessage = excepcion.HandleExceptionEx(ex); excepcion = null;
+                resul = false;
             }
 
             return resul;
@@ -199,14 +295,23 @@ namespace LogicaNegocio
         {
             Int32 id = _producto.ID; Boolean resul = false;
             Producto productoToDelete = db.ProductoSet.First(b => b.ID == id);
-            String IDCategoriaProducto = "";
+            String IDMarca = ""; String IDModelo = ""; String IDCategoria = "";
 
-            productoToDelete.ID = id;
-            productoToDelete.Nombre = _producto.Nombre;
-            productoToDelete.Marca = _producto.Marca;
-            Int32 iIDCategoriaProducto = _producto.IDcategoriaProducto;
-            productoToDelete.IDcategoriaProducto = iIDCategoriaProducto;
-            IDCategoriaProducto = iIDCategoriaProducto.ToString();
+            productoToDelete.ID = _producto.ID;
+            productoToDelete.Codigo = _producto.Codigo;
+            productoToDelete.Descripcion = _producto.Descripcion;
+
+            Int32 iIDMarca = _producto.IDMarca;
+            productoToDelete.IDMarca = iIDMarca;
+            IDMarca = iIDMarca.ToString();
+
+            Int32 iIDModelo = _producto.IDModelo;
+            productoToDelete.IDModelo = iIDModelo;
+            IDModelo = iIDModelo.ToString();
+
+            Int32 iIDCategoria = _producto.IDCategoria;
+            productoToDelete.IDCategoria = iIDCategoria;
+            IDCategoria = iIDCategoria.ToString();
 
             //valido si la Producto tiene alquiler
             if (db.AlquilerSet.FirstOrDefault(a => a.IDProducto == id) != null)
@@ -246,7 +351,7 @@ namespace LogicaNegocio
         public Boolean DatosValidos(List<EntidadNegocio.Entidades.Producto> _productos)
         {
             bool valido = true;
-            var count = (from p in _productos where string.IsNullOrEmpty(p.ID.ToString()) || string.IsNullOrEmpty(p.Nombre) || string.IsNullOrEmpty(p.Marca.ToString()) select p.ID).Count();
+            var count = (from p in _productos where string.IsNullOrEmpty(p.ID.ToString()) || string.IsNullOrEmpty(p.Codigo.ToString()) || string.IsNullOrEmpty(p.Descripcion)  select p.ID).Count();       
             if (count > 0)
             {
                 valido = false; throw new Exception(EntidadNegocio.Entidades.Mensajes.Info_Incompleta);

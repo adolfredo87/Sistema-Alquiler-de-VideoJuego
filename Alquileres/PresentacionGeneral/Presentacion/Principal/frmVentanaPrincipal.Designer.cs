@@ -34,7 +34,7 @@
             this.Cliente_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.Producto_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CategoriaProducto_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Categoria_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.Descuento_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Precio_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,7 +54,7 @@
             this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.Cliente_ToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.Producto_ToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.CategoriaProducto_ToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.Categoria_ToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.Descuento_ToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.Precio_ToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.ToolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -91,7 +91,7 @@
             this.Cliente_ToolStripMenuItem,
             this.MenuStripSeparator1,
             this.Producto_ToolStripMenuItem,
-            this.CategoriaProducto_ToolStripMenuItem,
+            this.Categoria_ToolStripMenuItem,
             this.MenuStripSeparator2,
             this.Descuento_ToolStripMenuItem,
             this.Precio_ToolStripMenuItem,
@@ -109,14 +109,14 @@
             this.Cliente_ToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.Cliente_ToolStripMenuItem.Name = "Cliente_ToolStripMenuItem";
             this.Cliente_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.P)));
-            this.Cliente_ToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.Cliente_ToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.Cliente_ToolStripMenuItem.Text = "&Cliente";
             this.Cliente_ToolStripMenuItem.Click += new System.EventHandler(this.Cliente_ToolStripMenuItem_Click);
             // 
             // MenuStripSeparator1
             // 
             this.MenuStripSeparator1.Name = "MenuStripSeparator1";
-            this.MenuStripSeparator1.Size = new System.Drawing.Size(209, 6);
+            this.MenuStripSeparator1.Size = new System.Drawing.Size(167, 6);
             // 
             // Producto_ToolStripMenuItem
             // 
@@ -124,23 +124,23 @@
             this.Producto_ToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.Producto_ToolStripMenuItem.Name = "Producto_ToolStripMenuItem";
             this.Producto_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.N)));
-            this.Producto_ToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.Producto_ToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.Producto_ToolStripMenuItem.Text = "Producto";
             this.Producto_ToolStripMenuItem.Click += new System.EventHandler(this.Producto_ToolStripMenuItem_Click);
             // 
-            // CategoriaProducto_ToolStripMenuItem
+            // Categoria_ToolStripMenuItem
             // 
-            this.CategoriaProducto_ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("CategoriaProducto_ToolStripMenuItem.Image")));
-            this.CategoriaProducto_ToolStripMenuItem.Name = "CategoriaProducto_ToolStripMenuItem";
-            this.CategoriaProducto_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S)));
-            this.CategoriaProducto_ToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.CategoriaProducto_ToolStripMenuItem.Text = "Categoria Producto";
-            this.CategoriaProducto_ToolStripMenuItem.Click += new System.EventHandler(this.CategoriaProducto_ToolStripMenuItem_Click);
+            this.Categoria_ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("Categoria_ToolStripMenuItem.Image")));
+            this.Categoria_ToolStripMenuItem.Name = "Categoria_ToolStripMenuItem";
+            this.Categoria_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S)));
+            this.Categoria_ToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.Categoria_ToolStripMenuItem.Text = "Categoria";
+            this.Categoria_ToolStripMenuItem.Click += new System.EventHandler(this.Categoria_ToolStripMenuItem_Click);
             // 
             // MenuStripSeparator2
             // 
             this.MenuStripSeparator2.Name = "MenuStripSeparator2";
-            this.MenuStripSeparator2.Size = new System.Drawing.Size(209, 6);
+            this.MenuStripSeparator2.Size = new System.Drawing.Size(167, 6);
             // 
             // Descuento_ToolStripMenuItem
             // 
@@ -148,7 +148,7 @@
             this.Descuento_ToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.Descuento_ToolStripMenuItem.Name = "Descuento_ToolStripMenuItem";
             this.Descuento_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.V)));
-            this.Descuento_ToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.Descuento_ToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.Descuento_ToolStripMenuItem.Text = "Descuento";
             this.Descuento_ToolStripMenuItem.Click += new System.EventHandler(this.Descuento_ToolStripMenuItem_Click);
             // 
@@ -156,21 +156,21 @@
             // 
             this.Precio_ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("Precio_ToolStripMenuItem.Image")));
             this.Precio_ToolStripMenuItem.Name = "Precio_ToolStripMenuItem";
-            this.Precio_ToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.Precio_ToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.Precio_ToolStripMenuItem.Text = "Precio";
             this.Precio_ToolStripMenuItem.Click += new System.EventHandler(this.Precio_ToolStripMenuItem_Click);
             // 
             // MenuStripSeparator3
             // 
             this.MenuStripSeparator3.Name = "MenuStripSeparator3";
-            this.MenuStripSeparator3.Size = new System.Drawing.Size(209, 6);
+            this.MenuStripSeparator3.Size = new System.Drawing.Size(167, 6);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("ExitToolStripMenuItem.Image")));
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
             this.ExitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.ExitToolStripMenuItem.Text = "&Salir";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -256,7 +256,7 @@
             this.ToolStripSeparator1,
             this.Cliente_ToolStripButton,
             this.Producto_ToolStripButton,
-            this.CategoriaProducto_ToolStripButton,
+            this.Categoria_ToolStripButton,
             this.Descuento_ToolStripButton,
             this.Precio_ToolStripButton,
             this.ToolStripSeparator2,
@@ -308,15 +308,15 @@
             this.Producto_ToolStripButton.Text = "Producto";
             this.Producto_ToolStripButton.Click += new System.EventHandler(this.Producto_ToolStripButton_Click);
             // 
-            // CategoriaProducto_ToolStripButton
+            // Categoria_ToolStripButton
             // 
-            this.CategoriaProducto_ToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.CategoriaProducto_ToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("CategoriaProducto_ToolStripButton.Image")));
-            this.CategoriaProducto_ToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
-            this.CategoriaProducto_ToolStripButton.Name = "CategoriaProducto_ToolStripButton";
-            this.CategoriaProducto_ToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.CategoriaProducto_ToolStripButton.Text = "Categoria Producto";
-            this.CategoriaProducto_ToolStripButton.Click += new System.EventHandler(this.CategoriaProducto_ToolStripButton_Click);
+            this.Categoria_ToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Categoria_ToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("Categoria_ToolStripButton.Image")));
+            this.Categoria_ToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
+            this.Categoria_ToolStripButton.Name = "Categoria_ToolStripButton";
+            this.Categoria_ToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.Categoria_ToolStripButton.Text = "Categoria";
+            this.Categoria_ToolStripButton.Click += new System.EventHandler(this.Categoria_ToolStripButton_Click);
             // 
             // Descuento_ToolStripButton
             // 
@@ -442,7 +442,7 @@
         internal System.Windows.Forms.ToolStripMenuItem Cliente_ToolStripMenuItem;
         internal System.Windows.Forms.ToolStripSeparator MenuStripSeparator1;
         internal System.Windows.Forms.ToolStripMenuItem Producto_ToolStripMenuItem;
-        internal System.Windows.Forms.ToolStripMenuItem CategoriaProducto_ToolStripMenuItem;
+        internal System.Windows.Forms.ToolStripMenuItem Categoria_ToolStripMenuItem;
         internal System.Windows.Forms.ToolStripSeparator MenuStripSeparator2;
         internal System.Windows.Forms.ToolStripMenuItem Descuento_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem Precio_ToolStripMenuItem;
@@ -462,7 +462,7 @@
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator1;
         internal System.Windows.Forms.ToolStripButton Cliente_ToolStripButton;
         internal System.Windows.Forms.ToolStripButton Producto_ToolStripButton;
-        internal System.Windows.Forms.ToolStripButton CategoriaProducto_ToolStripButton;
+        internal System.Windows.Forms.ToolStripButton Categoria_ToolStripButton;
         internal System.Windows.Forms.ToolStripButton Descuento_ToolStripButton;
         internal System.Windows.Forms.ToolStripButton Precio_ToolStripButton;
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator2;

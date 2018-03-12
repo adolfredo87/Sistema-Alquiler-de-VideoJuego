@@ -38,8 +38,10 @@
             this.mstpItemInsert = new System.Windows.Forms.ToolStripMenuItem();
             this.mstpItemSupr = new System.Windows.Forms.ToolStripMenuItem();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMarca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMarca = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.colModelo = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.colCategoria = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.GrupBox.SuspendLayout();
             this.mstpGuardarCancelar.SuspendLayout();
@@ -101,8 +103,10 @@
             this.dgProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colID,
-            this.colNombre,
+            this.colCodigo,
+            this.colDescripcion,
             this.colMarca,
+            this.colModelo,
             this.colCategoria});
             this.dgProductos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgProductos.Location = new System.Drawing.Point(3, 16);
@@ -153,25 +157,43 @@
             this.colID.Visible = false;
             this.colID.Width = 90;
             // 
-            // colNombre
+            // colCodigo
             // 
-            this.colNombre.DataPropertyName = "Nombre";
-            this.colNombre.HeaderText = "Nombre";
-            this.colNombre.Name = "colNombre";
-            this.colNombre.Width = 250;
+            this.colCodigo.DataPropertyName = "Codigo";
+            this.colCodigo.HeaderText = "Codigo";
+            this.colCodigo.Name = "colCodigo";
+            this.colCodigo.Width = 70;
+            // 
+            // colDescripcion
+            // 
+            this.colDescripcion.DataPropertyName = "Descripcion";
+            this.colDescripcion.HeaderText = "Descripcion";
+            this.colDescripcion.Name = "colDescripcion";
+            this.colDescripcion.Width = 220;
             // 
             // colMarca
             // 
-            this.colMarca.DataPropertyName = "Marca";
+            this.colMarca.DataPropertyName = "IDMarca";
             this.colMarca.HeaderText = "Marca";
             this.colMarca.Name = "colMarca";
+            this.colMarca.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colMarca.Width = 90;
+            // 
+            // colModelo
+            // 
+            this.colModelo.DataPropertyName = "IDModelo";
+            this.colModelo.HeaderText = "Modelo";
+            this.colModelo.Name = "colModelo";
+            this.colModelo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colModelo.Width = 90;
             // 
             // colCategoria
             // 
-            this.colCategoria.DataPropertyName = "IDcategoriaProducto";
-            this.colCategoria.HeaderText = "TipoCategoria";
+            this.colCategoria.DataPropertyName = "IDCategoria";
+            this.colCategoria.HeaderText = "Categoria";
             this.colCategoria.Name = "colCategoria";
             this.colCategoria.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colCategoria.Width = 90;
             // 
             // frmProducto
             // 
@@ -210,8 +232,10 @@
         public System.Windows.Forms.ToolStripMenuItem mstpItemInsert;
         public System.Windows.Forms.ToolStripMenuItem mstpItemSupr;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMarca;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCodigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDescripcion;
+        private System.Windows.Forms.DataGridViewComboBoxColumn colMarca;
+        private System.Windows.Forms.DataGridViewComboBoxColumn colModelo;
         private System.Windows.Forms.DataGridViewComboBoxColumn colCategoria;
     }
 }

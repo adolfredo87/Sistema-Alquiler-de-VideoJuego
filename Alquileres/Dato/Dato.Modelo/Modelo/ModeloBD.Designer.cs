@@ -21,9 +21,11 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("DemoAlquilerGameWinFormModel", "FK_Alquiler_Cliente", "cliente", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Dato.Modelo.Cliente), "alquiler", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Dato.Modelo.Alquiler), true)]
 [assembly: EdmRelationshipAttribute("DemoAlquilerGameWinFormModel", "FK_Alquiler_Producto", "producto", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Dato.Modelo.Producto), "alquiler", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Dato.Modelo.Alquiler), true)]
 [assembly: EdmRelationshipAttribute("DemoAlquilerGameWinFormModel", "FK_PagoDet_Alquiler", "alquiler", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Dato.Modelo.Alquiler), "pagoDet", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Dato.Modelo.PagoDetalle), true)]
-[assembly: EdmRelationshipAttribute("DemoAlquilerGameWinFormModel", "FK_Producto_categoriaProducto", "categoriaProducto", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Dato.Modelo.CategoriaProducto), "producto", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Dato.Modelo.Producto), true)]
 [assembly: EdmRelationshipAttribute("DemoAlquilerGameWinFormModel", "FK_PagoCab_Cliente", "cliente", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Dato.Modelo.Cliente), "pagoCab", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Dato.Modelo.PagoCabecera), true)]
 [assembly: EdmRelationshipAttribute("DemoAlquilerGameWinFormModel", "FK_PagoDet_PagoCab", "pagoCab", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Dato.Modelo.PagoCabecera), "pagoDet", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Dato.Modelo.PagoDetalle), true)]
+[assembly: EdmRelationshipAttribute("DemoAlquilerGameWinFormModel", "FK_Producto_Categoria", "categoria", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Dato.Modelo.Categoria), "Producto", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Dato.Modelo.Producto), true)]
+[assembly: EdmRelationshipAttribute("DemoAlquilerGameWinFormModel", "FK_Producto_Marca", "marca", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Dato.Modelo.Marca), "Producto", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Dato.Modelo.Producto), true)]
+[assembly: EdmRelationshipAttribute("DemoAlquilerGameWinFormModel", "FK_Producto_Modelo", "modelo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Dato.Modelo.Modelo), "Producto", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Dato.Modelo.Producto), true)]
 
 #endregion
 
@@ -90,22 +92,6 @@ namespace Dato.Modelo
             }
         }
         private ObjectSet<Alquiler> _AlquilerSet;
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        public ObjectSet<CategoriaProducto> CategoriaProductoSet
-        {
-            get
-            {
-                if ((_CategoriaProductoSet == null))
-                {
-                    _CategoriaProductoSet = base.CreateObjectSet<CategoriaProducto>("CategoriaProductoSet");
-                }
-                return _CategoriaProductoSet;
-            }
-        }
-        private ObjectSet<CategoriaProducto> _CategoriaProductoSet;
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -202,6 +188,54 @@ namespace Dato.Modelo
             }
         }
         private ObjectSet<Producto> _ProductoSet;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<Categoria> CategoriaSet
+        {
+            get
+            {
+                if ((_CategoriaSet == null))
+                {
+                    _CategoriaSet = base.CreateObjectSet<Categoria>("CategoriaSet");
+                }
+                return _CategoriaSet;
+            }
+        }
+        private ObjectSet<Categoria> _CategoriaSet;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<Marca> MarcaSet
+        {
+            get
+            {
+                if ((_MarcaSet == null))
+                {
+                    _MarcaSet = base.CreateObjectSet<Marca>("MarcaSet");
+                }
+                return _MarcaSet;
+            }
+        }
+        private ObjectSet<Marca> _MarcaSet;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<Modelo> ModeloSet
+        {
+            get
+            {
+                if ((_ModeloSet == null))
+                {
+                    _ModeloSet = base.CreateObjectSet<Modelo>("ModeloSet");
+                }
+                return _ModeloSet;
+            }
+        }
+        private ObjectSet<Modelo> _ModeloSet;
 
         #endregion
         #region Métodos AddTo
@@ -212,14 +246,6 @@ namespace Dato.Modelo
         public void AddToAlquilerSet(Alquiler alquiler)
         {
             base.AddObject("AlquilerSet", alquiler);
-        }
-    
-        /// <summary>
-        /// Método desusado para agregar un nuevo objeto al EntitySet CategoriaProductoSet. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
-        /// </summary>
-        public void AddToCategoriaProductoSet(CategoriaProducto categoriaProducto)
-        {
-            base.AddObject("CategoriaProductoSet", categoriaProducto);
         }
     
         /// <summary>
@@ -268,6 +294,30 @@ namespace Dato.Modelo
         public void AddToProductoSet(Producto producto)
         {
             base.AddObject("ProductoSet", producto);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet CategoriaSet. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToCategoriaSet(Categoria categoria)
+        {
+            base.AddObject("CategoriaSet", categoria);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet MarcaSet. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToMarcaSet(Marca marca)
+        {
+            base.AddObject("MarcaSet", marca);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet ModeloSet. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToModeloSet(Modelo modelo)
+        {
+            base.AddObject("ModeloSet", modelo);
         }
 
         #endregion
@@ -663,22 +713,22 @@ namespace Dato.Modelo
     /// <summary>
     /// No hay documentación de metadatos disponible.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="DemoAlquilerGameWinFormModel", Name="CategoriaProducto")]
+    [EdmEntityTypeAttribute(NamespaceName="DemoAlquilerGameWinFormModel", Name="Categoria")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class CategoriaProducto : EntityObject
+    public partial class Categoria : EntityObject
     {
         #region Método de generador
     
         /// <summary>
-        /// Crear un nuevo objeto CategoriaProducto.
+        /// Crear un nuevo objeto Categoria.
         /// </summary>
         /// <param name="id">Valor inicial de la propiedad ID.</param>
-        public static CategoriaProducto CreateCategoriaProducto(global::System.Int32 id)
+        public static Categoria CreateCategoria(global::System.Int32 id)
         {
-            CategoriaProducto categoriaProducto = new CategoriaProducto();
-            categoriaProducto.ID = id;
-            return categoriaProducto;
+            Categoria categoria = new Categoria();
+            categoria.ID = id;
+            return categoria;
         }
 
         #endregion
@@ -740,24 +790,24 @@ namespace Dato.Modelo
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Categoria
+        public global::System.String Descripcion
         {
             get
             {
-                return _Categoria;
+                return _Descripcion;
             }
             set
             {
-                OnCategoriaChanging(value);
-                ReportPropertyChanging("Categoria");
-                _Categoria = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Categoria");
-                OnCategoriaChanged();
+                OnDescripcionChanging(value);
+                ReportPropertyChanging("Descripcion");
+                _Descripcion = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Descripcion");
+                OnDescripcionChanged();
             }
         }
-        private global::System.String _Categoria;
-        partial void OnCategoriaChanging(global::System.String value);
-        partial void OnCategoriaChanged();
+        private global::System.String _Descripcion;
+        partial void OnDescripcionChanging(global::System.String value);
+        partial void OnDescripcionChanged();
 
         #endregion
     
@@ -769,18 +819,18 @@ namespace Dato.Modelo
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DemoAlquilerGameWinFormModel", "FK_Producto_categoriaProducto", "producto")]
+        [EdmRelationshipNavigationPropertyAttribute("DemoAlquilerGameWinFormModel", "FK_Producto_Categoria", "Producto")]
         public EntityCollection<Producto> Productos
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Producto>("DemoAlquilerGameWinFormModel.FK_Producto_categoriaProducto", "producto");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Producto>("DemoAlquilerGameWinFormModel.FK_Producto_Categoria", "Producto");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Producto>("DemoAlquilerGameWinFormModel.FK_Producto_categoriaProducto", "producto", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Producto>("DemoAlquilerGameWinFormModel.FK_Producto_Categoria", "Producto", value);
                 }
             }
         }
@@ -1137,6 +1187,262 @@ namespace Dato.Modelo
 
         #endregion
     
+    }
+    
+    /// <summary>
+    /// No hay documentación de metadatos disponible.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DemoAlquilerGameWinFormModel", Name="Marca")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Marca : EntityObject
+    {
+        #region Método de generador
+    
+        /// <summary>
+        /// Crear un nuevo objeto Marca.
+        /// </summary>
+        /// <param name="id">Valor inicial de la propiedad ID.</param>
+        public static Marca CreateMarca(global::System.Int32 id)
+        {
+            Marca marca = new Marca();
+            marca.ID = id;
+            return marca;
+        }
+
+        #endregion
+        #region Propiedades primitivas
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Codigo
+        {
+            get
+            {
+                return _Codigo;
+            }
+            set
+            {
+                OnCodigoChanging(value);
+                ReportPropertyChanging("Codigo");
+                _Codigo = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Codigo");
+                OnCodigoChanged();
+            }
+        }
+        private global::System.String _Codigo;
+        partial void OnCodigoChanging(global::System.String value);
+        partial void OnCodigoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Descripcion
+        {
+            get
+            {
+                return _Descripcion;
+            }
+            set
+            {
+                OnDescripcionChanging(value);
+                ReportPropertyChanging("Descripcion");
+                _Descripcion = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Descripcion");
+                OnDescripcionChanged();
+            }
+        }
+        private global::System.String _Descripcion;
+        partial void OnDescripcionChanging(global::System.String value);
+        partial void OnDescripcionChanged();
+
+        #endregion
+    
+        #region Propiedades de navegación
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DemoAlquilerGameWinFormModel", "FK_Producto_Marca", "Producto")]
+        public EntityCollection<Producto> Productos
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Producto>("DemoAlquilerGameWinFormModel.FK_Producto_Marca", "Producto");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Producto>("DemoAlquilerGameWinFormModel.FK_Producto_Marca", "Producto", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No hay documentación de metadatos disponible.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DemoAlquilerGameWinFormModel", Name="Modelo")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Modelo : EntityObject
+    {
+        #region Método de generador
+    
+        /// <summary>
+        /// Crear un nuevo objeto Modelo.
+        /// </summary>
+        /// <param name="id">Valor inicial de la propiedad ID.</param>
+        public static Modelo CreateModelo(global::System.Int32 id)
+        {
+            Modelo modelo = new Modelo();
+            modelo.ID = id;
+            return modelo;
+        }
+
+        #endregion
+        #region Propiedades primitivas
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Codigo
+        {
+            get
+            {
+                return _Codigo;
+            }
+            set
+            {
+                OnCodigoChanging(value);
+                ReportPropertyChanging("Codigo");
+                _Codigo = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Codigo");
+                OnCodigoChanged();
+            }
+        }
+        private global::System.String _Codigo;
+        partial void OnCodigoChanging(global::System.String value);
+        partial void OnCodigoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Descripcion
+        {
+            get
+            {
+                return _Descripcion;
+            }
+            set
+            {
+                OnDescripcionChanging(value);
+                ReportPropertyChanging("Descripcion");
+                _Descripcion = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Descripcion");
+                OnDescripcionChanged();
+            }
+        }
+        private global::System.String _Descripcion;
+        partial void OnDescripcionChanging(global::System.String value);
+        partial void OnDescripcionChanged();
+
+        #endregion
+    
+        #region Propiedades de navegación
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DemoAlquilerGameWinFormModel", "FK_Producto_Modelo", "Producto")]
+        public EntityCollection<Producto> Productos
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Producto>("DemoAlquilerGameWinFormModel.FK_Producto_Modelo", "Producto");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Producto>("DemoAlquilerGameWinFormModel.FK_Producto_Modelo", "Producto", value);
+                }
+            }
+        }
+
+        #endregion
     }
     
     /// <summary>
@@ -1806,16 +2112,20 @@ namespace Dato.Modelo
         /// Crear un nuevo objeto Producto.
         /// </summary>
         /// <param name="id">Valor inicial de la propiedad ID.</param>
-        /// <param name="nombre">Valor inicial de la propiedad Nombre.</param>
-        /// <param name="marca">Valor inicial de la propiedad Marca.</param>
-        /// <param name="iDcategoriaProducto">Valor inicial de la propiedad IDcategoriaProducto.</param>
-        public static Producto CreateProducto(global::System.Int32 id, global::System.String nombre, global::System.String marca, global::System.Int32 iDcategoriaProducto)
+        /// <param name="codigo">Valor inicial de la propiedad Codigo.</param>
+        /// <param name="descripcion">Valor inicial de la propiedad Descripcion.</param>
+        /// <param name="iDMarca">Valor inicial de la propiedad IDMarca.</param>
+        /// <param name="iDModelo">Valor inicial de la propiedad IDModelo.</param>
+        /// <param name="iDCategoria">Valor inicial de la propiedad IDCategoria.</param>
+        public static Producto CreateProducto(global::System.Int32 id, global::System.String codigo, global::System.String descripcion, global::System.Int32 iDMarca, global::System.Int32 iDModelo, global::System.Int32 iDCategoria)
         {
             Producto producto = new Producto();
             producto.ID = id;
-            producto.Nombre = nombre;
-            producto.Marca = marca;
-            producto.IDcategoriaProducto = iDcategoriaProducto;
+            producto.Codigo = codigo;
+            producto.Descripcion = descripcion;
+            producto.IDMarca = iDMarca;
+            producto.IDModelo = iDModelo;
+            producto.IDCategoria = iDCategoria;
             return producto;
         }
 
@@ -1854,72 +2164,120 @@ namespace Dato.Modelo
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Nombre
+        public global::System.String Codigo
         {
             get
             {
-                return _Nombre;
+                return _Codigo;
             }
             set
             {
-                OnNombreChanging(value);
-                ReportPropertyChanging("Nombre");
-                _Nombre = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Nombre");
-                OnNombreChanged();
+                OnCodigoChanging(value);
+                ReportPropertyChanging("Codigo");
+                _Codigo = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Codigo");
+                OnCodigoChanged();
             }
         }
-        private global::System.String _Nombre;
-        partial void OnNombreChanging(global::System.String value);
-        partial void OnNombreChanged();
+        private global::System.String _Codigo;
+        partial void OnCodigoChanging(global::System.String value);
+        partial void OnCodigoChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Marca
+        public global::System.String Descripcion
         {
             get
             {
-                return _Marca;
+                return _Descripcion;
             }
             set
             {
-                OnMarcaChanging(value);
-                ReportPropertyChanging("Marca");
-                _Marca = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Marca");
-                OnMarcaChanged();
+                OnDescripcionChanging(value);
+                ReportPropertyChanging("Descripcion");
+                _Descripcion = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Descripcion");
+                OnDescripcionChanged();
             }
         }
-        private global::System.String _Marca;
-        partial void OnMarcaChanging(global::System.String value);
-        partial void OnMarcaChanged();
+        private global::System.String _Descripcion;
+        partial void OnDescripcionChanging(global::System.String value);
+        partial void OnDescripcionChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 IDcategoriaProducto
+        public global::System.Int32 IDMarca
         {
             get
             {
-                return _IDcategoriaProducto;
+                return _IDMarca;
             }
             set
             {
-                OnIDcategoriaProductoChanging(value);
-                ReportPropertyChanging("IDcategoriaProducto");
-                _IDcategoriaProducto = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IDcategoriaProducto");
-                OnIDcategoriaProductoChanged();
+                OnIDMarcaChanging(value);
+                ReportPropertyChanging("IDMarca");
+                _IDMarca = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IDMarca");
+                OnIDMarcaChanged();
             }
         }
-        private global::System.Int32 _IDcategoriaProducto;
-        partial void OnIDcategoriaProductoChanging(global::System.Int32 value);
-        partial void OnIDcategoriaProductoChanged();
+        private global::System.Int32 _IDMarca;
+        partial void OnIDMarcaChanging(global::System.Int32 value);
+        partial void OnIDMarcaChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 IDModelo
+        {
+            get
+            {
+                return _IDModelo;
+            }
+            set
+            {
+                OnIDModeloChanging(value);
+                ReportPropertyChanging("IDModelo");
+                _IDModelo = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IDModelo");
+                OnIDModeloChanged();
+            }
+        }
+        private global::System.Int32 _IDModelo;
+        partial void OnIDModeloChanging(global::System.Int32 value);
+        partial void OnIDModeloChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 IDCategoria
+        {
+            get
+            {
+                return _IDCategoria;
+            }
+            set
+            {
+                OnIDCategoriaChanging(value);
+                ReportPropertyChanging("IDCategoria");
+                _IDCategoria = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IDCategoria");
+                OnIDCategoriaChanged();
+            }
+        }
+        private global::System.Int32 _IDCategoria;
+        partial void OnIDCategoriaChanging(global::System.Int32 value);
+        partial void OnIDCategoriaChanged();
 
         #endregion
     
@@ -1953,16 +2311,16 @@ namespace Dato.Modelo
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DemoAlquilerGameWinFormModel", "FK_Producto_categoriaProducto", "categoriaProducto")]
-        public CategoriaProducto CategoriaProducto
+        [EdmRelationshipNavigationPropertyAttribute("DemoAlquilerGameWinFormModel", "FK_Producto_Categoria", "categoria")]
+        public Categoria Categoria
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CategoriaProducto>("DemoAlquilerGameWinFormModel.FK_Producto_categoriaProducto", "categoriaProducto").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Categoria>("DemoAlquilerGameWinFormModel.FK_Producto_Categoria", "categoria").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CategoriaProducto>("DemoAlquilerGameWinFormModel.FK_Producto_categoriaProducto", "categoriaProducto").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Categoria>("DemoAlquilerGameWinFormModel.FK_Producto_Categoria", "categoria").Value = value;
             }
         }
         /// <summary>
@@ -1970,17 +2328,93 @@ namespace Dato.Modelo
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<CategoriaProducto> CategoriaProductoReference
+        public EntityReference<Categoria> CategoriaReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CategoriaProducto>("DemoAlquilerGameWinFormModel.FK_Producto_categoriaProducto", "categoriaProducto");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Categoria>("DemoAlquilerGameWinFormModel.FK_Producto_Categoria", "categoria");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<CategoriaProducto>("DemoAlquilerGameWinFormModel.FK_Producto_categoriaProducto", "categoriaProducto", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Categoria>("DemoAlquilerGameWinFormModel.FK_Producto_Categoria", "categoria", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DemoAlquilerGameWinFormModel", "FK_Producto_Marca", "marca")]
+        public Marca Marca
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Marca>("DemoAlquilerGameWinFormModel.FK_Producto_Marca", "marca").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Marca>("DemoAlquilerGameWinFormModel.FK_Producto_Marca", "marca").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Marca> MarcaReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Marca>("DemoAlquilerGameWinFormModel.FK_Producto_Marca", "marca");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Marca>("DemoAlquilerGameWinFormModel.FK_Producto_Marca", "marca", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DemoAlquilerGameWinFormModel", "FK_Producto_Modelo", "modelo")]
+        public Modelo Modelo
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Modelo>("DemoAlquilerGameWinFormModel.FK_Producto_Modelo", "modelo").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Modelo>("DemoAlquilerGameWinFormModel.FK_Producto_Modelo", "modelo").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Modelo> ModeloReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Modelo>("DemoAlquilerGameWinFormModel.FK_Producto_Modelo", "modelo");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Modelo>("DemoAlquilerGameWinFormModel.FK_Producto_Modelo", "modelo", value);
                 }
             }
         }

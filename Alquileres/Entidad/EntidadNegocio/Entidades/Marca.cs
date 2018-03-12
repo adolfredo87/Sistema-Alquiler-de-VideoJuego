@@ -10,12 +10,12 @@ using EntidadNegocio.Enumerados;
 
 namespace EntidadNegocio.Entidades
 {
-    public class CategoriaProducto
+    public class Marca
     {
         #region "Atributos"
         private System.Int32 _id;
         private System.String _codigo;
-        private System.String _categoria;
+        private System.String _descripcion;
         private EnumEstatus.Registro _estatus = EnumEstatus.Registro.Activo;
         private EnumEstatus.Edicion _edicion = EnumEstatus.Edicion.Normal;
         #endregion
@@ -31,10 +31,10 @@ namespace EntidadNegocio.Entidades
             get { return _codigo; }
             set { _codigo = value; }
         }
-        public String Categoria
+        public String Descripcion
         {
-            get { return _categoria; }
-            set { _categoria = value; }
+            get { return _descripcion; }
+            set { _descripcion = value; }
         }
         public EnumEstatus.Registro Status
         {

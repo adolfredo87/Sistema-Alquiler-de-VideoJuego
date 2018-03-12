@@ -287,7 +287,7 @@ namespace Presentacion.Operaciones
             {
                 txtCodigo.Text = Convert.ToString(_alquiler.ID.ToString());
                 cmbCliente.Text = _alquiler.Cliente.Nombre;
-                cmbProducto.Text = _alquiler.Producto.Nombre;
+                cmbProducto.Text = _alquiler.Producto.Descripcion;
                 txtDesde.Text = _alquiler.FechaDesde.ToString();
                 txtHasta.Text = _alquiler.FechaHasta.ToString();
                 txtHora.Text = _alquiler.TiempoHora;
