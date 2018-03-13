@@ -52,7 +52,7 @@
             // 
             this.GrupBox.Controls.Add(this.dgDescuento);
             this.GrupBox.Location = new System.Drawing.Point(12, 27);
-            this.GrupBox.Size = new System.Drawing.Size(577, 433);
+            this.GrupBox.Size = new System.Drawing.Size(597, 433);
             // 
             // mstpGuardarCancelar
             // 
@@ -63,7 +63,7 @@
             this.mstpItemSalir});
             this.mstpGuardarCancelar.Location = new System.Drawing.Point(0, 0);
             this.mstpGuardarCancelar.Name = "mstpGuardarCancelar";
-            this.mstpGuardarCancelar.Size = new System.Drawing.Size(601, 24);
+            this.mstpGuardarCancelar.Size = new System.Drawing.Size(621, 24);
             this.mstpGuardarCancelar.TabIndex = 2;
             this.mstpGuardarCancelar.Text = "MenuStrip2";
             // 
@@ -105,7 +105,7 @@
             this.mstpItemSupr});
             this.mstpInsSupr.Location = new System.Drawing.Point(0, 463);
             this.mstpInsSupr.Name = "mstpInsSupr";
-            this.mstpInsSupr.Size = new System.Drawing.Size(601, 24);
+            this.mstpInsSupr.Size = new System.Drawing.Size(621, 24);
             this.mstpInsSupr.TabIndex = 4;
             this.mstpInsSupr.Text = "MenuStrip2";
             // 
@@ -143,7 +143,7 @@
             this.dgDescuento.Location = new System.Drawing.Point(3, 16);
             this.dgDescuento.Name = "dgDescuento";
             this.dgDescuento.RowHeadersVisible = false;
-            this.dgDescuento.Size = new System.Drawing.Size(571, 414);
+            this.dgDescuento.Size = new System.Drawing.Size(591, 414);
             this.dgDescuento.TabIndex = 3;
             this.dgDescuento.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgDescuento_CellEndEdit);
             this.dgDescuento.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgDescuento_DataError);
@@ -191,7 +191,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(601, 487);
+            this.ClientSize = new System.Drawing.Size(621, 487);
             this.Controls.Add(this.mstpInsSupr);
             this.Controls.Add(this.mstpGuardarCancelar);
             this.Name = "frmDescuento";

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPago));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mstpMenuMaestro = new System.Windows.Forms.MenuStrip();
             this.mstpItemNuevo = new System.Windows.Forms.ToolStripMenuItem();
             this.mstpItemBuscar = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,7 +81,7 @@
             this.GrupBox.Controls.Add(this.gbCabecera);
             this.GrupBox.Controls.Add(this.gbDetalle);
             this.GrupBox.Location = new System.Drawing.Point(12, 27);
-            this.GrupBox.Size = new System.Drawing.Size(603, 418);
+            this.GrupBox.Size = new System.Drawing.Size(597, 448);
             // 
             // mstpMenuMaestro
             // 
@@ -97,7 +97,7 @@
             this.mstpMenuMaestro.Location = new System.Drawing.Point(0, 0);
             this.mstpMenuMaestro.Name = "mstpMenuMaestro";
             this.mstpMenuMaestro.ShowItemToolTips = true;
-            this.mstpMenuMaestro.Size = new System.Drawing.Size(627, 24);
+            this.mstpMenuMaestro.Size = new System.Drawing.Size(621, 24);
             this.mstpMenuMaestro.TabIndex = 6;
             this.mstpMenuMaestro.Text = "MenuStrip1";
             // 
@@ -181,7 +181,7 @@
             this.gbCabecera.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbCabecera.Location = new System.Drawing.Point(3, 16);
             this.gbCabecera.Name = "gbCabecera";
-            this.gbCabecera.Size = new System.Drawing.Size(597, 120);
+            this.gbCabecera.Size = new System.Drawing.Size(591, 120);
             this.gbCabecera.TabIndex = 1;
             this.gbCabecera.TabStop = false;
             this.gbCabecera.Text = "Datos Cabecera";
@@ -213,7 +213,7 @@
             this.TableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.TableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.TableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TableLayoutPanel7.Size = new System.Drawing.Size(591, 101);
+            this.TableLayoutPanel7.Size = new System.Drawing.Size(585, 101);
             this.TableLayoutPanel7.TabIndex = 0;
             // 
             // txtID
@@ -221,7 +221,7 @@
             this.txtID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtID.Location = new System.Drawing.Point(56, 29);
             this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(336, 20);
+            this.txtID.Size = new System.Drawing.Size(330, 20);
             this.txtID.TabIndex = 3;
             this.txtID.Text = " ";
             // 
@@ -232,7 +232,7 @@
             this.cmbCliente.FormattingEnabled = true;
             this.cmbCliente.Location = new System.Drawing.Point(56, 3);
             this.cmbCliente.Name = "cmbCliente";
-            this.cmbCliente.Size = new System.Drawing.Size(336, 21);
+            this.cmbCliente.Size = new System.Drawing.Size(330, 21);
             this.cmbCliente.TabIndex = 1;
             // 
             // Label2
@@ -274,7 +274,7 @@
             this.dtpFecha.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtpFecha.Location = new System.Drawing.Point(56, 53);
             this.dtpFecha.Name = "dtpFecha";
-            this.dtpFecha.Size = new System.Drawing.Size(336, 20);
+            this.dtpFecha.Size = new System.Drawing.Size(330, 20);
             this.dtpFecha.TabIndex = 7;
             // 
             // Label6
@@ -282,7 +282,7 @@
             this.Label6.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.Label6.AutoSize = true;
             this.Label6.BackColor = System.Drawing.Color.Transparent;
-            this.Label6.Location = new System.Drawing.Point(422, 31);
+            this.Label6.Location = new System.Drawing.Point(416, 31);
             this.Label6.Name = "Label6";
             this.Label6.Size = new System.Drawing.Size(40, 13);
             this.Label6.TabIndex = 4;
@@ -293,7 +293,7 @@
             this.cmbEstatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbEstatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbEstatus.FormattingEnabled = true;
-            this.cmbEstatus.Location = new System.Drawing.Point(468, 29);
+            this.cmbEstatus.Location = new System.Drawing.Point(462, 29);
             this.cmbEstatus.Name = "cmbEstatus";
             this.cmbEstatus.Size = new System.Drawing.Size(120, 21);
             this.cmbEstatus.TabIndex = 5;
@@ -303,7 +303,7 @@
             this.Label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.Label5.AutoSize = true;
             this.Label5.BackColor = System.Drawing.Color.Transparent;
-            this.Label5.Location = new System.Drawing.Point(398, 81);
+            this.Label5.Location = new System.Drawing.Point(392, 81);
             this.Label5.Name = "Label5";
             this.Label5.Size = new System.Drawing.Size(64, 13);
             this.Label5.TabIndex = 10;
@@ -313,7 +313,7 @@
             // 
             this.txtTotal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtTotal.Enabled = false;
-            this.txtTotal.Location = new System.Drawing.Point(468, 78);
+            this.txtTotal.Location = new System.Drawing.Point(462, 78);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.Size = new System.Drawing.Size(120, 20);
             this.txtTotal.TabIndex = 11;
@@ -328,7 +328,7 @@
             this.gbDetalle.Controls.Add(this.TableLayoutPanel1);
             this.gbDetalle.Location = new System.Drawing.Point(6, 136);
             this.gbDetalle.Name = "gbDetalle";
-            this.gbDetalle.Size = new System.Drawing.Size(594, 282);
+            this.gbDetalle.Size = new System.Drawing.Size(588, 312);
             this.gbDetalle.TabIndex = 2;
             this.gbDetalle.TabStop = false;
             this.gbDetalle.Text = "Datos Deatlle";
@@ -349,7 +349,7 @@
             this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.80992F));
             this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 68F));
             this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TableLayoutPanel1.Size = new System.Drawing.Size(588, 263);
+            this.TableLayoutPanel1.Size = new System.Drawing.Size(582, 293);
             this.TableLayoutPanel1.TabIndex = 1;
             // 
             // mstpInsSupr
@@ -360,9 +360,9 @@
             this.mstpInsSupr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mstpItemInsert,
             this.mstpItemSupr});
-            this.mstpInsSupr.Location = new System.Drawing.Point(0, 170);
+            this.mstpInsSupr.Location = new System.Drawing.Point(0, 196);
             this.mstpInsSupr.Name = "mstpInsSupr";
-            this.mstpInsSupr.Size = new System.Drawing.Size(588, 24);
+            this.mstpInsSupr.Size = new System.Drawing.Size(582, 28);
             this.mstpInsSupr.TabIndex = 15;
             this.mstpInsSupr.Text = "MenuStrip2";
             // 
@@ -371,7 +371,7 @@
             this.mstpItemInsert.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemInsert.Image")));
             this.mstpItemInsert.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.mstpItemInsert.Name = "mstpItemInsert";
-            this.mstpItemInsert.Size = new System.Drawing.Size(72, 20);
+            this.mstpItemInsert.Size = new System.Drawing.Size(72, 24);
             this.mstpItemInsert.Text = "(Insert)";
             // 
             // mstpItemSupr
@@ -379,7 +379,7 @@
             this.mstpItemSupr.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemSupr.Image")));
             this.mstpItemSupr.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.mstpItemSupr.Name = "mstpItemSupr";
-            this.mstpItemSupr.Size = new System.Drawing.Size(65, 20);
+            this.mstpItemSupr.Size = new System.Drawing.Size(65, 24);
             this.mstpItemSupr.Text = "(Supr)";
             // 
             // dgDetalle
@@ -397,7 +397,7 @@
             this.dgDetalle.Location = new System.Drawing.Point(3, 3);
             this.dgDetalle.Name = "dgDetalle";
             this.dgDetalle.RowHeadersVisible = false;
-            this.dgDetalle.Size = new System.Drawing.Size(582, 164);
+            this.dgDetalle.Size = new System.Drawing.Size(576, 190);
             this.dgDetalle.TabIndex = 0;
             // 
             // colProducto
@@ -422,8 +422,8 @@
             // colMonto
             // 
             this.colMonto.DataPropertyName = "Monto";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colMonto.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colMonto.DefaultCellStyle = dataGridViewCellStyle1;
             this.colMonto.HeaderText = "Monto";
             this.colMonto.Name = "colMonto";
             // 
@@ -438,7 +438,7 @@
             this.TableLayoutPanel8.Controls.Add(this.Label8, 0, 0);
             this.TableLayoutPanel8.Controls.Add(this.Label7, 0, 1);
             this.TableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Right;
-            this.TableLayoutPanel8.Location = new System.Drawing.Point(383, 197);
+            this.TableLayoutPanel8.Location = new System.Drawing.Point(377, 227);
             this.TableLayoutPanel8.Name = "TableLayoutPanel8";
             this.TableLayoutPanel8.RowCount = 2;
             this.TableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -500,7 +500,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(627, 457);
+            this.ClientSize = new System.Drawing.Size(621, 487);
             this.Controls.Add(this.mstpMenuMaestro);
             this.Name = "frmPago";
             this.Text = "frmPago";

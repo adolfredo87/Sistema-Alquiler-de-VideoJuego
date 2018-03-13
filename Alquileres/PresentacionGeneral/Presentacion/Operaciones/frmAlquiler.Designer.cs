@@ -57,6 +57,8 @@
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.cmbEstatus = new System.Windows.Forms.ComboBox();
+            this.lblFechaDesdeFormato = new System.Windows.Forms.Label();
+            this.lblFechaHastaFormato = new System.Windows.Forms.Label();
             this.GrupBox.SuspendLayout();
             this.mstpMenuMaestro.SuspendLayout();
             this.TableLayoutPanel1.SuspendLayout();
@@ -66,7 +68,7 @@
             // 
             this.GrupBox.Controls.Add(this.TableLayoutPanel1);
             this.GrupBox.Location = new System.Drawing.Point(12, 27);
-            this.GrupBox.Size = new System.Drawing.Size(577, 448);
+            this.GrupBox.Size = new System.Drawing.Size(597, 448);
             // 
             // mstpMenuMaestro
             // 
@@ -81,7 +83,7 @@
             this.mstpMenuMaestro.Location = new System.Drawing.Point(0, 0);
             this.mstpMenuMaestro.Name = "mstpMenuMaestro";
             this.mstpMenuMaestro.ShowItemToolTips = true;
-            this.mstpMenuMaestro.Size = new System.Drawing.Size(601, 24);
+            this.mstpMenuMaestro.Size = new System.Drawing.Size(621, 24);
             this.mstpMenuMaestro.TabIndex = 8;
             this.mstpMenuMaestro.Text = "MenuStrip1";
             // 
@@ -184,6 +186,8 @@
             this.TableLayoutPanel1.Controls.Add(this.txtPrecio, 1, 9);
             this.TableLayoutPanel1.Controls.Add(this.label10, 0, 10);
             this.TableLayoutPanel1.Controls.Add(this.cmbEstatus, 1, 10);
+            this.TableLayoutPanel1.Controls.Add(this.lblFechaDesdeFormato, 3, 4);
+            this.TableLayoutPanel1.Controls.Add(this.lblFechaHastaFormato, 3, 5);
             this.TableLayoutPanel1.Location = new System.Drawing.Point(6, 19);
             this.TableLayoutPanel1.Name = "TableLayoutPanel1";
             this.TableLayoutPanel1.RowCount = 12;
@@ -199,7 +203,7 @@
             this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.TableLayoutPanel1.Size = new System.Drawing.Size(565, 423);
+            this.TableLayoutPanel1.Size = new System.Drawing.Size(585, 423);
             this.TableLayoutPanel1.TabIndex = 9;
             // 
             // label5
@@ -241,7 +245,7 @@
             this.txtCodigo.Enabled = false;
             this.txtCodigo.Location = new System.Drawing.Point(92, 3);
             this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(152, 20);
+            this.txtCodigo.Size = new System.Drawing.Size(159, 20);
             this.txtCodigo.TabIndex = 1;
             this.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -270,21 +274,21 @@
             // txtDesde
             // 
             this.txtDesde.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.TableLayoutPanel1.SetColumnSpan(this.txtDesde, 3);
+            this.TableLayoutPanel1.SetColumnSpan(this.txtDesde, 2);
             this.txtDesde.Enabled = false;
             this.txtDesde.Location = new System.Drawing.Point(92, 83);
             this.txtDesde.Name = "txtDesde";
-            this.txtDesde.Size = new System.Drawing.Size(470, 20);
+            this.txtDesde.Size = new System.Drawing.Size(324, 20);
             this.txtDesde.TabIndex = 7;
             // 
             // txtHasta
             // 
             this.txtHasta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.TableLayoutPanel1.SetColumnSpan(this.txtHasta, 3);
+            this.TableLayoutPanel1.SetColumnSpan(this.txtHasta, 2);
             this.txtHasta.Enabled = false;
             this.txtHasta.Location = new System.Drawing.Point(92, 109);
             this.txtHasta.Name = "txtHasta";
-            this.txtHasta.Size = new System.Drawing.Size(470, 20);
+            this.txtHasta.Size = new System.Drawing.Size(324, 20);
             this.txtHasta.TabIndex = 9;
             // 
             // cmbCliente
@@ -294,7 +298,7 @@
             this.cmbCliente.FormattingEnabled = true;
             this.cmbCliente.Location = new System.Drawing.Point(92, 29);
             this.cmbCliente.Name = "cmbCliente";
-            this.cmbCliente.Size = new System.Drawing.Size(468, 21);
+            this.cmbCliente.Size = new System.Drawing.Size(490, 21);
             this.cmbCliente.TabIndex = 10;
             // 
             // cmbProducto
@@ -304,7 +308,7 @@
             this.cmbProducto.FormattingEnabled = true;
             this.cmbProducto.Location = new System.Drawing.Point(92, 56);
             this.cmbProducto.Name = "cmbProducto";
-            this.cmbProducto.Size = new System.Drawing.Size(468, 21);
+            this.cmbProducto.Size = new System.Drawing.Size(490, 21);
             this.cmbProducto.TabIndex = 11;
             // 
             // label6
@@ -324,7 +328,7 @@
             this.txtHora.Enabled = false;
             this.txtHora.Location = new System.Drawing.Point(92, 135);
             this.txtHora.Name = "txtHora";
-            this.txtHora.Size = new System.Drawing.Size(152, 20);
+            this.txtHora.Size = new System.Drawing.Size(159, 20);
             this.txtHora.TabIndex = 14;
             // 
             // label7
@@ -344,7 +348,7 @@
             this.txtDia.Enabled = false;
             this.txtDia.Location = new System.Drawing.Point(92, 161);
             this.txtDia.Name = "txtDia";
-            this.txtDia.Size = new System.Drawing.Size(152, 20);
+            this.txtDia.Size = new System.Drawing.Size(159, 20);
             this.txtDia.TabIndex = 16;
             // 
             // label8
@@ -364,7 +368,7 @@
             this.txtSemana.Enabled = false;
             this.txtSemana.Location = new System.Drawing.Point(92, 187);
             this.txtSemana.Name = "txtSemana";
-            this.txtSemana.Size = new System.Drawing.Size(152, 20);
+            this.txtSemana.Size = new System.Drawing.Size(159, 20);
             this.txtSemana.TabIndex = 18;
             // 
             // label9
@@ -384,7 +388,7 @@
             this.txtPrecio.Enabled = false;
             this.txtPrecio.Location = new System.Drawing.Point(92, 213);
             this.txtPrecio.Name = "txtPrecio";
-            this.txtPrecio.Size = new System.Drawing.Size(152, 20);
+            this.txtPrecio.Size = new System.Drawing.Size(159, 20);
             this.txtPrecio.TabIndex = 20;
             // 
             // label10
@@ -407,11 +411,33 @@
             this.cmbEstatus.Size = new System.Drawing.Size(152, 21);
             this.cmbEstatus.TabIndex = 22;
             // 
+            // lblFechaDesdeFormato
+            // 
+            this.lblFechaDesdeFormato.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblFechaDesdeFormato.AutoSize = true;
+            this.lblFechaDesdeFormato.BackColor = System.Drawing.Color.Transparent;
+            this.lblFechaDesdeFormato.Location = new System.Drawing.Point(422, 86);
+            this.lblFechaDesdeFormato.Name = "lblFechaDesdeFormato";
+            this.lblFechaDesdeFormato.Size = new System.Drawing.Size(160, 13);
+            this.lblFechaDesdeFormato.TabIndex = 23;
+            this.lblFechaDesdeFormato.Text = "Formato: dd/mm/aaaa hh:mm:ss ";
+            // 
+            // lblFechaHastaFormato
+            // 
+            this.lblFechaHastaFormato.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblFechaHastaFormato.AutoSize = true;
+            this.lblFechaHastaFormato.BackColor = System.Drawing.Color.Transparent;
+            this.lblFechaHastaFormato.Location = new System.Drawing.Point(422, 112);
+            this.lblFechaHastaFormato.Name = "lblFechaHastaFormato";
+            this.lblFechaHastaFormato.Size = new System.Drawing.Size(160, 13);
+            this.lblFechaHastaFormato.TabIndex = 24;
+            this.lblFechaHastaFormato.Text = "Formato: dd/mm/aaaa hh:mm:ss ";
+            // 
             // frmAlquiler
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(601, 487);
+            this.ClientSize = new System.Drawing.Size(621, 487);
             this.Controls.Add(this.mstpMenuMaestro);
             this.Name = "frmAlquiler";
             this.Text = "frmAlquiler";
@@ -460,6 +486,8 @@
         internal System.Windows.Forms.TextBox txtPrecio;
         internal System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox cmbEstatus;
+        internal System.Windows.Forms.Label lblFechaDesdeFormato;
+        internal System.Windows.Forms.Label lblFechaHastaFormato;
 
     }
 }

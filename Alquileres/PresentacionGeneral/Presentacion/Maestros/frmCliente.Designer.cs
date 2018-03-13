@@ -59,7 +59,7 @@
             // 
             this.GrupBox.Controls.Add(this.TableLayoutPanel1);
             this.GrupBox.Location = new System.Drawing.Point(12, 27);
-            this.GrupBox.Size = new System.Drawing.Size(577, 448);
+            this.GrupBox.Size = new System.Drawing.Size(597, 448);
             // 
             // mstpMenuMaestro
             // 
@@ -75,7 +75,7 @@
             this.mstpMenuMaestro.Location = new System.Drawing.Point(0, 0);
             this.mstpMenuMaestro.Name = "mstpMenuMaestro";
             this.mstpMenuMaestro.ShowItemToolTips = true;
-            this.mstpMenuMaestro.Size = new System.Drawing.Size(601, 24);
+            this.mstpMenuMaestro.Size = new System.Drawing.Size(621, 24);
             this.mstpMenuMaestro.TabIndex = 6;
             this.mstpMenuMaestro.Text = "MenuStrip1";
             // 
@@ -193,7 +193,7 @@
             this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.TableLayoutPanel1.Size = new System.Drawing.Size(565, 423);
+            this.TableLayoutPanel1.Size = new System.Drawing.Size(585, 423);
             this.TableLayoutPanel1.TabIndex = 1;
             // 
             // label10
@@ -246,7 +246,7 @@
             this.txtCodigo.Enabled = false;
             this.txtCodigo.Location = new System.Drawing.Point(74, 3);
             this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(158, 20);
+            this.txtCodigo.Size = new System.Drawing.Size(165, 20);
             this.txtCodigo.TabIndex = 1;
             this.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -257,7 +257,7 @@
             this.txtNombre.Enabled = false;
             this.txtNombre.Location = new System.Drawing.Point(74, 29);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(488, 20);
+            this.txtNombre.Size = new System.Drawing.Size(508, 20);
             this.txtNombre.TabIndex = 3;
             // 
             // Label4
@@ -290,7 +290,7 @@
             this.txtTelefono.Location = new System.Drawing.Point(74, 55);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtTelefono.Size = new System.Drawing.Size(488, 20);
+            this.txtTelefono.Size = new System.Drawing.Size(508, 20);
             this.txtTelefono.TabIndex = 5;
             // 
             // txtCorreo
@@ -300,7 +300,7 @@
             this.txtCorreo.Enabled = false;
             this.txtCorreo.Location = new System.Drawing.Point(74, 81);
             this.txtCorreo.Name = "txtCorreo";
-            this.txtCorreo.Size = new System.Drawing.Size(488, 20);
+            this.txtCorreo.Size = new System.Drawing.Size(508, 20);
             this.txtCorreo.TabIndex = 7;
             // 
             // txtDireccion
@@ -311,7 +311,7 @@
             this.txtDireccion.Location = new System.Drawing.Point(74, 107);
             this.txtDireccion.Multiline = true;
             this.txtDireccion.Name = "txtDireccion";
-            this.txtDireccion.Size = new System.Drawing.Size(488, 48);
+            this.txtDireccion.Size = new System.Drawing.Size(508, 48);
             this.txtDireccion.TabIndex = 9;
             // 
             // cmbEstatus
@@ -328,7 +328,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(601, 487);
+            this.ClientSize = new System.Drawing.Size(621, 487);
             this.Controls.Add(this.mstpMenuMaestro);
             this.Name = "frmCliente";
             this.Text = "Cliente";

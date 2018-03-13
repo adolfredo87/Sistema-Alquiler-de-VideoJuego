@@ -47,6 +47,8 @@ namespace Presentacion.Operaciones
             InitializeComponent();
             _ctrlAlquiler = new LogicaNegocio.AlquilerController();
             _alquiler = new EntidadNegocio.Entidades.Alquiler();
+            this.lblFechaDesdeFormato.Visible = false;
+            this.lblFechaHastaFormato.Visible = false;
         }
         public frmAlquiler(int idalquiler)
         {
@@ -95,7 +97,9 @@ namespace Presentacion.Operaciones
                     cmbCliente.Enabled = true;
                     cmbProducto.Enabled = true;
                     txtDesde.Enabled = true;
+                    lblFechaDesdeFormato.Visible = true;
                     txtHasta.Enabled = true;
+                    lblFechaHastaFormato.Visible = true;
                     txtHora.Enabled = false;
                     txtDia.Enabled = false;
                     txtSemana.Enabled = false;
@@ -112,7 +116,9 @@ namespace Presentacion.Operaciones
                     cmbCliente.Enabled = false;
                     cmbProducto.Enabled = false;
                     txtDesde.Enabled = false;
+                    lblFechaDesdeFormato.Visible = false;
                     txtHasta.Enabled = false;
+                    lblFechaHastaFormato.Visible = false;
                     txtHora.Enabled = false;
                     txtDia.Enabled = false;
                     txtSemana.Enabled = false;
@@ -129,7 +135,9 @@ namespace Presentacion.Operaciones
                     cmbCliente.Enabled = true;
                     cmbProducto.Enabled = true;
                     txtDesde.Enabled = true;
+                    lblFechaDesdeFormato.Visible = true;
                     txtHasta.Enabled = true;
+                    lblFechaHastaFormato.Visible = true;
                     txtHora.Enabled = false;
                     txtDia.Enabled = false;
                     txtSemana.Enabled = false;
@@ -149,7 +157,9 @@ namespace Presentacion.Operaciones
                     cmbCliente.Enabled = false;
                     cmbProducto.Enabled = false;
                     txtDesde.Enabled = false;
+                    lblFechaDesdeFormato.Visible = false;
                     txtHasta.Enabled = false;
+                    lblFechaHastaFormato.Visible = false;
                     txtHora.Enabled = false;
                     txtDia.Enabled = false;
                     txtSemana.Enabled = false;

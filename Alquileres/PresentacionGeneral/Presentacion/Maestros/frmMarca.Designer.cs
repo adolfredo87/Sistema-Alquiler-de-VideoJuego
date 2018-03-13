@@ -51,7 +51,7 @@
             // 
             this.GrupBox.Controls.Add(this.dgMarca);
             this.GrupBox.Location = new System.Drawing.Point(12, 27);
-            this.GrupBox.Size = new System.Drawing.Size(577, 433);
+            this.GrupBox.Size = new System.Drawing.Size(597, 433);
             // 
             // mstpGuardarCancelar
             // 
@@ -62,7 +62,7 @@
             this.mstpItemSalir});
             this.mstpGuardarCancelar.Location = new System.Drawing.Point(0, 0);
             this.mstpGuardarCancelar.Name = "mstpGuardarCancelar";
-            this.mstpGuardarCancelar.Size = new System.Drawing.Size(601, 24);
+            this.mstpGuardarCancelar.Size = new System.Drawing.Size(621, 24);
             this.mstpGuardarCancelar.TabIndex = 2;
             this.mstpGuardarCancelar.Text = "MenuStrip2";
             // 
@@ -104,7 +104,7 @@
             this.mstpItemSupr});
             this.mstpInsSupr.Location = new System.Drawing.Point(0, 463);
             this.mstpInsSupr.Name = "mstpInsSupr";
-            this.mstpInsSupr.Size = new System.Drawing.Size(601, 24);
+            this.mstpInsSupr.Size = new System.Drawing.Size(621, 24);
             this.mstpInsSupr.TabIndex = 4;
             this.mstpInsSupr.Text = "MenuStrip2";
             // 
@@ -141,7 +141,7 @@
             this.dgMarca.Location = new System.Drawing.Point(3, 16);
             this.dgMarca.Name = "dgMarca";
             this.dgMarca.RowHeadersVisible = false;
-            this.dgMarca.Size = new System.Drawing.Size(571, 414);
+            this.dgMarca.Size = new System.Drawing.Size(591, 414);
             this.dgMarca.TabIndex = 3;
             this.dgMarca.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgMarca_CellEndEdit);
             this.dgMarca.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgMarca_DataError);
@@ -181,7 +181,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(601, 487);
+            this.ClientSize = new System.Drawing.Size(621, 487);
             this.Controls.Add(this.mstpInsSupr);
             this.Controls.Add(this.mstpGuardarCancelar);
             this.Name = "frmMarca";

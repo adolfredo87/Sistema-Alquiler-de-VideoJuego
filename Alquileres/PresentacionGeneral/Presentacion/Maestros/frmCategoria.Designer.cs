@@ -51,7 +51,7 @@
             // 
             this.GrupBox.Controls.Add(this.dgCategoria);
             this.GrupBox.Location = new System.Drawing.Point(12, 27);
-            this.GrupBox.Size = new System.Drawing.Size(577, 433);
+            this.GrupBox.Size = new System.Drawing.Size(597, 433);
             this.GrupBox.Text = "Categoria";
             // 
             // mstpGuardarCancelar
@@ -63,7 +63,7 @@
             this.mstpItemSalir});
             this.mstpGuardarCancelar.Location = new System.Drawing.Point(0, 0);
             this.mstpGuardarCancelar.Name = "mstpGuardarCancelar";
-            this.mstpGuardarCancelar.Size = new System.Drawing.Size(601, 24);
+            this.mstpGuardarCancelar.Size = new System.Drawing.Size(621, 24);
             this.mstpGuardarCancelar.TabIndex = 1;
             this.mstpGuardarCancelar.Text = "MenuStrip2";
             // 
@@ -105,7 +105,7 @@
             this.mstpItemSupr});
             this.mstpInsSupr.Location = new System.Drawing.Point(0, 463);
             this.mstpInsSupr.Name = "mstpInsSupr";
-            this.mstpInsSupr.Size = new System.Drawing.Size(601, 24);
+            this.mstpInsSupr.Size = new System.Drawing.Size(621, 24);
             this.mstpInsSupr.TabIndex = 3;
             this.mstpInsSupr.Text = "MenuStrip2";
             // 
@@ -142,7 +142,7 @@
             this.dgCategoria.Location = new System.Drawing.Point(3, 16);
             this.dgCategoria.Name = "dgCategoria";
             this.dgCategoria.RowHeadersVisible = false;
-            this.dgCategoria.Size = new System.Drawing.Size(571, 414);
+            this.dgCategoria.Size = new System.Drawing.Size(591, 414);
             this.dgCategoria.TabIndex = 2;
             this.dgCategoria.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCategoria_CellEndEdit);
             this.dgCategoria.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgCategoria_DataError);
@@ -182,7 +182,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(601, 487);
+            this.ClientSize = new System.Drawing.Size(621, 487);
             this.Controls.Add(this.mstpInsSupr);
             this.Controls.Add(this.mstpGuardarCancelar);
             this.Name = "frmCategoria";
