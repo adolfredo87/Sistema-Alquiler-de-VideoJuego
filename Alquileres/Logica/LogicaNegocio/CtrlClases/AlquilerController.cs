@@ -33,7 +33,18 @@ namespace LogicaNegocio
                     _aE.TiempoDia = element.TiempoDia;
                     _aE.TiempoSemana = element.TiempoSemana;
                     _aE.PrecioEstimado = element.PrecioEstimado ?? 0;
-                    _aE.Estatus = element.Estatus;
+                    if (element.Estatus == 0)
+                    {
+                        _aE.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Generado;
+                    }
+                    else if (element.Estatus == 1)
+                    {
+                        _aE.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Procesado;
+                    }
+                    else
+                    {
+                        _aE.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Pagado;
+                    }
                     _aE.IDCliente = element.IDCliente;
                     _aE.Cliente = new EntidadNegocio.Entidades.Cliente();
                     _aE.Cliente.ID = element.Cliente.ID;
@@ -43,6 +54,22 @@ namespace LogicaNegocio
                     _aE.Cliente.Direccion = element.Cliente.Direccion;
                     _aE.IDProducto = element.IDProducto;
                     _aE.Producto = new EntidadNegocio.Entidades.Producto();
+                    _aE.Producto.ID = element.IDProducto;
+                    element.Producto.TipoLoad();
+                    _aE.Producto.Tipo = new EntidadNegocio.Entidades.Tipo();
+                    _aE.Producto.Tipo.ID = element.Producto.IDTipo;
+                    _aE.Producto.IDTipo = element.Producto.IDTipo;
+                    _aE.Producto.Tipo.Codigo = element.Producto.Tipo.Codigo;
+                    _aE.Producto.Tipo.Descripcion = element.Producto.Tipo.Descripcion;
+                    if (element.Producto.Tipo.Estatus == 1)
+                    {
+                        _aE.Producto.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Producto.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Producto.Tipo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                     _aE.Producto.ID = element.Producto.ID;
                     _aE.Producto.Codigo = element.Producto.Codigo;
                     _aE.Producto.Descripcion = element.Producto.Descripcion;
@@ -54,16 +81,53 @@ namespace LogicaNegocio
                     _aE.Producto.Marca.ID = element.Producto.IDMarca;
                     _aE.Producto.Marca.Codigo = element.Producto.Marca.Codigo;
                     _aE.Producto.Marca.Descripcion = element.Producto.Marca.Descripcion;
+                    if (element.Producto.Marca.Estatus == 1)
+                    {
+                        _aE.Producto.Marca.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Producto.Marca.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Producto.Marca.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                     element.Producto.ModeloLoad();
                     _aE.Producto.Modelo = new EntidadNegocio.Entidades.Modelo();
                     _aE.Producto.Modelo.ID = element.Producto.IDModelo;
                     _aE.Producto.Modelo.Codigo = element.Producto.Modelo.Codigo;
                     _aE.Producto.Modelo.Descripcion = element.Producto.Modelo.Descripcion;
+                    if (element.Producto.Modelo.Estatus == 1)
+                    {
+                        _aE.Producto.Modelo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Producto.Modelo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Producto.Modelo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                     element.Producto.CategoriaLoad();
                     _aE.Producto.Categoria = new EntidadNegocio.Entidades.Categoria();
                     _aE.Producto.Categoria.ID = element.Producto.IDCategoria;
                     _aE.Producto.Categoria.Codigo = element.Producto.Categoria.Codigo;
                     _aE.Producto.Categoria.Descripcion = element.Producto.Categoria.Descripcion;
+                    if (element.Producto.Categoria.Estatus == 1)
+                    {
+                        _aE.Producto.Categoria.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Producto.Categoria.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Producto.Categoria.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+
+                    if (element.Estatus == 1)
+                    {
+                        _aE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                     _ListAE.Add(_aE);
                 }
                 return _ListAE;
@@ -92,7 +156,18 @@ namespace LogicaNegocio
                     _aE.TiempoDia = element.TiempoDia;
                     _aE.TiempoSemana = element.TiempoSemana;
                     _aE.PrecioEstimado = element.PrecioEstimado ?? 0;
-                    _aE.Estatus = element.Estatus;
+                    if (element.Estatus == 0)
+                    {
+                        _aE.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Generado;
+                    }
+                    else if (element.Estatus == 1)
+                    {
+                        _aE.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Procesado;
+                    }
+                    else
+                    {
+                        _aE.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Pagado;
+                    }
                     _aE.IDCliente = element.IDCliente;
                     _aE.Cliente = new EntidadNegocio.Entidades.Cliente();
                     _aE.Cliente.ID = element.Cliente.ID;
@@ -102,6 +177,22 @@ namespace LogicaNegocio
                     _aE.Cliente.Direccion = element.Cliente.Direccion;
                     _aE.IDProducto = element.IDProducto;
                     _aE.Producto = new EntidadNegocio.Entidades.Producto();
+                    _aE.Producto.ID = element.IDProducto;
+                    element.Producto.TipoLoad();
+                    _aE.Producto.Tipo = new EntidadNegocio.Entidades.Tipo();
+                    _aE.Producto.Tipo.ID = element.Producto.IDTipo;
+                    _aE.Producto.IDTipo = element.Producto.IDTipo;
+                    _aE.Producto.Tipo.Codigo = element.Producto.Tipo.Codigo;
+                    _aE.Producto.Tipo.Descripcion = element.Producto.Tipo.Descripcion;
+                    if (element.Producto.Tipo.Estatus == 1)
+                    {
+                        _aE.Producto.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Producto.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Producto.Tipo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                     _aE.Producto.ID = element.Producto.ID;
                     _aE.Producto.Codigo = element.Producto.Codigo;
                     _aE.Producto.Descripcion = element.Producto.Descripcion;
@@ -113,16 +204,53 @@ namespace LogicaNegocio
                     _aE.Producto.Marca.ID = element.Producto.IDMarca;
                     _aE.Producto.Marca.Codigo = element.Producto.Marca.Codigo;
                     _aE.Producto.Marca.Descripcion = element.Producto.Marca.Descripcion;
+                    if (element.Producto.Marca.Estatus == 1)
+                    {
+                        _aE.Producto.Marca.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Producto.Marca.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Producto.Marca.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                     element.Producto.ModeloLoad();
                     _aE.Producto.Modelo = new EntidadNegocio.Entidades.Modelo();
                     _aE.Producto.Modelo.ID = element.Producto.IDModelo;
                     _aE.Producto.Modelo.Codigo = element.Producto.Modelo.Codigo;
                     _aE.Producto.Modelo.Descripcion = element.Producto.Modelo.Descripcion;
+                    if (element.Producto.Modelo.Estatus == 1)
+                    {
+                        _aE.Producto.Modelo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Producto.Modelo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Producto.Modelo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                     element.Producto.CategoriaLoad();
                     _aE.Producto.Categoria = new EntidadNegocio.Entidades.Categoria();
                     _aE.Producto.Categoria.ID = element.Producto.IDCategoria;
                     _aE.Producto.Categoria.Codigo = element.Producto.Categoria.Codigo;
                     _aE.Producto.Categoria.Descripcion = element.Producto.Categoria.Descripcion;
+                    if (element.Producto.Categoria.Estatus == 1)
+                    {
+                        _aE.Producto.Categoria.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Producto.Categoria.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Producto.Categoria.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+
+                    if (element.Estatus == 1)
+                    {
+                        _aE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                     _ListAE.Add(_aE);
                 }
                 return _ListAE;
@@ -154,6 +282,7 @@ namespace LogicaNegocio
                     _alquilerDetail = db.AlquilerSet.First(a => a.ID == id);
                     _alquilerDetail.ClienteLoad();
                     _alquilerDetail.ProductoLoad();
+                    _alquilerDetail.Producto.TipoLoad();
                     _alquilerDetail.Producto.MarcaLoad();
                     _alquilerDetail.Producto.ModeloLoad();
                     _alquilerDetail.Producto.CategoriaLoad();
@@ -168,7 +297,18 @@ namespace LogicaNegocio
                 alquilerDetail.TiempoDia = _alquilerDetail.TiempoDia;
                 alquilerDetail.TiempoSemana = _alquilerDetail.TiempoSemana;
                 alquilerDetail.PrecioEstimado = _alquilerDetail.PrecioEstimado ?? 0;
-                alquilerDetail.Estatus = _alquilerDetail.Estatus;
+                if (_alquilerDetail.Estatus == 0)
+                {
+                    alquilerDetail.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Generado;
+                }
+                else if (_alquilerDetail.Estatus == 1)
+                {
+                    alquilerDetail.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Procesado;
+                }
+                else
+                {
+                    alquilerDetail.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Pagado;
+                }
                 alquilerDetail.IDCliente = _alquilerDetail.IDCliente;
                 alquilerDetail.Cliente = new EntidadNegocio.Entidades.Cliente();
                 alquilerDetail.Cliente.ID = _alquilerDetail.Cliente.ID;
@@ -178,6 +318,21 @@ namespace LogicaNegocio
                 alquilerDetail.Cliente.Direccion = _alquilerDetail.Cliente.Direccion;
                 alquilerDetail.IDProducto = _alquilerDetail.IDProducto;
                 alquilerDetail.Producto = new EntidadNegocio.Entidades.Producto();
+                alquilerDetail.Producto.ID = _alquilerDetail.IDProducto;
+                alquilerDetail.Producto.Tipo = new EntidadNegocio.Entidades.Tipo();
+                alquilerDetail.Producto.Tipo.ID = _alquilerDetail.Producto.IDTipo;
+                alquilerDetail.Producto.IDTipo = _alquilerDetail.Producto.IDTipo;
+                alquilerDetail.Producto.Tipo.Codigo = _alquilerDetail.Producto.Tipo.Codigo;
+                alquilerDetail.Producto.Tipo.Descripcion = _alquilerDetail.Producto.Tipo.Descripcion;
+                if (_alquilerDetail.Producto.Tipo.Estatus == 1)
+                {
+                    alquilerDetail.Producto.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                }
+                else
+                {
+                    alquilerDetail.Producto.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                }
+                alquilerDetail.Producto.Tipo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                 alquilerDetail.Producto.ID = _alquilerDetail.Producto.ID;
                 alquilerDetail.Producto.Codigo = _alquilerDetail.Producto.Codigo;
                 alquilerDetail.Producto.Descripcion = _alquilerDetail.Producto.Descripcion;
@@ -188,15 +343,50 @@ namespace LogicaNegocio
                 alquilerDetail.Producto.Marca.ID = _alquilerDetail.Producto.IDMarca;
                 alquilerDetail.Producto.Marca.Codigo = _alquilerDetail.Producto.Marca.Codigo;
                 alquilerDetail.Producto.Marca.Descripcion = _alquilerDetail.Producto.Marca.Descripcion;
+                if (_alquilerDetail.Producto.Marca.Estatus == 1)
+                {
+                    alquilerDetail.Producto.Marca.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                }
+                else
+                {
+                    alquilerDetail.Producto.Marca.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                }
+                alquilerDetail.Producto.Marca.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                 alquilerDetail.Producto.Modelo = new EntidadNegocio.Entidades.Modelo();
                 alquilerDetail.Producto.Modelo.ID = _alquilerDetail.Producto.IDModelo;
                 alquilerDetail.Producto.Modelo.Codigo = _alquilerDetail.Producto.Modelo.Codigo;
                 alquilerDetail.Producto.Modelo.Descripcion = _alquilerDetail.Producto.Modelo.Descripcion;
+                if (_alquilerDetail.Producto.Modelo.Estatus == 1)
+                {
+                    alquilerDetail.Producto.Modelo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                }
+                else
+                {
+                    alquilerDetail.Producto.Modelo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                }
+                alquilerDetail.Producto.Modelo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                 alquilerDetail.Producto.Categoria = new EntidadNegocio.Entidades.Categoria();
                 alquilerDetail.Producto.Categoria.ID = _alquilerDetail.Producto.IDCategoria;
                 alquilerDetail.Producto.Categoria.Codigo = _alquilerDetail.Producto.Categoria.Codigo;
                 alquilerDetail.Producto.Categoria.Descripcion = _alquilerDetail.Producto.Categoria.Descripcion;
-
+                if (_alquilerDetail.Producto.Categoria.Estatus == 1)
+                {
+                    alquilerDetail.Producto.Categoria.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                }
+                else
+                {
+                    alquilerDetail.Producto.Categoria.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                }
+                alquilerDetail.Producto.Categoria.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+                if (_alquilerDetail.Estatus == 1)
+                {
+                    alquilerDetail.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                }
+                else
+                {
+                    alquilerDetail.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                }
+                alquilerDetail.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                 return alquilerDetail;
             }
             catch (Exception ex)
@@ -221,7 +411,6 @@ namespace LogicaNegocio
                 DateTime dFechaDesde = DateTime.Parse(_sFechaDesde);
                 String _sFechaHasta = _alquiler.FechaHasta.ToString();
                 DateTime dFechaHasta = DateTime.Parse(_sFechaHasta);
-                Int32 iEstatus = 0;
 
                 alquilerToAdd.IDCliente = iIDCliente;
                 alquilerToAdd.IDProducto = iIDProducto;
@@ -231,7 +420,19 @@ namespace LogicaNegocio
                 alquilerToAdd.TiempoDia = _alquiler.TiempoDia;
                 alquilerToAdd.TiempoSemana = _alquiler.TiempoSemana;
                 alquilerToAdd.PrecioEstimado = _alquiler.PrecioEstimado;
-                alquilerToAdd.Estatus = iEstatus;
+
+                if (_alquiler.Estatus == EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Generado)
+                {
+                    alquilerToAdd.Estatus = 0;
+                }
+                else if (_alquiler.Estatus == EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Procesado)
+                {
+                    alquilerToAdd.Estatus = 1;
+                }
+                else
+                {
+                    alquilerToAdd.Estatus = 2;
+                }
 
                 if (!String.IsNullOrEmpty(_sIDCliente))
                 {
@@ -313,7 +514,6 @@ namespace LogicaNegocio
                 DateTime dFechaDesde = DateTime.Parse(_sFechaDesde);
                 String _sFechaHasta = _alquiler.FechaHasta.ToString();
                 DateTime dFechaHasta = DateTime.Parse(_sFechaHasta);
-                Int32 iEstatus = 1;
 
                 alquilerToUpdate.IDCliente = iIDCliente;
                 alquilerToUpdate.IDProducto = iIDProducto;
@@ -323,7 +523,18 @@ namespace LogicaNegocio
                 alquilerToUpdate.TiempoDia = _alquiler.TiempoDia;
                 alquilerToUpdate.TiempoSemana = _alquiler.TiempoSemana;
                 alquilerToUpdate.PrecioEstimado = _alquiler.PrecioEstimado;
-                alquilerToUpdate.Estatus = iEstatus;
+                if (_alquiler.Estatus == EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Generado)
+                {
+                    alquilerToUpdate.Estatus = 0;
+                }
+                else if (_alquiler.Estatus == EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Procesado)
+                {
+                    alquilerToUpdate.Estatus = 1;
+                }
+                else
+                {
+                    alquilerToUpdate.Estatus = 2;
+                }
 
 
                 if (!String.IsNullOrEmpty(_sIDCliente))

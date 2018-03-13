@@ -40,6 +40,7 @@
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCoddigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEstatus = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.GrupBox.SuspendLayout();
             this.mstpGuardarCancelar.SuspendLayout();
             this.mstpInsSupr.SuspendLayout();
@@ -133,7 +134,8 @@
             this.dgCategoria.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colID,
             this.colCoddigo,
-            this.colDescripcion});
+            this.colDescripcion,
+            this.colEstatus});
             this.dgCategoria.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgCategoria.Location = new System.Drawing.Point(3, 16);
             this.dgCategoria.Name = "dgCategoria";
@@ -166,6 +168,14 @@
             this.colDescripcion.Name = "colDescripcion";
             this.colDescripcion.Width = 350;
             // 
+            // colEstatus
+            // 
+            this.colEstatus.DataPropertyName = "Status";
+            this.colEstatus.HeaderText = "Estatus";
+            this.colEstatus.Name = "colEstatus";
+            this.colEstatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colEstatus.Width = 90;
+            // 
             // frmCategoria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -174,7 +184,7 @@
             this.Controls.Add(this.mstpInsSupr);
             this.Controls.Add(this.mstpGuardarCancelar);
             this.Name = "frmCategoria";
-            this.Text = "Categoria";
+            this.Text = "frmCategoria";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCategoria_FormClosing);
             this.Load += new System.EventHandler(this.frmCategoria_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmCategoria_KeyDown);
@@ -205,5 +215,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCoddigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescripcion;
+        private System.Windows.Forms.DataGridViewComboBoxColumn colEstatus;
     }
 }

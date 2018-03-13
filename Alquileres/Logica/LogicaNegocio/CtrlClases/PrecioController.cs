@@ -30,7 +30,14 @@ namespace LogicaNegocio
                     _precioE.Codigo = element.Codigo;
                     _precioE.Descripcion = element.Descripcion;
                     _precioE.PrecioUnitario = element.PrecioUnitario ?? 0;
-                    _precioE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    if (element.Estatus == 1)
+                    {
+                        _precioE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _precioE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
                     _precioE.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                     _ListPE.Add(_precioE);
                 }
@@ -65,6 +72,14 @@ namespace LogicaNegocio
             precioDetail.Codigo = _precio.Codigo;
             precioDetail.Descripcion = _precio.Descripcion;
             precioDetail.PrecioUnitario = _precio.PrecioUnitario ?? 0;
+            if (_precio.Estatus == 1)
+            {
+                precioDetail.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+            }
+            else
+            {
+                precioDetail.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+            }
             return precioDetail;
         }
 
@@ -77,6 +92,14 @@ namespace LogicaNegocio
             precioToAdd.Codigo = _precio.Codigo;
             precioToAdd.Descripcion = _precio.Descripcion;
             precioToAdd.PrecioUnitario = _precio.PrecioUnitario;
+            if (_precio.Status == EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo)
+            {
+                precioToAdd.Estatus = 1;
+            }
+            else
+            {
+                precioToAdd.Estatus = 0;
+            }
 
             //valido claves primaria
             if (db.DescuentoSet.FirstOrDefault(b => b.ID == precioToAdd.ID) != null)
@@ -127,6 +150,14 @@ namespace LogicaNegocio
             precioToUpdate.Codigo = _precio.Codigo;
             precioToUpdate.Descripcion = _precio.Descripcion;
             precioToUpdate.PrecioUnitario = _precio.PrecioUnitario;
+            if (_precio.Status == EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo)
+            {
+                precioToUpdate.Estatus = 1;
+            }
+            else
+            {
+                precioToUpdate.Estatus = 0;
+            }
 
             if (db.Connection.State != System.Data.ConnectionState.Open)
             {
@@ -165,6 +196,14 @@ namespace LogicaNegocio
             String _Descripcion = _precio.Descripcion;
             precioToDelete.Descripcion = _Descripcion;
             precioToDelete.PrecioUnitario = _precio.PrecioUnitario;
+            if (_precio.Status == EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo)
+            {
+                precioToDelete.Estatus = 1;
+            }
+            else
+            {
+                precioToDelete.Estatus = 0;
+            }
 
             //valido si el descuento que se borra es de cabecera o de linea
             if (_Descripcion.Contains("Hora") || _Descripcion.Contains("Dia") || _Descripcion.Contains("Semana"))

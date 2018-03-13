@@ -56,7 +56,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.txtEstatus = new System.Windows.Forms.TextBox();
+            this.cmbEstatus = new System.Windows.Forms.ComboBox();
             this.GrupBox.SuspendLayout();
             this.mstpMenuMaestro.SuspendLayout();
             this.TableLayoutPanel1.SuspendLayout();
@@ -178,7 +178,7 @@
             this.TableLayoutPanel1.Controls.Add(this.label9, 0, 9);
             this.TableLayoutPanel1.Controls.Add(this.txtPrecio, 1, 9);
             this.TableLayoutPanel1.Controls.Add(this.label10, 0, 10);
-            this.TableLayoutPanel1.Controls.Add(this.txtEstatus, 1, 10);
+            this.TableLayoutPanel1.Controls.Add(this.cmbEstatus, 1, 10);
             this.TableLayoutPanel1.Location = new System.Drawing.Point(6, 19);
             this.TableLayoutPanel1.Name = "TableLayoutPanel1";
             this.TableLayoutPanel1.RowCount = 12;
@@ -387,20 +387,20 @@
             this.label10.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.Location = new System.Drawing.Point(44, 242);
+            this.label10.Location = new System.Drawing.Point(44, 243);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(42, 13);
             this.label10.TabIndex = 21;
             this.label10.Text = "Estatus";
             // 
-            // txtEstatus
+            // cmbEstatus
             // 
-            this.txtEstatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEstatus.Enabled = false;
-            this.txtEstatus.Location = new System.Drawing.Point(92, 239);
-            this.txtEstatus.Name = "txtEstatus";
-            this.txtEstatus.Size = new System.Drawing.Size(152, 20);
-            this.txtEstatus.TabIndex = 22;
+            this.cmbEstatus.Enabled = false;
+            this.cmbEstatus.FormattingEnabled = true;
+            this.cmbEstatus.Location = new System.Drawing.Point(92, 239);
+            this.cmbEstatus.Name = "cmbEstatus";
+            this.cmbEstatus.Size = new System.Drawing.Size(152, 21);
+            this.cmbEstatus.TabIndex = 22;
             // 
             // frmAlquiler
             // 
@@ -454,7 +454,7 @@
         internal System.Windows.Forms.Label label9;
         internal System.Windows.Forms.TextBox txtPrecio;
         internal System.Windows.Forms.Label label10;
-        internal System.Windows.Forms.TextBox txtEstatus;
+        private System.Windows.Forms.ComboBox cmbEstatus;
 
     }
 }

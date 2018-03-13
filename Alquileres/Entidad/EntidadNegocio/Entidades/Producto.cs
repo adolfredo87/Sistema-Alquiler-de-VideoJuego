@@ -14,6 +14,8 @@ namespace EntidadNegocio.Entidades
     {
         #region "Atributos"
         private System.Int32 _id;
+        private System.Int32 _idTipo;
+        private Tipo _tipo;
         private System.String _codigo;
         private System.String _descripcion;
         private System.Int32 _idmarca;
@@ -31,6 +33,16 @@ namespace EntidadNegocio.Entidades
         {
             get { return _id; }
             set { _id = value; }
+        }
+        public System.Int32 IDTipo
+        {
+            get { return _idTipo; }
+            set { _idTipo = value; }
+        }
+        public Tipo Tipo
+        {
+            get { return _tipo; }
+            set { _tipo = value; }
         }
         public System.String Codigo
         {

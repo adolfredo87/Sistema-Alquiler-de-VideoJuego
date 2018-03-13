@@ -125,6 +125,7 @@ CREATE TABLE [dbo].[cliente](
 	[Telefono] [varchar](255) NULL,
 	[Correo] [varchar](255) NULL,
 	[Direccion] [varchar](255) NULL,
+	[Estatus] [int] NOT NULL DEFAULT (1),
 PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
@@ -144,7 +145,7 @@ CREATE TABLE [dbo].[descuento](
 	[Codigo] [varchar](255) NULL,
 	[Descripcion] [varchar](255) NULL,
 	[PorcentajeDescuento] [float] NULL,
-	[Estatus] [int] NULL DEFAULT (0),
+	[Estatus] [int] NULL DEFAULT (1),
 PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
@@ -164,6 +165,26 @@ CREATE TABLE [dbo].[precio](
 	[Codigo] [varchar](255) NULL,
 	[Descripcion] [varchar](255) NULL,
 	[PrecioUnitario] [float] NULL,
+	[Estatus] [int] NOT NULL DEFAULT (1),
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[marca]    Script Date: 10/25/2016 15:51:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tipo](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Codigo] [varchar](255) NULL,
+	[Descripcion] [varchar](255) NULL,
+	[Estatus] [int] NOT NULL DEFAULT (1),
 PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
@@ -182,6 +203,9 @@ CREATE TABLE [dbo].[marca](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[Codigo] [varchar](255) NULL,
 	[Descripcion] [varchar](255) NULL,
+	[Estatus] [int] NOT NULL DEFAULT (1),
+	[IDTipo] [int] NOT NULL,
+	CONSTRAINT [FK_Marca_Tipo] FOREIGN KEY([IDTipo]) REFERENCES [dbo].[tipo] ([ID]),
 PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
@@ -200,6 +224,9 @@ CREATE TABLE [dbo].[modelo](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[Codigo] [varchar](255) NULL,
 	[Descripcion] [varchar](255) NULL,
+	[Estatus] [int] NOT NULL DEFAULT (1),
+	[IDTipo] [int] NOT NULL,
+	CONSTRAINT [FK_Modelo_Tipo] FOREIGN KEY([IDTipo]) REFERENCES [dbo].[tipo] ([ID]),
 PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
@@ -218,6 +245,9 @@ CREATE TABLE [dbo].[categoria](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[Codigo] [varchar](255) NULL,
 	[Descripcion] [varchar](255) NULL,
+	[Estatus] [int] NOT NULL DEFAULT (1),
+	[IDTipo] [int] NOT NULL,
+	CONSTRAINT [FK_Categoria_Tipo] FOREIGN KEY([IDTipo]) REFERENCES [dbo].[tipo] ([ID]),
 PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
@@ -234,11 +264,14 @@ SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[producto](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[IDTipo] [int] NOT NULL,
 	[Codigo] [varchar](255) NOT NULL,
 	[Descripcion] [varchar](255) NOT NULL,
+	[Estatus] [int] NOT NULL DEFAULT (1),
 	[IDMarca] [int] NOT NULL,
 	[IDModelo] [int] NOT NULL,
 	[IDCategoria] [int] NOT NULL,
+	CONSTRAINT [FK_Producto_Tipo] FOREIGN KEY([IDTipo]) REFERENCES [dbo].[tipo] ([ID]),
 	CONSTRAINT [FK_Producto_Marca] FOREIGN KEY([IDMarca]) REFERENCES [dbo].[marca] ([ID]),
 	CONSTRAINT [FK_Producto_Modelo] FOREIGN KEY([IDModelo]) REFERENCES [dbo].[modelo] ([ID]),
 	CONSTRAINT [FK_Producto_Categoria] FOREIGN KEY([IDCategoria]) REFERENCES [dbo].[categoria] ([ID]),
@@ -323,12 +356,14 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE VIEW [dbo].[vw_producto_descripcion]
 AS
-SELECT     dbo.producto.ID, dbo.producto.Codigo, dbo.producto.Descripcion AS Producto, dbo.marca.Descripcion AS Marca, dbo.modelo.Descripcion AS Modelo, 
-                      dbo.categoria.Descripcion AS Categoria
+SELECT     dbo.producto.ID, dbo.tipo.Descripcion AS Tipo, dbo.producto.Codigo, dbo.producto.Descripcion AS Producto, dbo.marca.Descripcion AS Marca, 
+                      dbo.modelo.Descripcion AS Modelo, dbo.categoria.Descripcion AS Categoria
 FROM         dbo.producto INNER JOIN
                       dbo.categoria ON dbo.producto.IDCategoria = dbo.categoria.ID INNER JOIN
                       dbo.marca ON dbo.producto.IDMarca = dbo.marca.ID INNER JOIN
-                      dbo.modelo ON dbo.producto.IDModelo = dbo.modelo.ID
+                      dbo.modelo ON dbo.producto.IDModelo = dbo.modelo.ID INNER JOIN
+                      dbo.tipo ON dbo.producto.IDTipo = dbo.tipo.ID AND dbo.categoria.IDTipo = dbo.tipo.ID AND dbo.marca.IDTipo = dbo.tipo.ID AND 
+                      dbo.modelo.IDTipo = dbo.tipo.ID
 GO
 
 /****** Object:  View [dbo].[vw_cantidad_alquiler_por_pagar]    Script Date: 03/04/2018 20:03:36 ******/
@@ -406,8 +441,8 @@ SET QUOTED_IDENTIFIER, ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIEL
 GO
 CREATE PROCEDURE [dbo].[USP_INCCLIENTE]
 ( 
-  @VNOMBRE AS VARCHAR(100), @VTELEFONO AS VARCHAR(50), @VCORREO AS VARCHAR(200), @VDIRECCION AS VARCHAR(200)
- )
+  @VNOMBRE AS VARCHAR(100), @VTELEFONO AS VARCHAR(50), @VCORREO AS VARCHAR(200), @VDIRECCION AS VARCHAR(200), @IESTATUS AS INT = 1
+)
 AS
 
 SET NOCOUNT ON
@@ -437,9 +472,9 @@ BEGIN TRY
       BEGIN TRAN
       
         INSERT INTO [DemoAlquilerGameWinForm].[dbo].[cliente]
-          (Nombre, Telefono, Correo, Direccion)
+          (Nombre, Telefono, Correo, Direccion, Estatus)
         VALUES
-          (@VNOMBRE, @VTELEFONO, @VCORREO, @VDIRECCION)
+          (@VNOMBRE, @VTELEFONO, @VCORREO, @VDIRECCION, @IESTATUS)
       
       COMMIT TRAN
     
@@ -473,7 +508,7 @@ SET QUOTED_IDENTIFIER, ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIEL
 GO
 CREATE PROCEDURE [dbo].[USP_MODCLIENTE]
 ( 
-  @ICLIENTE AS INT, @VNOMBRE AS VARCHAR(100), @VTELEFONO AS VARCHAR(50), @VCORREO AS VARCHAR(200), @VDIRECCION AS VARCHAR(200)
+  @ICLIENTE AS INT, @VNOMBRE AS VARCHAR(100), @VTELEFONO AS VARCHAR(50), @VCORREO AS VARCHAR(200), @VDIRECCION AS VARCHAR(200), @IESTATUS AS INT
 )
 AS
 
@@ -492,7 +527,8 @@ BEGIN TRY
       SET A1.Nombre = @VNOMBRE,
           A1.Telefono = @VTELEFONO,
           A1.Correo = @VCORREO, 
-          A1.Direccion = @VDIRECCION
+          A1.Direccion = @VDIRECCION, 
+          A1.Estatus = @IESTATUS
       FROM [DemoAlquilerGameWinForm].[dbo].[cliente] A1
       WHERE A1.ID = @ICLIENTE
     
@@ -528,7 +564,7 @@ SET QUOTED_IDENTIFIER, ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIEL
 GO
 CREATE PROCEDURE [dbo].[USP_ELICLIENTE]
 ( 
-  @ICLIENTE AS INT, @VNOMBRE AS VARCHAR(100), @VTELEFONO AS VARCHAR(50), @VCORREO AS VARCHAR(200), @VDIRECCION AS VARCHAR(200)
+  @ICLIENTE AS INT, @VNOMBRE AS VARCHAR(100), @VTELEFONO AS VARCHAR(50), @VCORREO AS VARCHAR(200), @VDIRECCION AS VARCHAR(200), @IESTATUS AS INT = 1
 )
 AS
 
@@ -714,7 +750,7 @@ SET QUOTED_IDENTIFIER, ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIEL
 GO
 CREATE PROCEDURE [dbo].[USP_ELIDESCUENTO]
 ( 
-  @IID AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @FPORCENTAJEDESCUENTO AS FLOAT, @IESTATUS AS INT
+  @IID AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @FPORCENTAJEDESCUENTO AS FLOAT, @IESTATUS AS INT = 1
 )
 AS
 
@@ -778,7 +814,7 @@ SET QUOTED_IDENTIFIER, ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIEL
 GO
 CREATE PROCEDURE [dbo].[USP_INCPRECIO]
 (           
-  @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @FPRECIO AS FLOAT
+  @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @FPRECIO AS FLOAT, @IESTATUS AS INT = 1
 )
 AS          
           
@@ -809,9 +845,9 @@ BEGIN TRY
       BEGIN TRAN
       
         INSERT INTO [DemoAlquilerGameWinForm].[dbo].[precio]
-          (Codigo, Descripcion, PrecioUnitario)
+          (Codigo, Descripcion, PrecioUnitario, Estatus)
         VALUES
-          (@VCODIGO, @VDESCRIPCION, @FPRECIO)
+          (@VCODIGO, @VDESCRIPCION, @FPRECIO, @IESTATUS)
       
       COMMIT TRAN
     
@@ -845,7 +881,7 @@ SET QUOTED_IDENTIFIER, ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIEL
 GO
 CREATE PROCEDURE [dbo].[USP_MODPRECIO]
 ( 
-  @IID AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @FPRECIO AS FLOAT
+  @IID AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @FPRECIO AS FLOAT, @IESTATUS AS INT = 1
 )
 AS
 
@@ -863,7 +899,8 @@ BEGIN TRY
       UPDATE A1
       SET	A1.Codigo = @VCODIGO,
 			A1.Descripcion = @VDESCRIPCION,
-			A1.PrecioUnitario = @FPRECIO
+			A1.PrecioUnitario = @FPRECIO, 
+			A1.Estatus = @IESTATUS 
       FROM [DemoAlquilerGameWinForm].[dbo].[precio] A1
       WHERE A1.ID = @IID
       
@@ -899,7 +936,7 @@ SET QUOTED_IDENTIFIER, ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIEL
 GO
 CREATE PROCEDURE [dbo].[USP_ELIPRECIO]
 ( 
-  @IID AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @FPRECIO AS FLOAT
+  @IID AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @FPRECIO AS FLOAT, @IESTATUS AS INT = 1
 )
 AS
 
@@ -961,9 +998,194 @@ SET NUMERIC_ROUNDABORT OFF;
 GO
 SET QUOTED_IDENTIFIER, ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIELDS_NULL, ARITHABORT ON;
 GO
+CREATE PROCEDURE [dbo].[USP_INCTIPO]
+(           
+  @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @IESTATUS AS INT = 1
+)
+AS          
+          
+SET NOCOUNT ON                  
+DECLARE @ERRORMESSAGE NVARCHAR(4000)          
+DECLARE @ERRORSEVERITY INT          
+DECLARE @ERRORSTATE INT      
+          
+BEGIN TRY          
+          
+  IF EXISTS (          
+              SELECT *          
+              FROM [DemoAlquilerGameWinForm].[dbo].[tipo] WITH (NOLOCK)          
+              WHERE [Codigo] = @VCODIGO        
+            )          
+    BEGIN          
+            
+      SET @ERRORMESSAGE = 'El codigo del tipo del producto que esta intentando registrar ya se encuentra en uso'          
+      SET @ERRORSEVERITY = 16         
+      SET @ERRORSTATE = 1             
+      GOTO ERROR              
+              
+    END
+  ELSE
+  
+    BEGIN
+    
+      BEGIN TRAN
+      
+        INSERT INTO [DemoAlquilerGameWinForm].[dbo].[tipo]
+          (Codigo, Descripcion, Estatus)
+        VALUES
+          (@VCODIGO, @VDESCRIPCION, @IESTATUS)
+      
+      COMMIT TRAN
+    
+    END
+    
+END TRY          
+          
+BEGIN CATCH          
+              
+  SET @ERRORMESSAGE = 'ERROR ' + CAST(ERROR_NUMBER() AS VARCHAR(10)) + '. LINEA ' + CAST(ERROR_LINE() AS VARCHAR(10)) + '. ' + ERROR_MESSAGE()          
+  SET @ERRORSEVERITY = ERROR_SEVERITY()            
+  SET @ERRORSTATE = ERROR_STATE()        
+  GOTO ERROR          
+          
+END CATCH          
+          
+SET NOCOUNT OFF          
+          
+RETURN        
+ERROR:        
+  IF XACT_STATE() <> 0 ROLLBACK TRAN        
+  RAISERROR (@ERRORMESSAGE, @ERRORSEVERITY, @ERRORSTATE)
+GO
+
+/****** Object:  StoredProcedure [dbo].[USP_MODMARCA]    Script Date: 02/23/2018 16:20:47 ******/
+SET QUOTED_IDENTIFIER ON
+GO
+SET NUMERIC_ROUNDABORT OFF;
+GO
+SET QUOTED_IDENTIFIER, ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIELDS_NULL, ARITHABORT ON;
+GO
+CREATE PROCEDURE [dbo].[USP_MODTIPO]
+( 
+  @IID AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @IESTATUS AS INT = 1
+)
+AS
+
+SET NOCOUNT ON
+DECLARE @ERRORMESSAGE NVARCHAR(4000)  
+DECLARE @ERRORSEVERITY INT  
+DECLARE @ERRORSTATE INT  
+
+BEGIN TRY
+
+    BEGIN
+    
+      BEGIN TRAN
+      
+      UPDATE A1
+      SET	A1.Codigo = @VCODIGO,
+			A1.Descripcion = @VDESCRIPCION, 
+			A1.Estatus = @IESTATUS 
+      FROM [DemoAlquilerGameWinForm].[dbo].[tipo] A1
+      WHERE A1.ID = @IID
+      
+      COMMIT TRAN
+      
+    END
+
+END TRY
+
+BEGIN CATCH
+
+  SET @ERRORMESSAGE = 'ERROR ' + CAST(ERROR_NUMBER() AS VARCHAR(10)) + '. LINEA ' + CAST(ERROR_LINE() AS VARCHAR(10)) + '. ' + ERROR_MESSAGE()
+  SET @ERRORSEVERITY = ERROR_SEVERITY()  
+  SET @ERRORSTATE = ERROR_STATE()  
+  GOTO ERROR
+  
+END CATCH
+
+SET NOCOUNT OFF
+
+RETURN
+ERROR:
+  IF XACT_STATE() <> 0 ROLLBACK TRAN
+  RAISERROR (@ERRORMESSAGE, @ERRORSEVERITY, @ERRORSTATE)
+GO
+
+/****** Object:  StoredProcedure [dbo].[USP_ELIMARCA]    Script Date: 03/03/2018 01:56:59 ******/
+SET QUOTED_IDENTIFIER ON
+GO
+SET NUMERIC_ROUNDABORT OFF;
+GO
+SET QUOTED_IDENTIFIER, ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIELDS_NULL, ARITHABORT ON;
+GO
+CREATE PROCEDURE [dbo].[USP_ELITIPO]
+( 
+  @IID AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @IESTATUS AS INT = 1
+)
+AS
+
+SET NOCOUNT ON
+DECLARE @ERRORMESSAGE NVARCHAR(4000)  
+DECLARE @ERRORSEVERITY INT  
+DECLARE @ERRORSTATE INT  
+
+BEGIN TRY          
+          
+  IF EXISTS (          
+              SELECT *          
+              FROM [DemoAlquilerGameWinForm].[dbo].[producto] WITH (NOLOCK)          
+              WHERE [IDMarca] = @IID        
+            )          
+    BEGIN
+            
+      SET @ERRORMESSAGE = 'El tipo del producto que esta intentando eliminar ya se encuentra en uso en otra tabla.'          
+      SET @ERRORSEVERITY = 16         
+      SET @ERRORSTATE = 1             
+      GOTO ERROR              
+              
+    END
+  ELSE
+  
+    BEGIN
+    
+      BEGIN TRAN
+      
+        DELETE FROM [DemoAlquilerGameWinForm].[dbo].[tipo] WHERE [ID] = @IID  
+      
+      COMMIT TRAN
+    
+    END
+    
+END TRY          
+          
+BEGIN CATCH          
+              
+  SET @ERRORMESSAGE = 'ERROR ' + CAST(ERROR_NUMBER() AS VARCHAR(10)) + '. LINEA ' + CAST(ERROR_LINE() AS VARCHAR(10)) + '. ' + ERROR_MESSAGE()          
+  SET @ERRORSEVERITY = ERROR_SEVERITY()            
+  SET @ERRORSTATE = ERROR_STATE()        
+  GOTO ERROR          
+          
+END CATCH          
+          
+SET NOCOUNT OFF          
+          
+RETURN        
+ERROR:        
+  IF XACT_STATE() <> 0 ROLLBACK TRAN        
+  RAISERROR (@ERRORMESSAGE, @ERRORSEVERITY, @ERRORSTATE)
+GO
+
+/****** Object:  StoredProcedure [dbo].[USP_INCMARCA]    Script Date: 02/23/2018 17:20:56 ******/
+SET QUOTED_IDENTIFIER ON
+GO
+SET NUMERIC_ROUNDABORT OFF;
+GO
+SET QUOTED_IDENTIFIER, ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIELDS_NULL, ARITHABORT ON;
+GO
 CREATE PROCEDURE [dbo].[USP_INCMARCA]
 (           
-  @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200)
+  @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @ITIPO AS INT, @IESTATUS AS INT = 1
 )
 AS          
           
@@ -993,10 +1215,17 @@ BEGIN TRY
     
       BEGIN TRAN
       
+		DECLARE @INUMERO INT
+		SET @INUMERO = (SELECT TOP 1 [ID] FROM [DemoAlquilerGameWinForm].[dbo].[tipo] ORDER BY [ID] DESC)
+		IF (@ITIPO = 0)
+		BEGIN
+			SET @ITIPO = @INUMERO
+		END 
+		        
         INSERT INTO [DemoAlquilerGameWinForm].[dbo].[marca]
-          (Codigo, Descripcion)
+          (Codigo, Descripcion, IDTipo, Estatus)
         VALUES
-          (@VCODIGO, @VDESCRIPCION)
+          (@VCODIGO, @VDESCRIPCION, @ITIPO, @IESTATUS)
       
       COMMIT TRAN
     
@@ -1030,7 +1259,7 @@ SET QUOTED_IDENTIFIER, ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIEL
 GO
 CREATE PROCEDURE [dbo].[USP_MODMARCA]
 ( 
-  @IID AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200)
+  @IID AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @ITIPO AS INT, @IESTATUS AS INT = 1
 )
 AS
 
@@ -1045,9 +1274,18 @@ BEGIN TRY
     
       BEGIN TRAN
       
+      DECLARE @INUMERO INT
+      SET @INUMERO = (SELECT TOP 1 [ID] FROM [DemoAlquilerGameWinForm].[dbo].[tipo] ORDER BY [ID] DESC)
+      IF (@ITIPO = 0)
+      BEGIN
+		  SET @ITIPO = @INUMERO      
+      END
+      
       UPDATE A1
       SET	A1.Codigo = @VCODIGO,
-			A1.Descripcion = @VDESCRIPCION
+			A1.Descripcion = @VDESCRIPCION, 
+			A1.IDTipo = @ITIPO, 
+			A1.Estatus = @IESTATUS 
       FROM [DemoAlquilerGameWinForm].[dbo].[marca] A1
       WHERE A1.ID = @IID
       
@@ -1083,7 +1321,7 @@ SET QUOTED_IDENTIFIER, ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIEL
 GO
 CREATE PROCEDURE [dbo].[USP_ELIMARCA]
 ( 
-  @IID AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200)
+  @IID AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @ITIPO AS INT, @IESTATUS AS INT = 1
 )
 AS
 
@@ -1147,15 +1385,15 @@ SET QUOTED_IDENTIFIER, ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIEL
 GO
 CREATE PROCEDURE [dbo].[USP_INCMODELO]
 (           
-  @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200)
+  @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @ITIPO AS INT, @IESTATUS AS INT = 1
 )
 AS          
           
 SET NOCOUNT ON                  
 DECLARE @ERRORMESSAGE NVARCHAR(4000)          
 DECLARE @ERRORSEVERITY INT          
-DECLARE @ERRORSTATE INT      
-          
+DECLARE @ERRORSTATE INT
+
 BEGIN TRY          
           
   IF EXISTS (          
@@ -1177,10 +1415,17 @@ BEGIN TRY
     
       BEGIN TRAN
       
+        DECLARE @INUMERO INT
+		SET @INUMERO = (SELECT TOP 1 [ID] FROM [DemoAlquilerGameWinForm].[dbo].[tipo] ORDER BY [ID] DESC)
+		IF (@ITIPO = 0)
+			BEGIN
+				SET @ITIPO = @INUMERO
+			END
+		        
         INSERT INTO [DemoAlquilerGameWinForm].[dbo].[modelo]
-          (Codigo, Descripcion)
+          (Codigo, Descripcion, IDTipo, Estatus)
         VALUES
-          (@VCODIGO, @VDESCRIPCION)
+          (@VCODIGO, @VDESCRIPCION, @ITIPO, @IESTATUS)
       
       COMMIT TRAN
     
@@ -1214,7 +1459,7 @@ SET QUOTED_IDENTIFIER, ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIEL
 GO
 CREATE PROCEDURE [dbo].[USP_MODMODELO]
 ( 
-  @IID AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200)
+  @IID AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @ITIPO AS INT, @IESTATUS AS INT = 1
 )
 AS
 
@@ -1229,9 +1474,18 @@ BEGIN TRY
     
       BEGIN TRAN
       
+      DECLARE @INUMERO INT
+      SET @INUMERO = (SELECT TOP 1 [ID] FROM [DemoAlquilerGameWinForm].[dbo].[tipo] ORDER BY [ID] DESC)
+      IF (@ITIPO = 0)
+      BEGIN
+		  SET @ITIPO = @INUMERO      
+      END      
+      
       UPDATE A1
       SET	A1.Codigo = @VCODIGO,
-			A1.Descripcion = @VDESCRIPCION
+			A1.Descripcion = @VDESCRIPCION, 
+			A1.IDTipo = @ITIPO, 
+			A1.Estatus = @IESTATUS 
       FROM [DemoAlquilerGameWinForm].[dbo].[modelo] A1
       WHERE A1.ID = @IID
       
@@ -1267,7 +1521,7 @@ SET QUOTED_IDENTIFIER, ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIEL
 GO
 CREATE PROCEDURE [dbo].[USP_ELIMODELO]
 ( 
-  @IID AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200)
+  @IID AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @ITIPO AS INT, @IESTATUS AS INT = 1
 )
 AS
 
@@ -1331,7 +1585,7 @@ SET QUOTED_IDENTIFIER, ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIEL
 GO
 CREATE PROCEDURE [dbo].[USP_INCCATEGORIA]
 (           
-  @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200)
+  @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @ITIPO AS INT, @IESTATUS AS INT = 1
 )
 AS          
           
@@ -1361,10 +1615,17 @@ BEGIN TRY
     
       BEGIN TRAN
       
+        DECLARE @INUMERO INT
+		SET @INUMERO = (SELECT TOP 1 [ID] FROM [DemoAlquilerGameWinForm].[dbo].[tipo] ORDER BY [ID] DESC)
+		IF (@ITIPO = 0)
+			BEGIN
+				SET @ITIPO = @INUMERO
+			END        
+        
         INSERT INTO [DemoAlquilerGameWinForm].[dbo].[categoria]
-          (Codigo, Descripcion)
+          (Codigo, Descripcion, IDTipo, Estatus)
         VALUES
-          (@VCODIGO, @VDESCRIPCION)
+          (@VCODIGO, @VDESCRIPCION, @ITIPO, @IESTATUS)
       
       COMMIT TRAN
     
@@ -1398,7 +1659,7 @@ SET QUOTED_IDENTIFIER, ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIEL
 GO
 CREATE PROCEDURE [dbo].[USP_MODCATEGORIA]
 ( 
-  @IID AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200)
+  @IID AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @ITIPO AS INT, @IESTATUS AS INT = 1
 )
 AS
 
@@ -1413,9 +1674,18 @@ BEGIN TRY
     
       BEGIN TRAN
       
+      DECLARE @INUMERO INT
+      SET @INUMERO = (SELECT TOP 1 [ID] FROM [DemoAlquilerGameWinForm].[dbo].[tipo] ORDER BY [ID] DESC)
+      IF (@ITIPO = 0)
+      BEGIN
+		  SET @ITIPO = @INUMERO      
+      END      
+      
       UPDATE A1
       SET	A1.Codigo = @VCODIGO,
-			A1.Descripcion = @VDESCRIPCION
+			A1.Descripcion = @VDESCRIPCION, 
+			A1.IDTipo = @ITIPO, 
+			A1.Estatus = @IESTATUS 
       FROM [DemoAlquilerGameWinForm].[dbo].[categoria] A1
       WHERE A1.ID = @IID
       
@@ -1451,7 +1721,7 @@ SET QUOTED_IDENTIFIER, ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIEL
 GO
 CREATE PROCEDURE [dbo].[USP_ELICATEGORIA]
 ( 
-  @IID AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200)
+  @IID AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @ITIPO AS INT, @IESTATUS AS INT = 1
 )
 AS
 
@@ -1515,7 +1785,7 @@ SET QUOTED_IDENTIFIER, ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIEL
 GO
 CREATE PROCEDURE [dbo].[USP_INCPRODUCTO]
 (           
-  @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @IMARCA AS INT, @IMODELO AS INT, @ICATEGORIA AS INT
+  @ITIPO AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @IMARCA AS INT, @IMODELO AS INT, @ICATEGORIA AS INT, @IESTATUS AS INT = 1
 )          
 AS          
           
@@ -1530,10 +1800,17 @@ BEGIN TRY
     
       BEGIN TRAN
       
+        DECLARE @INUMERO INT
+		SET @INUMERO = (SELECT TOP 1 [ID] FROM [DemoAlquilerGameWinForm].[dbo].[tipo] ORDER BY [ID] DESC)
+		IF (@ITIPO = 0)
+			BEGIN
+				SET @ITIPO = @INUMERO
+			END        
+        
         INSERT INTO [DemoAlquilerGameWinForm].[dbo].[producto]
-          (Codigo, Descripcion, IDMarca, IDModelo, IDCategoria)
+          (IDTipo, Codigo, Descripcion, IDMarca, IDModelo, IDCategoria, Estatus)
         VALUES
-          (@VCODIGO, @VDESCRIPCION, @IMARCA, @IMODELO, @ICATEGORIA)
+          (@ITIPO, @VCODIGO, @VDESCRIPCION, @IMARCA, @IMODELO, @ICATEGORIA, @IESTATUS)
       
       COMMIT TRAN
     
@@ -1567,7 +1844,7 @@ SET QUOTED_IDENTIFIER, ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIEL
 GO
 CREATE PROCEDURE [dbo].[USP_MODPRODUCTO]
 ( 
-  @IID AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @IMARCA AS INT, @IMODELO AS INT, @ICATEGORIA AS INT
+  @IID AS INT, @ITIPO AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @IMARCA AS INT, @IMODELO AS INT, @ICATEGORIA AS INT, @IESTATUS AS INT = 1
 )
 AS
 
@@ -1582,12 +1859,21 @@ BEGIN TRY
     
       BEGIN TRAN
       
+      DECLARE @INUMERO INT
+      SET @INUMERO = (SELECT TOP 1 [ID] FROM [DemoAlquilerGameWinForm].[dbo].[tipo] ORDER BY [ID] DESC)
+      IF (@ITIPO = 0)
+      BEGIN
+		  SET @ITIPO = @INUMERO      
+      END  
+      
       UPDATE A1
-      SET	A1.Codigo = @VCODIGO,
+      SET	A1.IDTipo = @ITIPO, 
+			A1.Codigo = @VCODIGO,
 			A1.Descripcion = @VDESCRIPCION, 
 			A1.IDMarca = @IMARCA, 
 			A1.IDModelo = @IMODELO, 
-			A1.IDCategoria = @ICATEGORIA 
+			A1.IDCategoria = @ICATEGORIA, 
+			A1.Estatus = @IESTATUS 
       FROM [DemoAlquilerGameWinForm].[dbo].[producto] A1
       WHERE A1.ID = @IID
       
@@ -1623,7 +1909,7 @@ SET QUOTED_IDENTIFIER, ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIEL
 GO
 CREATE PROCEDURE [dbo].[USP_ELIPRODUCTO]
 ( 
-  @IID AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @IMARCA AS INT, @IMODELO AS INT, @ICATEGORIA AS INT
+  @IID AS INT, @ITIPO AS INT, @VCODIGO AS VARCHAR(200), @VDESCRIPCION AS VARCHAR(200), @IMARCA AS INT, @IMODELO AS INT, @ICATEGORIA AS INT, @IESTATUS AS INT = 1
 )
 AS
 
@@ -2320,18 +2606,18 @@ ERROR:
   RAISERROR (@ERRORMESSAGE, @ERRORSEVERITY, @ERRORSTATE)
 GO
 
-INSERT INTO [DemoAlquilerGameWinForm].[dbo].[cliente] ([Nombre],[Telefono],[Correo], [Direccion])
-VALUES	('Tyrion Lannister','0234-2313098','tyrion@gmail.com', 'Los Cortijos'), 
-		('Arya Stark','0424-5308590','aryagot@hotmail.com', 'Sabana Grande'), 
-		('Jon Snow','0254-8004554','jonsnow@gmail.com', 'Urb. Altamira'),
-		('Jaime Lannister','0409-8902368','jaime@gmail.com', 'Plaza Venezuela'),
-		('Sansa Stark','090-2368450','sansagot@gmail.com', 'Plaza Bolivar')
+INSERT INTO [DemoAlquilerGameWinForm].[dbo].[cliente] ([Nombre],[Telefono],[Correo], [Direccion],[Estatus])
+VALUES	('Tyrion Lannister','0234-2313098','tyrion@gmail.com', 'Los Cortijos', 1), 
+		('Arya Stark','0424-5308590','aryagot@hotmail.com', 'Sabana Grande', 1), 
+		('Jon Snow','0254-8004554','jonsnow@gmail.com', 'Urb. Altamira', 1),
+		('Jaime Lannister','0409-8902368','jaime@gmail.com', 'Plaza Venezuela', 1),
+		('Sansa Stark','090-2368450','sansagot@gmail.com', 'Plaza Bolivar', 1)
 GO
 
-INSERT INTO [DemoAlquilerGameWinForm].[dbo].[precio] ([Codigo],[Descripcion],[PrecioUnitario])
-VALUES	('PRE1', 'Por Hora', 5.00), 
-		('PRE2', 'Por Dia', 20.00), 
-		('PRE3', 'Por Semana', 60.00)
+INSERT INTO [DemoAlquilerGameWinForm].[dbo].[precio] ([Codigo],[Descripcion],[PrecioUnitario],[Estatus])
+VALUES	('PRE1', 'Por Hora', 5.00, 1), 
+		('PRE2', 'Por Dia', 20.00, 1), 
+		('PRE3', 'Por Semana', 60.00, 1)
 GO
 
 INSERT INTO [DemoAlquilerGameWinForm].[dbo].[descuento] ([Codigo],[Descripcion],[PorcentajeDescuento],[Estatus])
@@ -2339,36 +2625,40 @@ VALUES	('DEC1', 'Por Cabecera', 0.30, 1),
 		('DEC2', 'Por Linea', 0.00, 1)
 GO
 
-INSERT INTO [DemoAlquilerGameWinForm].[dbo].[marca] ([Codigo],[Descripcion])
-VALUES	('MAC1', 'EA'), 
-		('MAC2', 'Activiccion'), 
-		('MAC3', 'Microsoft Game'), 
-		('MAC4', 'Nintendo'), 
-		('MAC5', 'Mojang AB'), 
-		('MAC6', 'Konami'), 
-		('MAC7', 'Sonny'), 
-		('MAC8', 'Square Enix') 
+INSERT INTO [DemoAlquilerGameWinForm].[dbo].[tipo] ([Codigo],[Descripcion],[Estatus])
+VALUES	('TIP1', 'VideoJuego', 1) 
 GO
 
-INSERT INTO [DemoAlquilerGameWinForm].[dbo].[modelo] ([Codigo],[Descripcion])
-VALUES	('MOD1', 'PC'), 
-		('MOD2', 'PSP'), 
-		('MOD3', 'PSP2'), 
-		('MOD4', 'Nintendo'), 
-		('MOD5', 'DS')
+INSERT INTO [DemoAlquilerGameWinForm].[dbo].[marca] ([Codigo],[Descripcion],[Estatus],[IDTipo])
+VALUES	('MAC1', 'EA', 1, 1), 
+		('MAC2', 'Activiccion', 1, 1), 
+		('MAC3', 'Microsoft Game', 1, 1), 
+		('MAC4', 'Nintendo', 1, 1), 
+		('MAC5', 'Mojang AB', 1, 1), 
+		('MAC6', 'Konami', 1, 1), 
+		('MAC7', 'Sonny', 1, 1), 
+		('MAC8', 'Square Enix', 1, 1) 
 GO
 
-INSERT INTO [DemoAlquilerGameWinForm].[dbo].[categoria] ([Codigo],[Descripcion])
-VALUES	('CAT1', 'Simulación'), 
-		('CAT2', 'RPG'), 
-		('CAT3', 'Aventura'), 
-		('CAT4', 'Terror')
+INSERT INTO [DemoAlquilerGameWinForm].[dbo].[modelo] ([Codigo],[Descripcion],[Estatus],[IDTipo])
+VALUES	('MOD1', 'PC', 1, 1), 
+		('MOD2', 'PSP', 1, 1), 
+		('MOD3', 'PSP2', 1, 1), 
+		('MOD4', 'Nintendo', 1, 1), 
+		('MOD5', 'DS', 1, 1)
 GO
 
-INSERT INTO [DemoAlquilerGameWinForm].[dbo].[producto] ([Codigo],[Descripcion],[IDMarca],[IDModelo],[IDCategoria])
-VALUES	('JUE1', 'Los Sims', 1, 1, 1), ('JUE2', 'Final Fantasy III', 2, 4, 2), ('JUE3', 'Minecraft', 5, 1, 3), ('JUE4', 'Silent Hill', 6, 1, 4), 
-		('JUE5', 'Los Sims 2', 1, 1, 1), ('JUE6', 'Final Fantasy VI', 2, 4, 2), ('JUE7', 'Super Mario Bros', 4, 4, 3), ('JUE8', 'The Evil Within', 7, 1, 4), 
-		('JUE9', 'Microsoft Flight Simulator', 3, 1, 1), ('JUE10', 'Final Fantasy VIII', 2, 4, 2), ('JUE11', 'Tomb Raider Survivor', 8, 1, 3), ('JUE12', 'Dead Space', 1, 1, 4)
+INSERT INTO [DemoAlquilerGameWinForm].[dbo].[categoria] ([Codigo],[Descripcion],[Estatus],[IDTipo])
+VALUES	('CAT1', 'Simulación', 1, 1), 
+		('CAT2', 'RPG', 1, 1), 
+		('CAT3', 'Aventura', 1, 1), 
+		('CAT4', 'Terror', 1, 1)
+GO
+
+INSERT INTO [DemoAlquilerGameWinForm].[dbo].[producto] ([IDTipo],[Codigo],[Descripcion],[IDMarca],[IDModelo],[IDCategoria],[Estatus])
+VALUES	(1, 'JUE1', 'Los Sims', 1, 1, 1, 1), (1, 'JUE2', 'Final Fantasy III', 2, 4, 2, 1), (1, 'JUE3', 'Minecraft', 5, 1, 3, 1), (1, 'JUE4', 'Silent Hill', 6, 1, 4, 1), 
+		(1, 'JUE5', 'Los Sims 2', 1, 1, 1, 1), (1, 'JUE6', 'Final Fantasy VI', 2, 4, 2, 1), (1, 'JUE7', 'Super Mario Bros', 4, 4, 3, 1), (1, 'JUE8', 'The Evil Within', 7, 1, 4, 1), 
+		(1, 'JUE9', 'Microsoft Flight Simulator', 3, 1, 1, 1), (1, 'JUE10', 'Final Fantasy VIII', 2, 4, 2, 1), (1, 'JUE11', 'Tomb Raider Survivor', 8, 1, 3, 1), (1, 'JUE12', 'Dead Space', 1, 1, 4, 1)
 GO
 
 DECLARE @DFECHADESDE AS DATETIME, @DFECHAHASTA AS DATETIME

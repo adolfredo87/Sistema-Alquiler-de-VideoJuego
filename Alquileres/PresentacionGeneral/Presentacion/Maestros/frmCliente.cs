@@ -74,6 +74,7 @@ namespace Presentacion.Maestros
                     txtTelefono.Enabled = true;
                     txtCorreo.Enabled = true;
                     txtDireccion.Enabled = true;
+                    cmbEstatus.Enabled = true;
                     break;
                 case EntidadNegocio.Enumerados.EnumTipos.AccionMenu.Buscar:
                     mstpItemNuevo.Enabled = false;
@@ -87,6 +88,7 @@ namespace Presentacion.Maestros
                     txtTelefono.Enabled = false;
                     txtCorreo.Enabled = false;
                     txtDireccion.Enabled = false;
+                    cmbEstatus.Enabled = false;
                     break;
                 case EntidadNegocio.Enumerados.EnumTipos.AccionMenu.Modificar:
                     mstpItemNuevo.Enabled = false;
@@ -100,6 +102,7 @@ namespace Presentacion.Maestros
                     txtTelefono.Enabled = true;
                     txtCorreo.Enabled = true;
                     txtDireccion.Enabled = true;
+                    cmbEstatus.Enabled = true;
                     break;
                 case EntidadNegocio.Enumerados.EnumTipos.AccionMenu.Eliminar:
                 case EntidadNegocio.Enumerados.EnumTipos.AccionMenu.Cancelar:
@@ -116,6 +119,7 @@ namespace Presentacion.Maestros
                     txtTelefono.Enabled = false;
                     txtCorreo.Enabled = false;
                     txtDireccion.Enabled = false;
+                    cmbEstatus.Enabled = false;
                     break;
             }
         }
@@ -190,11 +194,11 @@ namespace Presentacion.Maestros
                 MessageBox.Show(EntidadNegocio.Entidades.Mensajes.Info_Eliminado, EntidadNegocio.Entidades.Mensajes.Titulo_Eliminar, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.LimpiarCampos();
             }
+            this.Cancelar();
         }
         private void mstpItemCancelar_Click(object sender, EventArgs e)
         {
-            this.LimpiarCampos();
-            this.ControlBotonesMenu(EntidadNegocio.Enumerados.EnumTipos.AccionMenu.Cancelar);
+            this.Cancelar();
         }
         private void mstpItemSalir_Click(object sender, EventArgs e)
         {
@@ -203,6 +207,7 @@ namespace Presentacion.Maestros
         private void frmCliente_Load(object sender, EventArgs e)
         {
             this.GrupBox.Text = "Cleinte"; this.Text = "Cleinte";
+            this.LlenarComboEstatus();
         }
         private void frmCliente_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -229,6 +234,8 @@ namespace Presentacion.Maestros
             }
             txtCodigo.Text = id.ToString();
             txtCodigo.Enabled = false;
+            _cliente.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+            this.cmbEstatus.Text = _cliente.Status.ToString();
             _cliente.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Nuevo;
             this.ControlBotonesMenu(EntidadNegocio.Enumerados.EnumTipos.AccionMenu.Nuevo);
             txtNombre.Focus();
@@ -240,6 +247,7 @@ namespace Presentacion.Maestros
             txtTelefono.Text = "";
             txtCorreo.Text = "";
             txtDireccion.Text = "";
+            cmbEstatus.Text = "";
         }
         private void MostrarDatos()
         {
@@ -250,11 +258,17 @@ namespace Presentacion.Maestros
                 txtTelefono.Text = _cliente.Telefono;
                 txtCorreo.Text = _cliente.Correo;
                 txtDireccion.Text = _cliente.Direccion;
+                cmbEstatus.Text = _cliente.Status.ToString();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private void Cancelar()
+        {
+            this.LimpiarCampos();
+            this.ControlBotonesMenu(EntidadNegocio.Enumerados.EnumTipos.AccionMenu.Cancelar);
         }
         private void BuscarClientes()
         {
@@ -265,22 +279,47 @@ namespace Presentacion.Maestros
                 if (String.IsNullOrEmpty(caturar))
                 {
                     MessageBox.Show("Introduzca un valor numerico", EntidadNegocio.Entidades.Mensajes.Titulo_Advertencia, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    this.Cancelar();
                 }
                 else if (Int32.TryParse(caturar, out result))
                 {
                     _cliente = new EntidadNegocio.Entidades.Cliente();
                     _cliente = _ctrlCliente.Details(result);
-                    MostrarDatos();
+                    LimpiarCampos(); LlenarComboEstatus(); MostrarDatos(); 
                     this.ControlBotonesMenu(EntidadNegocio.Enumerados.EnumTipos.AccionMenu.Buscar);
                 }
                 else
                 {
                     MessageBox.Show("El valor no es numerico, introduzca un valor numerico", EntidadNegocio.Entidades.Mensajes.Titulo_Advertencia, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    this.Cancelar();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void LlenarComboEstatus()
+        {
+            try
+            {
+                List<EntidadNegocio.Entidades.EstatusRegistro> l = new List<EntidadNegocio.Entidades.EstatusRegistro>();
+                int[] values = ((int[])Enum.GetValues(typeof(EntidadNegocio.Enumerados.EnumEstatus.Registro)));
+                EntidadNegocio.Entidades.EstatusRegistro i;
+                foreach (int value in values)
+                {
+                    i = new EntidadNegocio.Entidades.EstatusRegistro();
+                    i.Descripcion = Enum.GetName(typeof(EntidadNegocio.Enumerados.EnumEstatus.Registro), value);
+                    i.Estatus = value;
+                    l.Add(i);
+                }
+                cmbEstatus.DataSource = l;
+                cmbEstatus.DisplayMember = "Descripcion";
+                cmbEstatus.ValueMember = "Estatus";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

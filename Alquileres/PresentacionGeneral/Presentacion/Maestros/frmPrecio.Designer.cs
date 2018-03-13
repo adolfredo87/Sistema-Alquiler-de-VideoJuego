@@ -41,6 +41,7 @@
             this.colCoddigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrecioUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEstatus = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.GrupBox.SuspendLayout();
             this.mstpGuardarCancelar.SuspendLayout();
             this.mstpInsSupr.SuspendLayout();
@@ -134,7 +135,8 @@
             this.colID,
             this.colCoddigo,
             this.colDescripcion,
-            this.colPrecioUnitario});
+            this.colPrecioUnitario,
+            this.colEstatus});
             this.dgPrecio.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgPrecio.Location = new System.Drawing.Point(3, 16);
             this.dgPrecio.Name = "dgPrecio";
@@ -173,6 +175,14 @@
             this.colPrecioUnitario.HeaderText = "Precio Unitario";
             this.colPrecioUnitario.Name = "colPrecioUnitario";
             this.colPrecioUnitario.Width = 150;
+            // 
+            // colEstatus
+            // 
+            this.colEstatus.DataPropertyName = "Status";
+            this.colEstatus.HeaderText = "Estatus";
+            this.colEstatus.Name = "colEstatus";
+            this.colEstatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colEstatus.Width = 90;
             // 
             // frmPrecio
             // 
@@ -214,5 +224,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCoddigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrecioUnitario;
+        private System.Windows.Forms.DataGridViewComboBoxColumn colEstatus;
     }
 }

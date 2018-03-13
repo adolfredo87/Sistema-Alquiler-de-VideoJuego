@@ -54,6 +54,7 @@
     <Compile Include="Modelo\Entidades\PagoDetalle.cs" />
     <Compile Include="Modelo\Entidades\Precio.cs" />
     <Compile Include="Modelo\Entidades\Producto.cs" />
+    <Compile Include="Modelo\Entidades\Tipo.cs" />
     <Compile Include="Modelo\ModeloBD.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Presentacion.Operaciones
+namespace Presentacion.Consultas
 {
     public partial class frmAlquilerPorPagar : Presentacion.Plantilla.FrmPlantilla
     {
@@ -45,30 +45,6 @@ namespace Presentacion.Operaciones
             cmbCliente.ValueMember = "ID";
             cmbCliente.DataSource = _clientes;
         }
-        private void CargarAlquilerPorPagar()
-        {
-            try
-            {
-                _lstAlquiler = _ctrlAlquiler.ObtenerItemsPorPagar(_idCliente);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        private void MostrarAlquilerPorPagar()
-        {
-            try
-            {
-                dgAlquiler.AutoGenerateColumns = false;
-                dgAlquiler.DataSource = null;
-                dgAlquiler.DataSource = _lstAlquiler;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
         private void ObtenerProductos()
         {
             try
@@ -95,6 +71,30 @@ namespace Presentacion.Operaciones
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void CargarAlquilerPorPagar()
+        {
+            try
+            {
+                _lstAlquiler = _ctrlAlquiler.ObtenerItemsPorPagar(_idCliente);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void MostrarAlquilerPorPagar()
+        {
+            try
+            {
+                dgAlquiler.AutoGenerateColumns = false;
+                dgAlquiler.DataSource = null;
+                dgAlquiler.DataSource = _lstAlquiler;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void frmAlquilerPorPagar_Load(object sender, EventArgs e)
         {
             try
@@ -102,9 +102,9 @@ namespace Presentacion.Operaciones
                 this.GrupBox.Text = "Alquiler Por Pagar";
                 this.Text = "Alquiler Por Pagar";
                 this.CargarComboCliente();
-                CargarProducto();
-                CargarAlquilerPorPagar();
-                MostrarAlquilerPorPagar();
+                this.CargarProducto();
+                this.CargarAlquilerPorPagar();
+                this.MostrarAlquilerPorPagar();
             }
             catch (Exception ex)
             {

@@ -27,34 +27,77 @@ namespace LogicaNegocio
                 {
                     _pE = new EntidadNegocio.Entidades.Producto();
                     _pE.ID = element.ID;
+                    element.TipoLoad();
+                    _pE.Tipo = new EntidadNegocio.Entidades.Tipo();
+                    _pE.Tipo.ID = element.IDTipo;
+                    _pE.IDTipo = element.IDTipo;
+                    _pE.Tipo.Codigo = element.Tipo.Codigo;
+                    _pE.Tipo.Descripcion = element.Tipo.Descripcion;
+                    if (element.Tipo.Estatus == 1)
+                    {
+                        _pE.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _pE.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _pE.Tipo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                     _pE.Codigo = element.Codigo;
                     _pE.Descripcion = element.Descripcion;
-                    _pE.IDMarca = element.IDMarca;
-                    _pE.IDModelo = element.IDModelo;
-                    _pE.IDCategoria = element.IDCategoria;
-                    _pE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
-                    _pE.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                     element.MarcaLoad();
                     _pE.Marca = new EntidadNegocio.Entidades.Marca();
                     _pE.Marca.ID = element.IDMarca;
+                    _pE.IDMarca = element.IDMarca;
                     _pE.Marca.Codigo = element.Marca.Codigo;
                     _pE.Marca.Descripcion = element.Marca.Descripcion;
-                    _pE.Marca.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    if (element.Marca.Estatus == 1)
+                    {
+                        _pE.Marca.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _pE.Marca.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
                     _pE.Marca.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                     element.ModeloLoad();
                     _pE.Modelo = new EntidadNegocio.Entidades.Modelo();
                     _pE.Modelo.ID = element.IDModelo;
+                    _pE.IDModelo = element.IDModelo;
                     _pE.Modelo.Codigo = element.Modelo.Codigo;
                     _pE.Modelo.Descripcion = element.Modelo.Descripcion;
-                    _pE.Modelo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    if (element.Modelo.Estatus == 1)
+                    {
+                        _pE.Modelo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _pE.Modelo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
                     _pE.Modelo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                     element.CategoriaLoad();
                     _pE.Categoria = new EntidadNegocio.Entidades.Categoria();
                     _pE.Categoria.ID = element.IDCategoria;
+                    _pE.IDCategoria = element.IDCategoria;
                     _pE.Categoria.Codigo = element.Categoria.Codigo;
                     _pE.Categoria.Descripcion = element.Categoria.Descripcion;
-                    _pE.Categoria.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    if (element.Categoria.Estatus == 1)
+                    {
+                        _pE.Categoria.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _pE.Categoria.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
                     _pE.Categoria.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+                    if (element.Estatus == 1)
+                    {
+                        _pE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _pE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _pE.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                     _ListPE.Add(_pE);
                 }
                 return _ListPE;
@@ -82,6 +125,7 @@ namespace LogicaNegocio
             else
             {
                 _productoDetail = db.ProductoSet.First(p => p.ID == id);
+                _productoDetail.TipoLoad();
                 _productoDetail.MarcaLoad();
                 _productoDetail.ModeloLoad();
                 _productoDetail.CategoriaLoad();
@@ -89,46 +133,112 @@ namespace LogicaNegocio
             EntidadNegocio.Entidades.Producto productoDetail = new EntidadNegocio.Entidades.Producto();
 
             productoDetail.ID = _productoDetail.ID;
+
+            productoDetail.Tipo = new EntidadNegocio.Entidades.Tipo();
+            productoDetail.Tipo.ID = _productoDetail.IDTipo;
+            productoDetail.IDTipo = _productoDetail.IDTipo;
+            productoDetail.Tipo.Codigo = _productoDetail.Tipo.Codigo;
+            productoDetail.Tipo.Descripcion = _productoDetail.Tipo.Descripcion;
+            if (_productoDetail.Tipo.Estatus == 1)
+            {
+                productoDetail.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+            }
+            else
+            {
+                productoDetail.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+            }
+            productoDetail.Tipo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+
             productoDetail.Codigo = _productoDetail.Codigo;
             productoDetail.Descripcion = _productoDetail.Descripcion;
-            productoDetail.IDMarca = _productoDetail.IDMarca;
-            productoDetail.IDModelo = _productoDetail.IDModelo;
-            productoDetail.IDCategoria = _productoDetail.IDCategoria;
-            productoDetail.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
-            productoDetail.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
 
             productoDetail.Marca = new EntidadNegocio.Entidades.Marca();
+            productoDetail.IDMarca = _productoDetail.IDMarca;
             productoDetail.Marca.ID = _productoDetail.IDMarca;
             productoDetail.Marca.Codigo = _productoDetail.Marca.Codigo;
             productoDetail.Marca.Descripcion = _productoDetail.Marca.Descripcion;
-            productoDetail.Marca.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+            if (_productoDetail.Marca.Estatus == 1)
+            {
+                productoDetail.Marca.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+            }
+            else
+            {
+                productoDetail.Marca.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+            }
             productoDetail.Marca.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
 
             productoDetail.Modelo = new EntidadNegocio.Entidades.Modelo();
+            productoDetail.IDModelo = _productoDetail.IDModelo;
             productoDetail.Modelo.ID = _productoDetail.IDModelo;
             productoDetail.Modelo.Codigo = _productoDetail.Modelo.Codigo;
             productoDetail.Modelo.Descripcion = _productoDetail.Modelo.Descripcion;
-            productoDetail.Modelo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+            if (_productoDetail.Modelo.Estatus == 1)
+            {
+                productoDetail.Modelo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+            }
+            else
+            {
+                productoDetail.Modelo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+            }
             productoDetail.Modelo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
 
             productoDetail.Categoria = new EntidadNegocio.Entidades.Categoria();
+            productoDetail.IDCategoria = _productoDetail.IDCategoria;
             productoDetail.Categoria.ID = _productoDetail.IDCategoria;
             productoDetail.Categoria.Codigo = _productoDetail.Categoria.Codigo;
             productoDetail.Categoria.Descripcion = _productoDetail.Categoria.Descripcion;
-            productoDetail.Categoria.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+            if (_productoDetail.Categoria.Estatus == 1)
+            {
+                productoDetail.Categoria.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+            }
+            else
+            {
+                productoDetail.Categoria.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+            }
             productoDetail.Categoria.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+
+            if (_productoDetail.Estatus == 1)
+            {
+                productoDetail.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+            }
+            else
+            {
+                productoDetail.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+            }
+            productoDetail.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
 
             return productoDetail;
         }
 
         public Boolean Create(EntidadNegocio.Entidades.Producto _producto)
         {
-            Dato.Modelo.Producto productoToAdd = new Dato.Modelo.Producto();
-            Boolean resul = false; String IDMarca = ""; String IDModelo = ""; String IDCategoria = "";
+            Dato.Modelo.Producto productoToAdd = new Dato.Modelo.Producto(); Boolean resul = false;
+            String IDTipo = ""; String IDMarca = ""; String IDModelo = ""; String IDCategoria = "";
 
             productoToAdd.ID = _producto.ID;
             productoToAdd.Codigo = _producto.Codigo;
             productoToAdd.Descripcion = _producto.Descripcion;
+            if (_producto.Status == EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo)
+            {
+                productoToAdd.Estatus = 1;
+            }
+            else
+            {
+                productoToAdd.Estatus = 0;
+            }
+
+            Int32 iIDTipo = _producto.IDTipo;
+            if (iIDTipo == 0)
+            {
+                TipoController ctrlTipo = new TipoController();
+                iIDTipo = ctrlTipo.UltimoID();
+            }
+            else
+            {
+                iIDTipo = _producto.IDTipo;
+            }
+            productoToAdd.IDTipo = iIDTipo;
+            IDTipo = iIDTipo.ToString();
 
             Int32 iIDMarca = _producto.IDMarca;
             productoToAdd.IDMarca = iIDMarca;
@@ -141,6 +251,16 @@ namespace LogicaNegocio
             Int32 iIDCategoria = _producto.IDCategoria;
             productoToAdd.IDCategoria = iIDCategoria;
             IDCategoria = iIDCategoria.ToString();
+
+            if (!String.IsNullOrEmpty(IDTipo))
+            {
+                productoToAdd.Tipo = db.TipoSet.FirstOrDefault(c => c.ID == iIDTipo);
+            }
+
+            if (productoToAdd.Tipo == null)
+            {
+                MessageBox.Show(String.Format("El número de IDTipo {0} no está registrado en la base de datos."), EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             if (!String.IsNullOrEmpty(IDMarca))
             {
@@ -215,11 +335,32 @@ namespace LogicaNegocio
         {
             Int32 id = _producto.ID; Boolean resul = false;
             Producto productoToUpdate = db.ProductoSet.First(b => b.ID == id);
-            String IDMarca = ""; String IDModelo = ""; String IDCategoria = "";
+            String IDTipo = ""; String IDMarca = ""; String IDModelo = ""; String IDCategoria = "";
 
             productoToUpdate.ID = _producto.ID;
             productoToUpdate.Codigo = _producto.Codigo;
             productoToUpdate.Descripcion = _producto.Descripcion;
+            if (_producto.Status == EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo)
+            {
+                productoToUpdate.Estatus = 1;
+            }
+            else
+            {
+                productoToUpdate.Estatus = 0;
+            }
+
+            Int32 iIDTipo = _producto.IDTipo;
+            if (iIDTipo == 0)
+            {
+                TipoController ctrlTipo = new TipoController();
+                iIDTipo = ctrlTipo.UltimoID();
+            }
+            else
+            {
+                iIDTipo = _producto.IDTipo;
+            }
+            productoToUpdate.IDTipo = iIDTipo;
+            IDTipo = iIDTipo.ToString();
 
             Int32 iIDMarca = _producto.IDMarca;
             productoToUpdate.IDMarca = iIDMarca;
@@ -232,6 +373,16 @@ namespace LogicaNegocio
             Int32 iIDCategoria = _producto.IDCategoria;
             productoToUpdate.IDCategoria = iIDCategoria;
             IDCategoria = iIDCategoria.ToString();
+
+            if (!String.IsNullOrEmpty(IDTipo))
+            {
+                productoToUpdate.Tipo = db.TipoSet.FirstOrDefault(c => c.ID == iIDTipo);
+            }
+
+            if (productoToUpdate.Tipo == null)
+            {
+                MessageBox.Show(String.Format("El número de IDTipo {0} no está registrado en la base de datos."), EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             if (!String.IsNullOrEmpty(IDMarca))
             {
@@ -295,11 +446,32 @@ namespace LogicaNegocio
         {
             Int32 id = _producto.ID; Boolean resul = false;
             Producto productoToDelete = db.ProductoSet.First(b => b.ID == id);
-            String IDMarca = ""; String IDModelo = ""; String IDCategoria = "";
+            String IDTipo = ""; String IDMarca = ""; String IDModelo = ""; String IDCategoria = "";
 
             productoToDelete.ID = _producto.ID;
             productoToDelete.Codigo = _producto.Codigo;
             productoToDelete.Descripcion = _producto.Descripcion;
+            if (_producto.Status == EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo)
+            {
+                productoToDelete.Estatus = 1;
+            }
+            else
+            {
+                productoToDelete.Estatus = 0;
+            }
+
+            Int32 iIDTipo = _producto.IDTipo;
+            if (iIDTipo == 0)
+            {
+                TipoController ctrlTipo = new TipoController();
+                iIDTipo = ctrlTipo.UltimoID();
+            }
+            else
+            {
+                iIDTipo = _producto.IDTipo;
+            }
+            productoToDelete.IDTipo = iIDTipo;
+            IDTipo = iIDTipo.ToString();
 
             Int32 iIDMarca = _producto.IDMarca;
             productoToDelete.IDMarca = iIDMarca;

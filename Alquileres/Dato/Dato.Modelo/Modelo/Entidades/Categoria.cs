@@ -23,9 +23,21 @@ namespace Dato.Modelo
             [Required, DisplayName("Categoria del Producto"), StringLength(100)]
             public String Descripcion { get; set; }
 
+            [Required, DisplayName("Estatus")]
+            public int Estatus { get; set; }
+
+            [Required, DisplayName("Tipo del Producto")]
+            public Tipo Tipo { get; set; }
+
         }
 
         #region Metodos Extendidos del Entities Framework
+
+        public Tipo TipoLoad()
+        {
+            return Utility.Entity<Tipo>.LoadReference(this.TipoReference);
+        }
+
         #endregion
     }
 }

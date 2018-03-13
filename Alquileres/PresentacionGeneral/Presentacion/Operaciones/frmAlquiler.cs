@@ -100,7 +100,7 @@ namespace Presentacion.Operaciones
                     txtDia.Enabled = false;
                     txtSemana.Enabled = false;
                     txtPrecio.Enabled = false;
-                    txtEstatus.Enabled = false;
+                    cmbEstatus.Enabled = false;
                     break;
                 case EntidadNegocio.Enumerados.EnumTipos.AccionMenu.Buscar:
                     mstpItemNuevo.Enabled = false;
@@ -117,7 +117,7 @@ namespace Presentacion.Operaciones
                     txtDia.Enabled = false;
                     txtSemana.Enabled = false;
                     txtPrecio.Enabled = false;
-                    txtEstatus.Enabled = false;
+                    cmbEstatus.Enabled = false;
                     break;
                 case EntidadNegocio.Enumerados.EnumTipos.AccionMenu.Modificar:
                     mstpItemNuevo.Enabled = false;
@@ -134,7 +134,7 @@ namespace Presentacion.Operaciones
                     txtDia.Enabled = false;
                     txtSemana.Enabled = false;
                     txtPrecio.Enabled = false;
-                    txtEstatus.Enabled = false;
+                    cmbEstatus.Enabled = false;
                     break;
                 case EntidadNegocio.Enumerados.EnumTipos.AccionMenu.Eliminar:
                 case EntidadNegocio.Enumerados.EnumTipos.AccionMenu.Cancelar:
@@ -154,7 +154,7 @@ namespace Presentacion.Operaciones
                     txtDia.Enabled = false;
                     txtSemana.Enabled = false;
                     txtPrecio.Enabled = false;
-                    txtEstatus.Enabled = false;
+                    cmbEstatus.Enabled = false;
                     break;
             }
         }
@@ -193,6 +193,8 @@ namespace Presentacion.Operaciones
         private void mstpItemModificar_Click(object sender, EventArgs e)
         {
             txtCodigo.Enabled = false;
+            _alquiler.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Procesado;
+            this.cmbEstatus.Text = _alquiler.Estatus.ToString();
             _alquiler.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Editado;
             this.ControlBotonesMenu(EntidadNegocio.Enumerados.EnumTipos.AccionMenu.Modificar);
             txtDesde.Focus();
@@ -206,6 +208,18 @@ namespace Presentacion.Operaciones
                 _alquiler.IDProducto = Convert.ToInt32(this.cmbProducto.SelectedValue.ToString());
                 _alquiler.FechaDesde = DateTime.Parse(txtDesde.Text.ToString());
                 _alquiler.FechaHasta = DateTime.Parse(txtHasta.Text.ToString());
+                if (cmbEstatus.SelectedValue.ToString() == "0")
+                {
+                    _alquiler.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Generado;
+                }
+                else if (cmbEstatus.SelectedValue.ToString() == "1")
+                {
+                    _alquiler.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Procesado;
+                }
+                else
+                {
+                    _alquiler.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Pagado;
+                }
                 List<EntidadNegocio.Entidades.Alquiler> _listA = new List<EntidadNegocio.Entidades.Alquiler>();
                 _listA.Add(_alquiler);
                 if (_ctrlAlquiler.Guardar(_listA))
@@ -234,6 +248,7 @@ namespace Presentacion.Operaciones
         private void frmAlquiler_Load(object sender, EventArgs e)
         {
             this.GrupBox.Text = "Alquiler"; this.Text = "Alquiler";
+            this.LlenarComboEstatus();
         }
         private void frmAlquiler_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -264,6 +279,8 @@ namespace Presentacion.Operaciones
             this.CargarComboProducto();
             this.txtDesde.Text = DateTime.Now.ToString();
             this.txtHasta.Text = DateTime.Now.ToString();
+            _alquiler.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Generado;
+            this.cmbEstatus.Text = _alquiler.Estatus.ToString();
             _alquiler.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Nuevo;
             this.ControlBotonesMenu(EntidadNegocio.Enumerados.EnumTipos.AccionMenu.Nuevo);
             this.txtDesde.Focus();
@@ -279,7 +296,7 @@ namespace Presentacion.Operaciones
             txtDia.Text = "";
             txtSemana.Text = "";
             txtPrecio.Text = "";
-            txtEstatus.Text = "";
+            cmbEstatus.Text = "";
         }
         private void MostrarDatos()
         {
@@ -294,7 +311,7 @@ namespace Presentacion.Operaciones
                 txtDia.Text = _alquiler.TiempoDia;
                 txtSemana.Text = _alquiler.TiempoSemana;
                 txtPrecio.Text = _alquiler.PrecioEstimado.ToString();
-                txtEstatus.Text = _alquiler.Estatus.ToString();
+                cmbEstatus.Text = _alquiler.Estatus.ToString();
             }
             catch (Exception ex)
             {
@@ -320,14 +337,15 @@ namespace Presentacion.Operaciones
                 {
                     _alquiler = new EntidadNegocio.Entidades.Alquiler();
                     _alquiler = _ctrlAlquiler.Details(result);
-                    if (_alquiler.Estatus == 2)
+                    if (_alquiler.Estatus == EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Pagado)
                     {
                         MessageBox.Show("El alquiler solicitado ya se encuntra pago.", EntidadNegocio.Entidades.Mensajes.Titulo_Advertencia, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         this.Cancelar();
                     }
                     else
                     {
-                        LimpiarCampos(); MostrarDatos();
+                        LimpiarCampos(); CargarComboCliente(); CargarComboProducto(); 
+                        LlenarComboEstatus(); MostrarDatos(); 
                         this.ControlBotonesMenu(EntidadNegocio.Enumerados.EnumTipos.AccionMenu.Buscar);
                     }
                 }
@@ -355,9 +373,32 @@ namespace Presentacion.Operaciones
             this.CargarProductos();
             List<EntidadNegocio.Entidades.Producto> _productos = new List<EntidadNegocio.Entidades.Producto>();
             _productos = (from c in _lstProductos select c).ToList();
-            cmbProducto.DisplayMember = "Nombre";
+            cmbProducto.DisplayMember = "Descripcion";
             cmbProducto.ValueMember = "ID";
             cmbProducto.DataSource = _productos;
+        }
+        private void LlenarComboEstatus()
+        {
+            try
+            {
+                List<EntidadNegocio.Entidades.EstatusRegistro> l = new List<EntidadNegocio.Entidades.EstatusRegistro>();
+                int[] values = ((int[])Enum.GetValues(typeof(EntidadNegocio.Enumerados.EnumEstatus.Registro)));
+                EntidadNegocio.Entidades.EstatusRegistro i;
+                foreach (int value in values)
+                {
+                    i = new EntidadNegocio.Entidades.EstatusRegistro();
+                    i.Descripcion = Enum.GetName(typeof(EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler), value);
+                    i.Estatus = value;
+                    l.Add(i);
+                }
+                cmbEstatus.DataSource = l;
+                cmbEstatus.DisplayMember = "Descripcion";
+                cmbEstatus.ValueMember = "Estatus";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -26,6 +26,9 @@ namespace Dato.Modelo
             [Required, DisplayName("Precio Unitario")]
             public Double PrecioUnitario { get; set; }
 
+            [Required, DisplayName("Estatus")]
+            public int Estatus { get; set; }
+
         }
 
         #region Metodos Extendidos del Entities Framework

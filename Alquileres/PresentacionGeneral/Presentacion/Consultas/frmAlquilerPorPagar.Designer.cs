@@ -1,4 +1,4 @@
-﻿namespace Presentacion.Operaciones
+﻿namespace Presentacion.Consultas
 {
     partial class frmAlquilerPorPagar
     {

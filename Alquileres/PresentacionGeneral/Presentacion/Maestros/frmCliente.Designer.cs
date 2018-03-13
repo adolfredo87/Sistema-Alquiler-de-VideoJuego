@@ -48,6 +48,8 @@
             this.txtTelefono = new System.Windows.Forms.TextBox();
             this.txtCorreo = new System.Windows.Forms.TextBox();
             this.txtDireccion = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.cmbEstatus = new System.Windows.Forms.ComboBox();
             this.GrupBox.SuspendLayout();
             this.mstpMenuMaestro.SuspendLayout();
             this.TableLayoutPanel1.SuspendLayout();
@@ -162,6 +164,7 @@
             this.TableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.TableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.TableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.TableLayoutPanel1.Controls.Add(this.label10, 0, 6);
             this.TableLayoutPanel1.Controls.Add(this.label3, 0, 5);
             this.TableLayoutPanel1.Controls.Add(this.Label1, 0, 0);
             this.TableLayoutPanel1.Controls.Add(this.Label2, 0, 2);
@@ -172,9 +175,11 @@
             this.TableLayoutPanel1.Controls.Add(this.txtTelefono, 1, 3);
             this.TableLayoutPanel1.Controls.Add(this.txtCorreo, 1, 4);
             this.TableLayoutPanel1.Controls.Add(this.txtDireccion, 1, 5);
+            this.TableLayoutPanel1.Controls.Add(this.cmbEstatus, 1, 6);
             this.TableLayoutPanel1.Location = new System.Drawing.Point(6, 19);
             this.TableLayoutPanel1.Name = "TableLayoutPanel1";
-            this.TableLayoutPanel1.RowCount = 7;
+            this.TableLayoutPanel1.RowCount = 8;
+            this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -292,6 +297,26 @@
             this.txtDireccion.Size = new System.Drawing.Size(488, 48);
             this.txtDireccion.TabIndex = 9;
             // 
+            // label10
+            // 
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.Transparent;
+            this.label10.Location = new System.Drawing.Point(26, 165);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(42, 13);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "Estatus";
+            // 
+            // cmbEstatus
+            // 
+            this.cmbEstatus.Enabled = false;
+            this.cmbEstatus.FormattingEnabled = true;
+            this.cmbEstatus.Location = new System.Drawing.Point(74, 161);
+            this.cmbEstatus.Name = "cmbEstatus";
+            this.cmbEstatus.Size = new System.Drawing.Size(152, 21);
+            this.cmbEstatus.TabIndex = 23;
+            // 
             // frmCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -337,5 +362,7 @@
         internal System.Windows.Forms.TextBox txtCorreo;
         internal System.Windows.Forms.Label label3;
         internal System.Windows.Forms.TextBox txtDireccion;
+        internal System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox cmbEstatus;
     }
 }

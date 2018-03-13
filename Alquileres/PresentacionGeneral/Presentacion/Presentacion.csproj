@@ -83,6 +83,18 @@
     <Compile Include="Maestros\frmDescuento.Designer.cs">
       <DependentUpon>frmDescuento.cs</DependentUpon>
     </Compile>
+    <Compile Include="Maestros\frmMarca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\frmMarca.Designer.cs">
+      <DependentUpon>frmMarca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\frmModelo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\frmModelo.Designer.cs">
+      <DependentUpon>frmModelo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Maestros\frmPrecio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,10 +113,10 @@
     <Compile Include="Operaciones\frmAlquiler.Designer.cs">
       <DependentUpon>frmAlquiler.cs</DependentUpon>
     </Compile>
-    <Compile Include="Operaciones\frmAlquilerPorPagar.cs">
+    <Compile Include="Consultas\frmAlquilerPorPagar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Operaciones\frmAlquilerPorPagar.Designer.cs">
+    <Compile Include="Consultas\frmAlquilerPorPagar.Designer.cs">
       <DependentUpon>frmAlquilerPorPagar.cs</DependentUpon>
     </Compile>
     <Compile Include="Operaciones\frmPago.cs">
@@ -130,6 +142,12 @@
     <EmbeddedResource Include="Maestros\frmDescuento.resx">
       <DependentUpon>frmDescuento.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\frmMarca.resx">
+      <DependentUpon>frmMarca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\frmModelo.resx">
+      <DependentUpon>frmModelo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Maestros\frmPrecio.resx">
       <DependentUpon>frmPrecio.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,7 +157,7 @@
     <EmbeddedResource Include="Operaciones\frmAlquiler.resx">
       <DependentUpon>frmAlquiler.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Operaciones\frmAlquilerPorPagar.resx">
+    <EmbeddedResource Include="Consultas\frmAlquilerPorPagar.resx">
       <DependentUpon>frmAlquilerPorPagar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Operaciones\frmPago.resx">

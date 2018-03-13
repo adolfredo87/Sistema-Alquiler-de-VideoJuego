@@ -11,37 +11,36 @@ using System.Collections.Generic;
 
 namespace LogicaNegocio
 {
-    public class DescuentoController
+    public class TipoController
     {
         private Dato.Modelo.DemoAlquilerGameBD db = new Dato.Modelo.DemoAlquilerGameBD();
 
-        public List<EntidadNegocio.Entidades.Descuento> ObtenerItems()
+        public List<EntidadNegocio.Entidades.Tipo> ObtenerItems()
         {
             try
             {
-                List<Dato.Modelo.Descuento> _ListD = null;
-                List<EntidadNegocio.Entidades.Descuento> _ListDE = new List<EntidadNegocio.Entidades.Descuento>();
-                EntidadNegocio.Entidades.Descuento _descE = null;
-                _ListD = (List<Dato.Modelo.Descuento>)db.DescuentoSet.ToList();
-                foreach (Dato.Modelo.Descuento element in _ListD)
+                List<Dato.Modelo.Tipo> _ListT = null;
+                List<EntidadNegocio.Entidades.Tipo> _ListTE = new List<EntidadNegocio.Entidades.Tipo>();
+                EntidadNegocio.Entidades.Tipo _tE = null;
+                _ListT = (List<Dato.Modelo.Tipo>)db.TipoSet.ToList();
+                foreach (Dato.Modelo.Tipo element in _ListT)
                 {
-                    _descE = new EntidadNegocio.Entidades.Descuento();
-                    _descE.ID = element.ID;
-                    _descE.Codigo = element.Codigo;
-                    _descE.Descripcion = element.Descripcion;
-                    _descE.PorcentajeDescuento = element.PorcentajeDescuento ?? 0;
+                    _tE = new EntidadNegocio.Entidades.Tipo();
+                    _tE.ID = element.ID;
+                    _tE.Codigo = element.Codigo;
+                    _tE.Descripcion = element.Descripcion;
                     if (element.Estatus == 1)
                     {
-                        _descE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                        _tE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
                     }
                     else
                     {
-                        _descE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                        _tE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
                     }
-                    _descE.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
-                    _ListDE.Add(_descE);
+                    _tE.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+                    _ListTE.Add(_tE);
                 }
-                return _ListDE;
+                return _ListTE;
             }
             catch (Exception ex)
             {
@@ -51,58 +50,56 @@ namespace LogicaNegocio
 
         public Int32 UltimoID()
         {
-            Dato.Modelo.Descuento _entidadToIDAdd = db.DescuentoSet.ToList().LastOrDefault();
+            Dato.Modelo.Tipo _entidadToIDAdd = db.TipoSet.ToList().LastOrDefault();
             Int32 _id = _entidadToIDAdd.ID;
             return _id;
         }
 
-        public EntidadNegocio.Entidades.Descuento Details(int id)
+        public EntidadNegocio.Entidades.Tipo Details(int id)
         {
-            Dato.Modelo.Descuento _descuento = new Dato.Modelo.Descuento();
+            Dato.Modelo.Tipo _tipo = new Dato.Modelo.Tipo();
             if (id == 0)
             {
-                _descuento = new Dato.Modelo.Descuento();
+                _tipo = new Dato.Modelo.Tipo();
             }
             else
             {
-                _descuento = db.DescuentoSet.First(c => c.ID == id);
+                _tipo = db.TipoSet.First(c => c.ID == id);
             }
-            EntidadNegocio.Entidades.Descuento descuentoDetail = new EntidadNegocio.Entidades.Descuento();
-            descuentoDetail.ID = _descuento.ID;
-            descuentoDetail.Codigo = _descuento.Codigo;
-            descuentoDetail.Descripcion = _descuento.Descripcion;
-            descuentoDetail.PorcentajeDescuento = _descuento.PorcentajeDescuento ?? 0;
-            if (_descuento.Estatus == 1)
+            EntidadNegocio.Entidades.Tipo tipoDetail = new EntidadNegocio.Entidades.Tipo();
+            tipoDetail.ID = _tipo.ID;
+            tipoDetail.Codigo = _tipo.Codigo;
+            tipoDetail.Descripcion = _tipo.Descripcion;
+            if (_tipo.Estatus == 1)
             {
-                descuentoDetail.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                tipoDetail.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
             }
             else
             {
-                descuentoDetail.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                tipoDetail.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
             }
-            return descuentoDetail;
+            return tipoDetail;
         }
 
-        public Boolean Create(EntidadNegocio.Entidades.Descuento _descuento)
+        public Boolean Create(EntidadNegocio.Entidades.Tipo _tipo)
         {
-            Dato.Modelo.Descuento descuentoToAdd = new Dato.Modelo.Descuento();
+            Dato.Modelo.Tipo tipoToAdd = new Dato.Modelo.Tipo();
             Boolean resul = false;
 
-            descuentoToAdd.ID = _descuento.ID;
-            descuentoToAdd.Codigo = _descuento.Codigo;
-            descuentoToAdd.Descripcion = _descuento.Descripcion;
-            descuentoToAdd.PorcentajeDescuento = _descuento.PorcentajeDescuento;
-            if (_descuento.Status == EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo)
+            tipoToAdd.ID = _tipo.ID;
+            tipoToAdd.Codigo = _tipo.Codigo;
+            tipoToAdd.Descripcion = _tipo.Descripcion;
+            if (_tipo.Status == EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo)
             {
-                descuentoToAdd.Estatus = 1;
+                tipoToAdd.Estatus = 1;
             }
             else
             {
-                descuentoToAdd.Estatus = 0;
+                tipoToAdd.Estatus = 0;
             }
 
             //valido claves primaria
-            if (db.DescuentoSet.FirstOrDefault(b => b.ID == descuentoToAdd.ID) != null)
+            if (db.TipoSet.FirstOrDefault(b => b.ID == tipoToAdd.ID) != null)
             {
                 MessageBox.Show(EntidadNegocio.Entidades.Mensajes.Info_ErrorAlGuardarViolacionPK, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -118,11 +115,11 @@ namespace LogicaNegocio
                 try
                 {
                     // Guardar y confirmar.
-                    db.AddToDescuentoSet(descuentoToAdd);
+                    db.AddToTipoSet(tipoToAdd);
                     db.SaveChanges();
                     dbTransaction.Commit();
                     /// Si la transaccion es exitosa enviamos true
-                    Dato.Modelo.Descuento _entidadToIDAdd = db.DescuentoSet.ToList().LastOrDefault();
+                    Dato.Modelo.Tipo _entidadToIDAdd = db.TipoSet.ToList().LastOrDefault();
                     Int32 _id = _entidadToIDAdd.ID;
                     _entidadToIDAdd.ID = _id;
                     resul = true;
@@ -138,25 +135,23 @@ namespace LogicaNegocio
             }
 
             return resul;
-
         }
 
-        public Boolean Edit(EntidadNegocio.Entidades.Descuento _descuento)
+        public Boolean Edit(EntidadNegocio.Entidades.Tipo _tipo)
         {
-            Int32 id = _descuento.ID; Boolean resul = false;
-            Dato.Modelo.Descuento descuentoToUpdate = db.DescuentoSet.First(d => d.ID == id);
+            Int32 id = _tipo.ID; Boolean resul = false;
+            Dato.Modelo.Tipo tipoToUpdate = db.TipoSet.First(cb => cb.ID == id);
 
-            descuentoToUpdate.ID = _descuento.ID;
-            descuentoToUpdate.Codigo = _descuento.Codigo;
-            descuentoToUpdate.Descripcion = _descuento.Descripcion;
-            descuentoToUpdate.PorcentajeDescuento = _descuento.PorcentajeDescuento;
-            if (_descuento.Status == EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo)
+            tipoToUpdate.ID = _tipo.ID;
+            tipoToUpdate.Codigo = _tipo.Codigo;
+            tipoToUpdate.Descripcion = _tipo.Descripcion;
+            if (_tipo.Status == EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo)
             {
-                descuentoToUpdate.Estatus = 1;
+                tipoToUpdate.Estatus = 1;
             }
             else
             {
-                descuentoToUpdate.Estatus = 0;
+                tipoToUpdate.Estatus = 0;
             }
 
             if (db.Connection.State != System.Data.ConnectionState.Open)
@@ -186,43 +181,41 @@ namespace LogicaNegocio
             return resul;
         }
 
-        public Boolean Delete(EntidadNegocio.Entidades.Descuento _descuento)
+        public Boolean Delete(EntidadNegocio.Entidades.Tipo _tipo)
         {
-            Int32 id = _descuento.ID; Boolean resul = false;
-            Dato.Modelo.Descuento descuentoToDelete = db.DescuentoSet.First(d => d.ID == id);
+            Int32 id = _tipo.ID; Boolean resul = false;
+            Dato.Modelo.Tipo tipoToDelete = db.TipoSet.First(cb => cb.ID == id);
 
-            descuentoToDelete.ID = _descuento.ID;
-            descuentoToDelete.Codigo = _descuento.Codigo;
-            String _Descripcion = _descuento.Descripcion;
-            descuentoToDelete.Descripcion = _Descripcion;
-            descuentoToDelete.PorcentajeDescuento = _descuento.PorcentajeDescuento;
-            if (_descuento.Status == EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo)
+            tipoToDelete.ID = _tipo.ID;
+            tipoToDelete.Codigo = _tipo.Codigo;
+            tipoToDelete.Descripcion = _tipo.Descripcion;
+            if (_tipo.Status == EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo)
             {
-                descuentoToDelete.Estatus = 1;
+                tipoToDelete.Estatus = 1;
             }
             else
             {
-                descuentoToDelete.Estatus = 0;
+                tipoToDelete.Estatus = 0;
             }
 
-            //valido si el descuento que se borra es de cabecera o de linea
-            if (_Descripcion.Contains("Cabecera") || _Descripcion.Contains("Linea"))
+            //valido la Tipo tiene un producto
+            if (db.ProductoSet.FirstOrDefault(b => b.IDTipo == id) != null)
             {
-                MessageBox.Show(String.Format("Ningun descuento de Cabecera o de Linea puede ser eliminado."), EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(String.Format("Esta intentando Borrar un Tipo que tiene un Producto"), EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                if (db.Connection.State != System.Data.ConnectionState.Open)
-                {
-                    db.Connection.Open();
-                }
-
-                DbTransaction dbTransaction = db.Connection.BeginTransaction();
-
                 try
                 {
+                    if (db.Connection.State != System.Data.ConnectionState.Open)
+                    {
+                        db.Connection.Open();
+                    }
+
+                    DbTransaction dbTransaction = db.Connection.BeginTransaction();
+
                     // Delete 
-                    db.DeleteObject(descuentoToDelete);
+                    db.DeleteObject(tipoToDelete);
                     db.SaveChanges();
                     dbTransaction.Commit();
                     /// Si la transaccion es exitosa enviamos true
@@ -240,10 +233,10 @@ namespace LogicaNegocio
             return resul;
         }
 
-        public Boolean DatosValidos(List<EntidadNegocio.Entidades.Descuento> _descuentos)
+        public Boolean DatosValidos(List<EntidadNegocio.Entidades.Tipo> _tipos)
         {
             bool valido = true;
-            var count = (from cp in _descuentos where string.IsNullOrEmpty(cp.ID.ToString()) || string.IsNullOrEmpty(cp.Codigo) select cp.ID).Count();
+            var count = (from m in _tipos where string.IsNullOrEmpty(m.ID.ToString()) || string.IsNullOrEmpty(m.Codigo) || string.IsNullOrEmpty(m.Descripcion.ToString()) select m.ID).Count();
             if (count > 0)
             {
                 valido = false; throw new Exception(EntidadNegocio.Entidades.Mensajes.Info_Incompleta);
@@ -255,9 +248,9 @@ namespace LogicaNegocio
             return valido;
         }
 
-        public Boolean DatoDuplicado(List<EntidadNegocio.Entidades.Descuento> _descuentos, Int32 id)
+        public Boolean DatoDuplicado(List<EntidadNegocio.Entidades.Tipo> _tipos, Int32 id)
         {
-            if (_descuentos.FindAll(cp => cp.ID.ToString().ToUpper() == id.ToString().ToUpper()).Count > 1)
+            if (_tipos.FindAll(m => m.ID.ToString().ToUpper() == id.ToString().ToUpper()).Count > 1)
             {
                 return true;
             }
@@ -267,37 +260,37 @@ namespace LogicaNegocio
             }
         }
 
-        public Boolean Guardar(List<EntidadNegocio.Entidades.Descuento> _descuentos)
+        public Boolean Guardar(List<EntidadNegocio.Entidades.Tipo> _tipos)
         {
             try
             {
                 bool resul = false;
-                var l = (from c in _descuentos where c.Edicion != EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal select c);
-                List<EntidadNegocio.Entidades.Descuento> _listDesc = null;
-                _listDesc = l.ToList();
-                if (DatosValidos(_listDesc))
+                var l = (from c in _tipos where c.Edicion != EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal select c);
+                List<EntidadNegocio.Entidades.Tipo> _listT = null;
+                _listT = l.ToList();
+                if (DatosValidos(_listT))
                 {
-                    if (_listDesc.Count == 0)
+                    if (_listT.Count == 0)
                     {
                         resul = false;
                     }
-                    else if (_listDesc.Count > 0)
+                    else if (_listT.Count > 0)
                     {
                         if (MessageBox.Show(EntidadNegocio.Entidades.Mensajes.Info_Guardar, EntidadNegocio.Entidades.Mensajes.Titulo_Guardar, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
                         {
-                            foreach (EntidadNegocio.Entidades.Descuento _desc in _listDesc)
+                            foreach (EntidadNegocio.Entidades.Tipo _tipo in _listT)
                             {
-                                if (_desc.Edicion == EntidadNegocio.Enumerados.EnumEstatus.Edicion.Nuevo)
+                                if (_tipo.Edicion == EntidadNegocio.Enumerados.EnumEstatus.Edicion.Nuevo)
                                 {
-                                    resul = this.Create(_desc);
+                                    resul = this.Create(_tipo);
                                 }
-                                else if (_desc.Edicion == EntidadNegocio.Enumerados.EnumEstatus.Edicion.Editado)
+                                else if (_tipo.Edicion == EntidadNegocio.Enumerados.EnumEstatus.Edicion.Editado)
                                 {
-                                    resul = this.Edit(_desc);
+                                    resul = this.Edit(_tipo);
                                 }
-                                else if (_desc.Edicion == EntidadNegocio.Enumerados.EnumEstatus.Edicion.Eliminar)
+                                else if (_tipo.Edicion == EntidadNegocio.Enumerados.EnumEstatus.Edicion.Eliminar)
                                 {
-                                    resul = this.Delete(_desc);
+                                    resul = this.Delete(_tipo);
                                 }
                                 else
                                 {

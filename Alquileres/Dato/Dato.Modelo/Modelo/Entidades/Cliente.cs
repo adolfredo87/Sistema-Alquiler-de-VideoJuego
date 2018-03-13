@@ -29,6 +29,9 @@ namespace Dato.Modelo
             [DisplayName("Direccion del Cliente"), StringLength(200)]
             public String Direccion { get; set; }
 
+            [Required, DisplayName("Estatus")]
+            public int Estatus { get; set; }
+
         }
 
         #region Metodos Extendidos del Entities Framework

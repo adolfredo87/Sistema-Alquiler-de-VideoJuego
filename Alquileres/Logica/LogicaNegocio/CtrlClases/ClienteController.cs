@@ -31,7 +31,14 @@ namespace LogicaNegocio
                     _cE.Telefono = element.Telefono;
                     _cE.Correo = element.Correo;
                     _cE.Direccion = element.Direccion;
-                    _cE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    if (element.Estatus == 1)
+                    {
+                        _cE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _cE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
                     _cE.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                     _ListCE.Add(_cE);
                 }
@@ -67,6 +74,14 @@ namespace LogicaNegocio
             clienteDetail.Telefono = _cliente.Telefono;
             clienteDetail.Correo = _cliente.Correo;
             clienteDetail.Direccion = _cliente.Direccion;
+            if (_cliente.Estatus == 1)
+            {
+                clienteDetail.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+            }
+            else
+            {
+                clienteDetail.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+            }
             return clienteDetail;
         }
 
@@ -80,6 +95,14 @@ namespace LogicaNegocio
             clienteToAdd.Telefono = _cliente.Telefono;
             clienteToAdd.Correo = _cliente.Correo;
             clienteToAdd.Direccion = _cliente.Direccion;
+            if (_cliente.Status == EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo)
+            {
+                clienteToAdd.Estatus = 1;
+            }
+            else
+            {
+                clienteToAdd.Estatus = 0;
+            }
 
             //valido claves primaria
             if (db.ClienteSet.FirstOrDefault(c => c.ID == clienteToAdd.ID) != null)
@@ -130,6 +153,14 @@ namespace LogicaNegocio
             clienteToUpdate.Telefono = _cliente.Telefono;
             clienteToUpdate.Correo = _cliente.Correo;
             clienteToUpdate.Direccion = _cliente.Direccion;
+            if (_cliente.Status == EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo)
+            {
+                clienteToUpdate.Estatus = 1;
+            }
+            else
+            {
+                clienteToUpdate.Estatus = 0;
+            }
 
             if (db.Connection.State != System.Data.ConnectionState.Open)
             {
@@ -168,6 +199,14 @@ namespace LogicaNegocio
             clienteToDelete.Telefono = _cliente.Telefono;
             clienteToDelete.Correo = _cliente.Correo;
             clienteToDelete.Direccion = _cliente.Direccion;
+            if (_cliente.Status == EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo)
+            {
+                clienteToDelete.Estatus = 1;
+            }
+            else
+            {
+                clienteToDelete.Estatus = 0;
+            }
 
             //valido cliente tiene alquiler
             if (db.AlquilerSet.FirstOrDefault(b => b.IDCliente == id) != null)

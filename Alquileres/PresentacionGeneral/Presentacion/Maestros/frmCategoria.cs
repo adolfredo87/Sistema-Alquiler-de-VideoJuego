@@ -60,6 +60,30 @@ namespace Presentacion.Maestros
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void LlenarComboGridEstatus()
+        {
+            try
+            {
+                DataGridViewComboBoxColumn column = ((DataGridViewComboBoxColumn)dgCategoria.Columns["colEstatus"]);
+                List<EntidadNegocio.Entidades.EstatusRegistro> l = new List<EntidadNegocio.Entidades.EstatusRegistro>();
+                int[] values = ((int[])Enum.GetValues(typeof(EntidadNegocio.Enumerados.EnumEstatus.Registro)));
+                EntidadNegocio.Entidades.EstatusRegistro i;
+                foreach (int value in values)
+                {
+                    i = new EntidadNegocio.Entidades.EstatusRegistro();
+                    i.Descripcion = Enum.GetName(typeof(EntidadNegocio.Enumerados.EnumEstatus.Registro), value);
+                    i.Estatus = value;
+                    l.Add(i);
+                }
+                column.DataSource = l;
+                column.DisplayMember = "Descripcion";
+                column.ValueMember = "Estatus";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void AñadirCategoria()
         {
             try
@@ -163,6 +187,7 @@ namespace Presentacion.Maestros
             {
                 this.GrupBox.Text = "Categoria";
                 this.Text = "Categoria";
+                LlenarComboGridEstatus();
                 CargarCategoria();
                 MostrarCategoria();
             }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DemoAlquilerGameWinFormModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+      <Schema Namespace="DemoAlquilerGameWinFormModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="DemoAlquilerGameWinFormModelStoreContainer">
           <EntitySet Name="alquiler" EntityType="DemoAlquilerGameWinFormModel.Store.alquiler" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="categoria" EntityType="DemoAlquilerGameWinFormModel.Store.categoria" store:Type="Tables" Schema="dbo" />
@@ -16,6 +16,7 @@
           <EntitySet Name="pagoDet" EntityType="DemoAlquilerGameWinFormModel.Store.pagoDet" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="precio" EntityType="DemoAlquilerGameWinFormModel.Store.precio" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="producto" EntityType="DemoAlquilerGameWinFormModel.Store.producto" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tipo" EntityType="DemoAlquilerGameWinFormModel.Store.tipo" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_Alquiler_Cliente" Association="DemoAlquilerGameWinFormModel.Store.FK_Alquiler_Cliente">
             <End Role="cliente" EntitySet="cliente" />
             <End Role="alquiler" EntitySet="alquiler" />
@@ -23,6 +24,18 @@
           <AssociationSet Name="FK_Alquiler_Producto" Association="DemoAlquilerGameWinFormModel.Store.FK_Alquiler_Producto">
             <End Role="producto" EntitySet="producto" />
             <End Role="alquiler" EntitySet="alquiler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Categoria_Tipo" Association="DemoAlquilerGameWinFormModel.Store.FK_Categoria_Tipo">
+            <End Role="tipo" EntitySet="tipo" />
+            <End Role="categoria" EntitySet="categoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Marca_Tipo" Association="DemoAlquilerGameWinFormModel.Store.FK_Marca_Tipo">
+            <End Role="tipo" EntitySet="tipo" />
+            <End Role="marca" EntitySet="marca" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modelo_Tipo" Association="DemoAlquilerGameWinFormModel.Store.FK_Modelo_Tipo">
+            <End Role="tipo" EntitySet="tipo" />
+            <End Role="modelo" EntitySet="modelo" />
           </AssociationSet>
           <AssociationSet Name="FK_PagoCab_Cliente" Association="DemoAlquilerGameWinFormModel.Store.FK_PagoCab_Cliente">
             <End Role="cliente" EntitySet="cliente" />
@@ -48,6 +61,10 @@
             <End Role="modelo" EntitySet="modelo" />
             <End Role="producto" EntitySet="producto" />
           </AssociationSet>
+          <AssociationSet Name="FK_Producto_Tipo" Association="DemoAlquilerGameWinFormModel.Store.FK_Producto_Tipo">
+            <End Role="tipo" EntitySet="tipo" />
+            <End Role="producto" EntitySet="producto" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="alquiler">
           <Key>
@@ -71,6 +88,8 @@
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Codigo" Type="varchar" MaxLength="255" />
           <Property Name="Descripcion" Type="varchar" MaxLength="255" />
+          <Property Name="Estatus" Type="int" Nullable="false" />
+          <Property Name="IDTipo" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="cliente">
           <Key>
@@ -81,6 +100,7 @@
           <Property Name="Telefono" Type="varchar" MaxLength="255" />
           <Property Name="Correo" Type="varchar" MaxLength="255" />
           <Property Name="Direccion" Type="varchar" MaxLength="255" />
+          <Property Name="Estatus" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="descuento">
           <Key>
@@ -99,6 +119,8 @@
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Codigo" Type="varchar" MaxLength="255" />
           <Property Name="Descripcion" Type="varchar" MaxLength="255" />
+          <Property Name="Estatus" Type="int" Nullable="false" />
+          <Property Name="IDTipo" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="modelo">
           <Key>
@@ -107,6 +129,8 @@
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Codigo" Type="varchar" MaxLength="255" />
           <Property Name="Descripcion" Type="varchar" MaxLength="255" />
+          <Property Name="Estatus" Type="int" Nullable="false" />
+          <Property Name="IDTipo" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="pagoCab">
           <Key>
@@ -139,17 +163,29 @@
           <Property Name="Codigo" Type="varchar" MaxLength="255" />
           <Property Name="Descripcion" Type="varchar" MaxLength="255" />
           <Property Name="PrecioUnitario" Type="float" />
+          <Property Name="Estatus" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="producto">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IDTipo" Type="int" Nullable="false" />
           <Property Name="Codigo" Type="varchar" Nullable="false" MaxLength="255" />
           <Property Name="Descripcion" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Estatus" Type="int" Nullable="false" />
           <Property Name="IDMarca" Type="int" Nullable="false" />
           <Property Name="IDModelo" Type="int" Nullable="false" />
           <Property Name="IDCategoria" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tipo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="varchar" MaxLength="255" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="255" />
+          <Property Name="Estatus" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Alquiler_Cliente">
           <End Role="cliente" Type="DemoAlquilerGameWinFormModel.Store.cliente" Multiplicity="1" />
@@ -172,6 +208,42 @@
             </Principal>
             <Dependent Role="alquiler">
               <PropertyRef Name="IDProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Categoria_Tipo">
+          <End Role="tipo" Type="DemoAlquilerGameWinFormModel.Store.tipo" Multiplicity="1" />
+          <End Role="categoria" Type="DemoAlquilerGameWinFormModel.Store.categoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="categoria">
+              <PropertyRef Name="IDTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Marca_Tipo">
+          <End Role="tipo" Type="DemoAlquilerGameWinFormModel.Store.tipo" Multiplicity="1" />
+          <End Role="marca" Type="DemoAlquilerGameWinFormModel.Store.marca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="marca">
+              <PropertyRef Name="IDTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modelo_Tipo">
+          <End Role="tipo" Type="DemoAlquilerGameWinFormModel.Store.tipo" Multiplicity="1" />
+          <End Role="modelo" Type="DemoAlquilerGameWinFormModel.Store.modelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="modelo">
+              <PropertyRef Name="IDTipo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -247,10 +319,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Producto_Tipo">
+          <End Role="tipo" Type="DemoAlquilerGameWinFormModel.Store.tipo" Multiplicity="1" />
+          <End Role="producto" Type="DemoAlquilerGameWinFormModel.Store.producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="producto">
+              <PropertyRef Name="IDTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="USP_ELICATEGORIA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IID" Type="int" Mode="In" />
           <Parameter Name="VCODIGO" Type="varchar" Mode="In" />
           <Parameter Name="VDESCRIPCION" Type="varchar" Mode="In" />
+          <Parameter Name="ITIPO" Type="int" Mode="In" />
+          <Parameter Name="IESTATUS" Type="int" Mode="In" />
         </Function>
         <Function Name="USP_ELICLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ICLIENTE" Type="int" Mode="In" />
@@ -258,6 +344,7 @@
           <Parameter Name="VTELEFONO" Type="varchar" Mode="In" />
           <Parameter Name="VCORREO" Type="varchar" Mode="In" />
           <Parameter Name="VDIRECCION" Type="varchar" Mode="In" />
+          <Parameter Name="IESTATUS" Type="int" Mode="In" />
         </Function>
         <Function Name="USP_ELIDESCUENTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IID" Type="int" Mode="In" />
@@ -270,25 +357,38 @@
           <Parameter Name="IID" Type="int" Mode="In" />
           <Parameter Name="VCODIGO" Type="varchar" Mode="In" />
           <Parameter Name="VDESCRIPCION" Type="varchar" Mode="In" />
+          <Parameter Name="ITIPO" Type="int" Mode="In" />
+          <Parameter Name="IESTATUS" Type="int" Mode="In" />
         </Function>
         <Function Name="USP_ELIMODELO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IID" Type="int" Mode="In" />
           <Parameter Name="VCODIGO" Type="varchar" Mode="In" />
           <Parameter Name="VDESCRIPCION" Type="varchar" Mode="In" />
+          <Parameter Name="ITIPO" Type="int" Mode="In" />
+          <Parameter Name="IESTATUS" Type="int" Mode="In" />
         </Function>
         <Function Name="USP_ELIPRECIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IID" Type="int" Mode="In" />
           <Parameter Name="VCODIGO" Type="varchar" Mode="In" />
           <Parameter Name="VDESCRIPCION" Type="varchar" Mode="In" />
           <Parameter Name="FPRECIO" Type="float" Mode="In" />
+          <Parameter Name="IESTATUS" Type="int" Mode="In" />
         </Function>
         <Function Name="USP_ELIPRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IID" Type="int" Mode="In" />
+          <Parameter Name="ITIPO" Type="int" Mode="In" />
           <Parameter Name="VCODIGO" Type="varchar" Mode="In" />
           <Parameter Name="VDESCRIPCION" Type="varchar" Mode="In" />
           <Parameter Name="IMARCA" Type="int" Mode="In" />
           <Parameter Name="IMODELO" Type="int" Mode="In" />
           <Parameter Name="ICATEGORIA" Type="int" Mode="In" />
+          <Parameter Name="IESTATUS" Type="int" Mode="In" />
+        </Function>
+        <Function Name="USP_ELITIPO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IID" Type="int" Mode="In" />
+          <Parameter Name="VCODIGO" Type="varchar" Mode="In" />
+          <Parameter Name="VDESCRIPCION" Type="varchar" Mode="In" />
+          <Parameter Name="IESTATUS" Type="int" Mode="In" />
         </Function>
         <Function Name="USP_INCALQUILER" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ICLIENTE" Type="int" Mode="In" />
@@ -303,12 +403,15 @@
         <Function Name="USP_INCCATEGORIA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="VCODIGO" Type="varchar" Mode="In" />
           <Parameter Name="VDESCRIPCION" Type="varchar" Mode="In" />
+          <Parameter Name="ITIPO" Type="int" Mode="In" />
+          <Parameter Name="IESTATUS" Type="int" Mode="In" />
         </Function>
         <Function Name="USP_INCCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="VNOMBRE" Type="varchar" Mode="In" />
           <Parameter Name="VTELEFONO" Type="varchar" Mode="In" />
           <Parameter Name="VCORREO" Type="varchar" Mode="In" />
           <Parameter Name="VDIRECCION" Type="varchar" Mode="In" />
+          <Parameter Name="IESTATUS" Type="int" Mode="In" />
         </Function>
         <Function Name="USP_INCDESCUENTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="VCODIGO" Type="varchar" Mode="In" />
@@ -319,10 +422,14 @@
         <Function Name="USP_INCMARCA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="VCODIGO" Type="varchar" Mode="In" />
           <Parameter Name="VDESCRIPCION" Type="varchar" Mode="In" />
+          <Parameter Name="ITIPO" Type="int" Mode="In" />
+          <Parameter Name="IESTATUS" Type="int" Mode="In" />
         </Function>
         <Function Name="USP_INCMODELO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="VCODIGO" Type="varchar" Mode="In" />
           <Parameter Name="VDESCRIPCION" Type="varchar" Mode="In" />
+          <Parameter Name="ITIPO" Type="int" Mode="In" />
+          <Parameter Name="IESTATUS" Type="int" Mode="In" />
         </Function>
         <Function Name="USP_INCPAGOCAB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ICLIENTE" Type="int" Mode="In" />
@@ -336,13 +443,21 @@
           <Parameter Name="VCODIGO" Type="varchar" Mode="In" />
           <Parameter Name="VDESCRIPCION" Type="varchar" Mode="In" />
           <Parameter Name="FPRECIO" Type="float" Mode="In" />
+          <Parameter Name="IESTATUS" Type="int" Mode="In" />
         </Function>
         <Function Name="USP_INCPRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ITIPO" Type="int" Mode="In" />
           <Parameter Name="VCODIGO" Type="varchar" Mode="In" />
           <Parameter Name="VDESCRIPCION" Type="varchar" Mode="In" />
           <Parameter Name="IMARCA" Type="int" Mode="In" />
           <Parameter Name="IMODELO" Type="int" Mode="In" />
           <Parameter Name="ICATEGORIA" Type="int" Mode="In" />
+          <Parameter Name="IESTATUS" Type="int" Mode="In" />
+        </Function>
+        <Function Name="USP_INCTIPO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VCODIGO" Type="varchar" Mode="In" />
+          <Parameter Name="VDESCRIPCION" Type="varchar" Mode="In" />
+          <Parameter Name="IESTATUS" Type="int" Mode="In" />
         </Function>
         <Function Name="USP_MODALQUILER" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IID" Type="int" Mode="In" />
@@ -359,6 +474,8 @@
           <Parameter Name="IID" Type="int" Mode="In" />
           <Parameter Name="VCODIGO" Type="varchar" Mode="In" />
           <Parameter Name="VDESCRIPCION" Type="varchar" Mode="In" />
+          <Parameter Name="ITIPO" Type="int" Mode="In" />
+          <Parameter Name="IESTATUS" Type="int" Mode="In" />
         </Function>
         <Function Name="USP_MODCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ICLIENTE" Type="int" Mode="In" />
@@ -366,6 +483,7 @@
           <Parameter Name="VTELEFONO" Type="varchar" Mode="In" />
           <Parameter Name="VCORREO" Type="varchar" Mode="In" />
           <Parameter Name="VDIRECCION" Type="varchar" Mode="In" />
+          <Parameter Name="IESTATUS" Type="int" Mode="In" />
         </Function>
         <Function Name="USP_MODDESCUENTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IID" Type="int" Mode="In" />
@@ -378,11 +496,15 @@
           <Parameter Name="IID" Type="int" Mode="In" />
           <Parameter Name="VCODIGO" Type="varchar" Mode="In" />
           <Parameter Name="VDESCRIPCION" Type="varchar" Mode="In" />
+          <Parameter Name="ITIPO" Type="int" Mode="In" />
+          <Parameter Name="IESTATUS" Type="int" Mode="In" />
         </Function>
         <Function Name="USP_MODMODELO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IID" Type="int" Mode="In" />
           <Parameter Name="VCODIGO" Type="varchar" Mode="In" />
           <Parameter Name="VDESCRIPCION" Type="varchar" Mode="In" />
+          <Parameter Name="ITIPO" Type="int" Mode="In" />
+          <Parameter Name="IESTATUS" Type="int" Mode="In" />
         </Function>
         <Function Name="USP_MODPAGOCAB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IID" Type="int" Mode="In" />
@@ -398,14 +520,23 @@
           <Parameter Name="VCODIGO" Type="varchar" Mode="In" />
           <Parameter Name="VDESCRIPCION" Type="varchar" Mode="In" />
           <Parameter Name="FPRECIO" Type="float" Mode="In" />
+          <Parameter Name="IESTATUS" Type="int" Mode="In" />
         </Function>
         <Function Name="USP_MODPRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IID" Type="int" Mode="In" />
+          <Parameter Name="ITIPO" Type="int" Mode="In" />
           <Parameter Name="VCODIGO" Type="varchar" Mode="In" />
           <Parameter Name="VDESCRIPCION" Type="varchar" Mode="In" />
           <Parameter Name="IMARCA" Type="int" Mode="In" />
           <Parameter Name="IMODELO" Type="int" Mode="In" />
           <Parameter Name="ICATEGORIA" Type="int" Mode="In" />
+          <Parameter Name="IESTATUS" Type="int" Mode="In" />
+        </Function>
+        <Function Name="USP_MODTIPO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IID" Type="int" Mode="In" />
+          <Parameter Name="VCODIGO" Type="varchar" Mode="In" />
+          <Parameter Name="VDESCRIPCION" Type="varchar" Mode="In" />
+          <Parameter Name="IESTATUS" Type="int" Mode="In" />
         </Function>
         <Function Name="USP_PAGOCAB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ICLIENTE" Type="int" Mode="In" />
@@ -420,18 +551,22 @@
           <Parameter Name="IID" Type="int" Mode="In" />
           <Parameter Name="ITIPO" Type="int" Mode="In" />
         </Function>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DemoAlquilerGameWinFormModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="DemoAlquilerGameBD" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AlquilerSet" EntityType="DemoAlquilerGameWinFormModel.Alquiler" />
+          <EntitySet Name="CategoriaSet" EntityType="DemoAlquilerGameWinFormModel.Categoria" />
           <EntitySet Name="ClienteSet" EntityType="DemoAlquilerGameWinFormModel.Cliente" />
           <EntitySet Name="DescuentoSet" EntityType="DemoAlquilerGameWinFormModel.Descuento" />
+          <EntitySet Name="MarcaSet" EntityType="DemoAlquilerGameWinFormModel.Marca" />
+          <EntitySet Name="ModeloSet" EntityType="DemoAlquilerGameWinFormModel.Modelo" />
           <EntitySet Name="PagoCabeceraSet" EntityType="DemoAlquilerGameWinFormModel.PagoCabecera" />
           <EntitySet Name="PagoDetalleSet" EntityType="DemoAlquilerGameWinFormModel.PagoDetalle" />
           <EntitySet Name="PrecioSet" EntityType="DemoAlquilerGameWinFormModel.Precio" />
-          <EntitySet Name="ProductoSet" EntityType="DemoAlquilerGameWinFormModel.Producto" />
+          <EntitySet Name="TipoSet" EntityType="DemoAlquilerGameWinFormModel.Tipo" />
           <AssociationSet Name="FK_Alquiler_Cliente" Association="DemoAlquilerGameWinFormModel.FK_Alquiler_Cliente">
             <End Role="cliente" EntitySet="ClienteSet" />
             <End Role="alquiler" EntitySet="AlquilerSet" />
@@ -444,29 +579,43 @@
             <End Role="alquiler" EntitySet="AlquilerSet" />
             <End Role="pagoDet" EntitySet="PagoDetalleSet" />
           </AssociationSet>
+          <AssociationSet Name="FK_Categoria_Tipo" Association="DemoAlquilerGameWinFormModel.FK_Categoria_Tipo">
+            <End Role="tipo" EntitySet="TipoSet" />
+            <End Role="categoria" EntitySet="CategoriaSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Categoria" Association="DemoAlquilerGameWinFormModel.FK_Producto_Categoria">
+            <End Role="categoria" EntitySet="CategoriaSet" />
+            <End Role="producto" EntitySet="ProductoSet" />
+          </AssociationSet>
           <AssociationSet Name="FK_PagoCab_Cliente" Association="DemoAlquilerGameWinFormModel.FK_PagoCab_Cliente">
             <End Role="cliente" EntitySet="ClienteSet" />
             <End Role="pagoCab" EntitySet="PagoCabeceraSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Marca_Tipo" Association="DemoAlquilerGameWinFormModel.FK_Marca_Tipo">
+            <End Role="tipo" EntitySet="TipoSet" />
+            <End Role="marca" EntitySet="MarcaSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Marca" Association="DemoAlquilerGameWinFormModel.FK_Producto_Marca">
+            <End Role="marca" EntitySet="MarcaSet" />
+            <End Role="producto" EntitySet="ProductoSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modelo_Tipo" Association="DemoAlquilerGameWinFormModel.FK_Modelo_Tipo">
+            <End Role="tipo" EntitySet="TipoSet" />
+            <End Role="modelo" EntitySet="ModeloSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Modelo" Association="DemoAlquilerGameWinFormModel.FK_Producto_Modelo">
+            <End Role="modelo" EntitySet="ModeloSet" />
+            <End Role="producto" EntitySet="ProductoSet" />
           </AssociationSet>
           <AssociationSet Name="FK_PagoDet_PagoCab" Association="DemoAlquilerGameWinFormModel.FK_PagoDet_PagoCab">
             <End Role="pagoCab" EntitySet="PagoCabeceraSet" />
             <End Role="pagoDet" EntitySet="PagoDetalleSet" />
           </AssociationSet>
-          <EntitySet Name="CategoriaSet" EntityType="DemoAlquilerGameWinFormModel.Categoria" />
-          <EntitySet Name="MarcaSet" EntityType="DemoAlquilerGameWinFormModel.Marca" />
-          <EntitySet Name="ModeloSet" EntityType="DemoAlquilerGameWinFormModel.Modelo" />
-          <AssociationSet Name="FK_Producto_Categoria" Association="DemoAlquilerGameWinFormModel.FK_Producto_Categoria">
-            <End Role="categoria" EntitySet="CategoriaSet" />
-            <End Role="Producto" EntitySet="ProductoSet" />
+          <AssociationSet Name="FK_Producto_Tipo" Association="DemoAlquilerGameWinFormModel.FK_Producto_Tipo">
+            <End Role="tipo" EntitySet="TipoSet" />
+            <End Role="producto" EntitySet="ProductoSet" />
           </AssociationSet>
-          <AssociationSet Name="FK_Producto_Marca" Association="DemoAlquilerGameWinFormModel.FK_Producto_Marca">
-            <End Role="marca" EntitySet="MarcaSet" />
-            <End Role="Producto" EntitySet="ProductoSet" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Producto_Modelo" Association="DemoAlquilerGameWinFormModel.FK_Producto_Modelo">
-            <End Role="modelo" EntitySet="ModeloSet" />
-            <End Role="Producto" EntitySet="ProductoSet" />
-          </AssociationSet>
+          <EntitySet Name="ProductoSet" EntityType="DemoAlquilerGameWinFormModel.Producto" />
         </EntityContainer>
         <EntityType Name="Alquiler">
           <Key>
@@ -486,6 +635,18 @@
           <NavigationProperty Name="Producto" Relationship="DemoAlquilerGameWinFormModel.FK_Alquiler_Producto" FromRole="alquiler" ToRole="producto" />
           <NavigationProperty Name="PagosDetalle" Relationship="DemoAlquilerGameWinFormModel.FK_PagoDet_Alquiler" FromRole="alquiler" ToRole="pagoDet" />
         </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Estatus" Type="Int32" Nullable="false" />
+          <Property Name="IDTipo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tipo" Relationship="DemoAlquilerGameWinFormModel.FK_Categoria_Tipo" FromRole="categoria" ToRole="tipo" />
+          <NavigationProperty Name="Productos" Relationship="DemoAlquilerGameWinFormModel.FK_Producto_Categoria" FromRole="categoria" ToRole="producto" />
+        </EntityType>
         <EntityType Name="Cliente">
           <Key>
             <PropertyRef Name="ID" />
@@ -495,6 +656,7 @@
           <Property Name="Telefono" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
           <Property Name="Correo" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
           <Property Name="Direccion" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Estatus" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Alquileres" Relationship="DemoAlquilerGameWinFormModel.FK_Alquiler_Cliente" FromRole="cliente" ToRole="alquiler" />
           <NavigationProperty Name="PagosCabecera" Relationship="DemoAlquilerGameWinFormModel.FK_PagoCab_Cliente" FromRole="cliente" ToRole="pagoCab" />
         </EntityType>
@@ -507,6 +669,30 @@
           <Property Name="Descripcion" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
           <Property Name="PorcentajeDescuento" Type="Double" />
           <Property Name="Estatus" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Estatus" Type="Int32" Nullable="false" />
+          <Property Name="IDTipo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tipo" Relationship="DemoAlquilerGameWinFormModel.FK_Marca_Tipo" FromRole="marca" ToRole="tipo" />
+          <NavigationProperty Name="Productos" Relationship="DemoAlquilerGameWinFormModel.FK_Producto_Marca" FromRole="marca" ToRole="producto" />
+        </EntityType>
+        <EntityType Name="Modelo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Estatus" Type="Int32" Nullable="false" />
+          <Property Name="IDTipo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tipo" Relationship="DemoAlquilerGameWinFormModel.FK_Modelo_Tipo" FromRole="modelo" ToRole="tipo" />
+          <NavigationProperty Name="Productos" Relationship="DemoAlquilerGameWinFormModel.FK_Producto_Modelo" FromRole="modelo" ToRole="producto" />
         </EntityType>
         <EntityType Name="PagoCabecera">
           <Key>
@@ -543,21 +729,38 @@
           <Property Name="Codigo" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
           <Property Name="Descripcion" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
           <Property Name="PrecioUnitario" Type="Double" />
+          <Property Name="Estatus" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Producto">
+		  <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDTipo" Type="Int32" Nullable="false" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Estatus" Type="Int32" Nullable="false" />
+          <Property Name="IDMarca" Type="Int32" Nullable="false" />
+          <Property Name="IDModelo" Type="Int32" Nullable="false" />
+          <Property Name="IDCategoria" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Alquileres" Relationship="DemoAlquilerGameWinFormModel.FK_Alquiler_Producto" FromRole="producto" ToRole="alquiler" />
+          <NavigationProperty Name="Categoria" Relationship="DemoAlquilerGameWinFormModel.FK_Producto_Categoria" FromRole="producto" ToRole="categoria" />
+          <NavigationProperty Name="Marca" Relationship="DemoAlquilerGameWinFormModel.FK_Producto_Marca" FromRole="producto" ToRole="marca" />
+          <NavigationProperty Name="Modelo" Relationship="DemoAlquilerGameWinFormModel.FK_Producto_Modelo" FromRole="producto" ToRole="modelo" />
+          <NavigationProperty Name="Tipo" Relationship="DemoAlquilerGameWinFormModel.FK_Producto_Tipo" FromRole="producto" ToRole="tipo" />
+        </EntityType>
+        <EntityType Name="Tipo">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Alquileres" Relationship="DemoAlquilerGameWinFormModel.FK_Alquiler_Producto" FromRole="producto" ToRole="alquiler" />
-          <Property Type="String" Name="Codigo" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IDMarca" Nullable="false" />
-          <Property Type="Int32" Name="IDModelo" Nullable="false" />
-          <Property Type="Int32" Name="IDCategoria" Nullable="false" />
-          <NavigationProperty Name="Categoria" Relationship="DemoAlquilerGameWinFormModel.FK_Producto_Categoria" FromRole="Producto" ToRole="categoria" />
-          <NavigationProperty Name="Marca" Relationship="DemoAlquilerGameWinFormModel.FK_Producto_Marca" FromRole="Producto" ToRole="marca" />
-          <NavigationProperty Name="Modelo" Relationship="DemoAlquilerGameWinFormModel.FK_Producto_Modelo" FromRole="Producto" ToRole="modelo" />
+          <Property Name="Codigo" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Estatus" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Categorias" Relationship="DemoAlquilerGameWinFormModel.FK_Categoria_Tipo" FromRole="tipo" ToRole="categoria" />
+          <NavigationProperty Name="Marcas" Relationship="DemoAlquilerGameWinFormModel.FK_Marca_Tipo" FromRole="tipo" ToRole="marca" />
+          <NavigationProperty Name="Modelos" Relationship="DemoAlquilerGameWinFormModel.FK_Modelo_Tipo" FromRole="tipo" ToRole="modelo" />
+          <NavigationProperty Name="Productos" Relationship="DemoAlquilerGameWinFormModel.FK_Producto_Tipo" FromRole="tipo" ToRole="producto" />
         </EntityType>
         <Association Name="FK_Alquiler_Cliente">
           <End Role="cliente" Type="DemoAlquilerGameWinFormModel.Cliente" Multiplicity="1" />
@@ -595,6 +798,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Categoria_Tipo">
+          <End Role="tipo" Type="DemoAlquilerGameWinFormModel.Tipo" Multiplicity="1" />
+          <End Role="categoria" Type="DemoAlquilerGameWinFormModel.Categoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="categoria">
+              <PropertyRef Name="IDTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Categoria">
+          <End Role="categoria" Type="DemoAlquilerGameWinFormModel.Categoria" Multiplicity="1" />
+          <End Role="producto" Type="DemoAlquilerGameWinFormModel.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categoria">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="producto">
+              <PropertyRef Name="IDCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PagoCab_Cliente">
           <End Role="cliente" Type="DemoAlquilerGameWinFormModel.Cliente" Multiplicity="1" />
           <End Role="pagoCab" Type="DemoAlquilerGameWinFormModel.PagoCabecera" Multiplicity="*" />
@@ -604,6 +831,54 @@
             </Principal>
             <Dependent Role="pagoCab">
               <PropertyRef Name="IDCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Marca_Tipo">
+          <End Role="tipo" Type="DemoAlquilerGameWinFormModel.Tipo" Multiplicity="1" />
+          <End Role="marca" Type="DemoAlquilerGameWinFormModel.Marca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="marca">
+              <PropertyRef Name="IDTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Marca">
+          <End Role="marca" Type="DemoAlquilerGameWinFormModel.Marca" Multiplicity="1" />
+          <End Role="producto" Type="DemoAlquilerGameWinFormModel.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="marca">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="producto">
+              <PropertyRef Name="IDMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modelo_Tipo">
+          <End Role="tipo" Type="DemoAlquilerGameWinFormModel.Tipo" Multiplicity="1" />
+          <End Role="modelo" Type="DemoAlquilerGameWinFormModel.Modelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="modelo">
+              <PropertyRef Name="IDTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Modelo">
+          <End Role="modelo" Type="DemoAlquilerGameWinFormModel.Modelo" Multiplicity="1" />
+          <End Role="producto" Type="DemoAlquilerGameWinFormModel.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="modelo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="producto">
+              <PropertyRef Name="IDModelo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -619,66 +894,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Categoria">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Codigo" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Descripcion" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Productos" Relationship="DemoAlquilerGameWinFormModel.FK_Producto_Categoria" FromRole="categoria" ToRole="Producto" />
-        </EntityType>
-        <EntityType Name="Marca">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Codigo" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Descripcion" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Productos" Relationship="DemoAlquilerGameWinFormModel.FK_Producto_Marca" FromRole="marca" ToRole="Producto" />
-        </EntityType>
-        <EntityType Name="Modelo">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Codigo" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Descripcion" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Productos" Relationship="DemoAlquilerGameWinFormModel.FK_Producto_Modelo" FromRole="modelo" ToRole="Producto" />
-        </EntityType>
-        <Association Name="FK_Producto_Categoria">
-          <End Type="DemoAlquilerGameWinFormModel.Categoria" Role="categoria" Multiplicity="1" />
-          <End Type="DemoAlquilerGameWinFormModel.Producto" Role="Producto" Multiplicity="*" />
+        <Association Name="FK_Producto_Tipo">
+          <End Role="tipo" Type="DemoAlquilerGameWinFormModel.Tipo" Multiplicity="1" />
+          <End Role="producto" Type="DemoAlquilerGameWinFormModel.Producto" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="categoria">
+            <Principal Role="tipo">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Producto">
-              <PropertyRef Name="IDCategoria" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Producto_Marca">
-          <End Type="DemoAlquilerGameWinFormModel.Marca" Role="marca" Multiplicity="1" />
-          <End Type="DemoAlquilerGameWinFormModel.Producto" Role="Producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="marca">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Producto">
-              <PropertyRef Name="IDMarca" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Producto_Modelo">
-          <End Type="DemoAlquilerGameWinFormModel.Modelo" Role="modelo" Multiplicity="1" />
-          <End Type="DemoAlquilerGameWinFormModel.Producto" Role="Producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="modelo">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Producto">
-              <PropertyRef Name="IDModelo" />
+            <Dependent Role="producto">
+              <PropertyRef Name="IDTipo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -688,18 +912,21 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DemoAlquilerGameWinFormModelStoreContainer" CdmEntityContainer="DemoAlquilerGameBD">
-          <EntitySetMapping Name="AlquilerSet"><EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Alquiler"><MappingFragment StoreEntitySet="alquiler">
-            <ScalarProperty Name="ID" ColumnName="ID" />
-            <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
-            <ScalarProperty Name="IDProducto" ColumnName="IDProducto" />
-            <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
-            <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
-            <ScalarProperty Name="TiempoHora" ColumnName="TiempoHora" />
-            <ScalarProperty Name="TiempoDia" ColumnName="TiempoDia" />
-            <ScalarProperty Name="TiempoSemana" ColumnName="TiempoSemana" />
-            <ScalarProperty Name="PrecioEstimado" ColumnName="PrecioEstimado" />
-            <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-          </MappingFragment></EntityTypeMapping>
+          <EntitySetMapping Name="AlquilerSet">
+            <EntityTypeMapping TypeName="IsTypeOf(DemoAlquilerGameWinFormModel.Alquiler)">
+              <MappingFragment StoreEntitySet="alquiler">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="PrecioEstimado" ColumnName="PrecioEstimado" />
+                <ScalarProperty Name="TiempoSemana" ColumnName="TiempoSemana" />
+                <ScalarProperty Name="TiempoDia" ColumnName="TiempoDia" />
+                <ScalarProperty Name="TiempoHora" ColumnName="TiempoHora" />
+                <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
+                <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
+                <ScalarProperty Name="IDProducto" ColumnName="IDProducto" />
+                <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
             <EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Alquiler">
               <ModificationFunctionMapping>
                 <InsertFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_INCALQUILER" >
@@ -713,7 +940,7 @@
                   <ScalarProperty Name="IDCliente" ParameterName="ICLIENTE" />
                 </InsertFunction>
                 <UpdateFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_MODALQUILER" >
-                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" Version="Original" />
+                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" Version="Current" />
                   <ScalarProperty Name="TiempoSemana" ParameterName="VTIEMPOSEM" Version="Original" />
                   <ScalarProperty Name="TiempoDia" ParameterName="VTIEMPODIA" Version="Original" />
                   <ScalarProperty Name="TiempoHora" ParameterName="VTIEMPOHOR" Version="Original" />
@@ -724,6 +951,38 @@
                   <ScalarProperty Name="ID" ParameterName="IID" Version="Current" />
                 </UpdateFunction>
               </ModificationFunctionMapping>
+            </EntityTypeMapping>
+            </EntitySetMapping>
+          <EntitySetMapping Name="CategoriaSet"><EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Categoria"><MappingFragment StoreEntitySet="categoria">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+            <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+            <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+            <ScalarProperty Name="IDTipo" ColumnName="IDTipo" />
+          </MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Categoria">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_INCCATEGORIA" >
+                  <ScalarProperty Name="IDTipo" ParameterName="ITIPO" />
+                  <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" />
+                  <ScalarProperty Name="Codigo" ParameterName="VCODIGO" />
+                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_MODCATEGORIA" >
+                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" Version="Current" />
+                  <ScalarProperty Name="IDTipo" ParameterName="ITIPO" Version="Current" />
+                  <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" Version="Current" />
+                  <ScalarProperty Name="Codigo" ParameterName="VCODIGO" Version="Current" />
+                  <ScalarProperty Name="ID" ParameterName="IID" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_ELICATEGORIA" >
+                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" />
+                  <ScalarProperty Name="IDTipo" ParameterName="ITIPO" />
+                  <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" />
+                  <ScalarProperty Name="Codigo" ParameterName="VCODIGO" />
+                  <ScalarProperty Name="ID" ParameterName="IID" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
             </EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="ClienteSet"><EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Cliente"><MappingFragment StoreEntitySet="cliente">
             <ScalarProperty Name="ID" ColumnName="ID" />
@@ -731,29 +990,33 @@
             <ScalarProperty Name="Telefono" ColumnName="Telefono" />
             <ScalarProperty Name="Correo" ColumnName="Correo" />
             <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+            <ScalarProperty Name="Estatus" ColumnName="Estatus" />
           </MappingFragment></EntityTypeMapping>
             <EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Cliente">
               <ModificationFunctionMapping>
                 <InsertFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_INCCLIENTE" >
+                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" />
                   <ScalarProperty Name="Direccion" ParameterName="VDIRECCION" />
                   <ScalarProperty Name="Correo" ParameterName="VCORREO" />
                   <ScalarProperty Name="Telefono" ParameterName="VTELEFONO" />
                   <ScalarProperty Name="Nombre" ParameterName="VNOMBRE" />
                 </InsertFunction>
-                <DeleteFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_ELICLIENTE" >
-                  <ScalarProperty Name="Direccion" ParameterName="VDIRECCION" />
-                  <ScalarProperty Name="Correo" ParameterName="VCORREO" />
-                  <ScalarProperty Name="Telefono" ParameterName="VTELEFONO" />
-                  <ScalarProperty Name="Nombre" ParameterName="VNOMBRE" />
-                  <ScalarProperty Name="ID" ParameterName="ICLIENTE" />
-                </DeleteFunction>
                 <UpdateFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_MODCLIENTE" >
+                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" Version="Current" />
                   <ScalarProperty Name="Direccion" ParameterName="VDIRECCION" Version="Current" />
                   <ScalarProperty Name="Correo" ParameterName="VCORREO" Version="Current" />
                   <ScalarProperty Name="Telefono" ParameterName="VTELEFONO" Version="Current" />
                   <ScalarProperty Name="Nombre" ParameterName="VNOMBRE" Version="Current" />
                   <ScalarProperty Name="ID" ParameterName="ICLIENTE" Version="Current" />
                 </UpdateFunction>
+                <DeleteFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_ELICLIENTE" >
+                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" />
+                  <ScalarProperty Name="Direccion" ParameterName="VDIRECCION" />
+                  <ScalarProperty Name="Correo" ParameterName="VCORREO" />
+                  <ScalarProperty Name="Telefono" ParameterName="VTELEFONO" />
+                  <ScalarProperty Name="Nombre" ParameterName="VNOMBRE" />
+                  <ScalarProperty Name="ID" ParameterName="ICLIENTE" />
+                </DeleteFunction>
               </ModificationFunctionMapping>
             </EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="DescuentoSet"><EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Descuento"><MappingFragment StoreEntitySet="descuento">
@@ -762,29 +1025,67 @@
             <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
             <ScalarProperty Name="PorcentajeDescuento" ColumnName="PorcentajeDescuento" />
             <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="MarcaSet"><EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Marca"><MappingFragment StoreEntitySet="marca">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+            <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+            <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+            <ScalarProperty Name="IDTipo" ColumnName="IDTipo" />
           </MappingFragment></EntityTypeMapping>
-            <EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Descuento">
+            <EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Marca">
               <ModificationFunctionMapping>
-                <InsertFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_INCDESCUENTO" >
-                  <ScalarProperty Name="ID" ParameterName="IESTATUS" />
-                  <ScalarProperty Name="PorcentajeDescuento" ParameterName="FPORCENTAJEDESCUENTO" />
+                <InsertFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_INCMARCA" >
+                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" />
+                  <ScalarProperty Name="IDTipo" ParameterName="ITIPO" />
                   <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" />
                   <ScalarProperty Name="Codigo" ParameterName="VCODIGO" />
                 </InsertFunction>
-                <DeleteFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_ELIDESCUENTO" >
-                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" />
-                  <ScalarProperty Name="PorcentajeDescuento" ParameterName="FPORCENTAJEDESCUENTO" />
-                  <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" />
-                  <ScalarProperty Name="Codigo" ParameterName="VCODIGO" />
-                  <ScalarProperty Name="ID" ParameterName="IID" />
-                </DeleteFunction>
-                <UpdateFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_MODDESCUENTO" >
+                <UpdateFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_MODMARCA" >
                   <ScalarProperty Name="Estatus" ParameterName="IESTATUS" Version="Current" />
-                  <ScalarProperty Name="PorcentajeDescuento" ParameterName="FPORCENTAJEDESCUENTO" Version="Current" />
+                  <ScalarProperty Name="IDTipo" ParameterName="ITIPO" Version="Current" />
                   <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" Version="Current" />
                   <ScalarProperty Name="Codigo" ParameterName="VCODIGO" Version="Current" />
                   <ScalarProperty Name="ID" ParameterName="IID" Version="Current" />
                 </UpdateFunction>
+                <DeleteFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_ELIMARCA" >
+                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" />
+                  <ScalarProperty Name="IDTipo" ParameterName="ITIPO" />
+                  <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" />
+                  <ScalarProperty Name="Codigo" ParameterName="VCODIGO" />
+                  <ScalarProperty Name="ID" ParameterName="IID" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ModeloSet"><EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Modelo"><MappingFragment StoreEntitySet="modelo">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+            <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+            <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+            <ScalarProperty Name="IDTipo" ColumnName="IDTipo" />
+          </MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Modelo">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_INCMODELO" >
+                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" />
+                  <ScalarProperty Name="IDTipo" ParameterName="ITIPO" />
+                  <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" />
+                  <ScalarProperty Name="Codigo" ParameterName="VCODIGO" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_MODMODELO" >
+                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" Version="Current" />
+                  <ScalarProperty Name="IDTipo" ParameterName="ITIPO" Version="Current" />
+                  <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" Version="Current" />
+                  <ScalarProperty Name="Codigo" ParameterName="VCODIGO" Version="Current" />
+                  <ScalarProperty Name="ID" ParameterName="IID" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_ELIMODELO" >
+                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" />
+                  <ScalarProperty Name="IDTipo" ParameterName="ITIPO" />
+                  <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" />
+                  <ScalarProperty Name="Codigo" ParameterName="VCODIGO" />
+                  <ScalarProperty Name="ID" ParameterName="IID" />
+                </DeleteFunction>
               </ModificationFunctionMapping>
             </EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="PagoCabeceraSet"><EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.PagoCabecera"><MappingFragment StoreEntitySet="pagoCab">
@@ -799,18 +1100,18 @@
             <EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.PagoCabecera">
               <ModificationFunctionMapping>
                 <InsertFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_PAGOCAB" >
+                  <ScalarProperty Name="IDCliente" ParameterName="ICLIENTE" />
                   <ScalarProperty Name="Estatus" ParameterName="IESTATUS" />
                   <ScalarProperty Name="MontoTotal" ParameterName="FMONTOTAL" />
                   <ScalarProperty Name="Descuento" ParameterName="FMONTODESC" />
                   <ScalarProperty Name="MontoExento" ParameterName="FMONTOEXTO" />
                   <ScalarProperty Name="Fecha" ParameterName="DFECHA" />
-                  <ScalarProperty Name="IDCliente" ParameterName="ICLIENTE" />
                 </InsertFunction>
                 <UpdateFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_MODPAGOCAB" >
-                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" Version="Original" />
-                  <ScalarProperty Name="MontoTotal" ParameterName="FMONTOTAL" Version="Original" />
-                  <ScalarProperty Name="Descuento" ParameterName="FMONTODESC" Version="Original" />
-                  <ScalarProperty Name="MontoExento" ParameterName="FMONTOEXTO" Version="Original" />
+                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" Version="Current" />
+                  <ScalarProperty Name="MontoTotal" ParameterName="FMONTOTAL" Version="Current" />
+                  <ScalarProperty Name="Descuento" ParameterName="FMONTODESC" Version="Current" />
+                  <ScalarProperty Name="MontoExento" ParameterName="FMONTOEXTO" Version="Current" />
                   <ScalarProperty Name="Fecha" ParameterName="DFECHA" Version="Current" />
                   <ScalarProperty Name="IDCliente" ParameterName="ICLIENTE" Version="Current" />
                   <ScalarProperty Name="ID" ParameterName="IID" Version="Current" />
@@ -830,21 +1131,25 @@
             <ScalarProperty Name="Codigo" ColumnName="Codigo" />
             <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
             <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+            <ScalarProperty Name="Estatus" ColumnName="Estatus" />
           </MappingFragment></EntityTypeMapping>
             <EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Precio">
               <ModificationFunctionMapping>
                 <InsertFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_INCPRECIO" >
+                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" />
                   <ScalarProperty Name="PrecioUnitario" ParameterName="FPRECIO" />
                   <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" />
                   <ScalarProperty Name="Codigo" ParameterName="VCODIGO" />
                 </InsertFunction>
                 <UpdateFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_MODPRECIO" >
+                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" Version="Current" />
                   <ScalarProperty Name="PrecioUnitario" ParameterName="FPRECIO" Version="Current" />
                   <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" Version="Current" />
                   <ScalarProperty Name="Codigo" ParameterName="VCODIGO" Version="Current" />
                   <ScalarProperty Name="ID" ParameterName="IID" Version="Current" />
                 </UpdateFunction>
                 <DeleteFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_ELIPRECIO" >
+                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" />
                   <ScalarProperty Name="PrecioUnitario" ParameterName="FPRECIO" />
                   <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" />
                   <ScalarProperty Name="Codigo" ParameterName="VCODIGO" />
@@ -852,117 +1157,75 @@
                 </DeleteFunction>
               </ModificationFunctionMapping>
             </EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="ProductoSet"><EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Producto"><MappingFragment StoreEntitySet="producto">
-            <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
-                <ScalarProperty Name="IDModelo" ColumnName="IDModelo" />
-                <ScalarProperty Name="IDMarca" ColumnName="IDMarca" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-            </MappingFragment></EntityTypeMapping>
-            <EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Producto">
+          <EntitySetMapping Name="TipoSet"><EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Tipo"><MappingFragment StoreEntitySet="tipo">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+            <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+            <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          </MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Tipo">
               <ModificationFunctionMapping>
-                <InsertFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_INCPRODUCTO" >
-                  <ScalarProperty Name="IDCategoria" ParameterName="ICATEGORIA" />
-                  <ScalarProperty Name="IDModelo" ParameterName="IMODELO" />
-                  <ScalarProperty Name="IDMarca" ParameterName="IMARCA" />
+                <InsertFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_INCTIPO" >
+                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" />
                   <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" />
                   <ScalarProperty Name="Codigo" ParameterName="VCODIGO" />
                 </InsertFunction>
-                <UpdateFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_MODPRODUCTO" >
+                <UpdateFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_MODTIPO" >
+                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" Version="Current" />
                   <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" Version="Current" />
-                  <ScalarProperty Name="IDCategoria" ParameterName="ICATEGORIA" Version="Current" />
-                  <ScalarProperty Name="IDModelo" ParameterName="IMODELO" Version="Current" />
-                  <ScalarProperty Name="IDMarca" ParameterName="IMARCA" Version="Current" />
                   <ScalarProperty Name="Codigo" ParameterName="VCODIGO" Version="Current" />
                   <ScalarProperty Name="ID" ParameterName="IID" Version="Current" />
                 </UpdateFunction>
-                <DeleteFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_ELIPRODUCTO" >
-                  <ScalarProperty Name="IDCategoria" ParameterName="ICATEGORIA" />
-                  <ScalarProperty Name="IDModelo" ParameterName="IMODELO" />
-                  <ScalarProperty Name="IDMarca" ParameterName="IMARCA" />
+                <DeleteFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_ELITIPO" >
+                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" />
                   <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" />
                   <ScalarProperty Name="Codigo" ParameterName="VCODIGO" />
                   <ScalarProperty Name="ID" ParameterName="IID" />
                 </DeleteFunction>
               </ModificationFunctionMapping>
             </EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="CategoriaSet">
-            <EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Categoria">
-              <MappingFragment StoreEntitySet="categoria">
+          <EntitySetMapping Name="ProductoSet">
+            <EntityTypeMapping TypeName="IsTypeOf(DemoAlquilerGameWinFormModel.Producto)" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+              <MappingFragment StoreEntitySet="producto">
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+                <ScalarProperty Name="IDModelo" ColumnName="IDModelo" />
+                <ScalarProperty Name="IDMarca" ColumnName="IDMarca" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDTipo" ColumnName="IDTipo" />
               </MappingFragment>
             </EntityTypeMapping>
-            <EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Categoria">
+            <EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Producto">
               <ModificationFunctionMapping>
-                <InsertFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_INCCATEGORIA" >
+                <InsertFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_INCPRODUCTO" >
+                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" />
+                  <ScalarProperty Name="IDCategoria" ParameterName="ICATEGORIA" />
+                  <ScalarProperty Name="IDModelo" ParameterName="IMODELO" />
+                  <ScalarProperty Name="IDMarca" ParameterName="IMARCA" />
                   <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" />
                   <ScalarProperty Name="Codigo" ParameterName="VCODIGO" />
+                  <ScalarProperty Name="IDTipo" ParameterName="ITIPO" />
                 </InsertFunction>
-                <UpdateFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_MODCATEGORIA" >
+                <UpdateFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_MODPRODUCTO" >
+                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" Version="Current" />
+                  <ScalarProperty Name="IDCategoria" ParameterName="ICATEGORIA" Version="Current" />
+                  <ScalarProperty Name="IDModelo" ParameterName="IMODELO" Version="Current" />
+                  <ScalarProperty Name="IDMarca" ParameterName="IMARCA" Version="Current" />
                   <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" Version="Current" />
                   <ScalarProperty Name="Codigo" ParameterName="VCODIGO" Version="Current" />
+                  <ScalarProperty Name="IDTipo" ParameterName="ITIPO" Version="Current" />
                   <ScalarProperty Name="ID" ParameterName="IID" Version="Current" />
                 </UpdateFunction>
-                <DeleteFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_ELICATEGORIA" >
+                <DeleteFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_ELIPRODUCTO" >
+                  <ScalarProperty Name="Estatus" ParameterName="IESTATUS" />
+                  <ScalarProperty Name="IDCategoria" ParameterName="ICATEGORIA" />
+                  <ScalarProperty Name="IDModelo" ParameterName="IMODELO" />
+                  <ScalarProperty Name="IDMarca" ParameterName="IMARCA" />
                   <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" />
                   <ScalarProperty Name="Codigo" ParameterName="VCODIGO" />
-                  <ScalarProperty Name="ID" ParameterName="IID" />
-                </DeleteFunction>
-              </ModificationFunctionMapping>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MarcaSet">
-            <EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Marca">
-              <MappingFragment StoreEntitySet="marca">
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-            <EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Marca">
-              <ModificationFunctionMapping>
-                <InsertFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_INCMARCA" >
-                  <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" />
-                  <ScalarProperty Name="Codigo" ParameterName="VCODIGO" />
-                </InsertFunction>
-                <UpdateFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_MODMARCA" >
-                  <ScalarProperty Name="Codigo" ParameterName="VCODIGO" Version="Current" />
-                  <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" Version="Current" />
-                  <ScalarProperty Name="ID" ParameterName="IID" Version="Current" />
-                </UpdateFunction>
-                <DeleteFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_ELIMARCA" >
-                  <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" />
-                  <ScalarProperty Name="Codigo" ParameterName="VCODIGO" />
-                  <ScalarProperty Name="ID" ParameterName="IID" />
-                </DeleteFunction>
-              </ModificationFunctionMapping>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ModeloSet">
-            <EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Modelo">
-              <MappingFragment StoreEntitySet="modelo">
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-            <EntityTypeMapping TypeName="DemoAlquilerGameWinFormModel.Modelo">
-              <ModificationFunctionMapping>
-                <InsertFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_INCMODELO" >
-                <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" />
-                  <ScalarProperty Name="Codigo" ParameterName="VCODIGO" />
-                </InsertFunction>
-                <UpdateFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_MODMODELO" >
-                  <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" Version="Current" />
-                  <ScalarProperty Name="Codigo" ParameterName="VCODIGO" Version="Current" />
-                  <ScalarProperty Name="ID" ParameterName="IID" Version="Current" />
-                </UpdateFunction>
-                <DeleteFunction FunctionName="DemoAlquilerGameWinFormModel.Store.USP_ELIMODELO" >
-                  <ScalarProperty Name="Descripcion" ParameterName="VDESCRIPCION" />
-                  <ScalarProperty Name="Codigo" ParameterName="VCODIGO" />
+                  <ScalarProperty Name="IDTipo" ParameterName="ITIPO" />
                   <ScalarProperty Name="ID" ParameterName="IID" />
                 </DeleteFunction>
               </ModificationFunctionMapping>
@@ -988,56 +1251,103 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="ModeloBD" ZoomLevel="86">
-        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.Alquiler" Width="1.5" PointX="0.75" PointY="2.5" Height="3.0714322916666661" IsExpanded="true" />
-        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.Cliente" Width="1.5" PointX="6.5" PointY="0.625" Height="2.0853483072916656" IsExpanded="true" />
-        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.Descuento" Width="1.5" PointX="10.375" PointY="0.5" Height="1.7566536458333335" IsExpanded="true" />
-        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.PagoCabecera" Width="1.5" PointX="8.625" PointY="1.125" Height="2.4140429687500005" IsExpanded="true" />
-        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.PagoDetalle" Width="1.5" PointX="6" PointY="3" Height="2.2496956380208317" IsExpanded="true" />
-        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.Precio" Width="1.5" PointX="10.375" PointY="3.75" Height="1.5923063151041674" IsExpanded="true" />
-        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.Producto" Width="1.5" PointX="3" PointY="2.5" Height="2.5783902994791665" IsExpanded="true" />
+      <Diagram Name="BD" ZoomLevel="82">
+        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.Alquiler" Width="1.5" PointX="0.5" PointY="0.5" Height="3.0714322916666674" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.Categoria" Width="1.5" PointX="9.875" PointY="4.375" Height="2.0853483072916656" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.Cliente" Width="1.5" PointX="6.5" PointY="1.125" Height="2.2496956380208335" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.Descuento" Width="1.5" PointX="6.125" PointY="4.5" Height="1.7566536458333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.Marca" Width="1.5" PointX="0.5" PointY="4.125" Height="2.0853483072916656" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.Modelo" Width="1.5" PointX="2.625" PointY="4.25" Height="2.0853483072916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.PagoCabecera" Width="1.5" PointX="9.25" PointY="1.125" Height="2.4140429687499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.PagoDetalle" Width="1.5" PointX="8" PointY="4.25" Height="2.2496956380208317" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.Precio" Width="1.5" PointX="4.375" PointY="4.5" Height="1.7566536458333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.Producto" Width="1.5" PointX="4.625" PointY="1.25" Height="3.0714322916666674" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.Tipo" Width="1.5" PointX="2.5" PointY="0.875" Height="2.2496956380208317" IsExpanded="true" />
         <AssociationConnector Association="DemoAlquilerGameWinFormModel.FK_Alquiler_Cliente" ManuallyRouted="false">
-          <ConnectorPoint PointX="7.78125" PointY="2.7103483072916656" />
-          <ConnectorPoint PointX="7.78125" PointY="5.4418139648437487" />
-          <ConnectorPoint PointX="2.25" PointY="5.4418139648437487" />
+          <ConnectorPoint PointX="7.25" PointY="1.125" />
+          <ConnectorPoint PointX="7.25" PointY="0.65625" />
+          <ConnectorPoint PointX="2" PointY="0.65625" />
         </AssociationConnector>
         <AssociationConnector Association="DemoAlquilerGameWinFormModel.FK_Alquiler_Producto" ManuallyRouted="false">
-          <ConnectorPoint PointX="3" PointY="3.7891951497395833" />
-          <ConnectorPoint PointX="2.25" PointY="3.7891951497395833" />
+          <ConnectorPoint PointX="4.625" PointY="3.3793139648437496" />
+          <ConnectorPoint PointX="4.4083333333333332" PointY="3.3793139648437491" />
+          <ConnectorPoint PointX="4.2416666666666671" PointY="3.3793139648437496" />
+          <ConnectorPoint PointX="3.3958333333333335" PointY="3.3793139648437491" />
+          <ConnectorPoint PointX="3.2291666666666665" PointY="3.3793139648437496" />
+          <ConnectorPoint PointX="2.6145833333333335" PointY="3.3793139648437491" />
+          <ConnectorPoint PointX="2.4479166666666665" PointY="3.3793139648437496" />
+          <ConnectorPoint PointX="2" PointY="3.3793139648437496" />
         </AssociationConnector>
         <AssociationConnector Association="DemoAlquilerGameWinFormModel.FK_PagoDet_Alquiler" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="5.19529296875" />
-          <ConnectorPoint PointX="3.6666666666666665" PointY="5.1952929687499987" />
-          <ConnectorPoint PointX="3.8333333333333335" PointY="5.19529296875" />
-          <ConnectorPoint PointX="6" PointY="5.19529296875" />
+          <ConnectorPoint PointX="2" PointY="0.76562749999999991" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="0.76562749999999935" />
+          <ConnectorPoint PointX="7.333333333333333" PointY="0.76562749999999991" />
+          <ConnectorPoint PointX="8.625" PointY="0.76562749999999991" />
+          <ConnectorPoint PointX="8.625" PointY="4.25" />
+        </AssociationConnector>
+        <AssociationConnector Association="DemoAlquilerGameWinFormModel.FK_Categoria_Tipo" ManuallyRouted="false">
+          <ConnectorPoint PointX="4" PointY="0.96875" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="0.96874999999999944" />
+          <ConnectorPoint PointX="7.333333333333333" PointY="0.96875" />
+          <ConnectorPoint PointX="8.5416666666666661" PointY="0.96874999999999944" />
+          <ConnectorPoint PointX="8.7083333333333339" PointY="0.96875" />
+          <ConnectorPoint PointX="11.09375" PointY="0.96875" />
+          <ConnectorPoint PointX="11.09375" PointY="4.375" />
+        </AssociationConnector>
+        <AssociationConnector Association="DemoAlquilerGameWinFormModel.FK_Producto_Categoria" ManuallyRouted="false">
+          <ConnectorPoint PointX="10.9218725" PointY="4.375" />
+          <ConnectorPoint PointX="10.9218725" PointY="3.894521484375" />
+          <ConnectorPoint PointX="8.7083333333333339" PointY="3.8945214843749993" />
+          <ConnectorPoint PointX="8.5416666666666661" PointY="3.894521484375" />
+          <ConnectorPoint PointX="8.3958308333333331" PointY="3.8945214843749993" />
+          <ConnectorPoint PointX="8.2291641666666653" PointY="3.894521484375" />
+          <ConnectorPoint PointX="6.125" PointY="3.894521484375" />
         </AssociationConnector>
         <AssociationConnector Association="DemoAlquilerGameWinFormModel.FK_PagoCab_Cliente" ManuallyRouted="false">
-          <ConnectorPoint PointX="8" PointY="1.9176741536458328" />
-          <ConnectorPoint PointX="8.625" PointY="1.9176741536458328" />
+          <ConnectorPoint PointX="8" PointY="2.2498478190104167" />
+          <ConnectorPoint PointX="8.5416666666666661" PointY="2.2498478190104163" />
+          <ConnectorPoint PointX="8.7083333333333339" PointY="2.2498478190104167" />
+          <ConnectorPoint PointX="9.25" PointY="2.2498478190104167" />
+        </AssociationConnector>
+        <AssociationConnector Association="DemoAlquilerGameWinFormModel.FK_Marca_Tipo" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.53125" PointY="3.1246956380208317" />
+          <ConnectorPoint PointX="2.53125" PointY="4.15625" />
+          <ConnectorPoint PointX="2" PointY="4.15625" />
+        </AssociationConnector>
+        <AssociationConnector Association="DemoAlquilerGameWinFormModel.FK_Producto_Marca" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.25" PointY="4.125" />
+          <ConnectorPoint PointX="1.25" PointY="3.8214322916666674" />
+          <ConnectorPoint PointX="2.4479166666666665" PointY="3.821432291666667" />
+          <ConnectorPoint PointX="2.6145833333333335" PointY="3.8214322916666674" />
+          <ConnectorPoint PointX="3.2291666666666665" PointY="3.821432291666667" />
+          <ConnectorPoint PointX="3.3958333333333335" PointY="3.8214322916666674" />
+          <ConnectorPoint PointX="4.25" PointY="3.8214322916666674" />
+          <ConnectorPoint PointX="4.25" PointY="1.9061338642578112" />
+          <ConnectorPoint PointX="4.625" PointY="1.9061338642578112" />
+        </AssociationConnector>
+        <AssociationConnector Association="DemoAlquilerGameWinFormModel.FK_Modelo_Tipo" ManuallyRouted="false">
+          <ConnectorPoint PointX="3.3125" PointY="3.1246956380208317" />
+          <ConnectorPoint PointX="3.3125" PointY="4.25" />
+        </AssociationConnector>
+        <AssociationConnector Association="DemoAlquilerGameWinFormModel.FK_Producto_Modelo" ManuallyRouted="false">
+          <ConnectorPoint PointX="3.750002" PointY="4.25" />
+          <ConnectorPoint PointX="3.750002" PointY="3.95" />
+          <ConnectorPoint PointX="4.075" PointY="3.95" />
+          <ConnectorPoint PointX="4.075" PointY="3.8816251282552092" />
+          <ConnectorPoint PointX="4.625" PointY="3.8816251282552092" />
         </AssociationConnector>
         <AssociationConnector Association="DemoAlquilerGameWinFormModel.FK_PagoDet_PagoCab" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.625" PointY="3.2695214843750002" />
-          <ConnectorPoint PointX="7.864583333333333" PointY="3.269521484375" />
-          <ConnectorPoint PointX="7.697916666666667" PointY="3.2695214843750002" />
-          <ConnectorPoint PointX="7.5" PointY="3.2695214843750002" />
+          <ConnectorPoint PointX="9.25" PointY="2.925697893880209" />
+          <ConnectorPoint PointX="8.7083333333333339" PointY="2.9256978938802085" />
+          <ConnectorPoint PointX="8.5416666666666661" PointY="2.925697893880209" />
+          <ConnectorPoint PointX="8.3124975" PointY="2.925697893880209" />
+          <ConnectorPoint PointX="8.3124975" PointY="4.25" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.Categoria" Width="1.5" PointX="4.25" PointY="0.5" Height="1.5923063151041674" />
-        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.Marca" Width="1.5" PointX="8.5" PointY="3.875" Height="1.5923063151041674" />
-        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.Modelo" Width="1.5" PointX="0.625" PointY="0.5" Height="1.592306315104171" />
-        <AssociationConnector Association="DemoAlquilerGameWinFormModel.FK_Producto_Categoria" >
-          <ConnectorPoint PointX="4.25" PointY="1.2961531575520837" />
-          <ConnectorPoint PointX="3.6249995" PointY="1.2961531575520837" />
-          <ConnectorPoint PointX="3.6249995" PointY="2.5" />
-        </AssociationConnector>
-        <AssociationConnector Association="DemoAlquilerGameWinFormModel.FK_Producto_Marca" >
-          <ConnectorPoint PointX="8.5" PointY="5.3770048014322906" />
-          <ConnectorPoint PointX="3.75" PointY="5.3770048014322906" />
-          <ConnectorPoint PointX="3.75" PointY="5.0783902994791665" />
-        </AssociationConnector>
-        <AssociationConnector Association="DemoAlquilerGameWinFormModel.FK_Producto_Modelo" >
-          <ConnectorPoint PointX="2.125" PointY="1.6942292363281273" />
-          <ConnectorPoint PointX="3.2812477500000004" PointY="1.6942292363281273" />
-          <ConnectorPoint PointX="3.2812477500000004" PointY="2.5" />
+        <AssociationConnector Association="DemoAlquilerGameWinFormModel.FK_Producto_Tipo" ManuallyRouted="false">
+          <ConnectorPoint PointX="4" PointY="2.6247717285156238" />
+          <ConnectorPoint PointX="4.2416666666666671" PointY="2.6247717285156233" />
+          <ConnectorPoint PointX="4.4083333333333332" PointY="2.6247717285156238" />
+          <ConnectorPoint PointX="4.625" PointY="2.6247717285156238" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

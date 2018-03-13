@@ -8,9 +8,9 @@ using Utilidad;
 
 namespace Dato.Modelo
 {
-    [MetadataType(typeof(Modelo.MetaData))]
-    [DisplayName("Modelo Producto")]
-    public partial class Modelo
+    [MetadataType(typeof(Tipo.MetaData))]
+    [DisplayName("Tipo Producto")]
+    public partial class Tipo
     {
         private sealed class MetaData
         {
@@ -20,24 +20,15 @@ namespace Dato.Modelo
             [Required, DisplayName("Codigo"), StringLength(50)]
             public String Codigo { get; set; }
 
-            [Required, DisplayName("Modelo del Producto"), StringLength(100)]
+            [Required, DisplayName("Tipo del Producto"), StringLength(100)]
             public String Descripcion { get; set; }
 
             [Required, DisplayName("Estatus")]
             public int Estatus { get; set; }
 
-            [Required, DisplayName("Tipo del Producto")]
-            public Tipo Tipo { get; set; }
-
         }
 
         #region Metodos Extendidos del Entities Framework
-
-        public Tipo TipoLoad()
-        {
-            return Utility.Entity<Tipo>.LoadReference(this.TipoReference);
-        }
-
         #endregion
     }
 }

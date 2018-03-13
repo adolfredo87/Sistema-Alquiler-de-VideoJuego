@@ -48,6 +48,10 @@ namespace Presentacion.Principal
             string titulo = "Sistema de Alquiler VideoGames";
             this.Text = titulo;
         }
+        private void Refrescar_ToolStripButton_Click(object sender, EventArgs e)
+        {
+
+        }
         private void Cliente_ToolStripButton_Click(object sender, EventArgs e)
         {
             try
@@ -103,6 +107,70 @@ namespace Presentacion.Principal
                 if (!FormularioEstaCargado("Presentacion.Maestros.frmProducto"))
                 {
                     Presentacion.Maestros.frmProducto frmMdiParent = new Presentacion.Maestros.frmProducto();
+                    frmMdiParent.MdiParent = this;
+                    frmMdiParent.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void Marca_ToolStripButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!FormularioEstaCargado("Presentacion.Maestros.frmMarca"))
+                {
+                    Presentacion.Maestros.frmMarca frmMdiParent = new Presentacion.Maestros.frmMarca();
+                    frmMdiParent.MdiParent = this;
+                    frmMdiParent.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void Marca_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!FormularioEstaCargado("Presentacion.Maestros.frmMarca"))
+                {
+                    Presentacion.Maestros.frmMarca frmMdiParent = new Presentacion.Maestros.frmMarca();
+                    frmMdiParent.MdiParent = this;
+                    frmMdiParent.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void Modelo_ToolStripButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!FormularioEstaCargado("Presentacion.Maestros.frmModelo"))
+                {
+                    Presentacion.Maestros.frmModelo frmMdiParent = new Presentacion.Maestros.frmModelo();
+                    frmMdiParent.MdiParent = this;
+                    frmMdiParent.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void Modelo_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!FormularioEstaCargado("Presentacion.Maestros.frmModelo"))
+                {
+                    Presentacion.Maestros.frmModelo frmMdiParent = new Presentacion.Maestros.frmModelo();
                     frmMdiParent.MdiParent = this;
                     frmMdiParent.Show();
                 }
@@ -252,9 +320,9 @@ namespace Presentacion.Principal
         {
             try
             {
-                if (!FormularioEstaCargado("Presentacion.Operaciones.frmAlquilerPorPagar"))
+                if (!FormularioEstaCargado("Presentacion.Consultas.frmAlquilerPorPagar"))
                 {
-                    Presentacion.Operaciones.frmAlquilerPorPagar frmMdiParent = new Presentacion.Operaciones.frmAlquilerPorPagar();
+                    Presentacion.Consultas.frmAlquilerPorPagar frmMdiParent = new Presentacion.Consultas.frmAlquilerPorPagar();
                     frmMdiParent.MdiParent = this;
                     frmMdiParent.Show();
                 }
@@ -264,9 +332,22 @@ namespace Presentacion.Principal
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void Calculadora_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("Calc.exe");
+        }
+        private void HelpToolStripButton_Click(object sender, EventArgs e)
+        {
 
-        
+        }
+        private void TemasAyuda_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
+        }
+        private void AcercaSistema_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
         
     }
 }

@@ -9,13 +9,13 @@ using System.Windows.Forms;
 
 namespace Presentacion.Maestros
 {
-    public partial class frmPrecio : Presentacion.Plantilla.FrmPlantilla
+    public partial class frmModelo : Presentacion.Plantilla.FrmPlantilla
     {
         #region "Atributos"
-        private LogicaNegocio.PrecioController _ctrlPrecio = new LogicaNegocio.PrecioController();
-        private EntidadNegocio.Entidades.Precio _precio = new EntidadNegocio.Entidades.Precio();
-        private List<EntidadNegocio.Entidades.Precio> _lstPrecio = new List<EntidadNegocio.Entidades.Precio>();
-        public delegate void GuardarEventHandler(EntidadNegocio.Entidades.Precio _precio);
+        private LogicaNegocio.ModeloController _ctrlModelo = new LogicaNegocio.ModeloController();
+        private EntidadNegocio.Entidades.Modelo _modelo = new EntidadNegocio.Entidades.Modelo();
+        private List<EntidadNegocio.Entidades.Modelo> _lstModelo = new List<EntidadNegocio.Entidades.Modelo>();
+        public delegate void GuardarEventHandler(EntidadNegocio.Entidades.Modelo _modelo);
         public event GuardarEventHandler Guardar;
         #endregion
 
@@ -32,28 +32,28 @@ namespace Presentacion.Maestros
         internal event MenuSalirEventHandler MenuSalir;
         #endregion
 
-        public frmPrecio()
+        public frmModelo()
         {
             InitializeComponent();
         }
-        private void CargarPrecio()
+        private void CargarModelo()
         {
             try
             {
-                _lstPrecio = _ctrlPrecio.ObtenerItems();
+                _lstModelo = _ctrlModelo.ObtenerItems();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void MostrarPrecio()
+        private void MostrarModelo()
         {
             try
             {
-                dgPrecio.AutoGenerateColumns = false;
-                dgPrecio.DataSource = null;
-                dgPrecio.DataSource = _lstPrecio;
+                dgModelo.AutoGenerateColumns = false;
+                dgModelo.DataSource = null;
+                dgModelo.DataSource = _lstModelo;
             }
             catch (Exception ex)
             {
@@ -64,7 +64,7 @@ namespace Presentacion.Maestros
         {
             try
             {
-                DataGridViewComboBoxColumn column = ((DataGridViewComboBoxColumn)dgPrecio.Columns["colEstatus"]);
+                DataGridViewComboBoxColumn column = ((DataGridViewComboBoxColumn)dgModelo.Columns["colEstatus"]);
                 List<EntidadNegocio.Entidades.EstatusRegistro> l = new List<EntidadNegocio.Entidades.EstatusRegistro>();
                 int[] values = ((int[])Enum.GetValues(typeof(EntidadNegocio.Enumerados.EnumEstatus.Registro)));
                 EntidadNegocio.Entidades.EstatusRegistro i;
@@ -84,69 +84,69 @@ namespace Presentacion.Maestros
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void AñadirPrecio()
+        private void AñadirModelo()
         {
             try
             {
-                EntidadNegocio.Entidades.Precio _Precio = new EntidadNegocio.Entidades.Precio();
-                _Precio.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
-                _Precio.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Nuevo;
-                if (_lstPrecio.Count == 0) _lstPrecio = new List<EntidadNegocio.Entidades.Precio>();
-                _lstPrecio.Add(_Precio);
-                MostrarPrecio();
+                EntidadNegocio.Entidades.Modelo _Modelo = new EntidadNegocio.Entidades.Modelo();
+                _Modelo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                _Modelo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Nuevo;
+                if (_lstModelo.Count == 0) _lstModelo = new List<EntidadNegocio.Entidades.Modelo>();
+                _lstModelo.Add(_Modelo);
+                MostrarModelo();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void EliminarPrecio()
+        private void EliminarModelo()
         {
             try
             {
-                if (_lstPrecio.Count > 0)
+                if (_lstModelo.Count > 0)
                 {
-                    ((EntidadNegocio.Entidades.Precio)dgPrecio.CurrentRow.DataBoundItem).Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
-                    ((EntidadNegocio.Entidades.Precio)dgPrecio.CurrentRow.DataBoundItem).Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Eliminar;
-                    if (((EntidadNegocio.Entidades.Precio)dgPrecio.CurrentRow.DataBoundItem).Edicion != EntidadNegocio.Enumerados.EnumEstatus.Edicion.Eliminar)
+                    ((EntidadNegocio.Entidades.Modelo)dgModelo.CurrentRow.DataBoundItem).Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    ((EntidadNegocio.Entidades.Modelo)dgModelo.CurrentRow.DataBoundItem).Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Eliminar;
+                    if (((EntidadNegocio.Entidades.Modelo)dgModelo.CurrentRow.DataBoundItem).Edicion != EntidadNegocio.Enumerados.EnumEstatus.Edicion.Eliminar)
                     {
-                        ((EntidadNegocio.Entidades.Precio)dgPrecio.CurrentRow.DataBoundItem).Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Editado;
+                        ((EntidadNegocio.Entidades.Modelo)dgModelo.CurrentRow.DataBoundItem).Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Editado;
                     }
-                    if (_lstPrecio.Count != 0)
+                    if (_lstModelo.Count != 0)
                     {
-                        if (_ctrlPrecio.DatosValidos(_lstPrecio))
+                        if (_ctrlModelo.DatosValidos(_lstModelo))
                         {
-                            if (_ctrlPrecio.Guardar(_lstPrecio))
+                            if (_ctrlModelo.Guardar(_lstModelo))
                             {
-                                //Se elimina la categoria del Producto
+                                //Se elimina la Modelo del Producto
                             }
                         }
                     }
                     else
                     {
-                        _lstPrecio.Remove(((EntidadNegocio.Entidades.Precio)dgPrecio.CurrentRow.DataBoundItem));
+                        _lstModelo.Remove(((EntidadNegocio.Entidades.Modelo)dgModelo.CurrentRow.DataBoundItem));
                     }
                 }
-                CargarPrecio();
-                MostrarPrecio();
+                CargarModelo();
+                MostrarModelo();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void GuardarPrecio()
+        private void GuardarModelo()
         {
             try
             {
-                dgPrecio.EndEdit();
-                if (_ctrlPrecio.Guardar(_lstPrecio))
+                dgModelo.EndEdit();
+                if (_ctrlModelo.Guardar(_lstModelo))
                 {
-                    CargarPrecio();
-                    MostrarPrecio();
+                    CargarModelo();
+                    MostrarModelo();
                     MessageBox.Show(EntidadNegocio.Entidades.Mensajes.Info_Guardado, EntidadNegocio.Entidades.Mensajes.Titulo_Guardar, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                dgPrecio.Focus();
+                dgModelo.Focus();
             }
             catch (Exception ex)
             {
@@ -174,49 +174,49 @@ namespace Presentacion.Maestros
                     break;
             }
         }
-        private void frmPrecio_FormClosing(object sender, FormClosingEventArgs e)
+        private void frmModelo_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show(EntidadNegocio.Entidades.Mensajes.Salir, EntidadNegocio.Entidades.Mensajes.Titulo_Salir, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
             {
                 e.Cancel = true;
             }
         }
-        private void frmPrecio_Load(object sender, EventArgs e)
+        private void frmModelo_Load(object sender, EventArgs e)
         {
             try
             {
-                this.GrupBox.Text = "Precio";
-                this.Text = "Precio";
+                this.GrupBox.Text = "Modelo";
+                this.Text = "Modelo";
                 LlenarComboGridEstatus();
-                CargarPrecio();
-                MostrarPrecio();
+                CargarModelo();
+                MostrarModelo();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void dgPrecio_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        private void dgModelo_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             e.Cancel = true;
         }
-        private void dgPrecio_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void dgModelo_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
                 if (e.ColumnIndex == 0)
                 {
-                    if (_ctrlPrecio.DatoDuplicado(_lstPrecio, ((EntidadNegocio.Entidades.Precio)dgPrecio.CurrentRow.DataBoundItem).ID))
+                    if (_ctrlModelo.DatoDuplicado(_lstModelo, ((EntidadNegocio.Entidades.Modelo)dgModelo.CurrentRow.DataBoundItem).ID))
                     {
                         MessageBox.Show(EntidadNegocio.Entidades.Mensajes.Info_DatosRepetidos, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        ((EntidadNegocio.Entidades.Precio)dgPrecio.CurrentRow.DataBoundItem).ID = Int32.Parse(_ctrlPrecio.UltimoID().ToString());
+                        ((EntidadNegocio.Entidades.Modelo)dgModelo.CurrentRow.DataBoundItem).ID = Int32.Parse(_ctrlModelo.UltimoID().ToString());
                     }
                 }
-                if (((EntidadNegocio.Entidades.Precio)dgPrecio.CurrentRow.DataBoundItem).Edicion != EntidadNegocio.Enumerados.EnumEstatus.Edicion.Nuevo)
+                if (((EntidadNegocio.Entidades.Modelo)dgModelo.CurrentRow.DataBoundItem).Edicion != EntidadNegocio.Enumerados.EnumEstatus.Edicion.Nuevo)
                 {
-                    ((EntidadNegocio.Entidades.Precio)dgPrecio.CurrentRow.DataBoundItem).Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Editado;
+                    ((EntidadNegocio.Entidades.Modelo)dgModelo.CurrentRow.DataBoundItem).Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Editado;
                 }
-                dgPrecio.Refresh();
+                dgModelo.Refresh();
             }
             catch (Exception ex)
             {
@@ -225,47 +225,47 @@ namespace Presentacion.Maestros
         }
         private void mstpItemInsert_Click(object sender, EventArgs e)
         {
-            AñadirPrecio();
+            AñadirModelo();
         }
         private void mstpItemSupr_Click(object sender, EventArgs e)
         {
-            EliminarPrecio();
+            EliminarModelo();
         }
         private void mstpItemGuardar_Click(object sender, EventArgs e)
         {
-            GuardarPrecio();
+            GuardarModelo();
         }
         private void mstpItemCancelar_Click(object sender, EventArgs e)
         {
-            CargarPrecio(); MostrarPrecio();
+            CargarModelo(); MostrarModelo();
         }
         private void mstpItemSalir_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        private void frmPrecio_KeyDown(object sender, KeyEventArgs e)
+        private void frmModelo_KeyDown(object sender, KeyEventArgs e)
         {
             this.TeclaPresionada(e.KeyCode);
         }
-        private void dgPrecio_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        private void dgModelo_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             try
             {
-                if (dgPrecio.CurrentCell.ColumnIndex == 0)
+                if (dgModelo.CurrentCell.ColumnIndex == 0)
                 {
-                    FormatoCeldaGrid(dgPrecio, e, dgPrecio.CurrentCell.ColumnIndex, EntidadNegocio.Enumerados.EnumTipos.TipoFormato.Numeros);
+                    FormatoCeldaGrid(dgModelo, e, dgModelo.CurrentCell.ColumnIndex, EntidadNegocio.Enumerados.EnumTipos.TipoFormato.Numeros);
                 }
-                if (dgPrecio.CurrentCell.ColumnIndex == 1)
+                if (dgModelo.CurrentCell.ColumnIndex == 1)
                 {
-                    FormatoCeldaGrid(dgPrecio, e, dgPrecio.CurrentCell.ColumnIndex, EntidadNegocio.Enumerados.EnumTipos.TipoFormato.NumeroLetras);
+                    FormatoCeldaGrid(dgModelo, e, dgModelo.CurrentCell.ColumnIndex, EntidadNegocio.Enumerados.EnumTipos.TipoFormato.NumeroLetras);
                 }
-                if (dgPrecio.CurrentCell.ColumnIndex == 2)
+                if (dgModelo.CurrentCell.ColumnIndex == 2)
                 {
-                    FormatoCeldaGrid(dgPrecio, e, dgPrecio.CurrentCell.ColumnIndex, EntidadNegocio.Enumerados.EnumTipos.TipoFormato.NumeroLetras);
+                    FormatoCeldaGrid(dgModelo, e, dgModelo.CurrentCell.ColumnIndex, EntidadNegocio.Enumerados.EnumTipos.TipoFormato.NumeroLetras);
                 }
-                if (dgPrecio.CurrentCell.ColumnIndex == 3)
+                if (dgModelo.CurrentCell.ColumnIndex == 3)
                 {
-                    FormatoCeldaGrid(dgPrecio, e, dgPrecio.CurrentCell.ColumnIndex, EntidadNegocio.Enumerados.EnumTipos.TipoFormato.Numeros);
+                    FormatoCeldaGrid(dgModelo, e, dgModelo.CurrentCell.ColumnIndex, EntidadNegocio.Enumerados.EnumTipos.TipoFormato.NumeroLetras);
                 }
             }
             catch (Exception ex)
@@ -273,5 +273,6 @@ namespace Presentacion.Maestros
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
     }
 }

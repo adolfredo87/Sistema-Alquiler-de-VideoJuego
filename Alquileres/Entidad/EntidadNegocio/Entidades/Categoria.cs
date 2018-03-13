@@ -17,6 +17,8 @@ namespace EntidadNegocio.Entidades
         private System.String _codigo;
         private System.String _descripcion;
         private EnumEstatus.Registro _estatus = EnumEstatus.Registro.Activo;
+        private System.Int32 _idTipo;
+        private Tipo _tipo;
         private EnumEstatus.Edicion _edicion = EnumEstatus.Edicion.Normal;
         #endregion
 
@@ -40,6 +42,16 @@ namespace EntidadNegocio.Entidades
         {
             get { return _estatus; }
             set { _estatus = value; }
+        }
+        public System.Int32 IDTipo
+        {
+            get { return _idTipo; }
+            set { _idTipo = value; }
+        }
+        public Tipo Tipo
+        {
+            get { return _tipo; }
+            set { _tipo = value; }
         }
         public EnumEstatus.Edicion Edicion
         {

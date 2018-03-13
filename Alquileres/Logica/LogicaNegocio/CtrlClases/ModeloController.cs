@@ -29,7 +29,29 @@ namespace LogicaNegocio
                     _mE.ID = element.ID;
                     _mE.Codigo = element.Codigo;
                     _mE.Descripcion = element.Descripcion;
-                    _mE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    if (element.Estatus == 1)
+                    {
+                        _mE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _mE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    element.TipoLoad();
+                    _mE.Tipo = new EntidadNegocio.Entidades.Tipo();
+                    _mE.Tipo.ID = element.IDTipo;
+                    _mE.IDTipo = element.IDTipo;
+                    _mE.Tipo.Codigo = element.Tipo.Codigo;
+                    _mE.Tipo.Descripcion = element.Tipo.Descripcion;
+                    if (element.Tipo.Estatus == 1)
+                    {
+                        _mE.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _mE.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _mE.Tipo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                     _mE.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                     _ListME.Add(_mE);
                 }
@@ -50,20 +72,43 @@ namespace LogicaNegocio
 
         public EntidadNegocio.Entidades.Modelo Details(int id)
         {
-            Dato.Modelo.Modelo _Modelo = new Dato.Modelo.Modelo();
+            Dato.Modelo.Modelo _modelo = new Dato.Modelo.Modelo();
             if (id == 0)
             {
-                _Modelo = new Dato.Modelo.Modelo();
+                _modelo = new Dato.Modelo.Modelo();
             }
             else
             {
-                _Modelo = db.ModeloSet.First(c => c.ID == id);
+                _modelo = db.ModeloSet.First(c => c.ID == id);
             }
-            EntidadNegocio.Entidades.Modelo ModeloDetail = new EntidadNegocio.Entidades.Modelo();
-            ModeloDetail.ID = _Modelo.ID;
-            ModeloDetail.Codigo = _Modelo.Codigo;
-            ModeloDetail.Descripcion = _Modelo.Descripcion;
-            return ModeloDetail;
+            EntidadNegocio.Entidades.Modelo modeloDetail = new EntidadNegocio.Entidades.Modelo();
+            modeloDetail.ID = _modelo.ID;
+            modeloDetail.Codigo = _modelo.Codigo;
+            modeloDetail.Descripcion = _modelo.Descripcion;
+            if (_modelo.Estatus == 1)
+            {
+                modeloDetail.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+            }
+            else
+            {
+                modeloDetail.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+            }
+            modeloDetail.Tipo = new EntidadNegocio.Entidades.Tipo();
+            modeloDetail.Tipo.ID = _modelo.IDTipo;
+            modeloDetail.IDTipo = _modelo.IDTipo;
+            modeloDetail.Tipo.Codigo = _modelo.Tipo.Codigo;
+            modeloDetail.Tipo.Descripcion = _modelo.Tipo.Descripcion;
+            if (_modelo.Tipo.Estatus == 1)
+            {
+                modeloDetail.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+            }
+            else
+            {
+                modeloDetail.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+            }
+            modeloDetail.Tipo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+            modeloDetail.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+            return modeloDetail;
         }
 
         public Boolean Create(EntidadNegocio.Entidades.Modelo _modelo)
@@ -74,6 +119,14 @@ namespace LogicaNegocio
             modeloToAdd.ID = _modelo.ID;
             modeloToAdd.Codigo = _modelo.Codigo;
             modeloToAdd.Descripcion = _modelo.Descripcion;
+            if (_modelo.Status == EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo)
+            {
+                modeloToAdd.Estatus = 1;
+            }
+            else
+            {
+                modeloToAdd.Estatus = 0;
+            }
 
             //valido claves primaria
             if (db.ModeloSet.FirstOrDefault(b => b.ID == modeloToAdd.ID) != null)
@@ -122,6 +175,14 @@ namespace LogicaNegocio
             modeloToUpdate.ID = _modelo.ID;
             modeloToUpdate.Codigo = _modelo.Codigo;
             modeloToUpdate.Descripcion = _modelo.Descripcion;
+            if (_modelo.Status == EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo)
+            {
+                modeloToUpdate.Estatus = 1;
+            }
+            else
+            {
+                modeloToUpdate.Estatus = 0;
+            }
 
             if (db.Connection.State != System.Data.ConnectionState.Open)
             {
@@ -158,6 +219,14 @@ namespace LogicaNegocio
             modeloToDelete.ID = _modelo.ID;
             modeloToDelete.Codigo = _modelo.Codigo;
             modeloToDelete.Descripcion = _modelo.Descripcion;
+            if (_modelo.Status == EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo)
+            {
+                modeloToDelete.Estatus = 1;
+            }
+            else
+            {
+                modeloToDelete.Estatus = 0;
+            }
 
             //valido la Modelo tiene un producto
             if (db.ProductoSet.FirstOrDefault(b => b.IDModelo == id) != null)
@@ -221,12 +290,12 @@ namespace LogicaNegocio
             }
         }
 
-        public Boolean Guardar(List<EntidadNegocio.Entidades.Modelo> _Modelos)
+        public Boolean Guardar(List<EntidadNegocio.Entidades.Modelo> _modelos)
         {
             try
             {
                 bool resul = false;
-                var l = (from c in _Modelos where c.Edicion != EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal select c);
+                var l = (from c in _modelos where c.Edicion != EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal select c);
                 List<EntidadNegocio.Entidades.Modelo> _listM = null;
                 _listM = l.ToList();
                 if (DatosValidos(_listM))

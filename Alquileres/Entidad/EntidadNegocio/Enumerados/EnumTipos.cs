@@ -18,11 +18,11 @@ namespace EntidadNegocio.Enumerados
             Ciudad = 3
         }
 
-        public enum TipoAccion
+        public enum TipoAccionAlquiler
         {
-            Carga = 1,
-            Descarga = 2,
-            Devolucion = 3
+            Generado = 0,
+            Procesado = 1,
+            Pagado = 2
         }
 
         public enum TipoFormato

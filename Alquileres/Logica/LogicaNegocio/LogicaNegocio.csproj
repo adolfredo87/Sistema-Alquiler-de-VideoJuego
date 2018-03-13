@@ -51,6 +51,7 @@
     <Compile Include="CtrlClases\PagoCabeceraController.cs" />
     <Compile Include="CtrlClases\PrecioController.cs" />
     <Compile Include="CtrlClases\ProductoController.cs" />
+    <Compile Include="CtrlClases\TipoController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

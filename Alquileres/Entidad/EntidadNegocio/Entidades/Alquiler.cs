@@ -24,7 +24,7 @@ namespace EntidadNegocio.Entidades
         private System.String _timeDia;
         private System.String _timeSemana;
         private System.Double _precioEstimado = 0;
-        private System.Int32 _estatus = 1;
+        private EnumTipos.TipoAccionAlquiler _estatus = EnumTipos.TipoAccionAlquiler.Procesado;
         private EnumEstatus.Registro _status = EnumEstatus.Registro.Activo;
         private EnumEstatus.Edicion _edicion = EnumEstatus.Edicion.Normal;
         #endregion
@@ -85,7 +85,7 @@ namespace EntidadNegocio.Entidades
             get { return _precioEstimado; }
             set { _precioEstimado = value; }
         }
-        public Int32 Estatus
+        public EnumTipos.TipoAccionAlquiler Estatus
         {
             get { return _estatus; }
             set { _estatus = value; }

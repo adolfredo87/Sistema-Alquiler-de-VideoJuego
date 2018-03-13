@@ -29,7 +29,29 @@ namespace LogicaNegocio
                     _cE.ID = element.ID;
                     _cE.Codigo = element.Codigo;
                     _cE.Descripcion = element.Descripcion;
-                    _cE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    if (element.Estatus == 1)
+                    {
+                        _cE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _cE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    element.TipoLoad();
+                    _cE.Tipo = new EntidadNegocio.Entidades.Tipo();
+                    _cE.Tipo.ID = element.IDTipo;
+                    _cE.IDTipo = element.IDTipo;
+                    _cE.Tipo.Codigo = element.Tipo.Codigo;
+                    _cE.Tipo.Descripcion = element.Tipo.Descripcion;
+                    if (element.Tipo.Estatus == 1)
+                    {
+                        _cE.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _cE.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _cE.Tipo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                     _cE.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
                     _ListCE.Add(_cE);
                 }
@@ -63,17 +85,63 @@ namespace LogicaNegocio
             categoriaDetail.ID = _categoria.ID;
             categoriaDetail.Codigo = _categoria.Codigo;
             categoriaDetail.Descripcion = _categoria.Descripcion;
+            if (_categoria.Estatus == 1)
+            {
+                categoriaDetail.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+            }
+            else
+            {
+                categoriaDetail.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+            }
+            categoriaDetail.Tipo = new EntidadNegocio.Entidades.Tipo();
+            categoriaDetail.Tipo.ID = _categoria.IDTipo;
+            categoriaDetail.IDTipo = _categoria.IDTipo;
+            categoriaDetail.Tipo.Codigo = _categoria.Tipo.Codigo;
+            categoriaDetail.Tipo.Descripcion = _categoria.Tipo.Descripcion;
+            if (_categoria.Tipo.Estatus == 1)
+            {
+                categoriaDetail.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+            }
+            else
+            {
+                categoriaDetail.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+            }
+            categoriaDetail.Tipo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+            categoriaDetail.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
             return categoriaDetail;
         }
 
         public Boolean Create(EntidadNegocio.Entidades.Categoria _categoria)
         {
             Dato.Modelo.Categoria categoriaToAdd = new Dato.Modelo.Categoria();
-            Boolean resul = false;
+            Boolean resul = false; String IDTipo = "";
 
             categoriaToAdd.ID = _categoria.ID;
+
+            Int32 iIDTipo = _categoria.IDTipo;
+            categoriaToAdd.IDTipo = iIDTipo;
+            IDTipo = iIDTipo.ToString();
+
             categoriaToAdd.Codigo = _categoria.Codigo;
             categoriaToAdd.Descripcion = _categoria.Descripcion;
+            if (_categoria.Status == EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo)
+            {
+                categoriaToAdd.Estatus = 1;
+            }
+            else
+            {
+                categoriaToAdd.Estatus = 0;
+            }
+
+            if (!String.IsNullOrEmpty(IDTipo))
+            {
+                categoriaToAdd.Tipo = db.TipoSet.FirstOrDefault(c => c.ID == iIDTipo);
+            }
+
+            if (categoriaToAdd.Tipo == null)
+            {
+                MessageBox.Show(String.Format("El número de IDTipo {0} no está registrado en la base de datos."), EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             //valido claves primaria
             if (db.CategoriaSet.FirstOrDefault(b => b.ID == categoriaToAdd.ID) != null)
@@ -122,6 +190,14 @@ namespace LogicaNegocio
             categoriaToUpdate.ID = _categoria.ID;
             categoriaToUpdate.Codigo = _categoria.Codigo;
             categoriaToUpdate.Descripcion = _categoria.Descripcion;
+            if (_categoria.Status == EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo)
+            {
+                categoriaToUpdate.Estatus = 1;
+            }
+            else
+            {
+                categoriaToUpdate.Estatus = 0;
+            }
 
             if (db.Connection.State != System.Data.ConnectionState.Open)
             {
@@ -158,6 +234,14 @@ namespace LogicaNegocio
             categoriaToDelete.ID = _categoria.ID;
             categoriaToDelete.Codigo = _categoria.Codigo;
             categoriaToDelete.Descripcion = _categoria.Descripcion;
+            if (_categoria.Status == EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo)
+            {
+                categoriaToDelete.Estatus = 1;
+            }
+            else
+            {
+                categoriaToDelete.Estatus = 0;
+            }
 
             //valido la categoria tiene un producto
             if (db.ProductoSet.FirstOrDefault(b => b.IDCategoria == id) != null)

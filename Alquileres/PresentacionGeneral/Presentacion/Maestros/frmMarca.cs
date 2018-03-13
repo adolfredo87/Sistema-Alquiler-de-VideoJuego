@@ -9,13 +9,13 @@ using System.Windows.Forms;
 
 namespace Presentacion.Maestros
 {
-    public partial class frmPrecio : Presentacion.Plantilla.FrmPlantilla
+    public partial class frmMarca : Presentacion.Plantilla.FrmPlantilla
     {
         #region "Atributos"
-        private LogicaNegocio.PrecioController _ctrlPrecio = new LogicaNegocio.PrecioController();
-        private EntidadNegocio.Entidades.Precio _precio = new EntidadNegocio.Entidades.Precio();
-        private List<EntidadNegocio.Entidades.Precio> _lstPrecio = new List<EntidadNegocio.Entidades.Precio>();
-        public delegate void GuardarEventHandler(EntidadNegocio.Entidades.Precio _precio);
+        private LogicaNegocio.MarcaController _ctrlMarca = new LogicaNegocio.MarcaController();
+        private EntidadNegocio.Entidades.Marca _marca = new EntidadNegocio.Entidades.Marca();
+        private List<EntidadNegocio.Entidades.Marca> _lstMarca = new List<EntidadNegocio.Entidades.Marca>();
+        public delegate void GuardarEventHandler(EntidadNegocio.Entidades.Marca _marca);
         public event GuardarEventHandler Guardar;
         #endregion
 
@@ -32,28 +32,28 @@ namespace Presentacion.Maestros
         internal event MenuSalirEventHandler MenuSalir;
         #endregion
 
-        public frmPrecio()
+        public frmMarca()
         {
             InitializeComponent();
         }
-        private void CargarPrecio()
+        private void CargarMarca()
         {
             try
             {
-                _lstPrecio = _ctrlPrecio.ObtenerItems();
+                _lstMarca = _ctrlMarca.ObtenerItems();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void MostrarPrecio()
+        private void MostrarMarca()
         {
             try
             {
-                dgPrecio.AutoGenerateColumns = false;
-                dgPrecio.DataSource = null;
-                dgPrecio.DataSource = _lstPrecio;
+                dgMarca.AutoGenerateColumns = false;
+                dgMarca.DataSource = null;
+                dgMarca.DataSource = _lstMarca;
             }
             catch (Exception ex)
             {
@@ -64,7 +64,7 @@ namespace Presentacion.Maestros
         {
             try
             {
-                DataGridViewComboBoxColumn column = ((DataGridViewComboBoxColumn)dgPrecio.Columns["colEstatus"]);
+                DataGridViewComboBoxColumn column = ((DataGridViewComboBoxColumn)dgMarca.Columns["colEstatus"]);
                 List<EntidadNegocio.Entidades.EstatusRegistro> l = new List<EntidadNegocio.Entidades.EstatusRegistro>();
                 int[] values = ((int[])Enum.GetValues(typeof(EntidadNegocio.Enumerados.EnumEstatus.Registro)));
                 EntidadNegocio.Entidades.EstatusRegistro i;
@@ -84,69 +84,69 @@ namespace Presentacion.Maestros
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void AñadirPrecio()
+        private void AñadirMarca()
         {
             try
             {
-                EntidadNegocio.Entidades.Precio _Precio = new EntidadNegocio.Entidades.Precio();
-                _Precio.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
-                _Precio.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Nuevo;
-                if (_lstPrecio.Count == 0) _lstPrecio = new List<EntidadNegocio.Entidades.Precio>();
-                _lstPrecio.Add(_Precio);
-                MostrarPrecio();
+                EntidadNegocio.Entidades.Marca _Marca = new EntidadNegocio.Entidades.Marca();
+                _Marca.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                _Marca.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Nuevo;
+                if (_lstMarca.Count == 0) _lstMarca = new List<EntidadNegocio.Entidades.Marca>();
+                _lstMarca.Add(_Marca);
+                MostrarMarca();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void EliminarPrecio()
+        private void EliminarMarca()
         {
             try
             {
-                if (_lstPrecio.Count > 0)
+                if (_lstMarca.Count > 0)
                 {
-                    ((EntidadNegocio.Entidades.Precio)dgPrecio.CurrentRow.DataBoundItem).Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
-                    ((EntidadNegocio.Entidades.Precio)dgPrecio.CurrentRow.DataBoundItem).Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Eliminar;
-                    if (((EntidadNegocio.Entidades.Precio)dgPrecio.CurrentRow.DataBoundItem).Edicion != EntidadNegocio.Enumerados.EnumEstatus.Edicion.Eliminar)
+                    ((EntidadNegocio.Entidades.Marca)dgMarca.CurrentRow.DataBoundItem).Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    ((EntidadNegocio.Entidades.Marca)dgMarca.CurrentRow.DataBoundItem).Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Eliminar;
+                    if (((EntidadNegocio.Entidades.Marca)dgMarca.CurrentRow.DataBoundItem).Edicion != EntidadNegocio.Enumerados.EnumEstatus.Edicion.Eliminar)
                     {
-                        ((EntidadNegocio.Entidades.Precio)dgPrecio.CurrentRow.DataBoundItem).Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Editado;
+                        ((EntidadNegocio.Entidades.Marca)dgMarca.CurrentRow.DataBoundItem).Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Editado;
                     }
-                    if (_lstPrecio.Count != 0)
+                    if (_lstMarca.Count != 0)
                     {
-                        if (_ctrlPrecio.DatosValidos(_lstPrecio))
+                        if (_ctrlMarca.DatosValidos(_lstMarca))
                         {
-                            if (_ctrlPrecio.Guardar(_lstPrecio))
+                            if (_ctrlMarca.Guardar(_lstMarca))
                             {
-                                //Se elimina la categoria del Producto
+                                //Se elimina la Marca del Producto
                             }
                         }
                     }
                     else
                     {
-                        _lstPrecio.Remove(((EntidadNegocio.Entidades.Precio)dgPrecio.CurrentRow.DataBoundItem));
+                        _lstMarca.Remove(((EntidadNegocio.Entidades.Marca)dgMarca.CurrentRow.DataBoundItem));
                     }
                 }
-                CargarPrecio();
-                MostrarPrecio();
+                CargarMarca();
+                MostrarMarca();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void GuardarPrecio()
+        private void GuardarMarca()
         {
             try
             {
-                dgPrecio.EndEdit();
-                if (_ctrlPrecio.Guardar(_lstPrecio))
+                dgMarca.EndEdit();
+                if (_ctrlMarca.Guardar(_lstMarca))
                 {
-                    CargarPrecio();
-                    MostrarPrecio();
+                    CargarMarca();
+                    MostrarMarca();
                     MessageBox.Show(EntidadNegocio.Entidades.Mensajes.Info_Guardado, EntidadNegocio.Entidades.Mensajes.Titulo_Guardar, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                dgPrecio.Focus();
+                dgMarca.Focus();
             }
             catch (Exception ex)
             {
@@ -174,49 +174,49 @@ namespace Presentacion.Maestros
                     break;
             }
         }
-        private void frmPrecio_FormClosing(object sender, FormClosingEventArgs e)
+        private void frmMarca_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show(EntidadNegocio.Entidades.Mensajes.Salir, EntidadNegocio.Entidades.Mensajes.Titulo_Salir, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
             {
                 e.Cancel = true;
             }
         }
-        private void frmPrecio_Load(object sender, EventArgs e)
+        private void frmMarca_Load(object sender, EventArgs e)
         {
             try
             {
-                this.GrupBox.Text = "Precio";
-                this.Text = "Precio";
+                this.GrupBox.Text = "Marca";
+                this.Text = "Marca";
                 LlenarComboGridEstatus();
-                CargarPrecio();
-                MostrarPrecio();
+                CargarMarca();
+                MostrarMarca();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void dgPrecio_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        private void dgMarca_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             e.Cancel = true;
         }
-        private void dgPrecio_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void dgMarca_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
                 if (e.ColumnIndex == 0)
                 {
-                    if (_ctrlPrecio.DatoDuplicado(_lstPrecio, ((EntidadNegocio.Entidades.Precio)dgPrecio.CurrentRow.DataBoundItem).ID))
+                    if (_ctrlMarca.DatoDuplicado(_lstMarca, ((EntidadNegocio.Entidades.Marca)dgMarca.CurrentRow.DataBoundItem).ID))
                     {
                         MessageBox.Show(EntidadNegocio.Entidades.Mensajes.Info_DatosRepetidos, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        ((EntidadNegocio.Entidades.Precio)dgPrecio.CurrentRow.DataBoundItem).ID = Int32.Parse(_ctrlPrecio.UltimoID().ToString());
+                        ((EntidadNegocio.Entidades.Marca)dgMarca.CurrentRow.DataBoundItem).ID = Int32.Parse(_ctrlMarca.UltimoID().ToString());
                     }
                 }
-                if (((EntidadNegocio.Entidades.Precio)dgPrecio.CurrentRow.DataBoundItem).Edicion != EntidadNegocio.Enumerados.EnumEstatus.Edicion.Nuevo)
+                if (((EntidadNegocio.Entidades.Marca)dgMarca.CurrentRow.DataBoundItem).Edicion != EntidadNegocio.Enumerados.EnumEstatus.Edicion.Nuevo)
                 {
-                    ((EntidadNegocio.Entidades.Precio)dgPrecio.CurrentRow.DataBoundItem).Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Editado;
+                    ((EntidadNegocio.Entidades.Marca)dgMarca.CurrentRow.DataBoundItem).Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Editado;
                 }
-                dgPrecio.Refresh();
+                dgMarca.Refresh();
             }
             catch (Exception ex)
             {
@@ -225,47 +225,47 @@ namespace Presentacion.Maestros
         }
         private void mstpItemInsert_Click(object sender, EventArgs e)
         {
-            AñadirPrecio();
+            AñadirMarca();
         }
         private void mstpItemSupr_Click(object sender, EventArgs e)
         {
-            EliminarPrecio();
+            EliminarMarca();
         }
         private void mstpItemGuardar_Click(object sender, EventArgs e)
         {
-            GuardarPrecio();
+            GuardarMarca();
         }
         private void mstpItemCancelar_Click(object sender, EventArgs e)
         {
-            CargarPrecio(); MostrarPrecio();
+            CargarMarca(); MostrarMarca();
         }
         private void mstpItemSalir_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        private void frmPrecio_KeyDown(object sender, KeyEventArgs e)
+        private void frmMarca_KeyDown(object sender, KeyEventArgs e)
         {
             this.TeclaPresionada(e.KeyCode);
         }
-        private void dgPrecio_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        private void dgMarca_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             try
             {
-                if (dgPrecio.CurrentCell.ColumnIndex == 0)
+                if (dgMarca.CurrentCell.ColumnIndex == 0)
                 {
-                    FormatoCeldaGrid(dgPrecio, e, dgPrecio.CurrentCell.ColumnIndex, EntidadNegocio.Enumerados.EnumTipos.TipoFormato.Numeros);
+                    FormatoCeldaGrid(dgMarca, e, dgMarca.CurrentCell.ColumnIndex, EntidadNegocio.Enumerados.EnumTipos.TipoFormato.Numeros);
                 }
-                if (dgPrecio.CurrentCell.ColumnIndex == 1)
+                if (dgMarca.CurrentCell.ColumnIndex == 1)
                 {
-                    FormatoCeldaGrid(dgPrecio, e, dgPrecio.CurrentCell.ColumnIndex, EntidadNegocio.Enumerados.EnumTipos.TipoFormato.NumeroLetras);
+                    FormatoCeldaGrid(dgMarca, e, dgMarca.CurrentCell.ColumnIndex, EntidadNegocio.Enumerados.EnumTipos.TipoFormato.NumeroLetras);
                 }
-                if (dgPrecio.CurrentCell.ColumnIndex == 2)
+                if (dgMarca.CurrentCell.ColumnIndex == 2)
                 {
-                    FormatoCeldaGrid(dgPrecio, e, dgPrecio.CurrentCell.ColumnIndex, EntidadNegocio.Enumerados.EnumTipos.TipoFormato.NumeroLetras);
+                    FormatoCeldaGrid(dgMarca, e, dgMarca.CurrentCell.ColumnIndex, EntidadNegocio.Enumerados.EnumTipos.TipoFormato.NumeroLetras);
                 }
-                if (dgPrecio.CurrentCell.ColumnIndex == 3)
+                if (dgMarca.CurrentCell.ColumnIndex == 3)
                 {
-                    FormatoCeldaGrid(dgPrecio, e, dgPrecio.CurrentCell.ColumnIndex, EntidadNegocio.Enumerados.EnumTipos.TipoFormato.Numeros);
+                    FormatoCeldaGrid(dgMarca, e, dgMarca.CurrentCell.ColumnIndex, EntidadNegocio.Enumerados.EnumTipos.TipoFormato.NumeroLetras);
                 }
             }
             catch (Exception ex)
@@ -273,5 +273,6 @@ namespace Presentacion.Maestros
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
     }
 }

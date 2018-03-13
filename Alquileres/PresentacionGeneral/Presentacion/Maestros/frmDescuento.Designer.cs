@@ -178,7 +178,7 @@
             // 
             // colEstatus
             // 
-            this.colEstatus.DataPropertyName = "Estatus";
+            this.colEstatus.DataPropertyName = "Status";
             this.colEstatus.HeaderText = "Estatus";
             this.colEstatus.Name = "colEstatus";
             this.colEstatus.ReadOnly = true;

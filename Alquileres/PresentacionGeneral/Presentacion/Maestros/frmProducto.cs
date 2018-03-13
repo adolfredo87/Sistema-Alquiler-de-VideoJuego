@@ -14,6 +14,8 @@ namespace Presentacion.Maestros
         #region "Atributos"
         private LogicaNegocio.ProductoController _ctrlProducto = new LogicaNegocio.ProductoController();
         private List<EntidadNegocio.Entidades.Producto> _lstProductos = new List<EntidadNegocio.Entidades.Producto>();
+        private List<EntidadNegocio.Entidades.Tipo> _lstTipo = new List<EntidadNegocio.Entidades.Tipo>();
+        private LogicaNegocio.TipoController _ctrlTipo = new LogicaNegocio.TipoController();
         private List<EntidadNegocio.Entidades.Marca> _lstMarca = new List<EntidadNegocio.Entidades.Marca>();
         private LogicaNegocio.MarcaController _ctrlMarca = new LogicaNegocio.MarcaController();
         private List<EntidadNegocio.Entidades.Modelo> _lstModelo = new List<EntidadNegocio.Entidades.Modelo>();
@@ -57,6 +59,33 @@ namespace Presentacion.Maestros
                 dgProductos.AutoGenerateColumns = false;
                 dgProductos.DataSource = null;
                 dgProductos.DataSource = _lstProductos;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void ObtenerTipo()
+        {
+            try
+            {
+                _lstTipo = _ctrlTipo.ObtenerItems();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void CargarComboTipo()
+        {
+            try
+            {
+                ObtenerTipo();
+                CargarProductos();
+                DataGridViewComboBoxColumn column = ((DataGridViewComboBoxColumn)dgProductos.Columns["colTipo"]);
+                column.DisplayMember = "Descripcion";
+                column.ValueMember = "ID";
+                column.DataSource = (from cp in _lstTipo select cp).ToList();
             }
             catch (Exception ex)
             {
@@ -140,6 +169,30 @@ namespace Presentacion.Maestros
                 column.DataSource = (from cp in _lstCategoria select cp).ToList();
             }
             catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void LlenarComboGridEstatus()
+        {
+            try
+            {
+                DataGridViewComboBoxColumn column = ((DataGridViewComboBoxColumn)dgProductos.Columns["colEstatus"]);
+                List<EntidadNegocio.Entidades.EstatusRegistro> l = new List<EntidadNegocio.Entidades.EstatusRegistro>();
+                int[] values = ((int[])Enum.GetValues(typeof(EntidadNegocio.Enumerados.EnumEstatus.Registro)));
+                EntidadNegocio.Entidades.EstatusRegistro i;
+                foreach (int value in values)
+                {
+                    i = new EntidadNegocio.Entidades.EstatusRegistro();
+                    i.Descripcion = Enum.GetName(typeof(EntidadNegocio.Enumerados.EnumEstatus.Registro), value);
+                    i.Estatus = value;
+                    l.Add(i);
+                }
+                column.DataSource = l;
+                column.DisplayMember = "Descripcion";
+                column.ValueMember = "Estatus";
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -247,9 +300,11 @@ namespace Presentacion.Maestros
             {
                 this.GrupBox.Text = "Producto";
                 this.Text = "Producto";
+                CargarComboTipo();
                 CargarComboMarca();
                 CargarComboModelo();
                 CargarComboCategoria();
+                LlenarComboGridEstatus();
                 CargarProductos();
                 MostrarProductos();
             }

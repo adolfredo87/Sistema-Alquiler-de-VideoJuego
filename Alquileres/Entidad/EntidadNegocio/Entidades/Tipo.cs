@@ -10,14 +10,13 @@ using EntidadNegocio.Enumerados;
 
 namespace EntidadNegocio.Entidades
 {
-    public class Descuento
+    public class Tipo
     {
         #region "Atributos"
         private System.Int32 _id;
         private System.String _codigo;
         private System.String _descripcion;
-        private System.Double _porcentajeDescuento = 0;
-        private EnumEstatus.Registro _status = EnumEstatus.Registro.Activo;
+        private EnumEstatus.Registro _estatus = EnumEstatus.Registro.Activo;
         private EnumEstatus.Edicion _edicion = EnumEstatus.Edicion.Normal;
         #endregion
 
@@ -37,15 +36,10 @@ namespace EntidadNegocio.Entidades
             get { return _descripcion; }
             set { _descripcion = value; }
         }
-        public Double PorcentajeDescuento
-        {
-            get { return _porcentajeDescuento; }
-            set { _porcentajeDescuento = value; }
-        }
         public EnumEstatus.Registro Status
         {
-            get { return _status; }
-            set { _status = value; }
+            get { return _estatus; }
+            set { _estatus = value; }
         }
         public EnumEstatus.Edicion Edicion
         {

@@ -17,11 +17,17 @@ namespace Dato.Modelo
             [Required, DisplayName("ID Producto"), StringLength(50)]
             public String ID { get; set; }
 
+            [Required, DisplayName("Tipo del Producto")]
+            public Tipo Tipo { get; set; }
+
             [Required, DisplayName("Código Producto"), StringLength(50)]
             public String Codigo { get; set; }
 
             [Required, DisplayName("Descripcion Producto"), StringLength(200)]
             public String Descripcion { get; set; }
+
+            [Required, DisplayName("Estatus")]
+            public int Estatus { get; set; }
 
             [Required, DisplayName("Marca del Producto")]
             public Marca Marca { get; set; }
@@ -34,6 +40,11 @@ namespace Dato.Modelo
         }
 
         #region Metodos Extendidos del Entities Framework
+
+        public Tipo TipoLoad()
+        {
+            return Utility.Entity<Tipo>.LoadReference(this.TipoReference);
+        }
 
         public Marca MarcaLoad()
         {

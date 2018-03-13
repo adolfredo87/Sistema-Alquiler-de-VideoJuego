@@ -34,6 +34,8 @@
             this.Cliente_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.Producto_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Marca_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Modelo_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Categoria_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.Descuento_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,6 +56,8 @@
             this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.Cliente_ToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.Producto_ToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.Marca_ToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.Modelo_ToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.Categoria_ToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.Descuento_ToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.Precio_ToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -91,6 +95,8 @@
             this.Cliente_ToolStripMenuItem,
             this.MenuStripSeparator1,
             this.Producto_ToolStripMenuItem,
+            this.Marca_ToolStripMenuItem,
+            this.Modelo_ToolStripMenuItem,
             this.Categoria_ToolStripMenuItem,
             this.MenuStripSeparator2,
             this.Descuento_ToolStripMenuItem,
@@ -108,47 +114,65 @@
             this.Cliente_ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("Cliente_ToolStripMenuItem.Image")));
             this.Cliente_ToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.Cliente_ToolStripMenuItem.Name = "Cliente_ToolStripMenuItem";
-            this.Cliente_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.P)));
-            this.Cliente_ToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.Cliente_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.C)));
+            this.Cliente_ToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.Cliente_ToolStripMenuItem.Text = "&Cliente";
             this.Cliente_ToolStripMenuItem.Click += new System.EventHandler(this.Cliente_ToolStripMenuItem_Click);
             // 
             // MenuStripSeparator1
             // 
             this.MenuStripSeparator1.Name = "MenuStripSeparator1";
-            this.MenuStripSeparator1.Size = new System.Drawing.Size(167, 6);
+            this.MenuStripSeparator1.Size = new System.Drawing.Size(168, 6);
             // 
             // Producto_ToolStripMenuItem
             // 
             this.Producto_ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("Producto_ToolStripMenuItem.Image")));
             this.Producto_ToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.Producto_ToolStripMenuItem.Name = "Producto_ToolStripMenuItem";
-            this.Producto_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.N)));
-            this.Producto_ToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.Producto_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.U)));
+            this.Producto_ToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.Producto_ToolStripMenuItem.Text = "Producto";
             this.Producto_ToolStripMenuItem.Click += new System.EventHandler(this.Producto_ToolStripMenuItem_Click);
+            // 
+            // Marca_ToolStripMenuItem
+            // 
+            this.Marca_ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("Marca_ToolStripMenuItem.Image")));
+            this.Marca_ToolStripMenuItem.Name = "Marca_ToolStripMenuItem";
+            this.Marca_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.M)));
+            this.Marca_ToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.Marca_ToolStripMenuItem.Text = "Marca";
+            this.Marca_ToolStripMenuItem.Click += new System.EventHandler(this.Marca_ToolStripMenuItem_Click);
+            // 
+            // Modelo_ToolStripMenuItem
+            // 
+            this.Modelo_ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("Modelo_ToolStripMenuItem.Image")));
+            this.Modelo_ToolStripMenuItem.Name = "Modelo_ToolStripMenuItem";
+            this.Modelo_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
+            this.Modelo_ToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.Modelo_ToolStripMenuItem.Text = "Modelo";
+            this.Modelo_ToolStripMenuItem.Click += new System.EventHandler(this.Modelo_ToolStripMenuItem_Click);
             // 
             // Categoria_ToolStripMenuItem
             // 
             this.Categoria_ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("Categoria_ToolStripMenuItem.Image")));
             this.Categoria_ToolStripMenuItem.Name = "Categoria_ToolStripMenuItem";
-            this.Categoria_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S)));
-            this.Categoria_ToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.Categoria_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.G)));
+            this.Categoria_ToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.Categoria_ToolStripMenuItem.Text = "Categoria";
             this.Categoria_ToolStripMenuItem.Click += new System.EventHandler(this.Categoria_ToolStripMenuItem_Click);
             // 
             // MenuStripSeparator2
             // 
             this.MenuStripSeparator2.Name = "MenuStripSeparator2";
-            this.MenuStripSeparator2.Size = new System.Drawing.Size(167, 6);
+            this.MenuStripSeparator2.Size = new System.Drawing.Size(168, 6);
             // 
             // Descuento_ToolStripMenuItem
             // 
             this.Descuento_ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("Descuento_ToolStripMenuItem.Image")));
             this.Descuento_ToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.Descuento_ToolStripMenuItem.Name = "Descuento_ToolStripMenuItem";
-            this.Descuento_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.V)));
-            this.Descuento_ToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.Descuento_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D)));
+            this.Descuento_ToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.Descuento_ToolStripMenuItem.Text = "Descuento";
             this.Descuento_ToolStripMenuItem.Click += new System.EventHandler(this.Descuento_ToolStripMenuItem_Click);
             // 
@@ -156,21 +180,22 @@
             // 
             this.Precio_ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("Precio_ToolStripMenuItem.Image")));
             this.Precio_ToolStripMenuItem.Name = "Precio_ToolStripMenuItem";
-            this.Precio_ToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.Precio_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.R)));
+            this.Precio_ToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.Precio_ToolStripMenuItem.Text = "Precio";
             this.Precio_ToolStripMenuItem.Click += new System.EventHandler(this.Precio_ToolStripMenuItem_Click);
             // 
             // MenuStripSeparator3
             // 
             this.MenuStripSeparator3.Name = "MenuStripSeparator3";
-            this.MenuStripSeparator3.Size = new System.Drawing.Size(167, 6);
+            this.MenuStripSeparator3.Size = new System.Drawing.Size(168, 6);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("ExitToolStripMenuItem.Image")));
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
             this.ExitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.ExitToolStripMenuItem.Text = "&Salir";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -180,14 +205,16 @@
             this.Alquiler_ToolStripMenuItem,
             this.Pago_ToolStripMenuItem});
             this.ProceosMenu.Name = "ProceosMenu";
+            this.ProceosMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.P)));
             this.ProceosMenu.Size = new System.Drawing.Size(62, 20);
-            this.ProceosMenu.Text = "Procesos";
+            this.ProceosMenu.Text = "&Procesos";
             // 
             // Alquiler_ToolStripMenuItem
             // 
             this.Alquiler_ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("Alquiler_ToolStripMenuItem.Image")));
             this.Alquiler_ToolStripMenuItem.Name = "Alquiler_ToolStripMenuItem";
-            this.Alquiler_ToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.Alquiler_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.L)));
+            this.Alquiler_ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.Alquiler_ToolStripMenuItem.Text = "Alquiler";
             this.Alquiler_ToolStripMenuItem.Click += new System.EventHandler(this.Alquiler_ToolStripMenuItem_Click);
             // 
@@ -195,7 +222,8 @@
             // 
             this.Pago_ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("Pago_ToolStripMenuItem.Image")));
             this.Pago_ToolStripMenuItem.Name = "Pago_ToolStripMenuItem";
-            this.Pago_ToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.Pago_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.O)));
+            this.Pago_ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.Pago_ToolStripMenuItem.Text = "Pago";
             this.Pago_ToolStripMenuItem.Click += new System.EventHandler(this.Pago_ToolStripMenuItem_Click);
             // 
@@ -215,6 +243,7 @@
             this.Calculadora_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.K)));
             this.Calculadora_ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.Calculadora_ToolStripMenuItem.Text = "Calculadora";
+            this.Calculadora_ToolStripMenuItem.Click += new System.EventHandler(this.Calculadora_ToolStripMenuItem_Click);
             // 
             // AyudaMenu
             // 
@@ -234,6 +263,7 @@
             this.TemasAyuda_ToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
             this.TemasAyuda_ToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.TemasAyuda_ToolStripMenuItem.Text = "&Temas de Ayuda";
+            this.TemasAyuda_ToolStripMenuItem.Click += new System.EventHandler(this.TemasAyuda_ToolStripMenuItem_Click);
             // 
             // MenuStripSeparator4
             // 
@@ -246,6 +276,7 @@
             this.AcercaSistema_ToolStripMenuItem.Name = "AcercaSistema_ToolStripMenuItem";
             this.AcercaSistema_ToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.AcercaSistema_ToolStripMenuItem.Text = "&Acerca del Sistema";
+            this.AcercaSistema_ToolStripMenuItem.Click += new System.EventHandler(this.AcercaSistema_ToolStripMenuItem_Click);
             // 
             // ToolStrip
             // 
@@ -256,6 +287,8 @@
             this.ToolStripSeparator1,
             this.Cliente_ToolStripButton,
             this.Producto_ToolStripButton,
+            this.Marca_ToolStripButton,
+            this.Modelo_ToolStripButton,
             this.Categoria_ToolStripButton,
             this.Descuento_ToolStripButton,
             this.Precio_ToolStripButton,
@@ -282,6 +315,7 @@
             this.Refrescar_ToolStripButton.Name = "Refrescar_ToolStripButton";
             this.Refrescar_ToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.Refrescar_ToolStripButton.Text = "Refrescar";
+            this.Refrescar_ToolStripButton.Click += new System.EventHandler(this.Refrescar_ToolStripButton_Click);
             // 
             // ToolStripSeparator1
             // 
@@ -307,6 +341,26 @@
             this.Producto_ToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.Producto_ToolStripButton.Text = "Producto";
             this.Producto_ToolStripButton.Click += new System.EventHandler(this.Producto_ToolStripButton_Click);
+            // 
+            // Marca_ToolStripButton
+            // 
+            this.Marca_ToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Marca_ToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("Marca_ToolStripButton.Image")));
+            this.Marca_ToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
+            this.Marca_ToolStripButton.Name = "Marca_ToolStripButton";
+            this.Marca_ToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.Marca_ToolStripButton.Text = "Marca";
+            this.Marca_ToolStripButton.Click += new System.EventHandler(this.Marca_ToolStripButton_Click);
+            // 
+            // Modelo_ToolStripButton
+            // 
+            this.Modelo_ToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Modelo_ToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("Modelo_ToolStripButton.Image")));
+            this.Modelo_ToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
+            this.Modelo_ToolStripButton.Name = "Modelo_ToolStripButton";
+            this.Modelo_ToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.Modelo_ToolStripButton.Text = "Modelo";
+            this.Modelo_ToolStripButton.Click += new System.EventHandler(this.Modelo_ToolStripButton_Click);
             // 
             // Categoria_ToolStripButton
             // 
@@ -391,6 +445,7 @@
             this.HelpToolStripButton.Name = "HelpToolStripButton";
             this.HelpToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.HelpToolStripButton.Text = "Temas de Ayuda";
+            this.HelpToolStripButton.Click += new System.EventHandler(this.HelpToolStripButton_Click);
             // 
             // ToolStripSeparator5
             // 
@@ -474,5 +529,9 @@
         internal System.Windows.Forms.ToolStripButton HelpToolStripButton;
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator5;
         internal System.Windows.Forms.ToolStripButton Salir_ToolStripButton;
+        internal System.Windows.Forms.ToolStripButton Marca_ToolStripButton;
+        internal System.Windows.Forms.ToolStripButton Modelo_ToolStripButton;
+        internal System.Windows.Forms.ToolStripMenuItem Marca_ToolStripMenuItem;
+        internal System.Windows.Forms.ToolStripMenuItem Modelo_ToolStripMenuItem;
     }
 }
