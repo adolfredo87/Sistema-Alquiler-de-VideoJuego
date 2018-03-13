@@ -1259,7 +1259,7 @@
         <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.Marca" Width="1.5" PointX="0.5" PointY="4.125" Height="2.0853483072916656" IsExpanded="true" />
         <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.Modelo" Width="1.5" PointX="2.625" PointY="4.25" Height="2.0853483072916674" IsExpanded="true" />
         <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.PagoCabecera" Width="1.5" PointX="9.25" PointY="1.125" Height="2.4140429687499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.PagoDetalle" Width="1.5" PointX="8" PointY="4.25" Height="2.2496956380208317" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.PagoDetalle" Width="1.5" PointX="8" PointY="4.125" Height="2.2496956380208317" IsExpanded="true" />
         <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.Precio" Width="1.5" PointX="4.375" PointY="4.5" Height="1.7566536458333317" IsExpanded="true" />
         <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.Producto" Width="1.5" PointX="4.625" PointY="1.25" Height="3.0714322916666674" IsExpanded="true" />
         <EntityTypeShape EntityType="DemoAlquilerGameWinFormModel.Tipo" Width="1.5" PointX="2.5" PointY="0.875" Height="2.2496956380208317" IsExpanded="true" />
@@ -1283,7 +1283,7 @@
           <ConnectorPoint PointX="7.166666666666667" PointY="0.76562749999999935" />
           <ConnectorPoint PointX="7.333333333333333" PointY="0.76562749999999991" />
           <ConnectorPoint PointX="8.625" PointY="0.76562749999999991" />
-          <ConnectorPoint PointX="8.625" PointY="4.25" />
+          <ConnectorPoint PointX="8.625" PointY="4.125" />
         </AssociationConnector>
         <AssociationConnector Association="DemoAlquilerGameWinFormModel.FK_Categoria_Tipo" ManuallyRouted="false">
           <ConnectorPoint PointX="4" PointY="0.96875" />
@@ -1296,18 +1296,22 @@
         </AssociationConnector>
         <AssociationConnector Association="DemoAlquilerGameWinFormModel.FK_Producto_Categoria" ManuallyRouted="false">
           <ConnectorPoint PointX="10.9218725" PointY="4.375" />
-          <ConnectorPoint PointX="10.9218725" PointY="3.894521484375" />
-          <ConnectorPoint PointX="8.7083333333333339" PointY="3.8945214843749993" />
-          <ConnectorPoint PointX="8.5416666666666661" PointY="3.894521484375" />
-          <ConnectorPoint PointX="8.3958308333333331" PointY="3.8945214843749993" />
-          <ConnectorPoint PointX="8.2291641666666653" PointY="3.894521484375" />
-          <ConnectorPoint PointX="6.125" PointY="3.894521484375" />
+          <ConnectorPoint PointX="10.9218725" PointY="3.832021484375" />
+          <ConnectorPoint PointX="9.0520848333333337" PointY="3.8320214843749993" />
+          <ConnectorPoint PointX="8.8854181666666658" PointY="3.832021484375" />
+          <ConnectorPoint PointX="8.7083333333333339" PointY="3.8320214843749993" />
+          <ConnectorPoint PointX="8.5416666666666661" PointY="3.832021484375" />
+          <ConnectorPoint PointX="6.125" PointY="3.832021484375" />
         </AssociationConnector>
-        <AssociationConnector Association="DemoAlquilerGameWinFormModel.FK_PagoCab_Cliente" ManuallyRouted="false">
+        <AssociationConnector Association="DemoAlquilerGameWinFormModel.FK_PagoCab_Cliente" ManuallyRouted="true">
           <ConnectorPoint PointX="8" PointY="2.2498478190104167" />
-          <ConnectorPoint PointX="8.5416666666666661" PointY="2.2498478190104163" />
-          <ConnectorPoint PointX="8.7083333333333339" PointY="2.2498478190104167" />
-          <ConnectorPoint PointX="9.25" PointY="2.2498478190104167" />
+          <ConnectorPoint PointX="8.4125" PointY="2.2498478190104167" />
+          <ConnectorPoint PointX="8.4125" PointY="1.9918447505342014" />
+          <ConnectorPoint PointX="8.5416666666666661" PointY="1.9918447505342007" />
+          <ConnectorPoint PointX="8.7083333333333339" PointY="1.9918447505342014" />
+          <ConnectorPoint PointX="8.8375" PointY="1.9918447505342014" />
+          <ConnectorPoint PointX="8.8375" PointY="2.1022955597367061" />
+          <ConnectorPoint PointX="9.25" PointY="2.1022955597367061" />
         </AssociationConnector>
         <AssociationConnector Association="DemoAlquilerGameWinFormModel.FK_Marca_Tipo" ManuallyRouted="false">
           <ConnectorPoint PointX="2.53125" PointY="3.1246956380208317" />
@@ -1337,11 +1341,9 @@
           <ConnectorPoint PointX="4.625" PointY="3.8816251282552092" />
         </AssociationConnector>
         <AssociationConnector Association="DemoAlquilerGameWinFormModel.FK_PagoDet_PagoCab" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.25" PointY="2.925697893880209" />
-          <ConnectorPoint PointX="8.7083333333333339" PointY="2.9256978938802085" />
-          <ConnectorPoint PointX="8.5416666666666661" PointY="2.925697893880209" />
-          <ConnectorPoint PointX="8.3124975" PointY="2.925697893880209" />
-          <ConnectorPoint PointX="8.3124975" PointY="4.25" />
+          <ConnectorPoint PointX="9.25" PointY="2.332021484375" />
+          <ConnectorPoint PointX="8.9687515" PointY="2.332021484375" />
+          <ConnectorPoint PointX="8.9687515" PointY="4.125" />
         </AssociationConnector>
         <AssociationConnector Association="DemoAlquilerGameWinFormModel.FK_Producto_Tipo" ManuallyRouted="false">
           <ConnectorPoint PointX="4" PointY="2.6247717285156238" />
