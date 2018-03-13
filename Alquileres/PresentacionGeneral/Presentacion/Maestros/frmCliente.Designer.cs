@@ -38,6 +38,7 @@
             this.mstpItemCancelar = new System.Windows.Forms.ToolStripMenuItem();
             this.mstpItemSalir = new System.Windows.Forms.ToolStripMenuItem();
             this.TableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label10 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.Label1 = new System.Windows.Forms.Label();
             this.Label2 = new System.Windows.Forms.Label();
@@ -48,7 +49,6 @@
             this.txtTelefono = new System.Windows.Forms.TextBox();
             this.txtCorreo = new System.Windows.Forms.TextBox();
             this.txtDireccion = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.cmbEstatus = new System.Windows.Forms.ComboBox();
             this.GrupBox.SuspendLayout();
             this.mstpMenuMaestro.SuspendLayout();
@@ -84,6 +84,7 @@
             this.mstpItemNuevo.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemNuevo.Image")));
             this.mstpItemNuevo.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.mstpItemNuevo.Name = "mstpItemNuevo";
+            this.mstpItemNuevo.ShortcutKeys = System.Windows.Forms.Keys.F7;
             this.mstpItemNuevo.Size = new System.Drawing.Size(55, 20);
             this.mstpItemNuevo.Text = "(F7)";
             this.mstpItemNuevo.ToolTipText = "Nuevo";
@@ -94,6 +95,7 @@
             this.mstpItemBuscar.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemBuscar.Image")));
             this.mstpItemBuscar.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.mstpItemBuscar.Name = "mstpItemBuscar";
+            this.mstpItemBuscar.ShortcutKeys = System.Windows.Forms.Keys.F8;
             this.mstpItemBuscar.Size = new System.Drawing.Size(55, 20);
             this.mstpItemBuscar.Text = "(F8)";
             this.mstpItemBuscar.ToolTipText = "Buscar";
@@ -105,6 +107,7 @@
             this.mstpItemModificar.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemModificar.Image")));
             this.mstpItemModificar.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.mstpItemModificar.Name = "mstpItemModificar";
+            this.mstpItemModificar.ShortcutKeys = System.Windows.Forms.Keys.F9;
             this.mstpItemModificar.Size = new System.Drawing.Size(55, 20);
             this.mstpItemModificar.Text = "(F9)";
             this.mstpItemModificar.ToolTipText = "Modificar";
@@ -116,6 +119,7 @@
             this.mstpItemGuardar.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemGuardar.Image")));
             this.mstpItemGuardar.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.mstpItemGuardar.Name = "mstpItemGuardar";
+            this.mstpItemGuardar.ShortcutKeys = System.Windows.Forms.Keys.F10;
             this.mstpItemGuardar.Size = new System.Drawing.Size(61, 20);
             this.mstpItemGuardar.Text = "(F10)";
             this.mstpItemGuardar.ToolTipText = "Guardar";
@@ -127,6 +131,7 @@
             this.mstpItemEliminar.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemEliminar.Image")));
             this.mstpItemEliminar.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.mstpItemEliminar.Name = "mstpItemEliminar";
+            this.mstpItemEliminar.ShortcutKeys = System.Windows.Forms.Keys.F11;
             this.mstpItemEliminar.Size = new System.Drawing.Size(61, 20);
             this.mstpItemEliminar.Text = "(F11)";
             this.mstpItemEliminar.ToolTipText = "Eliminar";
@@ -138,6 +143,7 @@
             this.mstpItemCancelar.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemCancelar.Image")));
             this.mstpItemCancelar.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.mstpItemCancelar.Name = "mstpItemCancelar";
+            this.mstpItemCancelar.ShortcutKeys = System.Windows.Forms.Keys.F12;
             this.mstpItemCancelar.Size = new System.Drawing.Size(61, 20);
             this.mstpItemCancelar.Text = "(F12)";
             this.mstpItemCancelar.ToolTipText = "Cancelar";
@@ -189,6 +195,17 @@
             this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TableLayoutPanel1.Size = new System.Drawing.Size(565, 423);
             this.TableLayoutPanel1.TabIndex = 1;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.Transparent;
+            this.label10.Location = new System.Drawing.Point(26, 165);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(42, 13);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "Estatus";
             // 
             // label3
             // 
@@ -296,17 +313,6 @@
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(488, 48);
             this.txtDireccion.TabIndex = 9;
-            // 
-            // label10
-            // 
-            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.Location = new System.Drawing.Point(26, 165);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(42, 13);
-            this.label10.TabIndex = 22;
-            this.label10.Text = "Estatus";
             // 
             // cmbEstatus
             // 

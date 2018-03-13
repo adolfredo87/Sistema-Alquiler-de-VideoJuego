@@ -72,6 +72,7 @@
             this.mstpItemGuardar.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemGuardar.Image")));
             this.mstpItemGuardar.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.mstpItemGuardar.Name = "mstpItemGuardar";
+            this.mstpItemGuardar.ShortcutKeys = System.Windows.Forms.Keys.F10;
             this.mstpItemGuardar.Size = new System.Drawing.Size(103, 20);
             this.mstpItemGuardar.Text = "Guardar (F10)";
             this.mstpItemGuardar.Click += new System.EventHandler(this.mstpItemGuardar_Click);
@@ -81,6 +82,7 @@
             this.mstpItemCancelar.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemCancelar.Image")));
             this.mstpItemCancelar.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.mstpItemCancelar.Name = "mstpItemCancelar";
+            this.mstpItemCancelar.ShortcutKeys = System.Windows.Forms.Keys.F12;
             this.mstpItemCancelar.Size = new System.Drawing.Size(106, 20);
             this.mstpItemCancelar.Text = "Cancelar (F12)";
             this.mstpItemCancelar.Click += new System.EventHandler(this.mstpItemCancelar_Click);

@@ -34,9 +34,6 @@
             this.mstpItemCancelar = new System.Windows.Forms.ToolStripMenuItem();
             this.mstpItemSalir = new System.Windows.Forms.ToolStripMenuItem();
             this.dgProductos = new System.Windows.Forms.DataGridView();
-            this.mstpInsSupr = new System.Windows.Forms.MenuStrip();
-            this.mstpItemInsert = new System.Windows.Forms.ToolStripMenuItem();
-            this.mstpItemSupr = new System.Windows.Forms.ToolStripMenuItem();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTipo = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,6 +42,9 @@
             this.colModelo = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.colCategoria = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.colEstatus = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.mstpInsSupr = new System.Windows.Forms.MenuStrip();
+            this.mstpItemInsert = new System.Windows.Forms.ToolStripMenuItem();
+            this.mstpItemSupr = new System.Windows.Forms.ToolStripMenuItem();
             this.GrupBox.SuspendLayout();
             this.mstpGuardarCancelar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgProductos)).BeginInit();
@@ -75,6 +75,7 @@
             this.mstpItemGuardar.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemGuardar.Image")));
             this.mstpItemGuardar.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.mstpItemGuardar.Name = "mstpItemGuardar";
+            this.mstpItemGuardar.ShortcutKeys = System.Windows.Forms.Keys.F10;
             this.mstpItemGuardar.Size = new System.Drawing.Size(103, 20);
             this.mstpItemGuardar.Text = "Guardar (F10)";
             this.mstpItemGuardar.Click += new System.EventHandler(this.mstpItemGuardar_Click);
@@ -84,6 +85,7 @@
             this.mstpItemCancelar.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemCancelar.Image")));
             this.mstpItemCancelar.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.mstpItemCancelar.Name = "mstpItemCancelar";
+            this.mstpItemCancelar.ShortcutKeys = System.Windows.Forms.Keys.F12;
             this.mstpItemCancelar.Size = new System.Drawing.Size(106, 20);
             this.mstpItemCancelar.Text = "Cancelar (F12)";
             this.mstpItemCancelar.Click += new System.EventHandler(this.mstpItemCancelar_Click);
@@ -121,37 +123,6 @@
             this.dgProductos.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgProductos_CellEndEdit);
             this.dgProductos.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgProductos_DataError);
             this.dgProductos.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgProductos_EditingControlShowing);
-            // 
-            // mstpInsSupr
-            // 
-            this.mstpInsSupr.BackColor = System.Drawing.Color.Transparent;
-            this.mstpInsSupr.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.mstpInsSupr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mstpItemInsert,
-            this.mstpItemSupr});
-            this.mstpInsSupr.Location = new System.Drawing.Point(0, 463);
-            this.mstpInsSupr.Name = "mstpInsSupr";
-            this.mstpInsSupr.Size = new System.Drawing.Size(601, 24);
-            this.mstpInsSupr.TabIndex = 3;
-            this.mstpInsSupr.Text = "MenuStrip2";
-            // 
-            // mstpItemInsert
-            // 
-            this.mstpItemInsert.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemInsert.Image")));
-            this.mstpItemInsert.MergeAction = System.Windows.Forms.MergeAction.Insert;
-            this.mstpItemInsert.Name = "mstpItemInsert";
-            this.mstpItemInsert.Size = new System.Drawing.Size(72, 20);
-            this.mstpItemInsert.Text = "(Insert)";
-            this.mstpItemInsert.Click += new System.EventHandler(this.mstpItemInsert_Click);
-            // 
-            // mstpItemSupr
-            // 
-            this.mstpItemSupr.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemSupr.Image")));
-            this.mstpItemSupr.MergeAction = System.Windows.Forms.MergeAction.Insert;
-            this.mstpItemSupr.Name = "mstpItemSupr";
-            this.mstpItemSupr.Size = new System.Drawing.Size(65, 20);
-            this.mstpItemSupr.Text = "(Supr)";
-            this.mstpItemSupr.Click += new System.EventHandler(this.mstpItemSupr_Click);
             // 
             // colID
             // 
@@ -214,6 +185,37 @@
             this.colEstatus.HeaderText = "Estatus";
             this.colEstatus.Name = "colEstatus";
             this.colEstatus.Width = 70;
+            // 
+            // mstpInsSupr
+            // 
+            this.mstpInsSupr.BackColor = System.Drawing.Color.Transparent;
+            this.mstpInsSupr.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.mstpInsSupr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mstpItemInsert,
+            this.mstpItemSupr});
+            this.mstpInsSupr.Location = new System.Drawing.Point(0, 463);
+            this.mstpInsSupr.Name = "mstpInsSupr";
+            this.mstpInsSupr.Size = new System.Drawing.Size(601, 24);
+            this.mstpInsSupr.TabIndex = 3;
+            this.mstpInsSupr.Text = "MenuStrip2";
+            // 
+            // mstpItemInsert
+            // 
+            this.mstpItemInsert.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemInsert.Image")));
+            this.mstpItemInsert.MergeAction = System.Windows.Forms.MergeAction.Insert;
+            this.mstpItemInsert.Name = "mstpItemInsert";
+            this.mstpItemInsert.Size = new System.Drawing.Size(72, 20);
+            this.mstpItemInsert.Text = "(Insert)";
+            this.mstpItemInsert.Click += new System.EventHandler(this.mstpItemInsert_Click);
+            // 
+            // mstpItemSupr
+            // 
+            this.mstpItemSupr.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemSupr.Image")));
+            this.mstpItemSupr.MergeAction = System.Windows.Forms.MergeAction.Insert;
+            this.mstpItemSupr.Name = "mstpItemSupr";
+            this.mstpItemSupr.Size = new System.Drawing.Size(65, 20);
+            this.mstpItemSupr.Text = "(Supr)";
+            this.mstpItemSupr.Click += new System.EventHandler(this.mstpItemSupr_Click);
             // 
             // frmProducto
             // 

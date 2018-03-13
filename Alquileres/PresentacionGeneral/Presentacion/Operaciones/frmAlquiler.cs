@@ -332,6 +332,7 @@ namespace Presentacion.Operaciones
                 if (String.IsNullOrEmpty(caturar))
                 {
                     MessageBox.Show("Introduzca un valor numerico", EntidadNegocio.Entidades.Mensajes.Titulo_Advertencia, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    this.Cancelar();
                 }
                 else if (Int32.TryParse(caturar, out result))
                 {
@@ -352,11 +353,13 @@ namespace Presentacion.Operaciones
                 else
                 {
                     MessageBox.Show("El valor no es numerico, introduzca un valor numerico", EntidadNegocio.Entidades.Mensajes.Titulo_Advertencia, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    this.Cancelar();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Cancelar();
             }
         }
         private void CargarComboCliente() 

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPago));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mstpMenuMaestro = new System.Windows.Forms.MenuStrip();
             this.mstpItemNuevo = new System.Windows.Forms.ToolStripMenuItem();
             this.mstpItemBuscar = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,6 +106,7 @@
             this.mstpItemNuevo.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemNuevo.Image")));
             this.mstpItemNuevo.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.mstpItemNuevo.Name = "mstpItemNuevo";
+            this.mstpItemNuevo.ShortcutKeys = System.Windows.Forms.Keys.F7;
             this.mstpItemNuevo.Size = new System.Drawing.Size(55, 20);
             this.mstpItemNuevo.Text = "(F7)";
             this.mstpItemNuevo.ToolTipText = "Nuevo";
@@ -115,6 +116,7 @@
             this.mstpItemBuscar.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemBuscar.Image")));
             this.mstpItemBuscar.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.mstpItemBuscar.Name = "mstpItemBuscar";
+            this.mstpItemBuscar.ShortcutKeys = System.Windows.Forms.Keys.F8;
             this.mstpItemBuscar.Size = new System.Drawing.Size(55, 20);
             this.mstpItemBuscar.Text = "(F8)";
             this.mstpItemBuscar.ToolTipText = "Buscar";
@@ -125,6 +127,7 @@
             this.mstpItemModificar.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemModificar.Image")));
             this.mstpItemModificar.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.mstpItemModificar.Name = "mstpItemModificar";
+            this.mstpItemModificar.ShortcutKeys = System.Windows.Forms.Keys.F9;
             this.mstpItemModificar.Size = new System.Drawing.Size(55, 20);
             this.mstpItemModificar.Text = "(F9)";
             this.mstpItemModificar.ToolTipText = "Modificar";
@@ -135,6 +138,7 @@
             this.mstpItemGuardar.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemGuardar.Image")));
             this.mstpItemGuardar.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.mstpItemGuardar.Name = "mstpItemGuardar";
+            this.mstpItemGuardar.ShortcutKeys = System.Windows.Forms.Keys.F10;
             this.mstpItemGuardar.Size = new System.Drawing.Size(61, 20);
             this.mstpItemGuardar.Text = "(F10)";
             this.mstpItemGuardar.ToolTipText = "Guardar";
@@ -145,6 +149,7 @@
             this.mstpItemEliminar.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemEliminar.Image")));
             this.mstpItemEliminar.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.mstpItemEliminar.Name = "mstpItemEliminar";
+            this.mstpItemEliminar.ShortcutKeys = System.Windows.Forms.Keys.F11;
             this.mstpItemEliminar.Size = new System.Drawing.Size(61, 20);
             this.mstpItemEliminar.Text = "(F11)";
             this.mstpItemEliminar.ToolTipText = "Eliminar";
@@ -155,6 +160,7 @@
             this.mstpItemCancelar.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemCancelar.Image")));
             this.mstpItemCancelar.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.mstpItemCancelar.Name = "mstpItemCancelar";
+            this.mstpItemCancelar.ShortcutKeys = System.Windows.Forms.Keys.F12;
             this.mstpItemCancelar.Size = new System.Drawing.Size(61, 20);
             this.mstpItemCancelar.Text = "(F12)";
             this.mstpItemCancelar.ToolTipText = "Cancelar";
@@ -416,8 +422,8 @@
             // colMonto
             // 
             this.colMonto.DataPropertyName = "Monto";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colMonto.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colMonto.DefaultCellStyle = dataGridViewCellStyle2;
             this.colMonto.HeaderText = "Monto";
             this.colMonto.Name = "colMonto";
             // 
