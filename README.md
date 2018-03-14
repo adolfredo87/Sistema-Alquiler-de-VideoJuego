@@ -51,4 +51,4 @@ Metodología: Desarrollo en C# WinForms N-tiers MVVM (Modelo-Vista-ModeloVista).
 
 Back-End: C# (C# WinForms), Linq C#, Expresiones Lambda C#, .Net Entity Framework, Colecciones Lsit<Entidad>, Delegados, etc.
 
-Software (c) 2018 Adolfredo Belizario. Este Software fue creado por Adolfredo Belizario bajo licencia MIT con el propósito de mostrar mi trabajo a Reclutadores en Desarrollo en .Net y C#
+Software (c) 2018 Adolfredo Belizario. Este Software fue creado por Adolfredo Belizario bajo licencia MPL v2.0 con el propósito de mostrar mi trabajo a Reclutadores en Desarrollo en .Net y C#
