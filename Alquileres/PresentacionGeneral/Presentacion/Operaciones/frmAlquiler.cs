@@ -50,17 +50,6 @@ namespace Presentacion.Operaciones
             this.lblFechaDesdeFormato.Visible = false;
             this.lblFechaHastaFormato.Visible = false;
         }
-        public frmAlquiler(int idalquiler)
-        {
-            InitializeComponent();
-            _ctrlAlquiler = new LogicaNegocio.AlquilerController();
-            _alquiler = new EntidadNegocio.Entidades.Alquiler();
-            _idalquiler = idalquiler;
-            this.mstpItemCancelar.Visible = false;
-            this.mstpItemModificar.Visible = false;
-            this.mstpItemNuevo.Visible = false;
-            txtCodigo.TabIndex = 0;
-        }
         private void CargarClientes()
         {
             try
@@ -77,6 +66,47 @@ namespace Presentacion.Operaciones
             try
             {
                 _lstProductos = _ctrlProducto.ObtenerItems();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void CargarComboCliente()
+        {
+            this.CargarClientes();
+            List<EntidadNegocio.Entidades.Cliente> _clientes = new List<EntidadNegocio.Entidades.Cliente>();
+            _clientes = (from c in _lstClientes select c).ToList();
+            cmbCliente.DisplayMember = "Nombre";
+            cmbCliente.ValueMember = "ID";
+            cmbCliente.DataSource = _clientes;
+        }
+        private void CargarComboProducto()
+        {
+            this.CargarProductos();
+            List<EntidadNegocio.Entidades.Producto> _productos = new List<EntidadNegocio.Entidades.Producto>();
+            _productos = (from c in _lstProductos select c).ToList();
+            cmbProducto.DisplayMember = "Descripcion";
+            cmbProducto.ValueMember = "ID";
+            cmbProducto.DataSource = _productos;
+        }
+        private void LlenarComboEstatus()
+        {
+            try
+            {
+                List<EntidadNegocio.Entidades.EstatusRegistro> l = new List<EntidadNegocio.Entidades.EstatusRegistro>();
+                int[] values = ((int[])Enum.GetValues(typeof(EntidadNegocio.Enumerados.EnumEstatus.Registro)));
+                EntidadNegocio.Entidades.EstatusRegistro i;
+                foreach (int value in values)
+                {
+                    i = new EntidadNegocio.Entidades.EstatusRegistro();
+                    i.Descripcion = Enum.GetName(typeof(EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler), value);
+                    i.Estatus = value;
+                    l.Add(i);
+                }
+                cmbEstatus.DataSource = l;
+                cmbEstatus.DisplayMember = "Descripcion";
+                cmbEstatus.ValueMember = "Estatus";
             }
             catch (Exception ex)
             {
@@ -372,46 +402,6 @@ namespace Presentacion.Operaciones
                 this.Cancelar();
             }
         }
-        private void CargarComboCliente() 
-        {
-            this.CargarClientes();
-            List<EntidadNegocio.Entidades.Cliente> _clientes = new List<EntidadNegocio.Entidades.Cliente>();
-            _clientes = (from c in _lstClientes select c).ToList();
-            cmbCliente.DisplayMember = "Nombre";
-            cmbCliente.ValueMember = "ID";
-            cmbCliente.DataSource = _clientes;
-        }
-        private void CargarComboProducto()
-        {
-            this.CargarProductos();
-            List<EntidadNegocio.Entidades.Producto> _productos = new List<EntidadNegocio.Entidades.Producto>();
-            _productos = (from c in _lstProductos select c).ToList();
-            cmbProducto.DisplayMember = "Descripcion";
-            cmbProducto.ValueMember = "ID";
-            cmbProducto.DataSource = _productos;
-        }
-        private void LlenarComboEstatus()
-        {
-            try
-            {
-                List<EntidadNegocio.Entidades.EstatusRegistro> l = new List<EntidadNegocio.Entidades.EstatusRegistro>();
-                int[] values = ((int[])Enum.GetValues(typeof(EntidadNegocio.Enumerados.EnumEstatus.Registro)));
-                EntidadNegocio.Entidades.EstatusRegistro i;
-                foreach (int value in values)
-                {
-                    i = new EntidadNegocio.Entidades.EstatusRegistro();
-                    i.Descripcion = Enum.GetName(typeof(EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler), value);
-                    i.Estatus = value;
-                    l.Add(i);
-                }
-                cmbEstatus.DataSource = l;
-                cmbEstatus.DisplayMember = "Descripcion";
-                cmbEstatus.ValueMember = "Estatus";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+
     }
 }

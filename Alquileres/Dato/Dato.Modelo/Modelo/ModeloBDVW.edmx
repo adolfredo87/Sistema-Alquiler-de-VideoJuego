@@ -1,0 +1,394 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DemoAlquilerGameDBVWModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="DemoAlquilerGameDBVWModelStoreContainer">
+          <EntitySet Name="vw_alquiler_pagado" EntityType="DemoAlquilerGameDBVWModel.Store.vw_alquiler_pagado" store:Type="Views" store:Schema="dbo" store:Name="vw_alquiler_pagado">
+            <DefiningQuery>SELECT 
+      [vw_alquiler_pagado].[ID] AS [ID], 
+      [vw_alquiler_pagado].[Nombre] AS [Nombre], 
+      [vw_alquiler_pagado].[Telefono] AS [Telefono], 
+      [vw_alquiler_pagado].[Correo] AS [Correo], 
+      [vw_alquiler_pagado].[Producto] AS [Producto], 
+      [vw_alquiler_pagado].[FechaDesde] AS [FechaDesde], 
+      [vw_alquiler_pagado].[FechaHasta] AS [FechaHasta], 
+      [vw_alquiler_pagado].[TiempoHora] AS [TiempoHora], 
+      [vw_alquiler_pagado].[TiempoDia] AS [TiempoDia], 
+      [vw_alquiler_pagado].[TiempoSemana] AS [TiempoSemana], 
+      [vw_alquiler_pagado].[PrecioEstimado] AS [PrecioEstimado], 
+      [vw_alquiler_pagado].[MontoExento] AS [MontoExento], 
+      [vw_alquiler_pagado].[Descuento] AS [Descuento], 
+      [vw_alquiler_pagado].[MontoTotal] AS [MontoTotal], 
+      [vw_alquiler_pagado].[Estatus] AS [Estatus]
+      FROM [dbo].[vw_alquiler_pagado] AS [vw_alquiler_pagado]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_alquiler_por_pagar" EntityType="DemoAlquilerGameDBVWModel.Store.vw_alquiler_por_pagar" store:Type="Views" store:Schema="dbo" store:Name="vw_alquiler_por_pagar">
+            <DefiningQuery>SELECT 
+      [vw_alquiler_por_pagar].[ID] AS [ID], 
+      [vw_alquiler_por_pagar].[Nombre] AS [Nombre], 
+      [vw_alquiler_por_pagar].[Telefono] AS [Telefono], 
+      [vw_alquiler_por_pagar].[Correo] AS [Correo], 
+      [vw_alquiler_por_pagar].[Producto] AS [Producto], 
+      [vw_alquiler_por_pagar].[FechaDesde] AS [FechaDesde], 
+      [vw_alquiler_por_pagar].[FechaHasta] AS [FechaHasta], 
+      [vw_alquiler_por_pagar].[TiempoHora] AS [TiempoHora], 
+      [vw_alquiler_por_pagar].[TiempoDia] AS [TiempoDia], 
+      [vw_alquiler_por_pagar].[TiempoSemana] AS [TiempoSemana], 
+      [vw_alquiler_por_pagar].[PrecioEstimado] AS [PrecioEstimado], 
+      [vw_alquiler_por_pagar].[Estatus] AS [Estatus]
+      FROM [dbo].[vw_alquiler_por_pagar] AS [vw_alquiler_por_pagar]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_cantidad_alquiler_pagado" EntityType="DemoAlquilerGameDBVWModel.Store.vw_cantidad_alquiler_pagado" store:Type="Views" store:Schema="dbo" store:Name="vw_cantidad_alquiler_pagado">
+            <DefiningQuery>SELECT 
+      [vw_cantidad_alquiler_pagado].[IDCliente] AS [IDCliente], 
+      [vw_cantidad_alquiler_pagado].[Nombre] AS [Nombre], 
+      [vw_cantidad_alquiler_pagado].[Telefono] AS [Telefono], 
+      [vw_cantidad_alquiler_pagado].[Correo] AS [Correo], 
+      [vw_cantidad_alquiler_pagado].[Direccion] AS [Direccion], 
+      [vw_cantidad_alquiler_pagado].[NumAlquiler] AS [NumAlquiler], 
+      [vw_cantidad_alquiler_pagado].[Fecha] AS [Fecha], 
+      [vw_cantidad_alquiler_pagado].[MontoExento] AS [MontoExento], 
+      [vw_cantidad_alquiler_pagado].[Descuento] AS [Descuento], 
+      [vw_cantidad_alquiler_pagado].[MontoTotal] AS [MontoTotal], 
+      [vw_cantidad_alquiler_pagado].[Estatus] AS [Estatus]
+      FROM [dbo].[vw_cantidad_alquiler_pagado] AS [vw_cantidad_alquiler_pagado]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_cantidad_alquiler_por_pagar" EntityType="DemoAlquilerGameDBVWModel.Store.vw_cantidad_alquiler_por_pagar" store:Type="Views" store:Schema="dbo" store:Name="vw_cantidad_alquiler_por_pagar">
+            <DefiningQuery>SELECT 
+      [vw_cantidad_alquiler_por_pagar].[IDCliente] AS [IDCliente], 
+      [vw_cantidad_alquiler_por_pagar].[Nombre] AS [Nombre], 
+      [vw_cantidad_alquiler_por_pagar].[Telefono] AS [Telefono], 
+      [vw_cantidad_alquiler_por_pagar].[Correo] AS [Correo], 
+      [vw_cantidad_alquiler_por_pagar].[Direccion] AS [Direccion], 
+      [vw_cantidad_alquiler_por_pagar].[NumAlquiler] AS [NumAlquiler], 
+      [vw_cantidad_alquiler_por_pagar].[Estatus] AS [Estatus]
+      FROM [dbo].[vw_cantidad_alquiler_por_pagar] AS [vw_cantidad_alquiler_por_pagar]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_producto_descripcion" EntityType="DemoAlquilerGameDBVWModel.Store.vw_producto_descripcion" store:Type="Views" store:Schema="dbo" store:Name="vw_producto_descripcion">
+            <DefiningQuery>SELECT 
+      [vw_producto_descripcion].[ID] AS [ID], 
+      [vw_producto_descripcion].[Tipo] AS [Tipo], 
+      [vw_producto_descripcion].[Codigo] AS [Codigo], 
+      [vw_producto_descripcion].[Producto] AS [Producto], 
+      [vw_producto_descripcion].[Marca] AS [Marca], 
+      [vw_producto_descripcion].[Modelo] AS [Modelo], 
+      [vw_producto_descripcion].[Categoria] AS [Categoria]
+      FROM [dbo].[vw_producto_descripcion] AS [vw_producto_descripcion]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+        <!--Se encontraron errores durante la generación:
+      advertencia 6002: La tabla o vista 'DemoAlquilerGameWinForm.dbo.vw_alquiler_pagado' no tiene ninguna clave principal definida. Se ha inferido la clave y la definición se creó como vista o tabla de solo lectura.
+      -->
+        <EntityType Name="vw_alquiler_pagado">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Producto" />
+            <PropertyRef Name="FechaDesde" />
+            <PropertyRef Name="FechaHasta" />
+            <PropertyRef Name="Estatus" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Telefono" Type="varchar" MaxLength="255" />
+          <Property Name="Correo" Type="varchar" MaxLength="255" />
+          <Property Name="Producto" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="FechaDesde" Type="datetime" Nullable="false" />
+          <Property Name="FechaHasta" Type="datetime" Nullable="false" />
+          <Property Name="TiempoHora" Type="varchar" MaxLength="255" />
+          <Property Name="TiempoDia" Type="varchar" MaxLength="255" />
+          <Property Name="TiempoSemana" Type="varchar" MaxLength="255" />
+          <Property Name="PrecioEstimado" Type="float" />
+          <Property Name="MontoExento" Type="float" />
+          <Property Name="Descuento" Type="float" />
+          <Property Name="MontoTotal" Type="float" />
+          <Property Name="Estatus" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Se encontraron errores durante la generación:
+      advertencia 6002: La tabla o vista 'DemoAlquilerGameWinForm.dbo.vw_alquiler_por_pagar' no tiene ninguna clave principal definida. Se ha inferido la clave y la definición se creó como vista o tabla de solo lectura.
+      -->
+        <EntityType Name="vw_alquiler_por_pagar">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Producto" />
+            <PropertyRef Name="FechaDesde" />
+            <PropertyRef Name="FechaHasta" />
+            <PropertyRef Name="Estatus" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Telefono" Type="varchar" MaxLength="255" />
+          <Property Name="Correo" Type="varchar" MaxLength="255" />
+          <Property Name="Producto" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="FechaDesde" Type="datetime" Nullable="false" />
+          <Property Name="FechaHasta" Type="datetime" Nullable="false" />
+          <Property Name="TiempoHora" Type="varchar" MaxLength="255" />
+          <Property Name="TiempoDia" Type="varchar" MaxLength="255" />
+          <Property Name="TiempoSemana" Type="varchar" MaxLength="255" />
+          <Property Name="PrecioEstimado" Type="float" />
+          <Property Name="Estatus" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Se encontraron errores durante la generación:
+      advertencia 6002: La tabla o vista 'DemoAlquilerGameWinForm.dbo.vw_cantidad_alquiler_pagado' no tiene ninguna clave principal definida. Se ha inferido la clave y la definición se creó como vista o tabla de solo lectura.
+      -->
+        <EntityType Name="vw_cantidad_alquiler_pagado">
+          <Key>
+            <PropertyRef Name="IDCliente" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Estatus" />
+          </Key>
+          <Property Name="IDCliente" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Telefono" Type="varchar" MaxLength="255" />
+          <Property Name="Correo" Type="varchar" MaxLength="255" />
+          <Property Name="Direccion" Type="varchar" MaxLength="255" />
+          <Property Name="NumAlquiler" Type="int" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="MontoExento" Type="float" />
+          <Property Name="Descuento" Type="float" />
+          <Property Name="MontoTotal" Type="float" />
+          <Property Name="Estatus" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Se encontraron errores durante la generación:
+      advertencia 6002: La tabla o vista 'DemoAlquilerGameWinForm.dbo.vw_cantidad_alquiler_por_pagar' no tiene ninguna clave principal definida. Se ha inferido la clave y la definición se creó como vista o tabla de solo lectura.
+      -->
+        <EntityType Name="vw_cantidad_alquiler_por_pagar">
+          <Key>
+            <PropertyRef Name="IDCliente" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Estatus" />
+          </Key>
+          <Property Name="IDCliente" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Telefono" Type="varchar" MaxLength="255" />
+          <Property Name="Correo" Type="varchar" MaxLength="255" />
+          <Property Name="Direccion" Type="varchar" MaxLength="255" />
+          <Property Name="NumAlquiler" Type="int" />
+          <Property Name="Estatus" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Se encontraron errores durante la generación:
+      advertencia 6002: La tabla o vista 'DemoAlquilerGameWinForm.dbo.vw_producto_descripcion' no tiene ninguna clave principal definida. Se ha inferido la clave y la definición se creó como vista o tabla de solo lectura.
+      -->
+        <EntityType Name="vw_producto_descripcion">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Codigo" />
+            <PropertyRef Name="Producto" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="255" />
+          <Property Name="Codigo" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Producto" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Marca" Type="varchar" MaxLength="255" />
+          <Property Name="Modelo" Type="varchar" MaxLength="255" />
+          <Property Name="Categoria" Type="varchar" MaxLength="255" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DemoAlquilerGameDBVWModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="DemoAlquilerGameDBVW" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alquiler_Pagado_VW_Set" EntityType="DemoAlquilerGameDBVWModel.Alquiler_Pagado_VW" />
+          <EntitySet Name="Alquiler_Por_Pagar_VW_Set" EntityType="DemoAlquilerGameDBVWModel.Alquiler_Por_Pagar_VW" />
+          <EntitySet Name="Cantidad_Alquileres_Pagados_VW_Set" EntityType="DemoAlquilerGameDBVWModel.Cantidad_Alquileres_Pagados_VW" />
+          <EntitySet Name="Cantidad_Alquileres_Por_Pagar_VW_Set" EntityType="DemoAlquilerGameDBVWModel.Cantidad_Alquileres_Por_Pagar_VW" />
+          <EntitySet Name="Producto_Descripcion_VW_Set" EntityType="DemoAlquilerGameDBVWModel.Producto_Descripcion_VW" />
+        </EntityContainer>
+        <EntityType Name="Alquiler_Pagado_VW">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Producto" />
+            <PropertyRef Name="FechaDesde" />
+            <PropertyRef Name="FechaHasta" />
+            <PropertyRef Name="Estatus" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Telefono" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Correo" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Producto" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="FechaDesde" Type="DateTime" Nullable="false" />
+          <Property Name="FechaHasta" Type="DateTime" Nullable="false" />
+          <Property Name="TiempoHora" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="TiempoDia" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="TiempoSemana" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="PrecioEstimado" Type="Double" />
+          <Property Name="MontoExento" Type="Double" />
+          <Property Name="Descuento" Type="Double" />
+          <Property Name="MontoTotal" Type="Double" />
+          <Property Name="Estatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Alquiler_Por_Pagar_VW">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Producto" />
+            <PropertyRef Name="FechaDesde" />
+            <PropertyRef Name="FechaHasta" />
+            <PropertyRef Name="Estatus" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Telefono" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Correo" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Producto" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="FechaDesde" Type="DateTime" Nullable="false" />
+          <Property Name="FechaHasta" Type="DateTime" Nullable="false" />
+          <Property Name="TiempoHora" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="TiempoDia" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="TiempoSemana" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="PrecioEstimado" Type="Double" />
+          <Property Name="Estatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cantidad_Alquileres_Pagados_VW">
+          <Key>
+            <PropertyRef Name="IDCliente" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Estatus" />
+          </Key>
+          <Property Name="IDCliente" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Telefono" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Correo" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Direccion" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="NumAlquiler" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" />
+          <Property Name="MontoExento" Type="Double" />
+          <Property Name="Descuento" Type="Double" />
+          <Property Name="MontoTotal" Type="Double" />
+          <Property Name="Estatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cantidad_Alquileres_Por_Pagar_VW">
+          <Key>
+            <PropertyRef Name="IDCliente" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Estatus" />
+          </Key>
+          <Property Name="IDCliente" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Telefono" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Correo" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Direccion" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="NumAlquiler" Type="Int32" />
+          <Property Name="Estatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Producto_Descripcion_VW">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Codigo" />
+            <PropertyRef Name="Producto" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Tipo" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Producto" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Marca" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Modelo" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Categoria" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DemoAlquilerGameDBVWModelStoreContainer" CdmEntityContainer="DemoAlquilerGameDBVW">
+          <EntitySetMapping Name="Alquiler_Pagado_VW_Set"><EntityTypeMapping TypeName="DemoAlquilerGameDBVWModel.Alquiler_Pagado_VW"><MappingFragment StoreEntitySet="vw_alquiler_pagado">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+            <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+            <ScalarProperty Name="Correo" ColumnName="Correo" />
+            <ScalarProperty Name="Producto" ColumnName="Producto" />
+            <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
+            <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
+            <ScalarProperty Name="TiempoHora" ColumnName="TiempoHora" />
+            <ScalarProperty Name="TiempoDia" ColumnName="TiempoDia" />
+            <ScalarProperty Name="TiempoSemana" ColumnName="TiempoSemana" />
+            <ScalarProperty Name="PrecioEstimado" ColumnName="PrecioEstimado" />
+            <ScalarProperty Name="MontoExento" ColumnName="MontoExento" />
+            <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+            <ScalarProperty Name="MontoTotal" ColumnName="MontoTotal" />
+            <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Alquiler_Por_Pagar_VW_Set"><EntityTypeMapping TypeName="DemoAlquilerGameDBVWModel.Alquiler_Por_Pagar_VW"><MappingFragment StoreEntitySet="vw_alquiler_por_pagar">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+            <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+            <ScalarProperty Name="Correo" ColumnName="Correo" />
+            <ScalarProperty Name="Producto" ColumnName="Producto" />
+            <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
+            <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
+            <ScalarProperty Name="TiempoHora" ColumnName="TiempoHora" />
+            <ScalarProperty Name="TiempoDia" ColumnName="TiempoDia" />
+            <ScalarProperty Name="TiempoSemana" ColumnName="TiempoSemana" />
+            <ScalarProperty Name="PrecioEstimado" ColumnName="PrecioEstimado" />
+            <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Cantidad_Alquileres_Pagados_VW_Set"><EntityTypeMapping TypeName="DemoAlquilerGameDBVWModel.Cantidad_Alquileres_Pagados_VW"><MappingFragment StoreEntitySet="vw_cantidad_alquiler_pagado">
+            <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+            <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+            <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+            <ScalarProperty Name="Correo" ColumnName="Correo" />
+            <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+            <ScalarProperty Name="NumAlquiler" ColumnName="NumAlquiler" />
+            <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+            <ScalarProperty Name="MontoExento" ColumnName="MontoExento" />
+            <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+            <ScalarProperty Name="MontoTotal" ColumnName="MontoTotal" />
+            <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Cantidad_Alquileres_Por_Pagar_VW_Set"><EntityTypeMapping TypeName="DemoAlquilerGameDBVWModel.Cantidad_Alquileres_Por_Pagar_VW"><MappingFragment StoreEntitySet="vw_cantidad_alquiler_por_pagar">
+            <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+            <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+            <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+            <ScalarProperty Name="Correo" ColumnName="Correo" />
+            <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+            <ScalarProperty Name="NumAlquiler" ColumnName="NumAlquiler" />
+            <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Producto_Descripcion_VW_Set"><EntityTypeMapping TypeName="DemoAlquilerGameDBVWModel.Producto_Descripcion_VW"><MappingFragment StoreEntitySet="vw_producto_descripcion">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+            <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+            <ScalarProperty Name="Producto" ColumnName="Producto" />
+            <ScalarProperty Name="Marca" ColumnName="Marca" />
+            <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+            <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="ModeloBDVW">
+        <EntityTypeShape EntityType="DemoAlquilerGameDBVWModel.Alquiler_Pagado_VW" Width="1.5" PointX="0.75" PointY="0.75" Height="3.4001269531249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoAlquilerGameDBVWModel.Alquiler_Por_Pagar_VW" Width="1.5" PointX="2.75" PointY="0.75" Height="2.9070849609374996" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoAlquilerGameDBVWModel.Cantidad_Alquileres_Pagados_VW" Width="1.5" PointX="4.75" PointY="0.75" Height="2.7427376302083335" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoAlquilerGameDBVWModel.Cantidad_Alquileres_Por_Pagar_VW" Width="1.5" PointX="6.625" PointY="1.25" Height="2.0853483072916656" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoAlquilerGameDBVWModel.Producto_Descripcion_VW" Width="1.5" PointX="8.625" PointY="1.125" Height="2.0853483072916674" IsExpanded="true" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

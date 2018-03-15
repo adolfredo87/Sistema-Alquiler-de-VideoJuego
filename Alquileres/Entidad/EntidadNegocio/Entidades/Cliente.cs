@@ -18,6 +18,7 @@ namespace EntidadNegocio.Entidades
         private System.String _telefono;
         private System.String _correo;
         private System.String _direccion;
+        private System.Int32 _numAlquiler = 0;
         private EnumEstatus.Registro _estatus = EnumEstatus.Registro.Activo;
         private EnumEstatus.Edicion _edicion = EnumEstatus.Edicion.Normal;
         #endregion
@@ -47,6 +48,11 @@ namespace EntidadNegocio.Entidades
         {
             get { return _direccion; }
             set { _direccion = value; }
+        }
+        public Int32 NumAlquileres
+        {
+            get { return _numAlquiler; }
+            set { _numAlquiler = value; }
         }
         public EnumEstatus.Registro Status
         {

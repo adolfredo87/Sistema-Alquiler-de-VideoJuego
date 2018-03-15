@@ -29,7 +29,7 @@ namespace Presentacion.Consultas
         {
             try
             {
-                _lstClientes = _ctrlCliente.ObtenerItems();
+                _lstClientes = _ctrlCliente.ObtenerItemsClinetePorPagar();
             }
             catch (Exception ex)
             {

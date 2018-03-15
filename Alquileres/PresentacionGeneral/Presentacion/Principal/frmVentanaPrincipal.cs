@@ -310,11 +310,35 @@ namespace Presentacion.Principal
         }
         private void Pago_ToolStripButton_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (!FormularioEstaCargado("Presentacion.Operaciones.frmPago"))
+                {
+                    Presentacion.Operaciones.frmPago frmMdiParent = new Presentacion.Operaciones.frmPago();
+                    frmMdiParent.MdiParent = this;
+                    frmMdiParent.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void Pago_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (!FormularioEstaCargado("Presentacion.Operaciones.frmPago"))
+                {
+                    Presentacion.Operaciones.frmPago frmMdiParent = new Presentacion.Operaciones.frmPago();
+                    frmMdiParent.MdiParent = this;
+                    frmMdiParent.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, EntidadNegocio.Entidades.Mensajes.Titulo_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void Busqueda_ToolStripButton_Click(object sender, EventArgs e)
         {

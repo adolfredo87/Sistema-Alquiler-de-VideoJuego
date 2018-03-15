@@ -14,12 +14,49 @@ namespace LogicaNegocio
     public class ClienteController 
     {
         private Dato.Modelo.DemoAlquilerGameBD db = new Dato.Modelo.DemoAlquilerGameBD();
+        private Dato.Modelo.DemoAlquilerGameDBVW dbVW = new Dato.Modelo.DemoAlquilerGameDBVW();
+
+        public List<EntidadNegocio.Entidades.Cliente> ObtenerItemsClinetePorPagar()
+        {
+            try
+            {
+                List<Dato.Modelo.Cantidad_Alquileres_Por_Pagar_VW> _ListC = null; 
+                List<EntidadNegocio.Entidades.Cliente> _ListCE = new List<EntidadNegocio.Entidades.Cliente>();
+                EntidadNegocio.Entidades.Cliente _cE = null;
+                _ListC = (List<Dato.Modelo.Cantidad_Alquileres_Por_Pagar_VW>)dbVW.Cantidad_Alquileres_Por_Pagar_VW_Set.ToList();
+                foreach (Dato.Modelo.Cantidad_Alquileres_Por_Pagar_VW element in _ListC)
+                {
+                    _cE = new EntidadNegocio.Entidades.Cliente();
+                    _cE.ID = element.IDCliente;
+                    _cE.Nombre = element.Nombre;
+                    _cE.Telefono = element.Telefono;
+                    _cE.Correo = element.Correo;
+                    _cE.Direccion = element.Direccion;
+                    _cE.NumAlquileres = element.NumAlquiler.Value;
+                    if (element.Estatus == 1)
+                    {
+                        _cE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _cE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _cE.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+                    _ListCE.Add(_cE);
+                }
+                return _ListCE;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public List<EntidadNegocio.Entidades.Cliente> ObtenerItems()
         {
             try
             {
-                List<Dato.Modelo.Cliente> _ListC = null;
+                List<Dato.Modelo.Cliente> _ListC = null; 
                 List<EntidadNegocio.Entidades.Cliente> _ListCE = new List<EntidadNegocio.Entidades.Cliente>();
                 EntidadNegocio.Entidades.Cliente _cE = null;
                 _ListC = (List<Dato.Modelo.Cliente>)db.ClienteSet.ToList();
@@ -31,6 +68,7 @@ namespace LogicaNegocio
                     _cE.Telefono = element.Telefono;
                     _cE.Correo = element.Correo;
                     _cE.Direccion = element.Direccion;
+                    _cE.NumAlquileres = 0;
                     if (element.Estatus == 1)
                     {
                         _cE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;

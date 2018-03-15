@@ -40,6 +40,8 @@
             this.mstpItemSalir = new System.Windows.Forms.ToolStripMenuItem();
             this.gbCabecera = new System.Windows.Forms.GroupBox();
             this.TableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.txtDescuento = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
             this.cmbCliente = new System.Windows.Forms.ComboBox();
             this.Label2 = new System.Windows.Forms.Label();
@@ -57,9 +59,9 @@
             this.mstpItemSupr = new System.Windows.Forms.ToolStripMenuItem();
             this.dgDetalle = new System.Windows.Forms.DataGridView();
             this.colProducto = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.colDesde = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHasta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrecio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDescuento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMonto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.lblTotal = new System.Windows.Forms.Label();
             this.lblMontoExento = new System.Windows.Forms.Label();
@@ -194,6 +196,8 @@
             this.TableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.TableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.TableLayoutPanel7.Controls.Add(this.txtDescuento, 0, 3);
+            this.TableLayoutPanel7.Controls.Add(this.label4, 0, 3);
             this.TableLayoutPanel7.Controls.Add(this.txtID, 1, 1);
             this.TableLayoutPanel7.Controls.Add(this.cmbCliente, 1, 0);
             this.TableLayoutPanel7.Controls.Add(this.Label2, 0, 0);
@@ -216,12 +220,33 @@
             this.TableLayoutPanel7.Size = new System.Drawing.Size(585, 101);
             this.TableLayoutPanel7.TabIndex = 0;
             // 
+            // txtDescuento
+            // 
+            this.txtDescuento.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtDescuento.Enabled = false;
+            this.txtDescuento.Location = new System.Drawing.Point(68, 78);
+            this.txtDescuento.Name = "txtDescuento";
+            this.txtDescuento.Size = new System.Drawing.Size(318, 20);
+            this.txtDescuento.TabIndex = 13;
+            this.txtDescuento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Location = new System.Drawing.Point(3, 81);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Descuento";
+            // 
             // txtID
             // 
             this.txtID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtID.Location = new System.Drawing.Point(56, 29);
+            this.txtID.Location = new System.Drawing.Point(68, 29);
             this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(330, 20);
+            this.txtID.Size = new System.Drawing.Size(318, 20);
             this.txtID.TabIndex = 3;
             this.txtID.Text = " ";
             // 
@@ -230,17 +255,18 @@
             this.cmbCliente.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCliente.FormattingEnabled = true;
-            this.cmbCliente.Location = new System.Drawing.Point(56, 3);
+            this.cmbCliente.Location = new System.Drawing.Point(68, 3);
             this.cmbCliente.Name = "cmbCliente";
-            this.cmbCliente.Size = new System.Drawing.Size(330, 21);
+            this.cmbCliente.Size = new System.Drawing.Size(318, 21);
             this.cmbCliente.TabIndex = 1;
+            this.cmbCliente.SelectedIndexChanged += new System.EventHandler(this.cmbCliente_SelectedIndexChanged);
             // 
             // Label2
             // 
             this.Label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.Label2.AutoSize = true;
             this.Label2.BackColor = System.Drawing.Color.Transparent;
-            this.Label2.Location = new System.Drawing.Point(11, 6);
+            this.Label2.Location = new System.Drawing.Point(23, 6);
             this.Label2.Name = "Label2";
             this.Label2.Size = new System.Drawing.Size(39, 13);
             this.Label2.TabIndex = 0;
@@ -251,7 +277,7 @@
             this.Label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.Label3.AutoSize = true;
             this.Label3.BackColor = System.Drawing.Color.Transparent;
-            this.Label3.Location = new System.Drawing.Point(13, 56);
+            this.Label3.Location = new System.Drawing.Point(25, 56);
             this.Label3.Name = "Label3";
             this.Label3.Size = new System.Drawing.Size(37, 13);
             this.Label3.TabIndex = 6;
@@ -262,7 +288,7 @@
             this.Label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.Label1.AutoSize = true;
             this.Label1.BackColor = System.Drawing.Color.Transparent;
-            this.Label1.Location = new System.Drawing.Point(3, 31);
+            this.Label1.Location = new System.Drawing.Point(15, 31);
             this.Label1.Name = "Label1";
             this.Label1.Size = new System.Drawing.Size(47, 13);
             this.Label1.TabIndex = 2;
@@ -272,9 +298,9 @@
             // 
             this.dtpFecha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(214)))), ((int)(((byte)(239)))));
             this.dtpFecha.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtpFecha.Location = new System.Drawing.Point(56, 53);
+            this.dtpFecha.Location = new System.Drawing.Point(68, 53);
             this.dtpFecha.Name = "dtpFecha";
-            this.dtpFecha.Size = new System.Drawing.Size(330, 20);
+            this.dtpFecha.Size = new System.Drawing.Size(318, 20);
             this.dtpFecha.TabIndex = 7;
             // 
             // Label6
@@ -282,11 +308,11 @@
             this.Label6.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.Label6.AutoSize = true;
             this.Label6.BackColor = System.Drawing.Color.Transparent;
-            this.Label6.Location = new System.Drawing.Point(416, 31);
+            this.Label6.Location = new System.Drawing.Point(414, 31);
             this.Label6.Name = "Label6";
-            this.Label6.Size = new System.Drawing.Size(40, 13);
+            this.Label6.Size = new System.Drawing.Size(42, 13);
             this.Label6.TabIndex = 4;
-            this.Label6.Text = "Estado";
+            this.Label6.Text = "Estatus";
             // 
             // cmbEstatus
             // 
@@ -390,9 +416,9 @@
             this.dgDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgDetalle.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colProducto,
-            this.colPrecio,
-            this.colDescuento,
-            this.colMonto});
+            this.colDesde,
+            this.colHasta,
+            this.colPrecio});
             this.dgDetalle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgDetalle.Location = new System.Drawing.Point(3, 3);
             this.dgDetalle.Name = "dgDetalle";
@@ -402,30 +428,33 @@
             // 
             // colProducto
             // 
-            this.colProducto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colProducto.DataPropertyName = "IdProducto";
+            this.colProducto.DataPropertyName = "IDProducto";
             this.colProducto.HeaderText = "Producto";
             this.colProducto.Name = "colProducto";
+            this.colProducto.Width = 200;
+            // 
+            // colDesde
+            // 
+            this.colDesde.DataPropertyName = "FechaDesde";
+            this.colDesde.HeaderText = "Desde";
+            this.colDesde.Name = "colDesde";
+            this.colDesde.Width = 140;
+            // 
+            // colHasta
+            // 
+            this.colHasta.DataPropertyName = "FechaHasta";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colHasta.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colHasta.HeaderText = "Hasta";
+            this.colHasta.Name = "colHasta";
+            this.colHasta.Width = 140;
             // 
             // colPrecio
             // 
-            this.colPrecio.DataPropertyName = "Precio";
-            this.colPrecio.HeaderText = "Precio Unitario";
+            this.colPrecio.DataPropertyName = "PrecioEstimado";
+            this.colPrecio.HeaderText = "Precio";
             this.colPrecio.Name = "colPrecio";
-            // 
-            // colDescuento
-            // 
-            this.colDescuento.DataPropertyName = "Descuento";
-            this.colDescuento.HeaderText = "Descuento";
-            this.colDescuento.Name = "colDescuento";
-            // 
-            // colMonto
-            // 
-            this.colMonto.DataPropertyName = "Monto";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colMonto.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colMonto.HeaderText = "Monto";
-            this.colMonto.Name = "colMonto";
+            this.colPrecio.Width = 90;
             // 
             // TableLayoutPanel8
             // 
@@ -504,6 +533,8 @@
             this.Controls.Add(this.mstpMenuMaestro);
             this.Name = "frmPago";
             this.Text = "frmPago";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPago_FormClosing);
+            this.Load += new System.EventHandler(this.frmPago_Load);
             this.Controls.SetChildIndex(this.mstpMenuMaestro, 0);
             this.Controls.SetChildIndex(this.GrupBox, 0);
             this.GrupBox.ResumeLayout(false);
@@ -555,13 +586,15 @@
         public System.Windows.Forms.ToolStripMenuItem mstpItemEliminar;
         public System.Windows.Forms.ToolStripMenuItem mstpItemCancelar;
         public System.Windows.Forms.ToolStripMenuItem mstpItemSalir;
+        internal System.Windows.Forms.TextBox txtDescuento;
+        internal System.Windows.Forms.Label label4;
         internal System.Windows.Forms.MenuStrip mstpInsSupr;
         public System.Windows.Forms.ToolStripMenuItem mstpItemInsert;
         public System.Windows.Forms.ToolStripMenuItem mstpItemSupr;
         private System.Windows.Forms.DataGridViewComboBoxColumn colProducto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDesde;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHasta;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrecio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDescuento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMonto;
 
     }
 }

@@ -60,6 +60,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModeloBD.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Modelo\ModeloBDVW.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloBDVW.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +75,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
+    <EntityDeploy Include="Modelo\ModeloBDVW.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModeloBDVW.Designer.cs</LastGenOutput>
+    </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Apoyo\Utilidad\Utilidad.csproj">
