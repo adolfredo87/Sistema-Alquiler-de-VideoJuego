@@ -32,7 +32,7 @@ namespace LogicaNegocio
                     _cE.Telefono = element.Telefono;
                     _cE.Correo = element.Correo;
                     _cE.Direccion = element.Direccion;
-                    _cE.NumAlquileres = element.NumAlquiler.Value;
+                    _cE.NumAlquileres = element.NumAlquiler ?? 0;
                     if (element.Estatus == 1)
                     {
                         _cE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
@@ -112,6 +112,36 @@ namespace LogicaNegocio
             clienteDetail.Telefono = _cliente.Telefono;
             clienteDetail.Correo = _cliente.Correo;
             clienteDetail.Direccion = _cliente.Direccion;
+            clienteDetail.NumAlquileres = 0;
+            if (_cliente.Estatus == 1)
+            {
+                clienteDetail.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+            }
+            else
+            {
+                clienteDetail.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+            }
+            return clienteDetail;
+        }
+
+        public EntidadNegocio.Entidades.Cliente DetailsClinetePorPagar(int id)
+        {
+            Dato.Modelo.Cantidad_Alquileres_Por_Pagar_VW _cliente = new Dato.Modelo.Cantidad_Alquileres_Por_Pagar_VW();
+            if (id == 0)
+            {
+                _cliente = new Dato.Modelo.Cantidad_Alquileres_Por_Pagar_VW();
+            }
+            else
+            {
+                _cliente = dbVW.Cantidad_Alquileres_Por_Pagar_VW_Set.First(c => c.IDCliente == id);
+            }
+            EntidadNegocio.Entidades.Cliente clienteDetail = new EntidadNegocio.Entidades.Cliente();
+            clienteDetail.ID = _cliente.IDCliente;
+            clienteDetail.Nombre = _cliente.Nombre;
+            clienteDetail.Telefono = _cliente.Telefono;
+            clienteDetail.Correo = _cliente.Correo;
+            clienteDetail.Direccion = _cliente.Direccion;
+            clienteDetail.NumAlquileres = _cliente.NumAlquiler ?? 0;
             if (_cliente.Estatus == 1)
             {
                 clienteDetail.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;

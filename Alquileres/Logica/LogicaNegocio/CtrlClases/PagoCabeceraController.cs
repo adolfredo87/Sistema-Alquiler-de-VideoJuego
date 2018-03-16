@@ -14,44 +14,7 @@ namespace LogicaNegocio
     public class PagoCabeceraController
     {
         private Dato.Modelo.DemoAlquilerGameBD db = new Dato.Modelo.DemoAlquilerGameBD();
-
-        public List<EntidadNegocio.Entidades.PagoCabecera> ObtenerItems()
-        {
-            try
-            {
-                List<Dato.Modelo.PagoCabecera> _ListPag = null;
-                List<EntidadNegocio.Entidades.PagoCabecera> _ListPagE = new List<EntidadNegocio.Entidades.PagoCabecera>();
-                EntidadNegocio.Entidades.PagoCabecera _pagE = null;
-                _ListPag = (List<Dato.Modelo.PagoCabecera>)db.PagoCabeceraSet.ToList();
-                foreach (Dato.Modelo.PagoCabecera element in _ListPag)
-                {
-                    _pagE = new EntidadNegocio.Entidades.PagoCabecera();
-                    _pagE.ID = element.ID;
-                    _pagE.Fecha = element.Fecha;
-                    _pagE.MontoExento = element.MontoExento ?? 0;
-                    _pagE.Descuento = element.Descuento ?? 0;
-                    _pagE.MontoTotal = element.MontoTotal ?? 0;
-                    _pagE.Estatus = element.Estatus;
-                    _pagE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
-                    _pagE.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
-                    element.ClienteLoad(); _pagE.IDCliente = element.IDCliente;
-                    _pagE.Cliente = new EntidadNegocio.Entidades.Cliente();
-                    _pagE.Cliente.ID = element.IDCliente;
-                    _pagE.Cliente.Nombre = element.Cliente.Nombre;
-                    _pagE.Cliente.Telefono = element.Cliente.Telefono;
-                    _pagE.Cliente.Correo = element.Cliente.Correo;
-                    _pagE.Cliente.Direccion = element.Cliente.Direccion;
-                    _pagE.Cliente.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
-                    _pagE.Cliente.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
-                    _ListPagE.Add(_pagE);
-                }
-                return _ListPagE;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        private Dato.Modelo.DemoAlquilerGameDBVW dbVW = new Dato.Modelo.DemoAlquilerGameDBVW();
 
         public Int32 UltimoID()
         {
@@ -63,30 +26,40 @@ namespace LogicaNegocio
         public EntidadNegocio.Entidades.PagoCabecera Details(int id)
         {
             Dato.Modelo.PagoCabecera _pagoCabeceraDetail = new Dato.Modelo.PagoCabecera();
-            if (id == 0)
+            _pagoCabeceraDetail = new Dato.Modelo.PagoCabecera();
+            EntidadNegocio.Entidades.PagoCabecera pagoCabeceraDetail = new EntidadNegocio.Entidades.PagoCabecera();
+            Dato.Modelo.Cliente cliente = db.ClienteSet.First(c => c.ID == id); Int32 iIDCliente = cliente.ID;
+            Dato.Modelo.Cantidad_Alquileres_Por_Pagar_VW clienteAlq = dbVW.Cantidad_Alquileres_Por_Pagar_VW_Set.First(c => c.IDCliente == iIDCliente);
+            List<Dato.Modelo.Alquiler> listAlquiler = db.AlquilerSet.Where(a => a.IDCliente == iIDCliente && a.Estatus == 1).ToList();
+            Double _dMontoEstimado = 0; _dMontoEstimado = (from e in listAlquiler select e.PrecioEstimado).Sum().Value;
+            Dato.Modelo.Descuento descuento = db.DescuentoSet.First(d => d.Codigo == "DEC1");
+            Double _dPorcentajeDescuento = 0; _dPorcentajeDescuento = descuento.PorcentajeDescuento ?? 0;
+            Double _dDescuento = _dPorcentajeDescuento * _dMontoEstimado;
+            Double _dMontoTotal = _dMontoEstimado - _dDescuento;
+            Int32 _iIDCliente = iIDCliente;
+            Int32 _idCabecera = UltimoID();
+            DateTime _dFecha = DateTime.Now;
+            pagoCabeceraDetail.Fecha = _dFecha;
+            if (clienteAlq.NumAlquiler >= 3 && clienteAlq.NumAlquiler <= 5)
             {
-                _pagoCabeceraDetail = new Dato.Modelo.PagoCabecera();
+                pagoCabeceraDetail.MontoExento = _dMontoEstimado;
+                pagoCabeceraDetail.Descuento = _dDescuento;
+                pagoCabeceraDetail.MontoTotal = _dMontoTotal;
             }
             else
             {
-                _pagoCabeceraDetail = db.PagoCabeceraSet.First(p => p.ID == id);
-                _pagoCabeceraDetail.ClienteLoad();
+                pagoCabeceraDetail.MontoExento = _dMontoEstimado;
+                pagoCabeceraDetail.Descuento = 0;
+                pagoCabeceraDetail.MontoTotal = _dMontoEstimado;
             }
-            EntidadNegocio.Entidades.PagoCabecera pagoCabeceraDetail = new EntidadNegocio.Entidades.PagoCabecera();
-            Dato.Modelo.Cliente cliente = db.ClienteSet.First(c => c.ID == id); Int32 iIDCliente = cliente.ID;
-            List<Dato.Modelo.Alquiler> listAlquiler = db.AlquilerSet.Where(a => a.IDCliente == iIDCliente && a.Estatus == 1).ToList();
-            Double _dMontoEstimado = 0; _dMontoEstimado = (from e in listAlquiler select e.PrecioEstimado).Sum().Value;
-            Int32 _iIDCliente = iIDCliente;
-            DateTime _dFecha = DateTime.Now;
-            pagoCabeceraDetail.Fecha = _dFecha;
-            pagoCabeceraDetail.MontoTotal = _dMontoEstimado;
             pagoCabeceraDetail.IDCliente = _iIDCliente;
             pagoCabeceraDetail.Cliente = new EntidadNegocio.Entidades.Cliente();
             pagoCabeceraDetail.Cliente.ID = _iIDCliente;
-            pagoCabeceraDetail.Cliente.Nombre = _pagoCabeceraDetail.Cliente.Nombre;
-            pagoCabeceraDetail.Cliente.Telefono = _pagoCabeceraDetail.Cliente.Telefono;
-            pagoCabeceraDetail.Cliente.Correo = _pagoCabeceraDetail.Cliente.Correo;
-            pagoCabeceraDetail.Cliente.Direccion = _pagoCabeceraDetail.Cliente.Direccion;
+            pagoCabeceraDetail.Cliente.Nombre = cliente.Nombre;
+            pagoCabeceraDetail.Cliente.Telefono = cliente.Telefono;
+            pagoCabeceraDetail.Cliente.Correo = cliente.Correo;
+            pagoCabeceraDetail.Cliente.Direccion = cliente.Direccion;
+            pagoCabeceraDetail.Cliente.NumAlquileres = clienteAlq.NumAlquiler ?? 0;
             return pagoCabeceraDetail;
         }
 
@@ -100,12 +73,13 @@ namespace LogicaNegocio
             List<Dato.Modelo.Alquiler> listAlquiler = db.AlquilerSet.Where(a => a.IDCliente == iIDCliente && a.Estatus == 1).ToList();
 
             Double _dMontoEstimado = 0; _dMontoEstimado = (from monto in listAlquiler select monto.PrecioEstimado).Sum().Value;
-            _pago.MontoTotal = _dMontoEstimado;
+            _pago.MontoExento = _dMontoEstimado;
+
             DateTime _dFecha = DateTime.Now;
             _pago.Fecha = _dFecha;
             
             pagoCabeceraToAdd.IDCliente = _iIDCliente;
-            pagoCabeceraToAdd.MontoTotal = _pago.MontoTotal;
+            pagoCabeceraToAdd.MontoExento = _pago.MontoExento;
             pagoCabeceraToAdd.Fecha = _pago.Fecha;
             Int32 iEstatus = 1;
             pagoCabeceraToAdd.Estatus = iEstatus;

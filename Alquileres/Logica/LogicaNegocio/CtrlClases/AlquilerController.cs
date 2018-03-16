@@ -138,6 +138,129 @@ namespace LogicaNegocio
             }
         }
 
+        public List<EntidadNegocio.Entidades.Alquiler> ObtenerItemsPorPagar()
+        {
+            try
+            {
+                List<Dato.Modelo.Alquiler> _ListA = null;
+                List<EntidadNegocio.Entidades.Alquiler> _ListAE = new List<EntidadNegocio.Entidades.Alquiler>();
+                EntidadNegocio.Entidades.Alquiler _aE = null;
+                _ListA = (List<Dato.Modelo.Alquiler>)db.AlquilerSet.Where(a => a.Estatus == 1).ToList();
+                foreach (Dato.Modelo.Alquiler element in _ListA)
+                {
+                    _aE = new EntidadNegocio.Entidades.Alquiler();
+                    _aE.ID = element.ID;
+                    _aE.FechaDesde = element.FechaDesde;
+                    _aE.FechaHasta = element.FechaHasta;
+                    _aE.TiempoHora = element.TiempoHora;
+                    _aE.TiempoDia = element.TiempoDia;
+                    _aE.TiempoSemana = element.TiempoSemana;
+                    _aE.PrecioEstimado = element.PrecioEstimado ?? 0;
+                    if (element.Estatus == 0)
+                    {
+                        _aE.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Generado;
+                    }
+                    else if (element.Estatus == 1)
+                    {
+                        _aE.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Procesado;
+                    }
+                    else
+                    {
+                        _aE.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Pagado;
+                    }
+                    _aE.IDCliente = element.IDCliente;
+                    _aE.Cliente = new EntidadNegocio.Entidades.Cliente();
+                    _aE.Cliente.ID = element.Cliente.ID;
+                    _aE.Cliente.Nombre = element.Cliente.Nombre;
+                    _aE.Cliente.Telefono = element.Cliente.Telefono;
+                    _aE.Cliente.Correo = element.Cliente.Correo;
+                    _aE.Cliente.Direccion = element.Cliente.Direccion;
+                    _aE.IDProducto = element.IDProducto;
+                    _aE.Producto = new EntidadNegocio.Entidades.Producto();
+                    _aE.Producto.ID = element.IDProducto;
+                    element.Producto.TipoLoad();
+                    _aE.Producto.Tipo = new EntidadNegocio.Entidades.Tipo();
+                    _aE.Producto.Tipo.ID = element.Producto.IDTipo;
+                    _aE.Producto.IDTipo = element.Producto.IDTipo;
+                    _aE.Producto.Tipo.Codigo = element.Producto.Tipo.Codigo;
+                    _aE.Producto.Tipo.Descripcion = element.Producto.Tipo.Descripcion;
+                    if (element.Producto.Tipo.Estatus == 1)
+                    {
+                        _aE.Producto.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Producto.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Producto.Tipo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+                    _aE.Producto.ID = element.Producto.ID;
+                    _aE.Producto.Codigo = element.Producto.Codigo;
+                    _aE.Producto.Descripcion = element.Producto.Descripcion;
+                    _aE.Producto.IDMarca = element.Producto.IDMarca;
+                    _aE.Producto.IDModelo = element.Producto.IDModelo;
+                    _aE.Producto.IDCategoria = element.Producto.IDCategoria;
+                    element.Producto.MarcaLoad();
+                    _aE.Producto.Marca = new EntidadNegocio.Entidades.Marca();
+                    _aE.Producto.Marca.ID = element.Producto.IDMarca;
+                    _aE.Producto.Marca.Codigo = element.Producto.Marca.Codigo;
+                    _aE.Producto.Marca.Descripcion = element.Producto.Marca.Descripcion;
+                    if (element.Producto.Marca.Estatus == 1)
+                    {
+                        _aE.Producto.Marca.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Producto.Marca.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Producto.Marca.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+                    element.Producto.ModeloLoad();
+                    _aE.Producto.Modelo = new EntidadNegocio.Entidades.Modelo();
+                    _aE.Producto.Modelo.ID = element.Producto.IDModelo;
+                    _aE.Producto.Modelo.Codigo = element.Producto.Modelo.Codigo;
+                    _aE.Producto.Modelo.Descripcion = element.Producto.Modelo.Descripcion;
+                    if (element.Producto.Modelo.Estatus == 1)
+                    {
+                        _aE.Producto.Modelo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Producto.Modelo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Producto.Modelo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+                    element.Producto.CategoriaLoad();
+                    _aE.Producto.Categoria = new EntidadNegocio.Entidades.Categoria();
+                    _aE.Producto.Categoria.ID = element.Producto.IDCategoria;
+                    _aE.Producto.Categoria.Codigo = element.Producto.Categoria.Codigo;
+                    _aE.Producto.Categoria.Descripcion = element.Producto.Categoria.Descripcion;
+                    if (element.Producto.Categoria.Estatus == 1)
+                    {
+                        _aE.Producto.Categoria.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Producto.Categoria.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Producto.Categoria.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+
+                    if (element.Estatus == 1)
+                    {
+                        _aE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+                    _ListAE.Add(_aE);
+                }
+                return _ListAE;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<EntidadNegocio.Entidades.Alquiler> ObtenerItemsPorPagar(int idCliente)
         {
             try
@@ -146,6 +269,252 @@ namespace LogicaNegocio
                 List<EntidadNegocio.Entidades.Alquiler> _ListAE = new List<EntidadNegocio.Entidades.Alquiler>();
                 EntidadNegocio.Entidades.Alquiler _aE = null;
                 _ListA = (List<Dato.Modelo.Alquiler>)db.AlquilerSet.Where(a => a.IDCliente == idCliente && a.Estatus == 1).ToList();
+                foreach (Dato.Modelo.Alquiler element in _ListA)
+                {
+                    _aE = new EntidadNegocio.Entidades.Alquiler();
+                    _aE.ID = element.ID;
+                    _aE.FechaDesde = element.FechaDesde;
+                    _aE.FechaHasta = element.FechaHasta;
+                    _aE.TiempoHora = element.TiempoHora;
+                    _aE.TiempoDia = element.TiempoDia;
+                    _aE.TiempoSemana = element.TiempoSemana;
+                    _aE.PrecioEstimado = element.PrecioEstimado ?? 0;
+                    if (element.Estatus == 0)
+                    {
+                        _aE.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Generado;
+                    }
+                    else if (element.Estatus == 1)
+                    {
+                        _aE.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Procesado;
+                    }
+                    else
+                    {
+                        _aE.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Pagado;
+                    }
+                    _aE.IDCliente = element.IDCliente;
+                    _aE.Cliente = new EntidadNegocio.Entidades.Cliente();
+                    _aE.Cliente.ID = element.Cliente.ID;
+                    _aE.Cliente.Nombre = element.Cliente.Nombre;
+                    _aE.Cliente.Telefono = element.Cliente.Telefono;
+                    _aE.Cliente.Correo = element.Cliente.Correo;
+                    _aE.Cliente.Direccion = element.Cliente.Direccion;
+                    _aE.IDProducto = element.IDProducto;
+                    _aE.Producto = new EntidadNegocio.Entidades.Producto();
+                    _aE.Producto.ID = element.IDProducto;
+                    element.Producto.TipoLoad();
+                    _aE.Producto.Tipo = new EntidadNegocio.Entidades.Tipo();
+                    _aE.Producto.Tipo.ID = element.Producto.IDTipo;
+                    _aE.Producto.IDTipo = element.Producto.IDTipo;
+                    _aE.Producto.Tipo.Codigo = element.Producto.Tipo.Codigo;
+                    _aE.Producto.Tipo.Descripcion = element.Producto.Tipo.Descripcion;
+                    if (element.Producto.Tipo.Estatus == 1)
+                    {
+                        _aE.Producto.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Producto.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Producto.Tipo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+                    _aE.Producto.ID = element.Producto.ID;
+                    _aE.Producto.Codigo = element.Producto.Codigo;
+                    _aE.Producto.Descripcion = element.Producto.Descripcion;
+                    _aE.Producto.IDMarca = element.Producto.IDMarca;
+                    _aE.Producto.IDModelo = element.Producto.IDModelo;
+                    _aE.Producto.IDCategoria = element.Producto.IDCategoria;
+                    element.Producto.MarcaLoad();
+                    _aE.Producto.Marca = new EntidadNegocio.Entidades.Marca();
+                    _aE.Producto.Marca.ID = element.Producto.IDMarca;
+                    _aE.Producto.Marca.Codigo = element.Producto.Marca.Codigo;
+                    _aE.Producto.Marca.Descripcion = element.Producto.Marca.Descripcion;
+                    if (element.Producto.Marca.Estatus == 1)
+                    {
+                        _aE.Producto.Marca.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Producto.Marca.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Producto.Marca.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+                    element.Producto.ModeloLoad();
+                    _aE.Producto.Modelo = new EntidadNegocio.Entidades.Modelo();
+                    _aE.Producto.Modelo.ID = element.Producto.IDModelo;
+                    _aE.Producto.Modelo.Codigo = element.Producto.Modelo.Codigo;
+                    _aE.Producto.Modelo.Descripcion = element.Producto.Modelo.Descripcion;
+                    if (element.Producto.Modelo.Estatus == 1)
+                    {
+                        _aE.Producto.Modelo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Producto.Modelo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Producto.Modelo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+                    element.Producto.CategoriaLoad();
+                    _aE.Producto.Categoria = new EntidadNegocio.Entidades.Categoria();
+                    _aE.Producto.Categoria.ID = element.Producto.IDCategoria;
+                    _aE.Producto.Categoria.Codigo = element.Producto.Categoria.Codigo;
+                    _aE.Producto.Categoria.Descripcion = element.Producto.Categoria.Descripcion;
+                    if (element.Producto.Categoria.Estatus == 1)
+                    {
+                        _aE.Producto.Categoria.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Producto.Categoria.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Producto.Categoria.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+
+                    if (element.Estatus == 1)
+                    {
+                        _aE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+                    _ListAE.Add(_aE);
+                }
+                return _ListAE;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<EntidadNegocio.Entidades.Alquiler> ObtenerItemsPagado()
+        {
+            try
+            {
+                List<Dato.Modelo.Alquiler> _ListA = null;
+                List<EntidadNegocio.Entidades.Alquiler> _ListAE = new List<EntidadNegocio.Entidades.Alquiler>();
+                EntidadNegocio.Entidades.Alquiler _aE = null;
+                _ListA = (List<Dato.Modelo.Alquiler>)db.AlquilerSet.Where(a => a.Estatus == 2).ToList();
+                foreach (Dato.Modelo.Alquiler element in _ListA)
+                {
+                    _aE = new EntidadNegocio.Entidades.Alquiler();
+                    _aE.ID = element.ID;
+                    _aE.FechaDesde = element.FechaDesde;
+                    _aE.FechaHasta = element.FechaHasta;
+                    _aE.TiempoHora = element.TiempoHora;
+                    _aE.TiempoDia = element.TiempoDia;
+                    _aE.TiempoSemana = element.TiempoSemana;
+                    _aE.PrecioEstimado = element.PrecioEstimado ?? 0;
+                    if (element.Estatus == 0)
+                    {
+                        _aE.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Generado;
+                    }
+                    else if (element.Estatus == 1)
+                    {
+                        _aE.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Procesado;
+                    }
+                    else
+                    {
+                        _aE.Estatus = EntidadNegocio.Enumerados.EnumTipos.TipoAccionAlquiler.Pagado;
+                    }
+                    _aE.IDCliente = element.IDCliente;
+                    _aE.Cliente = new EntidadNegocio.Entidades.Cliente();
+                    _aE.Cliente.ID = element.Cliente.ID;
+                    _aE.Cliente.Nombre = element.Cliente.Nombre;
+                    _aE.Cliente.Telefono = element.Cliente.Telefono;
+                    _aE.Cliente.Correo = element.Cliente.Correo;
+                    _aE.Cliente.Direccion = element.Cliente.Direccion;
+                    _aE.IDProducto = element.IDProducto;
+                    _aE.Producto = new EntidadNegocio.Entidades.Producto();
+                    _aE.Producto.ID = element.IDProducto;
+                    element.Producto.TipoLoad();
+                    _aE.Producto.Tipo = new EntidadNegocio.Entidades.Tipo();
+                    _aE.Producto.Tipo.ID = element.Producto.IDTipo;
+                    _aE.Producto.IDTipo = element.Producto.IDTipo;
+                    _aE.Producto.Tipo.Codigo = element.Producto.Tipo.Codigo;
+                    _aE.Producto.Tipo.Descripcion = element.Producto.Tipo.Descripcion;
+                    if (element.Producto.Tipo.Estatus == 1)
+                    {
+                        _aE.Producto.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Producto.Tipo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Producto.Tipo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+                    _aE.Producto.ID = element.Producto.ID;
+                    _aE.Producto.Codigo = element.Producto.Codigo;
+                    _aE.Producto.Descripcion = element.Producto.Descripcion;
+                    _aE.Producto.IDMarca = element.Producto.IDMarca;
+                    _aE.Producto.IDModelo = element.Producto.IDModelo;
+                    _aE.Producto.IDCategoria = element.Producto.IDCategoria;
+                    element.Producto.MarcaLoad();
+                    _aE.Producto.Marca = new EntidadNegocio.Entidades.Marca();
+                    _aE.Producto.Marca.ID = element.Producto.IDMarca;
+                    _aE.Producto.Marca.Codigo = element.Producto.Marca.Codigo;
+                    _aE.Producto.Marca.Descripcion = element.Producto.Marca.Descripcion;
+                    if (element.Producto.Marca.Estatus == 1)
+                    {
+                        _aE.Producto.Marca.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Producto.Marca.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Producto.Marca.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+                    element.Producto.ModeloLoad();
+                    _aE.Producto.Modelo = new EntidadNegocio.Entidades.Modelo();
+                    _aE.Producto.Modelo.ID = element.Producto.IDModelo;
+                    _aE.Producto.Modelo.Codigo = element.Producto.Modelo.Codigo;
+                    _aE.Producto.Modelo.Descripcion = element.Producto.Modelo.Descripcion;
+                    if (element.Producto.Modelo.Estatus == 1)
+                    {
+                        _aE.Producto.Modelo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Producto.Modelo.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Producto.Modelo.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+                    element.Producto.CategoriaLoad();
+                    _aE.Producto.Categoria = new EntidadNegocio.Entidades.Categoria();
+                    _aE.Producto.Categoria.ID = element.Producto.IDCategoria;
+                    _aE.Producto.Categoria.Codigo = element.Producto.Categoria.Codigo;
+                    _aE.Producto.Categoria.Descripcion = element.Producto.Categoria.Descripcion;
+                    if (element.Producto.Categoria.Estatus == 1)
+                    {
+                        _aE.Producto.Categoria.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Producto.Categoria.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Producto.Categoria.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+
+                    if (element.Estatus == 1)
+                    {
+                        _aE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Activo;
+                    }
+                    else
+                    {
+                        _aE.Status = EntidadNegocio.Enumerados.EnumEstatus.Registro.Inactivo;
+                    }
+                    _aE.Edicion = EntidadNegocio.Enumerados.EnumEstatus.Edicion.Normal;
+                    _ListAE.Add(_aE);
+                }
+                return _ListAE;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<EntidadNegocio.Entidades.Alquiler> ObtenerItemsPagado(int idCliente)
+        {
+            try
+            {
+                List<Dato.Modelo.Alquiler> _ListA = null;
+                List<EntidadNegocio.Entidades.Alquiler> _ListAE = new List<EntidadNegocio.Entidades.Alquiler>();
+                EntidadNegocio.Entidades.Alquiler _aE = null;
+                _ListA = (List<Dato.Modelo.Alquiler>)db.AlquilerSet.Where(a => a.IDCliente == idCliente && a.Estatus == 2).ToList();
                 foreach (Dato.Modelo.Alquiler element in _ListA)
                 {
                     _aE = new EntidadNegocio.Entidades.Alquiler();

@@ -32,10 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mstpMenuMaestro = new System.Windows.Forms.MenuStrip();
             this.mstpItemNuevo = new System.Windows.Forms.ToolStripMenuItem();
-            this.mstpItemBuscar = new System.Windows.Forms.ToolStripMenuItem();
-            this.mstpItemModificar = new System.Windows.Forms.ToolStripMenuItem();
             this.mstpItemGuardar = new System.Windows.Forms.ToolStripMenuItem();
-            this.mstpItemEliminar = new System.Windows.Forms.ToolStripMenuItem();
             this.mstpItemCancelar = new System.Windows.Forms.ToolStripMenuItem();
             this.mstpItemSalir = new System.Windows.Forms.ToolStripMenuItem();
             this.gbCabecera = new System.Windows.Forms.GroupBox();
@@ -54,9 +51,6 @@
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.gbDetalle = new System.Windows.Forms.GroupBox();
             this.TableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.mstpInsSupr = new System.Windows.Forms.MenuStrip();
-            this.mstpItemInsert = new System.Windows.Forms.ToolStripMenuItem();
-            this.mstpItemSupr = new System.Windows.Forms.ToolStripMenuItem();
             this.dgDetalle = new System.Windows.Forms.DataGridView();
             this.colProducto = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.colDesde = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,13 +61,13 @@
             this.lblMontoExento = new System.Windows.Forms.Label();
             this.Label8 = new System.Windows.Forms.Label();
             this.Label7 = new System.Windows.Forms.Label();
+            this.lblRows = new System.Windows.Forms.Label();
             this.GrupBox.SuspendLayout();
             this.mstpMenuMaestro.SuspendLayout();
             this.gbCabecera.SuspendLayout();
             this.TableLayoutPanel7.SuspendLayout();
             this.gbDetalle.SuspendLayout();
             this.TableLayoutPanel1.SuspendLayout();
-            this.mstpInsSupr.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgDetalle)).BeginInit();
             this.TableLayoutPanel8.SuspendLayout();
             this.SuspendLayout();
@@ -90,10 +84,7 @@
             this.mstpMenuMaestro.BackColor = System.Drawing.Color.Transparent;
             this.mstpMenuMaestro.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mstpItemNuevo,
-            this.mstpItemBuscar,
-            this.mstpItemModificar,
             this.mstpItemGuardar,
-            this.mstpItemEliminar,
             this.mstpItemCancelar,
             this.mstpItemSalir});
             this.mstpMenuMaestro.Location = new System.Drawing.Point(0, 0);
@@ -112,27 +103,7 @@
             this.mstpItemNuevo.Size = new System.Drawing.Size(55, 20);
             this.mstpItemNuevo.Text = "(F7)";
             this.mstpItemNuevo.ToolTipText = "Nuevo";
-            // 
-            // mstpItemBuscar
-            // 
-            this.mstpItemBuscar.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemBuscar.Image")));
-            this.mstpItemBuscar.MergeAction = System.Windows.Forms.MergeAction.Insert;
-            this.mstpItemBuscar.Name = "mstpItemBuscar";
-            this.mstpItemBuscar.ShortcutKeys = System.Windows.Forms.Keys.F8;
-            this.mstpItemBuscar.Size = new System.Drawing.Size(55, 20);
-            this.mstpItemBuscar.Text = "(F8)";
-            this.mstpItemBuscar.ToolTipText = "Buscar";
-            // 
-            // mstpItemModificar
-            // 
-            this.mstpItemModificar.Enabled = false;
-            this.mstpItemModificar.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemModificar.Image")));
-            this.mstpItemModificar.MergeAction = System.Windows.Forms.MergeAction.Insert;
-            this.mstpItemModificar.Name = "mstpItemModificar";
-            this.mstpItemModificar.ShortcutKeys = System.Windows.Forms.Keys.F9;
-            this.mstpItemModificar.Size = new System.Drawing.Size(55, 20);
-            this.mstpItemModificar.Text = "(F9)";
-            this.mstpItemModificar.ToolTipText = "Modificar";
+            this.mstpItemNuevo.Click += new System.EventHandler(this.mstpItemNuevo_Click);
             // 
             // mstpItemGuardar
             // 
@@ -144,17 +115,7 @@
             this.mstpItemGuardar.Size = new System.Drawing.Size(61, 20);
             this.mstpItemGuardar.Text = "(F10)";
             this.mstpItemGuardar.ToolTipText = "Guardar";
-            // 
-            // mstpItemEliminar
-            // 
-            this.mstpItemEliminar.Enabled = false;
-            this.mstpItemEliminar.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemEliminar.Image")));
-            this.mstpItemEliminar.MergeAction = System.Windows.Forms.MergeAction.Insert;
-            this.mstpItemEliminar.Name = "mstpItemEliminar";
-            this.mstpItemEliminar.ShortcutKeys = System.Windows.Forms.Keys.F11;
-            this.mstpItemEliminar.Size = new System.Drawing.Size(61, 20);
-            this.mstpItemEliminar.Text = "(F11)";
-            this.mstpItemEliminar.ToolTipText = "Eliminar";
+            this.mstpItemGuardar.Click += new System.EventHandler(this.mstpItemGuardar_Click);
             // 
             // mstpItemCancelar
             // 
@@ -166,6 +127,7 @@
             this.mstpItemCancelar.Size = new System.Drawing.Size(61, 20);
             this.mstpItemCancelar.Text = "(F12)";
             this.mstpItemCancelar.ToolTipText = "Cancelar";
+            this.mstpItemCancelar.Click += new System.EventHandler(this.mstpItemCancelar_Click);
             // 
             // mstpItemSalir
             // 
@@ -175,6 +137,7 @@
             this.mstpItemSalir.Size = new System.Drawing.Size(59, 20);
             this.mstpItemSalir.Text = "(Esc)";
             this.mstpItemSalir.ToolTipText = "Salir";
+            this.mstpItemSalir.Click += new System.EventHandler(this.mstpItemSalir_Click);
             // 
             // gbCabecera
             // 
@@ -344,6 +307,7 @@
             this.txtTotal.Size = new System.Drawing.Size(120, 20);
             this.txtTotal.TabIndex = 11;
             this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtTotal.TextChanged += new System.EventHandler(this.txtTotal_TextChanged);
             // 
             // gbDetalle
             // 
@@ -364,49 +328,19 @@
             this.TableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             this.TableLayoutPanel1.ColumnCount = 1;
             this.TableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TableLayoutPanel1.Controls.Add(this.mstpInsSupr, 0, 1);
             this.TableLayoutPanel1.Controls.Add(this.dgDetalle, 0, 0);
             this.TableLayoutPanel1.Controls.Add(this.TableLayoutPanel8, 0, 2);
+            this.TableLayoutPanel1.Controls.Add(this.lblRows, 0, 1);
             this.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TableLayoutPanel1.Location = new System.Drawing.Point(3, 16);
             this.TableLayoutPanel1.Name = "TableLayoutPanel1";
             this.TableLayoutPanel1.RowCount = 3;
-            this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 87.19009F));
-            this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.80992F));
-            this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 68F));
+            this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.90909F));
+            this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.TableLayoutPanel1.Size = new System.Drawing.Size(582, 293);
             this.TableLayoutPanel1.TabIndex = 1;
-            // 
-            // mstpInsSupr
-            // 
-            this.mstpInsSupr.BackColor = System.Drawing.Color.Transparent;
-            this.mstpInsSupr.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mstpInsSupr.Enabled = false;
-            this.mstpInsSupr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mstpItemInsert,
-            this.mstpItemSupr});
-            this.mstpInsSupr.Location = new System.Drawing.Point(0, 196);
-            this.mstpInsSupr.Name = "mstpInsSupr";
-            this.mstpInsSupr.Size = new System.Drawing.Size(582, 28);
-            this.mstpInsSupr.TabIndex = 15;
-            this.mstpInsSupr.Text = "MenuStrip2";
-            // 
-            // mstpItemInsert
-            // 
-            this.mstpItemInsert.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemInsert.Image")));
-            this.mstpItemInsert.MergeAction = System.Windows.Forms.MergeAction.Insert;
-            this.mstpItemInsert.Name = "mstpItemInsert";
-            this.mstpItemInsert.Size = new System.Drawing.Size(72, 24);
-            this.mstpItemInsert.Text = "(Insert)";
-            // 
-            // mstpItemSupr
-            // 
-            this.mstpItemSupr.Image = ((System.Drawing.Image)(resources.GetObject("mstpItemSupr.Image")));
-            this.mstpItemSupr.MergeAction = System.Windows.Forms.MergeAction.Insert;
-            this.mstpItemSupr.Name = "mstpItemSupr";
-            this.mstpItemSupr.Size = new System.Drawing.Size(65, 24);
-            this.mstpItemSupr.Text = "(Supr)";
             // 
             // dgDetalle
             // 
@@ -423,7 +357,7 @@
             this.dgDetalle.Location = new System.Drawing.Point(3, 3);
             this.dgDetalle.Name = "dgDetalle";
             this.dgDetalle.RowHeadersVisible = false;
-            this.dgDetalle.Size = new System.Drawing.Size(576, 190);
+            this.dgDetalle.Size = new System.Drawing.Size(576, 205);
             this.dgDetalle.TabIndex = 0;
             // 
             // colProducto
@@ -467,12 +401,12 @@
             this.TableLayoutPanel8.Controls.Add(this.Label8, 0, 0);
             this.TableLayoutPanel8.Controls.Add(this.Label7, 0, 1);
             this.TableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Right;
-            this.TableLayoutPanel8.Location = new System.Drawing.Point(377, 227);
+            this.TableLayoutPanel8.Location = new System.Drawing.Point(377, 235);
             this.TableLayoutPanel8.Name = "TableLayoutPanel8";
             this.TableLayoutPanel8.RowCount = 2;
             this.TableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.TableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TableLayoutPanel8.Size = new System.Drawing.Size(202, 63);
+            this.TableLayoutPanel8.Size = new System.Drawing.Size(202, 55);
             this.TableLayoutPanel8.TabIndex = 13;
             // 
             // lblTotal
@@ -481,7 +415,7 @@
             this.lblTotal.BackColor = System.Drawing.Color.Transparent;
             this.lblTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Location = new System.Drawing.Point(104, 34);
+            this.lblTotal.Location = new System.Drawing.Point(104, 28);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(95, 26);
             this.lblTotal.TabIndex = 3;
@@ -493,7 +427,7 @@
             this.lblMontoExento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMontoExento.BackColor = System.Drawing.Color.Transparent;
             this.lblMontoExento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblMontoExento.Location = new System.Drawing.Point(104, 5);
+            this.lblMontoExento.Location = new System.Drawing.Point(104, 3);
             this.lblMontoExento.Name = "lblMontoExento";
             this.lblMontoExento.Size = new System.Drawing.Size(95, 21);
             this.lblMontoExento.TabIndex = 1;
@@ -505,7 +439,7 @@
             this.Label8.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.Label8.AutoSize = true;
             this.Label8.BackColor = System.Drawing.Color.Transparent;
-            this.Label8.Location = new System.Drawing.Point(25, 9);
+            this.Label8.Location = new System.Drawing.Point(25, 7);
             this.Label8.Name = "Label8";
             this.Label8.Size = new System.Drawing.Size(73, 13);
             this.Label8.TabIndex = 0;
@@ -518,12 +452,22 @@
             this.Label7.AutoSize = true;
             this.Label7.BackColor = System.Drawing.Color.Transparent;
             this.Label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label7.Location = new System.Drawing.Point(23, 40);
+            this.Label7.Location = new System.Drawing.Point(23, 34);
             this.Label7.Name = "Label7";
             this.Label7.Size = new System.Drawing.Size(75, 13);
             this.Label7.TabIndex = 2;
             this.Label7.Text = "Monto Total";
             this.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblRows
+            // 
+            this.lblRows.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblRows.AutoSize = true;
+            this.lblRows.Location = new System.Drawing.Point(482, 215);
+            this.lblRows.Name = "lblRows";
+            this.lblRows.Size = new System.Drawing.Size(97, 13);
+            this.lblRows.TabIndex = 14;
+            this.lblRows.Text = "DataGrid - Rows: 0";
             // 
             // frmPago
             // 
@@ -546,8 +490,6 @@
             this.gbDetalle.ResumeLayout(false);
             this.TableLayoutPanel1.ResumeLayout(false);
             this.TableLayoutPanel1.PerformLayout();
-            this.mstpInsSupr.ResumeLayout(false);
-            this.mstpInsSupr.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgDetalle)).EndInit();
             this.TableLayoutPanel8.ResumeLayout(false);
             this.TableLayoutPanel8.PerformLayout();
@@ -571,30 +513,25 @@
         internal System.Windows.Forms.Label Label5;
         internal System.Windows.Forms.TextBox txtTotal;
         internal System.Windows.Forms.GroupBox gbDetalle;
+        internal System.Windows.Forms.MenuStrip mstpMenuMaestro;
+        public System.Windows.Forms.ToolStripMenuItem mstpItemNuevo;
+        public System.Windows.Forms.ToolStripMenuItem mstpItemGuardar;
+        public System.Windows.Forms.ToolStripMenuItem mstpItemCancelar;
+        public System.Windows.Forms.ToolStripMenuItem mstpItemSalir;
+        internal System.Windows.Forms.TextBox txtDescuento;
+        internal System.Windows.Forms.Label label4;
         internal System.Windows.Forms.TableLayoutPanel TableLayoutPanel1;
         internal System.Windows.Forms.DataGridView dgDetalle;
+        private System.Windows.Forms.DataGridViewComboBoxColumn colProducto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDesde;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHasta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPrecio;
         internal System.Windows.Forms.TableLayoutPanel TableLayoutPanel8;
         internal System.Windows.Forms.Label lblTotal;
         internal System.Windows.Forms.Label lblMontoExento;
         internal System.Windows.Forms.Label Label8;
         internal System.Windows.Forms.Label Label7;
-        internal System.Windows.Forms.MenuStrip mstpMenuMaestro;
-        public System.Windows.Forms.ToolStripMenuItem mstpItemNuevo;
-        public System.Windows.Forms.ToolStripMenuItem mstpItemBuscar;
-        public System.Windows.Forms.ToolStripMenuItem mstpItemModificar;
-        public System.Windows.Forms.ToolStripMenuItem mstpItemGuardar;
-        public System.Windows.Forms.ToolStripMenuItem mstpItemEliminar;
-        public System.Windows.Forms.ToolStripMenuItem mstpItemCancelar;
-        public System.Windows.Forms.ToolStripMenuItem mstpItemSalir;
-        internal System.Windows.Forms.TextBox txtDescuento;
-        internal System.Windows.Forms.Label label4;
-        internal System.Windows.Forms.MenuStrip mstpInsSupr;
-        public System.Windows.Forms.ToolStripMenuItem mstpItemInsert;
-        public System.Windows.Forms.ToolStripMenuItem mstpItemSupr;
-        private System.Windows.Forms.DataGridViewComboBoxColumn colProducto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDesde;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHasta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPrecio;
+        private System.Windows.Forms.Label lblRows;
 
     }
 }
